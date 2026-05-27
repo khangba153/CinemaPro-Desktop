@@ -6,19 +6,25 @@ partial class LoginForm
 {
     private System.ComponentModel.IContainer components = null;
     private TableLayoutPanel rootLayout;
-    private WatermarkPanel brandPanel;
+    private Panel brandPanel;
     private TableLayoutPanel brandLayout;
     private Label logoLabel;
     private Label brandTitleLabel;
     private Label brandCopyLabel;
     private Panel loginHost;
-    private RoundedPanel loginCard;
+    private Panel loginCard;
     private TableLayoutPanel formLayout;
+    private Label formTitleLabel;
+    private Label formSubtitleLabel;
+    private Label usernameInputLabel;
     private TextBox _usernameTextBox;
+    private Label passwordInputLabel;
     private TextBox _passwordTextBox;
     private CheckBox rememberCheckBox;
-    private RoundedButton loginButton;
-    private RoundedButton exitButton;
+    private Button loginButton;
+    private Button exitButton;
+    private Label demoAccountLabel;
+    private Label demoStatusLabel;
     private Label footerLabel;
 
     protected override void Dispose(bool disposing)
@@ -35,19 +41,33 @@ partial class LoginForm
     {
         components = new System.ComponentModel.Container();
         rootLayout = new TableLayoutPanel();
-        brandPanel = new WatermarkPanel();
+        brandPanel = new Panel();
         brandLayout = new TableLayoutPanel();
         logoLabel = new Label();
         brandTitleLabel = new Label();
         brandCopyLabel = new Label();
         loginHost = new Panel();
-        loginCard = UiStyleHelper.CreateCard();
+        loginCard = new Panel();
         formLayout = new TableLayoutPanel();
-        _usernameTextBox = UiStyleHelper.CreateTextBox("Nhập tên đăng nhập");
-        _passwordTextBox = UiStyleHelper.CreateTextBox("Nhập mật khẩu");
+        formTitleLabel = new Label();
+        formSubtitleLabel = new Label();
+        usernameInputLabel = new Label();
+        _usernameTextBox = new TextBox();
+        _usernameTextBox.PlaceholderText = "Nhập tên đăng nhập";
+        _usernameTextBox.BorderStyle = BorderStyle.FixedSingle;
+        _usernameTextBox.Font = UiStyleHelper.BodyFont(10F);
+        _usernameTextBox.Height = 32;
+        passwordInputLabel = new Label();
+        _passwordTextBox = new TextBox();
+        _passwordTextBox.PlaceholderText = "Nhập mật khẩu";
+        _passwordTextBox.BorderStyle = BorderStyle.FixedSingle;
+        _passwordTextBox.Font = UiStyleHelper.BodyFont(10F);
+        _passwordTextBox.Height = 32;
         rememberCheckBox = new CheckBox();
-        loginButton = UiStyleHelper.CreateButton("Đăng nhập", UiStyleHelper.Primary);
-        exitButton = UiStyleHelper.CreateOutlineButton("Thoát", UiStyleHelper.Primary);
+        loginButton = new Button();
+        exitButton = new Button();
+        demoAccountLabel = new Label();
+        demoStatusLabel = new Label();
         footerLabel = new Label();
         rootLayout.SuspendLayout();
         brandPanel.SuspendLayout();
@@ -142,6 +162,8 @@ partial class LoginForm
         //
         // loginCard
         //
+        loginCard.BackColor = Color.White;
+        loginCard.BorderStyle = BorderStyle.FixedSingle;
         loginCard.Controls.Add(formLayout);
         loginCard.Dock = DockStyle.Fill;
         loginCard.Padding = new Padding(36, 34, 36, 28);
@@ -151,49 +173,25 @@ partial class LoginForm
         formLayout.BackColor = Color.Transparent;
         formLayout.ColumnCount = 1;
         formLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-        formLayout.Controls.Add(new Label
-        {
-            Dock = DockStyle.Fill,
-            Text = "Đăng nhập hệ thống",
-            Font = UiStyleHelper.TitleFont(20),
-            ForeColor = UiStyleHelper.TextDark,
-            TextAlign = ContentAlignment.BottomLeft
-        }, 0, 0);
-        formLayout.Controls.Add(new Label
-        {
-            Dock = DockStyle.Fill,
-            Text = "Sử dụng tài khoản được cấp cho ca làm việc tại rạp.",
-            Font = UiStyleHelper.SmallFont(9.75F),
-            ForeColor = UiStyleHelper.TextMuted,
-            TextAlign = ContentAlignment.TopLeft
-        }, 0, 1);
-        formLayout.Controls.Add(UiStyleHelper.FieldBlock("Tên đăng nhập", _usernameTextBox), 0, 2);
-        formLayout.Controls.Add(UiStyleHelper.FieldBlock("Mật khẩu", _passwordTextBox), 0, 3);
-        formLayout.Controls.Add(rememberCheckBox, 0, 4);
-        formLayout.Controls.Add(loginButton, 0, 5);
-        formLayout.Controls.Add(exitButton, 0, 6);
-        formLayout.Controls.Add(new Label
-        {
-            Dock = DockStyle.Fill,
-            Text = "Tài khoản demo: admin / 123456 hoặc staff01 / 123456",
-            Font = UiStyleHelper.SmallFont(9F),
-            ForeColor = UiStyleHelper.TextMuted,
-            TextAlign = ContentAlignment.MiddleLeft
-        }, 0, 7);
-        formLayout.Controls.Add(new Label
-        {
-            Dock = DockStyle.Fill,
-            Text = "Trạng thái demo: dữ liệu giả, không kết nối database",
-            Font = UiStyleHelper.SectionFont(9F),
-            ForeColor = UiStyleHelper.Success,
-            TextAlign = ContentAlignment.MiddleCenter
-        }, 0, 8);
+        formLayout.Controls.Add(formTitleLabel, 0, 0);
+        formLayout.Controls.Add(formSubtitleLabel, 0, 1);
+        formLayout.Controls.Add(usernameInputLabel, 0, 2);
+        formLayout.Controls.Add(_usernameTextBox, 0, 3);
+        formLayout.Controls.Add(passwordInputLabel, 0, 4);
+        formLayout.Controls.Add(_passwordTextBox, 0, 5);
+        formLayout.Controls.Add(rememberCheckBox, 0, 6);
+        formLayout.Controls.Add(loginButton, 0, 7);
+        formLayout.Controls.Add(exitButton, 0, 8);
+        formLayout.Controls.Add(demoAccountLabel, 0, 9);
+        formLayout.Controls.Add(demoStatusLabel, 0, 10);
         formLayout.Dock = DockStyle.Fill;
-        formLayout.RowCount = 10;
+        formLayout.RowCount = 12;
         formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 62F));
         formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
-        formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 70F));
-        formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 72F));
+        formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 22F));
+        formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 44F));
+        formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 22F));
+        formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 44F));
         formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 38F));
         formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 48F));
         formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 48F));
@@ -203,6 +201,22 @@ partial class LoginForm
         //
         // login controls
         //
+        formTitleLabel.Dock = DockStyle.Fill;
+        formTitleLabel.Font = UiStyleHelper.TitleFont(20);
+        formTitleLabel.ForeColor = UiStyleHelper.TextDark;
+        formTitleLabel.Text = "Đăng nhập hệ thống";
+        formTitleLabel.TextAlign = ContentAlignment.BottomLeft;
+        formSubtitleLabel.Dock = DockStyle.Fill;
+        formSubtitleLabel.Font = UiStyleHelper.SmallFont(9.75F);
+        formSubtitleLabel.ForeColor = UiStyleHelper.TextMuted;
+        formSubtitleLabel.Text = "Sử dụng tài khoản được cấp cho ca làm việc tại rạp.";
+        formSubtitleLabel.TextAlign = ContentAlignment.TopLeft;
+        StyleFieldLabel(usernameInputLabel, "Tên đăng nhập");
+        StyleFieldLabel(passwordInputLabel, "Mật khẩu");
+        _usernameTextBox.Dock = DockStyle.Fill;
+        _usernameTextBox.Margin = new Padding(0, 0, 0, 10);
+        _passwordTextBox.Dock = DockStyle.Fill;
+        _passwordTextBox.Margin = new Padding(0, 0, 0, 10);
         _passwordTextBox.UseSystemPasswordChar = true;
         rememberCheckBox.Dock = DockStyle.Fill;
         rememberCheckBox.Font = UiStyleHelper.SmallFont(9.25F);
@@ -210,11 +224,38 @@ partial class LoginForm
         rememberCheckBox.Text = "Ghi nhớ đăng nhập";
         rememberCheckBox.TextAlign = ContentAlignment.MiddleLeft;
         loginButton.Dock = DockStyle.Fill;
+        loginButton.BackColor = UiStyleHelper.Primary;
+        loginButton.Cursor = Cursors.Hand;
+        loginButton.FlatStyle = FlatStyle.Flat;
+        loginButton.FlatAppearance.BorderSize = 0;
+        loginButton.Font = UiStyleHelper.SectionFont(9.5F);
+        loginButton.ForeColor = Color.White;
         loginButton.Margin = new Padding(0, 0, 0, 8);
+        loginButton.Text = "Đăng nhập";
+        loginButton.UseVisualStyleBackColor = false;
         loginButton.Click += LoginButton_Click;
         exitButton.Dock = DockStyle.Fill;
+        exitButton.BackColor = Color.White;
+        exitButton.Cursor = Cursors.Hand;
+        exitButton.FlatStyle = FlatStyle.Flat;
+        exitButton.FlatAppearance.BorderColor = ColorTranslator.FromHtml("#9BC2FF");
+        exitButton.FlatAppearance.BorderSize = 1;
+        exitButton.Font = UiStyleHelper.SectionFont(9.5F);
+        exitButton.ForeColor = UiStyleHelper.Primary;
         exitButton.Margin = new Padding(0, 0, 0, 8);
+        exitButton.Text = "Thoát";
+        exitButton.UseVisualStyleBackColor = false;
         exitButton.Click += ExitButton_Click;
+        demoAccountLabel.Dock = DockStyle.Fill;
+        demoAccountLabel.Font = UiStyleHelper.SmallFont(9F);
+        demoAccountLabel.ForeColor = UiStyleHelper.TextMuted;
+        demoAccountLabel.Text = "Tài khoản demo: admin / 123456 hoặc staff01 / 123456";
+        demoAccountLabel.TextAlign = ContentAlignment.MiddleLeft;
+        demoStatusLabel.Dock = DockStyle.Fill;
+        demoStatusLabel.Font = UiStyleHelper.SectionFont(9F);
+        demoStatusLabel.ForeColor = UiStyleHelper.Success;
+        demoStatusLabel.Text = "Trạng thái demo: dữ liệu giả, không kết nối database";
+        demoStatusLabel.TextAlign = ContentAlignment.MiddleCenter;
         //
         // footerLabel
         //
@@ -230,5 +271,14 @@ partial class LoginForm
         loginCard.ResumeLayout(false);
         formLayout.ResumeLayout(false);
         ResumeLayout(false);
+    }
+
+    private static void StyleFieldLabel(Label label, string text)
+    {
+        label.Dock = DockStyle.Fill;
+        label.Font = UiStyleHelper.SmallFont(9.25F);
+        label.ForeColor = UiStyleHelper.TextMuted;
+        label.Text = text;
+        label.TextAlign = ContentAlignment.MiddleLeft;
     }
 }

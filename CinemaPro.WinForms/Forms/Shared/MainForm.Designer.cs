@@ -8,7 +8,25 @@ partial class MainForm
     private TableLayoutPanel shellLayout;
     private TableLayoutPanel sidebarLayout;
     private TableLayoutPanel logoLayout;
+    private Label logoMarkLabel;
+    private Label logoTitleLabel;
+    private Label logoSubtitleLabel;
     private FlowLayoutPanel _menuPanel;
+    private Label operationGroupLabel;
+    private Button dashboardButton;
+    private Button ticketSaleButton;
+    private Button ticketCheckButton;
+    private Button soldTicketsButton;
+    private Button todayShowtimeButton;
+    private Label managementGroupLabel;
+    private Button movieButton;
+    private Button showtimeButton;
+    private Button roomButton;
+    private Button seatButton;
+    private Button userButton;
+    private Label reportGroupLabel;
+    private Button revenueButton;
+    private Button settingsButton;
     private Button logoutButton;
     private Label sidebarStatusLabel;
     private TableLayoutPanel mainLayout;
@@ -40,8 +58,26 @@ partial class MainForm
         shellLayout = new TableLayoutPanel();
         sidebarLayout = new TableLayoutPanel();
         logoLayout = new TableLayoutPanel();
+        logoMarkLabel = new Label();
+        logoTitleLabel = new Label();
+        logoSubtitleLabel = new Label();
         _menuPanel = new FlowLayoutPanel();
-        logoutButton = CreateMenuButton("Đăng xuất", true);
+        operationGroupLabel = new Label();
+        dashboardButton = new Button();
+        ticketSaleButton = new Button();
+        ticketCheckButton = new Button();
+        soldTicketsButton = new Button();
+        todayShowtimeButton = new Button();
+        managementGroupLabel = new Label();
+        movieButton = new Button();
+        showtimeButton = new Button();
+        roomButton = new Button();
+        seatButton = new Button();
+        userButton = new Button();
+        reportGroupLabel = new Label();
+        revenueButton = new Button();
+        settingsButton = new Button();
+        logoutButton = new Button();
         sidebarStatusLabel = new Label();
         mainLayout = new TableLayoutPanel();
         topbarPanel = new Panel();
@@ -111,36 +147,30 @@ partial class MainForm
         logoLayout.BackColor = UiStyleHelper.Sidebar;
         logoLayout.ColumnCount = 1;
         logoLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-        logoLayout.Controls.Add(new Label
-        {
-            Dock = DockStyle.Fill,
-            Text = "CP",
-            Font = UiStyleHelper.TitleFont(24),
-            ForeColor = UiStyleHelper.Primary,
-            TextAlign = ContentAlignment.BottomCenter
-        }, 0, 0);
-        logoLayout.Controls.Add(new Label
-        {
-            Dock = DockStyle.Fill,
-            Text = "CINEMAPRO",
-            Font = UiStyleHelper.TitleFont(12),
-            ForeColor = UiStyleHelper.Primary,
-            TextAlign = ContentAlignment.MiddleCenter
-        }, 0, 1);
-        logoLayout.Controls.Add(new Label
-        {
-            Dock = DockStyle.Fill,
-            Text = "Rạp chiếu phim",
-            Font = UiStyleHelper.SectionFont(9.5F),
-            ForeColor = UiStyleHelper.Primary,
-            TextAlign = ContentAlignment.TopCenter
-        }, 0, 2);
+        logoLayout.Controls.Add(logoMarkLabel, 0, 0);
+        logoLayout.Controls.Add(logoTitleLabel, 0, 1);
+        logoLayout.Controls.Add(logoSubtitleLabel, 0, 2);
         logoLayout.Dock = DockStyle.Fill;
         logoLayout.Padding = new Padding(0, 0, 0, 10);
         logoLayout.RowCount = 3;
         logoLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 48F));
         logoLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 26F));
         logoLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 24F));
+        logoMarkLabel.Dock = DockStyle.Fill;
+        logoMarkLabel.Font = UiStyleHelper.TitleFont(24);
+        logoMarkLabel.ForeColor = UiStyleHelper.Primary;
+        logoMarkLabel.Text = "CP";
+        logoMarkLabel.TextAlign = ContentAlignment.BottomCenter;
+        logoTitleLabel.Dock = DockStyle.Fill;
+        logoTitleLabel.Font = UiStyleHelper.TitleFont(12);
+        logoTitleLabel.ForeColor = UiStyleHelper.Primary;
+        logoTitleLabel.Text = "CINEMAPRO";
+        logoTitleLabel.TextAlign = ContentAlignment.MiddleCenter;
+        logoSubtitleLabel.Dock = DockStyle.Fill;
+        logoSubtitleLabel.Font = UiStyleHelper.SectionFont(9.5F);
+        logoSubtitleLabel.ForeColor = UiStyleHelper.Primary;
+        logoSubtitleLabel.Text = "Rạp chiếu phim";
+        logoSubtitleLabel.TextAlign = ContentAlignment.TopCenter;
         //
         // _menuPanel
         //
@@ -148,12 +178,43 @@ partial class MainForm
         _menuPanel.BackColor = UiStyleHelper.Sidebar;
         _menuPanel.Dock = DockStyle.Fill;
         _menuPanel.FlowDirection = FlowDirection.TopDown;
+        _menuPanel.Controls.Add(operationGroupLabel);
+        _menuPanel.Controls.Add(dashboardButton);
+        _menuPanel.Controls.Add(ticketSaleButton);
+        _menuPanel.Controls.Add(ticketCheckButton);
+        _menuPanel.Controls.Add(soldTicketsButton);
+        _menuPanel.Controls.Add(todayShowtimeButton);
+        _menuPanel.Controls.Add(managementGroupLabel);
+        _menuPanel.Controls.Add(movieButton);
+        _menuPanel.Controls.Add(showtimeButton);
+        _menuPanel.Controls.Add(roomButton);
+        _menuPanel.Controls.Add(seatButton);
+        _menuPanel.Controls.Add(userButton);
+        _menuPanel.Controls.Add(reportGroupLabel);
+        _menuPanel.Controls.Add(revenueButton);
+        _menuPanel.Controls.Add(settingsButton);
         _menuPanel.WrapContents = false;
+        StyleGroupLabel(operationGroupLabel, "Vận hành");
+        StyleMenuButton(dashboardButton, "Dashboard");
+        StyleMenuButton(ticketSaleButton, "Bán vé");
+        StyleMenuButton(ticketCheckButton, "Kiểm tra vé");
+        StyleMenuButton(soldTicketsButton, "Vé đã bán");
+        StyleMenuButton(todayShowtimeButton, "Lịch chiếu hôm nay");
+        StyleGroupLabel(managementGroupLabel, "Quản lý");
+        StyleMenuButton(movieButton, "Phim");
+        StyleMenuButton(showtimeButton, "Lịch chiếu");
+        StyleMenuButton(roomButton, "Phòng chiếu");
+        StyleMenuButton(seatButton, "Ghế");
+        StyleMenuButton(userButton, "Nhân viên");
+        StyleGroupLabel(reportGroupLabel, "Báo cáo");
+        StyleMenuButton(revenueButton, "Thống kê doanh thu");
+        StyleMenuButton(settingsButton, "Cài đặt");
         //
         // logoutButton
         //
         logoutButton.Dock = DockStyle.Fill;
         logoutButton.Margin = new Padding(0, 8, 0, 8);
+        StyleMenuButton(logoutButton, "Đăng xuất", true);
         logoutButton.Click += LogoutButton_Click;
         //
         // sidebarStatusLabel
@@ -279,5 +340,33 @@ partial class MainForm
         topbarPanel.ResumeLayout(false);
         userPanel.ResumeLayout(false);
         ResumeLayout(false);
+    }
+
+    private static void StyleGroupLabel(Label label, string text)
+    {
+        label.Font = UiStyleHelper.SmallFont(8.75F);
+        label.ForeColor = UiStyleHelper.TextMuted;
+        label.Height = 26;
+        label.Margin = new Padding(0, 8, 0, 2);
+        label.Text = text;
+        label.TextAlign = ContentAlignment.BottomLeft;
+        label.Width = 196;
+    }
+
+    private static void StyleMenuButton(Button button, string text, bool isLogout = false)
+    {
+        button.BackColor = UiStyleHelper.Sidebar;
+        button.Cursor = Cursors.Hand;
+        button.FlatStyle = FlatStyle.Flat;
+        button.FlatAppearance.BorderSize = 0;
+        button.Font = UiStyleHelper.SectionFont(9.5F);
+        button.ForeColor = isLogout ? UiStyleHelper.Danger : UiStyleHelper.SidebarText;
+        button.Height = 38;
+        button.Margin = new Padding(0, 0, 0, 6);
+        button.Padding = new Padding(18, 0, 0, 0);
+        button.Text = text;
+        button.TextAlign = ContentAlignment.MiddleLeft;
+        button.UseVisualStyleBackColor = false;
+        button.Width = 196;
     }
 }

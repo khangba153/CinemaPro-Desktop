@@ -67,45 +67,32 @@ public sealed partial class TodayShowtimeForm : Form
 
     private void RenderTimeline()
     {
-        _timelinePanel.Controls.Clear();
-        foreach (var roomGroup in _showtimes.GroupBy(showtime => showtime.Room).Take(4))
+        var labels = new[] { todayTimeline1Label, todayTimeline2Label, todayTimeline3Label, todayTimeline4Label, todayTimeline5Label };
+        foreach (var label in labels)
         {
-            var row = new FlowLayoutPanel
-            {
-                Width = 1040,
-                Height = 36,
-                FlowDirection = FlowDirection.LeftToRight,
-                WrapContents = false,
-                BackColor = Color.White,
-                Margin = new Padding(0, 2, 0, 4)
-            };
-            row.Controls.Add(new Label
-            {
-                Width = 110,
-                Height = 34,
-                Text = roomGroup.Key,
-                Font = UiStyleHelper.SectionFont(9.5f),
-                ForeColor = UiStyleHelper.TextDark,
-                TextAlign = ContentAlignment.MiddleLeft
-            });
+            label.Visible = false;
+        }
 
-            foreach (var showtime in roomGroup)
-            {
-                var color = showtime.Status == "Đang mở bán" ? UiStyleHelper.Success : UiStyleHelper.Primary;
-                row.Controls.Add(new Label
-                {
-                    Width = 180,
-                    Height = 34,
-                    Text = $"{showtime.StartTime:HH:mm}\n{showtime.Movie}",
-                    Font = UiStyleHelper.SmallFont(8.5f),
-                    ForeColor = color,
-                    BackColor = Color.FromArgb(22, color),
-                    TextAlign = ContentAlignment.MiddleCenter,
-                    Margin = new Padding(0, 0, 12, 0)
-                });
-            }
+        var groups = _showtimes
+            .GroupBy(showtime => showtime.Room)
+            .OrderBy(group => group.Key)
+            .Take(labels.Length)
+            .ToList();
 
-            _timelinePanel.Controls.Add(row);
+        for (var index = 0; index < groups.Count; index++)
+        {
+            var group = groups[index];
+            var firstShowtime = group.OrderBy(showtime => showtime.StartTime).FirstOrDefault();
+            var color = firstShowtime?.Status == "Đang mở bán" ? UiStyleHelper.Success : UiStyleHelper.Primary;
+            var slots = string.Join("     ", group
+                .OrderBy(showtime => showtime.StartTime)
+                .Take(4)
+                .Select(showtime => $"{showtime.StartTime:HH:mm} {showtime.Movie}"));
+
+            labels[index].Text = $"{group.Key}     {slots}";
+            labels[index].ForeColor = color;
+            labels[index].BackColor = Color.FromArgb(22, color);
+            labels[index].Visible = true;
         }
     }
 
@@ -156,5 +143,10 @@ public sealed partial class TodayShowtimeForm : Form
         button.ForeColor = accent;
         button.Font = UiStyleHelper.SectionFont(9.5f);
         button.Cursor = Cursors.Hand;
+    }
+
+    private void waitingShowtimeValueLabel_Click(object sender, EventArgs e)
+    {
+
     }
 }

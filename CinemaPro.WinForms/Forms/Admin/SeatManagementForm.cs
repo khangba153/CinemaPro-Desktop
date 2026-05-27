@@ -40,59 +40,34 @@ public sealed partial class SeatManagementForm : Form
 
     private void RenderSeats()
     {
-        seatPanel.Controls.Clear();
-        var seats = FakeDataProvider.GetSeatMap();
-        var rows = seats
-            .GroupBy(seat => seat.SeatCode[0])
-            .OrderBy(group => group.Key)
-            .ToList();
-
-        for (var rowIndex = 0; rowIndex < rows.Count; rowIndex++)
+        var seats = FakeDataProvider.GetSeatMap().ToDictionary(seat => seat.SeatCode);
+        foreach (var button in seatPanel.Controls.OfType<Button>())
         {
-            var row = rows[rowIndex];
-            seatPanel.Controls.Add(new Label
+            if (button.Tag is not string seatCode || !seats.TryGetValue(seatCode, out var seat))
             {
-                Dock = DockStyle.Fill,
-                Text = row.Key.ToString(),
-                Font = UiStyleHelper.SectionFont(10F),
-                ForeColor = UiStyleHelper.TextDark,
-                TextAlign = ContentAlignment.MiddleCenter,
-                Margin = new Padding(0, 4, 10, 4)
-            }, 0, rowIndex);
-
-            foreach (var seat in row)
-            {
-                var column = int.Parse(seat.SeatCode[1..]);
-                var button = new Button
-                {
-                    Dock = DockStyle.Fill,
-                    Text = seat.SeatCode[1..],
-                    Tag = seat,
-                    FlatStyle = FlatStyle.Flat,
-                    UseVisualStyleBackColor = false,
-                    Font = UiStyleHelper.SectionFont(8.75F),
-                    ForeColor = UiStyleHelper.TextDark,
-                    Margin = new Padding(6, 4, 6, 4),
-                    Cursor = Cursors.Hand
-                };
-
-                button.FlatAppearance.BorderSize = 1;
-                ApplySeatStyle(button, seat);
-                button.Click += (_, _) =>
-                {
-                    var selectedSeat = (SeatInfo)button.Tag;
-                    _selectedSeat = selectedSeat.SeatCode;
-                    RenderSeats();
-                    summaryLabel.Text = $"Ghế đang chọn: {_selectedSeat}     |     Phòng: {roomCombo.SelectedItem}     |     Trạng thái: {DisplaySeatStatus(selectedSeat.Status)}.";
-                };
-                seatPanel.Controls.Add(button, column, rowIndex);
+                continue;
             }
+
+            ApplySeatStyle(button, seat);
         }
 
         if (string.IsNullOrWhiteSpace(_selectedSeat))
         {
             summaryLabel.Text = $"Phòng: {roomCombo.SelectedItem}     |     Tổng ghế demo: {seats.Count}     |     Chọn một ghế để xem trạng thái.";
         }
+    }
+
+    private void SeatButton_Click(object? sender, EventArgs e)
+    {
+        if (sender is not Button { Tag: string seatCode })
+        {
+            return;
+        }
+
+        var seat = FakeDataProvider.GetSeatMap().FirstOrDefault(item => item.SeatCode == seatCode);
+        _selectedSeat = seatCode;
+        RenderSeats();
+        summaryLabel.Text = $"Ghế đang chọn: {_selectedSeat}     |     Phòng: {roomCombo.SelectedItem}     |     Trạng thái: {DisplaySeatStatus(seat?.Status ?? SeatStatus.Available)}.";
     }
 
     private void ApplySeatStyle(Button button, SeatInfo seat)

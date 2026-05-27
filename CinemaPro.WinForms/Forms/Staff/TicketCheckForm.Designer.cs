@@ -36,6 +36,13 @@ partial class TicketCheckForm
     private TableLayoutPanel historyLayout;
     private Label historyTitleLabel;
     private DataGridView _historyGrid;
+    private DataGridViewTextBoxColumn historyTicketIdColumn;
+    private DataGridViewTextBoxColumn historyMovieColumn;
+    private DataGridViewTextBoxColumn historySeatsColumn;
+    private DataGridViewTextBoxColumn historyShowtimeColumn;
+    private DataGridViewTextBoxColumn historyResultColumn;
+    private DataGridViewTextBoxColumn historyStaffColumn;
+    private DataGridViewTextBoxColumn historyCheckedAtColumn;
 
     protected override void Dispose(bool disposing)
     {
@@ -49,7 +56,6 @@ partial class TicketCheckForm
 
     private void InitializeComponent()
     {
-        components = new System.ComponentModel.Container();
         rootLayout = new TableLayoutPanel();
         filterPanel = new FlowLayoutPanel();
         ticketCodeLabel = new Label();
@@ -63,8 +69,8 @@ partial class TicketCheckForm
         _resultNoteLabel = new Label();
         _ticketInfoLabel = new Label();
         resultActionsPanel = new FlowLayoutPanel();
-        _confirmButton = new Button();
         cancelButton = new Button();
+        _confirmButton = new Button();
         overviewPanel = new Panel();
         overviewLayout = new TableLayoutPanel();
         overviewTitleLabel = new Label();
@@ -81,6 +87,13 @@ partial class TicketCheckForm
         historyLayout = new TableLayoutPanel();
         historyTitleLabel = new Label();
         _historyGrid = new DataGridView();
+        historyTicketIdColumn = new DataGridViewTextBoxColumn();
+        historyMovieColumn = new DataGridViewTextBoxColumn();
+        historySeatsColumn = new DataGridViewTextBoxColumn();
+        historyShowtimeColumn = new DataGridViewTextBoxColumn();
+        historyResultColumn = new DataGridViewTextBoxColumn();
+        historyStaffColumn = new DataGridViewTextBoxColumn();
+        historyCheckedAtColumn = new DataGridViewTextBoxColumn();
         rootLayout.SuspendLayout();
         filterPanel.SuspendLayout();
         middleLayout.SuspendLayout();
@@ -97,94 +110,112 @@ partial class TicketCheckForm
         ((System.ComponentModel.ISupportInitialize)_historyGrid).BeginInit();
         SuspendLayout();
         //
-        // TicketCheckForm
-        //
-        AutoScaleDimensions = new SizeF(7F, 15F);
-        AutoScaleMode = AutoScaleMode.Font;
-        BackColor = UiStyleHelper.ContentBackground;
-        ClientSize = new Size(1100, 620);
-        Controls.Add(rootLayout);
-        Font = UiStyleHelper.BodyFont();
-        Name = "TicketCheckForm";
-        Text = "Kiểm tra vé";
-        //
         // rootLayout
         //
-        rootLayout.BackColor = UiStyleHelper.ContentBackground;
+        rootLayout.BackColor = Color.FromArgb(245, 248, 252);
         rootLayout.ColumnCount = 1;
         rootLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
         rootLayout.Controls.Add(filterPanel, 0, 0);
         rootLayout.Controls.Add(middleLayout, 0, 1);
         rootLayout.Controls.Add(historyPanel, 0, 2);
         rootLayout.Dock = DockStyle.Fill;
+        rootLayout.Location = new Point(0, 0);
+        rootLayout.Margin = new Padding(3, 4, 3, 4);
+        rootLayout.Name = "rootLayout";
         rootLayout.RowCount = 3;
-        rootLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 72F));
+        rootLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 76F));
         rootLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        rootLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 190F));
+        rootLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 174F));
+        rootLayout.Size = new Size(1100, 620);
+        rootLayout.TabIndex = 0;
         //
         // filterPanel
         //
-        filterPanel.BackColor = UiStyleHelper.ContentBackground;
+        filterPanel.BackColor = Color.FromArgb(245, 248, 252);
         filterPanel.Controls.Add(ticketCodeLabel);
         filterPanel.Controls.Add(_ticketCodeTextBox);
         filterPanel.Controls.Add(checkButton);
         filterPanel.Controls.Add(refreshButton);
         filterPanel.Dock = DockStyle.Fill;
-        filterPanel.FlowDirection = FlowDirection.LeftToRight;
-        filterPanel.Padding = new Padding(0, 8, 0, 8);
+        filterPanel.Location = new Point(3, 4);
+        filterPanel.Margin = new Padding(3, 4, 3, 4);
+        filterPanel.Name = "filterPanel";
+        filterPanel.Padding = new Padding(0, 11, 0, 11);
+        filterPanel.Size = new Size(1251, 88);
+        filterPanel.TabIndex = 0;
         filterPanel.WrapContents = false;
         //
         // ticketCodeLabel
         //
-        ticketCodeLabel.Font = UiStyleHelper.SmallFont(9.25F);
-        ticketCodeLabel.ForeColor = UiStyleHelper.TextMuted;
-        ticketCodeLabel.Margin = new Padding(0, 6, 10, 0);
-        ticketCodeLabel.Size = new Size(150, 44);
+        ticketCodeLabel.Font = new Font("Segoe UI", 9.25F);
+        ticketCodeLabel.ForeColor = Color.FromArgb(100, 116, 139);
+        ticketCodeLabel.Location = new Point(0, 19);
+        ticketCodeLabel.Margin = new Padding(0, 8, 11, 0);
+        ticketCodeLabel.Name = "ticketCodeLabel";
+        ticketCodeLabel.Size = new Size(171, 59);
+        ticketCodeLabel.TabIndex = 0;
         ticketCodeLabel.Text = "Nhập mã vé hoặc QR";
         ticketCodeLabel.TextAlign = ContentAlignment.MiddleLeft;
         //
         // _ticketCodeTextBox
         //
-        _ticketCodeTextBox.AutoSize = false;
         _ticketCodeTextBox.BorderStyle = BorderStyle.FixedSingle;
-        _ticketCodeTextBox.Font = UiStyleHelper.BodyFont(10F);
-        _ticketCodeTextBox.Margin = new Padding(0, 10, 12, 0);
+        _ticketCodeTextBox.Font = new Font("Segoe UI", 10F);
+        _ticketCodeTextBox.Location = new Point(182, 24);
+        _ticketCodeTextBox.Margin = new Padding(0, 13, 14, 0);
+        _ticketCodeTextBox.Name = "_ticketCodeTextBox";
         _ticketCodeTextBox.PlaceholderText = "Quét mã QR hoặc nhập mã vé...";
-        _ticketCodeTextBox.Size = new Size(520, 32);
+        _ticketCodeTextBox.Size = new Size(594, 42);
+        _ticketCodeTextBox.TabIndex = 1;
         //
         // checkButton
         //
-        checkButton.Margin = new Padding(0, 8, 12, 0);
-        checkButton.Size = new Size(170, 36);
+        checkButton.Location = new Point(790, 22);
+        checkButton.Margin = new Padding(0, 11, 14, 0);
+        checkButton.Name = "checkButton";
+        checkButton.Size = new Size(194, 48);
+        checkButton.TabIndex = 2;
         checkButton.Text = "Kiểm tra vé";
         //
         // refreshButton
         //
-        refreshButton.Margin = new Padding(0, 8, 0, 0);
-        refreshButton.Size = new Size(130, 36);
+        refreshButton.Location = new Point(998, 22);
+        refreshButton.Margin = new Padding(0, 11, 0, 0);
+        refreshButton.Name = "refreshButton";
+        refreshButton.Size = new Size(149, 48);
+        refreshButton.TabIndex = 3;
         refreshButton.Text = "Làm mới";
         //
         // middleLayout
         //
-        middleLayout.BackColor = UiStyleHelper.ContentBackground;
+        middleLayout.BackColor = Color.FromArgb(245, 248, 252);
         middleLayout.ColumnCount = 2;
         middleLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 70F));
         middleLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
         middleLayout.Controls.Add(resultPanel, 0, 0);
         middleLayout.Controls.Add(overviewPanel, 1, 0);
         middleLayout.Dock = DockStyle.Fill;
-        middleLayout.Padding = new Padding(0, 0, 0, 10);
+        middleLayout.Location = new Point(3, 100);
+        middleLayout.Margin = new Padding(3, 4, 3, 4);
+        middleLayout.Name = "middleLayout";
+        middleLayout.Padding = new Padding(0, 0, 0, 13);
         middleLayout.RowCount = 1;
         middleLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+        middleLayout.Size = new Size(1251, 470);
+        middleLayout.TabIndex = 1;
         //
         // resultPanel
         //
-        resultPanel.BackColor = UiStyleHelper.CardBackground;
+        resultPanel.BackColor = Color.White;
         resultPanel.BorderStyle = BorderStyle.FixedSingle;
         resultPanel.Controls.Add(resultLayout);
         resultPanel.Dock = DockStyle.Fill;
-        resultPanel.Margin = new Padding(0, 0, 12, 0);
-        resultPanel.Padding = new Padding(20);
+        resultPanel.Location = new Point(0, 0);
+        resultPanel.Margin = new Padding(0, 0, 14, 0);
+        resultPanel.Name = "resultPanel";
+        resultPanel.Padding = new Padding(23, 27, 23, 27);
+        resultPanel.Size = new Size(861, 457);
+        resultPanel.TabIndex = 0;
         //
         // resultLayout
         //
@@ -197,67 +228,101 @@ partial class TicketCheckForm
         resultLayout.Controls.Add(_ticketInfoLabel, 1, 0);
         resultLayout.Controls.Add(resultActionsPanel, 0, 2);
         resultLayout.Dock = DockStyle.Fill;
+        resultLayout.Location = new Point(23, 27);
+        resultLayout.Margin = new Padding(3, 4, 3, 4);
+        resultLayout.Name = "resultLayout";
         resultLayout.RowCount = 3;
-        resultLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 72F));
+        resultLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 96F));
         resultLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        resultLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 54F));
-        resultLayout.SetColumnSpan(resultActionsPanel, 2);
+        resultLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 72F));
+        resultLayout.Size = new Size(813, 401);
+        resultLayout.TabIndex = 0;
         //
         // _resultTitleLabel
         //
         _resultTitleLabel.Dock = DockStyle.Fill;
-        _resultTitleLabel.Font = UiStyleHelper.TitleFont(20F);
-        _resultTitleLabel.ForeColor = UiStyleHelper.TextDark;
+        _resultTitleLabel.Font = new Font("Segoe UI Semibold", 20F, FontStyle.Bold);
+        _resultTitleLabel.ForeColor = Color.FromArgb(17, 27, 63);
+        _resultTitleLabel.Location = new Point(3, 0);
+        _resultTitleLabel.Name = "_resultTitleLabel";
+        _resultTitleLabel.Size = new Size(286, 96);
+        _resultTitleLabel.TabIndex = 0;
         _resultTitleLabel.Text = "Sẵn sàng kiểm tra";
         _resultTitleLabel.TextAlign = ContentAlignment.BottomCenter;
         //
         // _resultNoteLabel
         //
         _resultNoteLabel.Dock = DockStyle.Fill;
-        _resultNoteLabel.Font = UiStyleHelper.BodyFont(10F);
-        _resultNoteLabel.ForeColor = UiStyleHelper.TextMuted;
+        _resultNoteLabel.Font = new Font("Segoe UI", 10F);
+        _resultNoteLabel.ForeColor = Color.FromArgb(100, 116, 139);
+        _resultNoteLabel.Location = new Point(3, 96);
+        _resultNoteLabel.Name = "_resultNoteLabel";
+        _resultNoteLabel.Size = new Size(286, 233);
+        _resultNoteLabel.TabIndex = 1;
         _resultNoteLabel.Text = "Nhập mã vé để bắt đầu.";
         _resultNoteLabel.TextAlign = ContentAlignment.TopCenter;
         //
         // _ticketInfoLabel
         //
         _ticketInfoLabel.Dock = DockStyle.Fill;
-        _ticketInfoLabel.Font = UiStyleHelper.BodyFont(10.5F);
-        _ticketInfoLabel.ForeColor = UiStyleHelper.TextDark;
-        _ticketInfoLabel.Padding = new Padding(16, 0, 0, 0);
+        _ticketInfoLabel.Font = new Font("Segoe UI", 10.5F);
+        _ticketInfoLabel.ForeColor = Color.FromArgb(17, 27, 63);
+        _ticketInfoLabel.Location = new Point(295, 0);
+        _ticketInfoLabel.Name = "_ticketInfoLabel";
+        _ticketInfoLabel.Padding = new Padding(18, 0, 0, 0);
+        resultLayout.SetRowSpan(_ticketInfoLabel, 2);
+        _ticketInfoLabel.Size = new Size(515, 329);
+        _ticketInfoLabel.TabIndex = 2;
         _ticketInfoLabel.Text = "Mã vé demo: TK000001\r\nPhim: Avengers: Endgame\r\nSuất chiếu: 19:30 - 22:32\r\nPhòng: Phòng 2\r\nGhế: B6\r\nTrạng thái: Chưa sử dụng";
         _ticketInfoLabel.TextAlign = ContentAlignment.MiddleLeft;
-        resultLayout.SetRowSpan(_ticketInfoLabel, 2);
         //
         // resultActionsPanel
         //
         resultActionsPanel.BackColor = Color.White;
+        resultLayout.SetColumnSpan(resultActionsPanel, 2);
         resultActionsPanel.Controls.Add(cancelButton);
         resultActionsPanel.Controls.Add(_confirmButton);
         resultActionsPanel.Dock = DockStyle.Fill;
         resultActionsPanel.FlowDirection = FlowDirection.RightToLeft;
-        resultActionsPanel.Padding = new Padding(0, 10, 0, 0);
+        resultActionsPanel.Location = new Point(3, 333);
+        resultActionsPanel.Margin = new Padding(3, 4, 3, 4);
+        resultActionsPanel.Name = "resultActionsPanel";
+        resultActionsPanel.Padding = new Padding(0, 13, 0, 0);
+        resultActionsPanel.Size = new Size(807, 64);
+        resultActionsPanel.TabIndex = 3;
         resultActionsPanel.WrapContents = false;
-        //
-        // _confirmButton
-        //
-        _confirmButton.Margin = new Padding(8, 0, 0, 0);
-        _confirmButton.Size = new Size(190, 38);
-        _confirmButton.Text = "Xác nhận vào rạp";
         //
         // cancelButton
         //
-        cancelButton.Margin = new Padding(8, 0, 0, 0);
-        cancelButton.Size = new Size(120, 38);
+        cancelButton.Location = new Point(670, 13);
+        cancelButton.Margin = new Padding(9, 0, 0, 0);
+        cancelButton.Name = "cancelButton";
+        cancelButton.Size = new Size(137, 51);
+        cancelButton.TabIndex = 0;
         cancelButton.Text = "Hủy";
+        cancelButton.Click += cancelButton_Click_1;
+        //
+        // _confirmButton
+        //
+        _confirmButton.Location = new Point(444, 13);
+        _confirmButton.Margin = new Padding(9, 0, 0, 0);
+        _confirmButton.Name = "_confirmButton";
+        _confirmButton.Size = new Size(217, 51);
+        _confirmButton.TabIndex = 1;
+        _confirmButton.Text = "Xác nhận vào rạp";
         //
         // overviewPanel
         //
-        overviewPanel.BackColor = UiStyleHelper.CardBackground;
+        overviewPanel.BackColor = Color.White;
         overviewPanel.BorderStyle = BorderStyle.FixedSingle;
         overviewPanel.Controls.Add(overviewLayout);
         overviewPanel.Dock = DockStyle.Fill;
-        overviewPanel.Padding = new Padding(16);
+        overviewPanel.Location = new Point(878, 4);
+        overviewPanel.Margin = new Padding(3, 4, 3, 4);
+        overviewPanel.Name = "overviewPanel";
+        overviewPanel.Padding = new Padding(18, 21, 18, 21);
+        overviewPanel.Size = new Size(370, 449);
+        overviewPanel.TabIndex = 1;
         //
         // overviewLayout
         //
@@ -269,79 +334,156 @@ partial class TicketCheckForm
         overviewLayout.Controls.Add(unusedPanel, 0, 2);
         overviewLayout.Controls.Add(canceledPanel, 0, 3);
         overviewLayout.Dock = DockStyle.Fill;
+        overviewLayout.Location = new Point(18, 21);
+        overviewLayout.Margin = new Padding(3, 4, 3, 4);
+        overviewLayout.Name = "overviewLayout";
         overviewLayout.RowCount = 5;
-        overviewLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 32F));
-        overviewLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 76F));
-        overviewLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 76F));
-        overviewLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 76F));
+        overviewLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 43F));
+        overviewLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 101F));
+        overviewLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 101F));
+        overviewLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 101F));
         overviewLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+        overviewLayout.Size = new Size(332, 405);
+        overviewLayout.TabIndex = 0;
+        //
+        // overviewTitleLabel
+        //
         overviewTitleLabel.Dock = DockStyle.Fill;
-        overviewTitleLabel.Font = UiStyleHelper.SectionFont(10F);
-        overviewTitleLabel.ForeColor = UiStyleHelper.Primary;
+        overviewTitleLabel.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+        overviewTitleLabel.ForeColor = Color.FromArgb(13, 110, 253);
+        overviewTitleLabel.Location = new Point(3, 0);
+        overviewTitleLabel.Name = "overviewTitleLabel";
+        overviewTitleLabel.Size = new Size(326, 43);
+        overviewTitleLabel.TabIndex = 0;
         overviewTitleLabel.Text = "TỔNG QUAN HÔM NAY";
         overviewTitleLabel.TextAlign = ContentAlignment.MiddleLeft;
-        checkedInPanel.BackColor = UiStyleHelper.SurfaceMuted;
+        //
+        // checkedInPanel
+        //
+        checkedInPanel.BackColor = Color.FromArgb(248, 250, 252);
         checkedInPanel.BorderStyle = BorderStyle.FixedSingle;
         checkedInPanel.Controls.Add(checkedInValueLabel);
         checkedInPanel.Controls.Add(checkedInTitleLabel);
         checkedInPanel.Dock = DockStyle.Fill;
-        checkedInPanel.Margin = new Padding(0, 4, 0, 8);
-        checkedInPanel.Padding = new Padding(12);
-        checkedInTitleLabel.Dock = DockStyle.Fill;
-        checkedInTitleLabel.Font = UiStyleHelper.BodyFont(9.5F);
-        checkedInTitleLabel.ForeColor = UiStyleHelper.TextDark;
-        checkedInTitleLabel.Text = "Đã check-in hôm nay";
-        checkedInTitleLabel.TextAlign = ContentAlignment.MiddleLeft;
+        checkedInPanel.Location = new Point(0, 48);
+        checkedInPanel.Margin = new Padding(0, 5, 0, 11);
+        checkedInPanel.Name = "checkedInPanel";
+        checkedInPanel.Padding = new Padding(14, 16, 14, 16);
+        checkedInPanel.Size = new Size(332, 85);
+        checkedInPanel.TabIndex = 1;
+        //
+        // checkedInValueLabel
+        //
         checkedInValueLabel.Dock = DockStyle.Right;
-        checkedInValueLabel.Font = UiStyleHelper.TitleFont(18F);
-        checkedInValueLabel.ForeColor = UiStyleHelper.Success;
+        checkedInValueLabel.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold);
+        checkedInValueLabel.ForeColor = Color.FromArgb(22, 163, 74);
+        checkedInValueLabel.Location = new Point(236, 16);
+        checkedInValueLabel.Name = "checkedInValueLabel";
+        checkedInValueLabel.Size = new Size(80, 51);
+        checkedInValueLabel.TabIndex = 0;
         checkedInValueLabel.Text = "0";
         checkedInValueLabel.TextAlign = ContentAlignment.MiddleRight;
-        checkedInValueLabel.Width = 70;
-        unusedPanel.BackColor = UiStyleHelper.SurfaceMuted;
+        //
+        // checkedInTitleLabel
+        //
+        checkedInTitleLabel.Dock = DockStyle.Fill;
+        checkedInTitleLabel.Font = new Font("Segoe UI", 9.5F);
+        checkedInTitleLabel.ForeColor = Color.FromArgb(17, 27, 63);
+        checkedInTitleLabel.Location = new Point(14, 16);
+        checkedInTitleLabel.Name = "checkedInTitleLabel";
+        checkedInTitleLabel.Size = new Size(302, 51);
+        checkedInTitleLabel.TabIndex = 1;
+        checkedInTitleLabel.Text = "Đã check-in hôm nay";
+        checkedInTitleLabel.TextAlign = ContentAlignment.MiddleLeft;
+        //
+        // unusedPanel
+        //
+        unusedPanel.BackColor = Color.FromArgb(248, 250, 252);
         unusedPanel.BorderStyle = BorderStyle.FixedSingle;
         unusedPanel.Controls.Add(unusedValueLabel);
         unusedPanel.Controls.Add(unusedTitleLabel);
         unusedPanel.Dock = DockStyle.Fill;
-        unusedPanel.Margin = new Padding(0, 4, 0, 8);
-        unusedPanel.Padding = new Padding(12);
-        unusedTitleLabel.Dock = DockStyle.Fill;
-        unusedTitleLabel.Font = UiStyleHelper.BodyFont(9.5F);
-        unusedTitleLabel.ForeColor = UiStyleHelper.TextDark;
-        unusedTitleLabel.Text = "Vé chưa sử dụng";
-        unusedTitleLabel.TextAlign = ContentAlignment.MiddleLeft;
+        unusedPanel.Location = new Point(0, 149);
+        unusedPanel.Margin = new Padding(0, 5, 0, 11);
+        unusedPanel.Name = "unusedPanel";
+        unusedPanel.Padding = new Padding(14, 16, 14, 16);
+        unusedPanel.Size = new Size(332, 85);
+        unusedPanel.TabIndex = 2;
+        //
+        // unusedValueLabel
+        //
         unusedValueLabel.Dock = DockStyle.Right;
-        unusedValueLabel.Font = UiStyleHelper.TitleFont(18F);
-        unusedValueLabel.ForeColor = UiStyleHelper.Warning;
+        unusedValueLabel.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold);
+        unusedValueLabel.ForeColor = Color.FromArgb(249, 115, 22);
+        unusedValueLabel.Location = new Point(236, 16);
+        unusedValueLabel.Name = "unusedValueLabel";
+        unusedValueLabel.Size = new Size(80, 51);
+        unusedValueLabel.TabIndex = 0;
         unusedValueLabel.Text = "0";
         unusedValueLabel.TextAlign = ContentAlignment.MiddleRight;
-        unusedValueLabel.Width = 70;
-        canceledPanel.BackColor = UiStyleHelper.SurfaceMuted;
+        //
+        // unusedTitleLabel
+        //
+        unusedTitleLabel.Dock = DockStyle.Fill;
+        unusedTitleLabel.Font = new Font("Segoe UI", 9.5F);
+        unusedTitleLabel.ForeColor = Color.FromArgb(17, 27, 63);
+        unusedTitleLabel.Location = new Point(14, 16);
+        unusedTitleLabel.Name = "unusedTitleLabel";
+        unusedTitleLabel.Size = new Size(302, 51);
+        unusedTitleLabel.TabIndex = 1;
+        unusedTitleLabel.Text = "Vé chưa sử dụng";
+        unusedTitleLabel.TextAlign = ContentAlignment.MiddleLeft;
+        //
+        // canceledPanel
+        //
+        canceledPanel.BackColor = Color.FromArgb(248, 250, 252);
         canceledPanel.BorderStyle = BorderStyle.FixedSingle;
         canceledPanel.Controls.Add(canceledValueLabel);
         canceledPanel.Controls.Add(canceledTitleLabel);
         canceledPanel.Dock = DockStyle.Fill;
-        canceledPanel.Margin = new Padding(0, 4, 0, 8);
-        canceledPanel.Padding = new Padding(12);
-        canceledTitleLabel.Dock = DockStyle.Fill;
-        canceledTitleLabel.Font = UiStyleHelper.BodyFont(9.5F);
-        canceledTitleLabel.ForeColor = UiStyleHelper.TextDark;
-        canceledTitleLabel.Text = "Vé đã hủy";
-        canceledTitleLabel.TextAlign = ContentAlignment.MiddleLeft;
+        canceledPanel.Location = new Point(0, 250);
+        canceledPanel.Margin = new Padding(0, 5, 0, 11);
+        canceledPanel.Name = "canceledPanel";
+        canceledPanel.Padding = new Padding(14, 16, 14, 16);
+        canceledPanel.Size = new Size(332, 85);
+        canceledPanel.TabIndex = 3;
+        //
+        // canceledValueLabel
+        //
         canceledValueLabel.Dock = DockStyle.Right;
-        canceledValueLabel.Font = UiStyleHelper.TitleFont(18F);
-        canceledValueLabel.ForeColor = UiStyleHelper.Danger;
+        canceledValueLabel.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold);
+        canceledValueLabel.ForeColor = Color.FromArgb(239, 68, 68);
+        canceledValueLabel.Location = new Point(236, 16);
+        canceledValueLabel.Name = "canceledValueLabel";
+        canceledValueLabel.Size = new Size(80, 51);
+        canceledValueLabel.TabIndex = 0;
         canceledValueLabel.Text = "0";
         canceledValueLabel.TextAlign = ContentAlignment.MiddleRight;
-        canceledValueLabel.Width = 70;
+        //
+        // canceledTitleLabel
+        //
+        canceledTitleLabel.Dock = DockStyle.Fill;
+        canceledTitleLabel.Font = new Font("Segoe UI", 9.5F);
+        canceledTitleLabel.ForeColor = Color.FromArgb(17, 27, 63);
+        canceledTitleLabel.Location = new Point(14, 16);
+        canceledTitleLabel.Name = "canceledTitleLabel";
+        canceledTitleLabel.Size = new Size(302, 51);
+        canceledTitleLabel.TabIndex = 1;
+        canceledTitleLabel.Text = "Vé đã hủy";
+        canceledTitleLabel.TextAlign = ContentAlignment.MiddleLeft;
         //
         // historyPanel
         //
-        historyPanel.BackColor = UiStyleHelper.CardBackground;
+        historyPanel.BackColor = Color.White;
         historyPanel.BorderStyle = BorderStyle.FixedSingle;
         historyPanel.Controls.Add(historyLayout);
         historyPanel.Dock = DockStyle.Fill;
-        historyPanel.Padding = new Padding(10);
+        historyPanel.Location = new Point(3, 578);
+        historyPanel.Margin = new Padding(3, 4, 3, 4);
+        historyPanel.Name = "historyPanel";
+        historyPanel.Padding = new Padding(11, 13, 11, 13);
+        historyPanel.Size = new Size(1251, 245);
+        historyPanel.TabIndex = 2;
         //
         // historyLayout
         //
@@ -351,12 +493,24 @@ partial class TicketCheckForm
         historyLayout.Controls.Add(historyTitleLabel, 0, 0);
         historyLayout.Controls.Add(_historyGrid, 0, 1);
         historyLayout.Dock = DockStyle.Fill;
+        historyLayout.Location = new Point(11, 13);
+        historyLayout.Margin = new Padding(3, 4, 3, 4);
+        historyLayout.Name = "historyLayout";
         historyLayout.RowCount = 2;
-        historyLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
+        historyLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 37F));
         historyLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+        historyLayout.Size = new Size(1227, 217);
+        historyLayout.TabIndex = 0;
+        //
+        // historyTitleLabel
+        //
         historyTitleLabel.Dock = DockStyle.Fill;
-        historyTitleLabel.Font = UiStyleHelper.SectionFont(10F);
-        historyTitleLabel.ForeColor = UiStyleHelper.Primary;
+        historyTitleLabel.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+        historyTitleLabel.ForeColor = Color.FromArgb(13, 110, 253);
+        historyTitleLabel.Location = new Point(3, 0);
+        historyTitleLabel.Name = "historyTitleLabel";
+        historyTitleLabel.Size = new Size(1221, 37);
+        historyTitleLabel.TabIndex = 0;
         historyTitleLabel.Text = "LỊCH SỬ KIỂM TRA VÉ";
         historyTitleLabel.TextAlign = ContentAlignment.MiddleLeft;
         //
@@ -371,20 +525,65 @@ partial class TicketCheckForm
         _historyGrid.BorderStyle = BorderStyle.None;
         _historyGrid.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
         _historyGrid.ColumnHeadersHeight = 40;
-        _historyGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "TicketId", DataPropertyName = "TicketId", HeaderText = "Mã vé", FillWeight = 110 });
-        _historyGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Movie", DataPropertyName = "Movie", HeaderText = "Phim", FillWeight = 170 });
-        _historyGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Seats", DataPropertyName = "Seats", HeaderText = "Ghế", FillWeight = 70 });
-        _historyGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Showtime", DataPropertyName = "Showtime", HeaderText = "Giờ chiếu", FillWeight = 120 });
-        _historyGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Result", DataPropertyName = "Result", HeaderText = "Kết quả", FillWeight = 90 });
-        _historyGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Staff", DataPropertyName = "Staff", HeaderText = "Nhân viên", FillWeight = 110 });
-        _historyGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "CheckedAt", DataPropertyName = "CheckedAt", HeaderText = "Thời gian kiểm tra", FillWeight = 140 });
         _historyGrid.Dock = DockStyle.Fill;
         _historyGrid.EnableHeadersVisualStyles = false;
+        _historyGrid.Location = new Point(3, 41);
+        _historyGrid.Margin = new Padding(3, 4, 3, 4);
         _historyGrid.MultiSelect = false;
+        _historyGrid.Name = "_historyGrid";
         _historyGrid.ReadOnly = true;
         _historyGrid.RowHeadersVisible = false;
+        _historyGrid.RowHeadersWidth = 51;
         _historyGrid.RowTemplate.Height = 34;
         _historyGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        _historyGrid.Size = new Size(1221, 172);
+        _historyGrid.TabIndex = 1;
+        historyTicketIdColumn.Name = "TicketId";
+        historyTicketIdColumn.DataPropertyName = "TicketId";
+        historyTicketIdColumn.HeaderText = "Mã vé";
+        historyTicketIdColumn.FillWeight = 95F;
+        _historyGrid.Columns.Add(historyTicketIdColumn);
+        historyMovieColumn.Name = "Movie";
+        historyMovieColumn.DataPropertyName = "Movie";
+        historyMovieColumn.HeaderText = "Phim";
+        historyMovieColumn.FillWeight = 190F;
+        _historyGrid.Columns.Add(historyMovieColumn);
+        historySeatsColumn.Name = "Seats";
+        historySeatsColumn.DataPropertyName = "Seats";
+        historySeatsColumn.HeaderText = "Ghế";
+        historySeatsColumn.FillWeight = 80F;
+        _historyGrid.Columns.Add(historySeatsColumn);
+        historyShowtimeColumn.Name = "Showtime";
+        historyShowtimeColumn.DataPropertyName = "Showtime";
+        historyShowtimeColumn.HeaderText = "Suất chiếu";
+        historyShowtimeColumn.FillWeight = 130F;
+        _historyGrid.Columns.Add(historyShowtimeColumn);
+        historyResultColumn.Name = "Result";
+        historyResultColumn.DataPropertyName = "Result";
+        historyResultColumn.HeaderText = "Kết quả";
+        historyResultColumn.FillWeight = 110F;
+        _historyGrid.Columns.Add(historyResultColumn);
+        historyStaffColumn.Name = "Staff";
+        historyStaffColumn.DataPropertyName = "Staff";
+        historyStaffColumn.HeaderText = "Nhân viên";
+        historyStaffColumn.FillWeight = 120F;
+        _historyGrid.Columns.Add(historyStaffColumn);
+        historyCheckedAtColumn.Name = "CheckedAt";
+        historyCheckedAtColumn.DataPropertyName = "CheckedAt";
+        historyCheckedAtColumn.HeaderText = "Thời gian";
+        historyCheckedAtColumn.FillWeight = 150F;
+        _historyGrid.Columns.Add(historyCheckedAtColumn);
+        //
+        // TicketCheckForm
+        //
+        AutoScaleDimensions = new SizeF(7F, 15F);
+        AutoScaleMode = AutoScaleMode.Font;
+        BackColor = Color.FromArgb(245, 248, 252);
+        ClientSize = new Size(1100, 620);
+        Controls.Add(rootLayout);
+        Margin = new Padding(3, 4, 3, 4);
+        Name = "TicketCheckForm";
+        Text = "Kiểm tra vé";
         rootLayout.ResumeLayout(false);
         filterPanel.ResumeLayout(false);
         middleLayout.ResumeLayout(false);
@@ -400,44 +599,5 @@ partial class TicketCheckForm
         historyLayout.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)_historyGrid).EndInit();
         ResumeLayout(false);
-    }
-
-    private static Label CreateCardTitleLabel(string text) => new()
-    {
-        Dock = DockStyle.Fill,
-        Font = UiStyleHelper.SectionFont(10F),
-        ForeColor = UiStyleHelper.Primary,
-        Text = text.ToUpperInvariant(),
-        TextAlign = ContentAlignment.MiddleLeft
-    };
-
-    private static Label CreateOverviewTitleLabel() => CreateCardTitleLabel("Tổng quan hôm nay");
-
-    private static Panel CreateOverviewItemPanel(string label, Label valueLabel, Color accent)
-    {
-        var panel = new Panel
-        {
-            BackColor = UiStyleHelper.SurfaceMuted,
-            BorderStyle = BorderStyle.FixedSingle,
-            Dock = DockStyle.Fill,
-            Margin = new Padding(0, 4, 0, 8),
-            Padding = new Padding(12)
-        };
-        valueLabel.Dock = DockStyle.Right;
-        valueLabel.Font = UiStyleHelper.TitleFont(18F);
-        valueLabel.ForeColor = accent;
-        valueLabel.Text = "0";
-        valueLabel.TextAlign = ContentAlignment.MiddleRight;
-        valueLabel.Width = 70;
-        panel.Controls.Add(valueLabel);
-        panel.Controls.Add(new Label
-        {
-            Dock = DockStyle.Fill,
-            Font = UiStyleHelper.BodyFont(9.5F),
-            ForeColor = UiStyleHelper.TextDark,
-            Text = label,
-            TextAlign = ContentAlignment.MiddleLeft
-        });
-        return panel;
     }
 }

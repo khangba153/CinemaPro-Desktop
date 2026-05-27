@@ -17,7 +17,7 @@ public sealed partial class MainForm : Form
         InitializeComponent();
         _userLabel.Text = string.IsNullOrWhiteSpace(UserSession.FullName) ? "Nguyễn Văn Quản" : UserSession.FullName;
         _roleLabel.Text = CurrentRole;
-        BuildSidebarMenu();
+        ConfigureSidebarMenu();
         StartClock();
         OpenDefaultDashboard();
     }
@@ -28,11 +28,15 @@ public sealed partial class MainForm : Form
 
     public void OpenChildForm(Form childForm, string title, string icon, string? activeKey = null)
     {
-        _currentChildForm?.Close();
-        _currentChildForm?.Dispose();
+        if (_currentChildForm is not null)
+        {
+            _contentPanel.Controls.Remove(_currentChildForm);
+            _currentChildForm.Close();
+            _currentChildForm.Dispose();
+        }
+
         _currentChildForm = childForm;
         UiStyleHelper.PrepareChildForm(childForm);
-        _contentPanel.Controls.Clear();
         _contentPanel.Controls.Add(childForm);
         _titleLabel.Text = title;
         _pageIconLabel.Text = icon;
@@ -45,33 +49,72 @@ public sealed partial class MainForm : Form
         childForm.Show();
     }
 
-    private void BuildSidebarMenu()
+    private void ConfigureSidebarMenu()
     {
-        _menuPanel.Controls.Clear();
         _menuButtons.Clear();
-        AddGroupLabel("Vận hành");
+        RegisterMenuButton(dashboardButton, "Dashboard", OpenDefaultDashboard);
+        RegisterMenuButton(ticketSaleButton, "Bán vé", OpenStaffTicketSale);
+        RegisterMenuButton(ticketCheckButton, "Kiểm tra vé", OpenStaffTicketCheck);
+        RegisterMenuButton(soldTicketsButton, "Vé đã bán", () => OpenChildForm(new SoldTicketsForm(), "Quản lý vé đã bán", "\uE8A1", "Vé đã bán"));
+        RegisterMenuButton(todayShowtimeButton, "Lịch chiếu hôm nay", () => OpenChildForm(new TodayShowtimeForm(), "Lịch chiếu hôm nay", "\uE787", "Lịch chiếu hôm nay"));
+        RegisterMenuButton(movieButton, "Phim", () => OpenChildForm(new MovieManagementForm(), "Quản lý phim & lịch chiếu", "\uE7F4", "Phim"));
+        RegisterMenuButton(showtimeButton, "Lịch chiếu", () => OpenChildForm(new ShowtimeManagementForm(), "Quản lý lịch chiếu", "\uE787", "Lịch chiếu"));
+        RegisterMenuButton(roomButton, "Phòng chiếu", () => OpenChildForm(new RoomManagementForm(), "Quản lý phòng chiếu", "\uE8B7", "Phòng chiếu"));
+        RegisterMenuButton(seatButton, "Ghế", () => OpenChildForm(new SeatManagementForm(), "Quản lý ghế", "\uE7F1", "Ghế"));
+        RegisterMenuButton(userButton, "Nhân viên", () => OpenChildForm(new UserManagementForm(), "Quản lý nhân viên", "\uE716", "Nhân viên"));
+        RegisterMenuButton(revenueButton, "Thống kê doanh thu", () => OpenChildForm(new RevenueReportForm(), "Thống kê doanh thu", "\uE9D2", "Thống kê doanh thu"));
+        RegisterMenuButton(settingsButton, "Cài đặt", () => OpenChildForm(new SettingsForm(), "Cài đặt hệ thống", "\uE713", "Cài đặt"));
+        ApplyRoleMenuVisibility();
+        AttachMenuHover(logoutButton);
+    }
 
-        if (CurrentRole == "Admin")
+    private void RegisterMenuButton(Button button, string key, Action action)
+    {
+        button.Tag = key;
+        button.Click += (_, _) =>
         {
-            AddMenuButton("Dashboard", () => OpenChildForm(new AdminDashboardForm(), "Dashboard", "\uE80F", "Dashboard"));
-            AddGroupLabel("Quản lý");
-            AddMenuButton("Phim", () => OpenChildForm(new MovieManagementForm(), "Quản lý phim & lịch chiếu", "\uE7F4", "Phim"));
-            AddMenuButton("Lịch chiếu", () => OpenChildForm(new ShowtimeManagementForm(), "Quản lý lịch chiếu", "\uE787", "Lịch chiếu"));
-            AddMenuButton("Phòng chiếu", () => OpenChildForm(new RoomManagementForm(), "Quản lý phòng chiếu", "\uE8B7", "Phòng chiếu"));
-            AddMenuButton("Ghế", () => OpenChildForm(new SeatManagementForm(), "Quản lý ghế", "\uE7F1", "Ghế"));
-            AddMenuButton("Nhân viên", () => OpenChildForm(new UserManagementForm(), "Quản lý nhân viên", "\uE716", "Nhân viên"));
-            AddGroupLabel("Báo cáo");
-            AddMenuButton("Thống kê doanh thu", () => OpenChildForm(new RevenueReportForm(), "Thống kê doanh thu", "\uE9D2", "Thống kê doanh thu"));
-            AddMenuButton("Cài đặt", () => OpenChildForm(new SettingsForm(), "Cài đặt hệ thống", "\uE713", "Cài đặt"));
-        }
-        else
+            SetActiveButton(button);
+            action();
+        };
+        AttachMenuHover(button);
+        _menuButtons[key] = button;
+    }
+
+    private void ApplyRoleMenuVisibility()
+    {
+        var isAdmin = CurrentRole == "Admin";
+        ticketSaleButton.Visible = !isAdmin;
+        ticketCheckButton.Visible = !isAdmin;
+        soldTicketsButton.Visible = !isAdmin;
+        todayShowtimeButton.Visible = !isAdmin;
+
+        managementGroupLabel.Visible = isAdmin;
+        movieButton.Visible = isAdmin;
+        showtimeButton.Visible = isAdmin;
+        roomButton.Visible = isAdmin;
+        seatButton.Visible = isAdmin;
+        userButton.Visible = isAdmin;
+        reportGroupLabel.Visible = isAdmin;
+        revenueButton.Visible = isAdmin;
+        settingsButton.Visible = isAdmin;
+    }
+
+    private static void AttachMenuHover(Button button)
+    {
+        button.MouseEnter += (_, _) =>
         {
-            AddMenuButton("Dashboard", () => OpenChildForm(new StaffDashboardForm(OpenStaffTicketSale, OpenStaffTicketCheck), "Dashboard", "\uE80F", "Dashboard"));
-            AddMenuButton("Bán vé", OpenStaffTicketSale);
-            AddMenuButton("Kiểm tra vé", OpenStaffTicketCheck);
-            AddMenuButton("Vé đã bán", () => OpenChildForm(new SoldTicketsForm(), "Quản lý vé đã bán", "\uE8A1", "Vé đã bán"));
-            AddMenuButton("Lịch chiếu hôm nay", () => OpenChildForm(new TodayShowtimeForm(), "Lịch chiếu hôm nay", "\uE787", "Lịch chiếu hôm nay"));
-        }
+            if (button.BackColor != UiStyleHelper.SidebarActive)
+            {
+                button.BackColor = UiStyleHelper.SidebarHover;
+            }
+        };
+        button.MouseLeave += (_, _) =>
+        {
+            if (button.BackColor != UiStyleHelper.SidebarActive)
+            {
+                button.BackColor = UiStyleHelper.Sidebar;
+            }
+        };
     }
 
     private void OpenDefaultDashboard()
@@ -97,67 +140,6 @@ public sealed partial class MainForm : Form
     private void UpdateStatusTime()
     {
         _statusLabel.Text = $"  ●  Đang kết nối      Máy trạm: COUNTER-01      Phiên bản: 1.0.0      {DateTime.Now:dd/MM/yyyy HH:mm:ss}";
-    }
-
-    private void AddGroupLabel(string text)
-    {
-        _menuPanel.Controls.Add(new Label
-        {
-            Width = 196,
-            Height = 26,
-            Text = text,
-            Font = UiStyleHelper.SmallFont(8.75f),
-            ForeColor = UiStyleHelper.TextMuted,
-            TextAlign = ContentAlignment.BottomLeft,
-            Margin = new Padding(0, 8, 0, 2)
-        });
-    }
-
-    private void AddMenuButton(string text, Action action)
-    {
-        var button = CreateMenuButton(text);
-        button.Tag = text;
-        button.Click += (_, _) =>
-        {
-            SetActiveButton(button);
-            action();
-        };
-        _menuButtons[text] = button;
-        _menuPanel.Controls.Add(button);
-    }
-
-    private static Button CreateMenuButton(string text, bool isLogout = false)
-    {
-        var button = new Button
-        {
-            Width = 196,
-            Height = 38,
-            Text = text,
-            TextAlign = ContentAlignment.MiddleLeft,
-            Padding = new Padding(18, 0, 0, 0),
-            Font = UiStyleHelper.SectionFont(9.5f),
-            ForeColor = isLogout ? UiStyleHelper.Danger : UiStyleHelper.SidebarText,
-            BackColor = UiStyleHelper.Sidebar,
-            FlatStyle = FlatStyle.Flat,
-            Cursor = Cursors.Hand,
-            Margin = new Padding(0, 0, 0, 6)
-        };
-        button.FlatAppearance.BorderSize = 0;
-        button.MouseEnter += (_, _) =>
-        {
-            if (button.BackColor != UiStyleHelper.SidebarActive)
-            {
-                button.BackColor = UiStyleHelper.SidebarHover;
-            }
-        };
-        button.MouseLeave += (_, _) =>
-        {
-            if (button.BackColor != UiStyleHelper.SidebarActive)
-            {
-                button.BackColor = UiStyleHelper.Sidebar;
-            }
-        };
-        return button;
     }
 
     private void SetActiveButton(Button button)

@@ -28,38 +28,16 @@ public sealed partial class PaymentForm : Form
 
     private void BindSummary()
     {
-        detailsTable.Controls.Clear();
-        AddRow("Mã vé", _summary.TicketId);
-        AddRow("Tên phim", _summary.Movie);
-        AddRow("Suất chiếu", _summary.Showtime);
-        AddRow("Phòng", _summary.Room);
-        AddRow("Ghế", string.Join(", ", _summary.Seats));
-        AddRow("Tổng tiền", UiStyleHelper.FormatCurrency(_summary.Total));
-        AddRow("Thanh toán", _summary.PaymentMethod);
+        ticketIdValueLabel.Text = _summary.TicketId;
+        movieValueLabel.Text = _summary.Movie;
+        showtimeValueLabel.Text = _summary.Showtime;
+        roomValueLabel.Text = _summary.Room;
+        seatsValueLabel.Text = string.Join(", ", _summary.Seats);
+        totalValueLabel.Text = UiStyleHelper.FormatCurrency(_summary.Total);
+        paymentMethodValueLabel.Text = _summary.PaymentMethod;
 
         AcceptButton = confirmButton;
         CancelButton = closeButton;
-    }
-
-    private void AddRow(string label, string value)
-    {
-        detailsTable.Controls.Add(new Label
-        {
-            Text = label,
-            Dock = DockStyle.Fill,
-            ForeColor = UiStyleHelper.TextMuted,
-            Font = UiStyleHelper.SmallFont(9.5f),
-            TextAlign = ContentAlignment.MiddleLeft
-        });
-        detailsTable.Controls.Add(new Label
-        {
-            Text = value,
-            Dock = DockStyle.Fill,
-            ForeColor = UiStyleHelper.TextDark,
-            Font = UiStyleHelper.SectionFont(9.5f),
-            TextAlign = ContentAlignment.MiddleLeft,
-            AutoEllipsis = true
-        });
     }
 
     private void ConfirmButton_Click(object? sender, EventArgs e) => ConfirmPayment();

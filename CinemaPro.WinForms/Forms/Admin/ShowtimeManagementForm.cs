@@ -121,22 +121,24 @@ public sealed partial class ShowtimeManagementForm : Form
 
     private void RenderTimeline(IReadOnlyList<ShowtimeRow> rows)
     {
-        timelinePanel.Controls.Clear();
-        var source = rows.Count > 0 ? rows : _showtimes.OrderBy(showtime => showtime.StartTime).Take(5).ToList();
-
-        foreach (var showtime in source.OrderBy(showtime => showtime.StartTime).Take(5))
+        var labels = new[] { timeline1Label, timeline2Label, timeline3Label, timeline4Label, timeline5Label };
+        foreach (var label in labels)
         {
-            timelinePanel.Controls.Add(new Label
-            {
-                Width = 980,
-                Height = 34,
-                Text = $"{showtime.Room}     {showtime.StartTime:HH:mm} - {showtime.EndTime:HH:mm}     {showtime.Movie}",
-                Font = UiStyleHelper.SectionFont(9.25f),
-                ForeColor = showtime.StartTime.Hour >= 22 ? UiStyleHelper.Danger : UiStyleHelper.Primary,
-                BackColor = ColorTranslator.FromHtml(showtime.StartTime.Hour >= 22 ? "#FFF1F2" : "#EAF3FF"),
-                TextAlign = ContentAlignment.MiddleCenter,
-                Margin = new Padding(0, 4, 0, 4)
-            });
+            label.Visible = false;
+        }
+
+        var source = rows.Count > 0
+            ? rows.OrderBy(showtime => showtime.StartTime).Take(labels.Length).ToList()
+            : _showtimes.OrderBy(showtime => showtime.StartTime).Take(labels.Length).ToList();
+
+        for (var index = 0; index < source.Count; index++)
+        {
+            var showtime = source[index];
+            var label = labels[index];
+            label.Text = $"{showtime.Room}     {showtime.StartTime:HH:mm} - {showtime.EndTime:HH:mm}     {showtime.Movie}";
+            label.ForeColor = showtime.StartTime.Hour >= 22 ? UiStyleHelper.Danger : UiStyleHelper.Primary;
+            label.BackColor = ColorTranslator.FromHtml(showtime.StartTime.Hour >= 22 ? "#FFF1F2" : "#EAF3FF");
+            label.Visible = true;
         }
     }
 

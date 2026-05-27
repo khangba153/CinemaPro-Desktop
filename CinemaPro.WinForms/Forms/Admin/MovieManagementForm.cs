@@ -122,25 +122,4 @@ public sealed partial class MovieManagementForm : Form
         _detailLabel.Text = "Không tìm thấy phim phù hợp với bộ lọc hiện tại.";
         _showtimeGrid.DataSource = Array.Empty<object>();
     }
-
-    private sealed class PosterPreview : Panel
-    {
-        public PosterPreview()
-        {
-            DoubleBuffered = true;
-            BackColor = ColorTranslator.FromHtml("#172554");
-            Margin = new Padding(0, 0, 14, 12);
-        }
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);
-            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            using var text = new SolidBrush(Color.White);
-            using var accent = new SolidBrush(ColorTranslator.FromHtml("#60A5FA"));
-            using var title = UiStyleHelper.TitleFont(11);
-            e.Graphics.FillEllipse(accent, Width - 52, 14, 38, 38);
-            e.Graphics.DrawString("POSTER", title, text, new RectangleF(14, Height - 42, Width - 28, 36));
-        }
-    }
 }

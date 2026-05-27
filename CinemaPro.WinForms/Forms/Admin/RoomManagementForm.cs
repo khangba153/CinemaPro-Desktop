@@ -94,36 +94,25 @@ public sealed partial class RoomManagementForm : Form
 
     private void RenderSeatPreview(RoomRow room)
     {
-        seatPreviewPanel.Controls.Clear();
         var previewRows = Math.Min(room.SeatRows, 6);
         var previewSeats = Math.Min(room.SeatsPerRow, 10);
 
-        for (var rowIndex = 0; rowIndex < previewRows; rowIndex++)
+        foreach (var label in seatPreviewPanel.Controls.OfType<Label>())
         {
-            var row = (char)('A' + rowIndex);
-            seatPreviewPanel.Controls.Add(new Label
+            var cell = seatPreviewPanel.GetCellPosition(label);
+            if (cell.Row < 0 || cell.Column < 0)
             {
-                Dock = DockStyle.Fill,
-                Text = row.ToString(),
-                Font = UiStyleHelper.SectionFont(9F),
-                TextAlign = ContentAlignment.MiddleCenter,
-                Margin = new Padding(0, 3, 8, 3)
-            }, 0, rowIndex);
-
-            for (var number = 1; number <= previewSeats; number++)
-            {
-                seatPreviewPanel.Controls.Add(new Label
-                {
-                    Dock = DockStyle.Fill,
-                    Text = number.ToString(),
-                    Font = UiStyleHelper.SmallFont(8.5F),
-                    ForeColor = UiStyleHelper.TextDark,
-                    BackColor = number % 7 == 0 ? UiStyleHelper.SeatSold : UiStyleHelper.SeatAvailable,
-                    BorderStyle = BorderStyle.FixedSingle,
-                    TextAlign = ContentAlignment.MiddleCenter,
-                    Margin = new Padding(5, 3, 5, 3)
-                }, number, rowIndex);
+                continue;
             }
+
+            if (cell.Column == 0)
+            {
+                label.Visible = cell.Row < previewRows;
+                continue;
+            }
+
+            label.Visible = cell.Row < previewRows && cell.Column <= previewSeats;
+            label.BackColor = cell.Column % 7 == 0 ? UiStyleHelper.SeatSold : UiStyleHelper.SeatAvailable;
         }
     }
 }

@@ -7,34 +7,56 @@ partial class MovieManagementForm
     private System.ComponentModel.IContainer components = null;
     private TableLayoutPanel rootLayout;
     private FlowLayoutPanel filterBar;
+    private Label searchFilterLabel;
     private TextBox searchTextBox;
+    private Label genreFilterLabel;
     private ComboBox genreFilterCombo;
+    private Label statusFilterLabel;
     private ComboBox statusFilterCombo;
-    private RoundedButton addMovieButton;
-    private RoundedButton addShowtimeButton;
-    private RoundedButton refreshButton;
+    private Button addMovieButton;
+    private Button addShowtimeButton;
+    private Button refreshButton;
     private TableLayoutPanel mainLayout;
-    private RoundedPanel movieGridCard;
+    private Panel movieGridCard;
     private TableLayoutPanel movieGridLayout;
+    private Label movieGridTitleLabel;
     private DataGridView _movieGrid;
-    private RoundedPanel detailCard;
+    private Panel detailCard;
     private TableLayoutPanel detailLayout;
-    private PosterPreview posterPreview;
+    private Label detailTitleLabel;
+    private Panel posterPreview;
+    private Label titleInputLabel;
     private TextBox _titleBox;
+    private Label genreInputLabel;
     private ComboBox _genreCombo;
+    private Label durationInputLabel;
     private TextBox _durationBox;
+    private Label formatInputLabel;
     private ComboBox _formatCombo;
+    private Label movieStatusInputLabel;
     private ComboBox _statusCombo;
     private Label _detailLabel;
     private TableLayoutPanel detailBottomLayout;
     private TableLayoutPanel detailButtonsLayout;
-    private RoundedButton saveButton;
-    private RoundedButton updateButton;
-    private RoundedButton deleteButton;
-    private RoundedPanel showtimeCard;
+    private Button saveButton;
+    private Button updateButton;
+    private Button deleteButton;
+    private Panel showtimeCard;
     private TableLayoutPanel showtimeLayout;
+    private Label showtimeTitleLabel;
     private DataGridView _showtimeGrid;
 
+    private DataGridViewTextBoxColumn movieGridMovieIdColumn;
+    private DataGridViewTextBoxColumn movieGridTitleColumn;
+    private DataGridViewTextBoxColumn movieGridGenreColumn;
+    private DataGridViewTextBoxColumn movieGridDurationColumn;
+    private DataGridViewTextBoxColumn movieGridStatusColumn;
+    private DataGridViewTextBoxColumn showtimeGridShowtimeIdColumn;
+    private DataGridViewTextBoxColumn showtimeGridRoomColumn;
+    private DataGridViewTextBoxColumn showtimeGridDateColumn;
+    private DataGridViewTextBoxColumn showtimeGridStartColumn;
+    private DataGridViewTextBoxColumn showtimeGridPriceColumn;
+    private DataGridViewTextBoxColumn showtimeGridStatusColumn;
     protected override void Dispose(bool disposing)
     {
         if (disposing && components != null)
@@ -48,34 +70,88 @@ partial class MovieManagementForm
     private void InitializeComponent()
     {
         components = new System.ComponentModel.Container();
+        movieGridMovieIdColumn = new DataGridViewTextBoxColumn();
+        movieGridTitleColumn = new DataGridViewTextBoxColumn();
+        movieGridGenreColumn = new DataGridViewTextBoxColumn();
+        movieGridDurationColumn = new DataGridViewTextBoxColumn();
+        movieGridStatusColumn = new DataGridViewTextBoxColumn();
+        showtimeGridShowtimeIdColumn = new DataGridViewTextBoxColumn();
+        showtimeGridRoomColumn = new DataGridViewTextBoxColumn();
+        showtimeGridDateColumn = new DataGridViewTextBoxColumn();
+        showtimeGridStartColumn = new DataGridViewTextBoxColumn();
+        showtimeGridPriceColumn = new DataGridViewTextBoxColumn();
+        showtimeGridStatusColumn = new DataGridViewTextBoxColumn();
         rootLayout = new TableLayoutPanel();
         filterBar = new FlowLayoutPanel();
-        searchTextBox = UiStyleHelper.CreateTextBox("Tìm kiếm phim...");
-        genreFilterCombo = UiStyleHelper.CreateComboBox();
-        statusFilterCombo = UiStyleHelper.CreateComboBox();
-        addMovieButton = UiStyleHelper.CreateButton("Thêm phim");
-        addShowtimeButton = UiStyleHelper.CreateOutlineButton("Thêm lịch chiếu", UiStyleHelper.Success);
-        refreshButton = UiStyleHelper.CreateOutlineButton("Làm mới");
+        searchFilterLabel = new Label();
+        searchTextBox = new TextBox();
+        searchTextBox.PlaceholderText = "Tìm kiếm phim...";
+        searchTextBox.BorderStyle = BorderStyle.FixedSingle;
+        searchTextBox.Font = UiStyleHelper.BodyFont(10F);
+        searchTextBox.Height = 32;
+        genreFilterLabel = new Label();
+        genreFilterCombo = new ComboBox();
+        genreFilterCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+        genreFilterCombo.FlatStyle = FlatStyle.Flat;
+        genreFilterCombo.Font = UiStyleHelper.BodyFont(10F);
+        genreFilterCombo.Height = 34;
+        statusFilterLabel = new Label();
+        statusFilterCombo = new ComboBox();
+        statusFilterCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+        statusFilterCombo.FlatStyle = FlatStyle.Flat;
+        statusFilterCombo.Font = UiStyleHelper.BodyFont(10F);
+        statusFilterCombo.Height = 34;
+        addMovieButton = new Button();
+        addShowtimeButton = new Button();
+        refreshButton = new Button();
         mainLayout = new TableLayoutPanel();
-        movieGridCard = UiStyleHelper.CreateCard();
+        movieGridCard = new Panel();
         movieGridLayout = new TableLayoutPanel();
+        movieGridTitleLabel = new Label();
         _movieGrid = new DataGridView();
-        detailCard = UiStyleHelper.CreateCard();
+        detailCard = new Panel();
         detailLayout = new TableLayoutPanel();
-        posterPreview = new PosterPreview();
-        _titleBox = UiStyleHelper.CreateTextBox("Tên phim");
-        _genreCombo = UiStyleHelper.CreateComboBox();
-        _durationBox = UiStyleHelper.CreateTextBox("Phút");
-        _formatCombo = UiStyleHelper.CreateComboBox();
-        _statusCombo = UiStyleHelper.CreateComboBox();
+        detailTitleLabel = new Label();
+        posterPreview = new Panel();
+        titleInputLabel = new Label();
+        _titleBox = new TextBox();
+        _titleBox.PlaceholderText = "Tên phim";
+        _titleBox.BorderStyle = BorderStyle.FixedSingle;
+        _titleBox.Font = UiStyleHelper.BodyFont(10F);
+        _titleBox.Height = 32;
+        genreInputLabel = new Label();
+        _genreCombo = new ComboBox();
+        _genreCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+        _genreCombo.FlatStyle = FlatStyle.Flat;
+        _genreCombo.Font = UiStyleHelper.BodyFont(10F);
+        _genreCombo.Height = 34;
+        durationInputLabel = new Label();
+        _durationBox = new TextBox();
+        _durationBox.PlaceholderText = "Phút";
+        _durationBox.BorderStyle = BorderStyle.FixedSingle;
+        _durationBox.Font = UiStyleHelper.BodyFont(10F);
+        _durationBox.Height = 32;
+        formatInputLabel = new Label();
+        _formatCombo = new ComboBox();
+        _formatCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+        _formatCombo.FlatStyle = FlatStyle.Flat;
+        _formatCombo.Font = UiStyleHelper.BodyFont(10F);
+        _formatCombo.Height = 34;
+        movieStatusInputLabel = new Label();
+        _statusCombo = new ComboBox();
+        _statusCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+        _statusCombo.FlatStyle = FlatStyle.Flat;
+        _statusCombo.Font = UiStyleHelper.BodyFont(10F);
+        _statusCombo.Height = 34;
         _detailLabel = new Label();
         detailBottomLayout = new TableLayoutPanel();
         detailButtonsLayout = new TableLayoutPanel();
-        saveButton = UiStyleHelper.CreateButton("Lưu");
-        updateButton = UiStyleHelper.CreateOutlineButton("Cập nhật");
-        deleteButton = UiStyleHelper.CreateOutlineButton("Xóa", UiStyleHelper.Danger);
-        showtimeCard = UiStyleHelper.CreateCard();
+        saveButton = new Button();
+        updateButton = new Button();
+        deleteButton = new Button();
+        showtimeCard = new Panel();
         showtimeLayout = new TableLayoutPanel();
+        showtimeTitleLabel = new Label();
         _showtimeGrid = new DataGridView();
         rootLayout.SuspendLayout();
         filterBar.SuspendLayout();
@@ -118,9 +194,12 @@ partial class MovieManagementForm
         // filterBar
         //
         filterBar.BackColor = UiStyleHelper.ContentBackground;
-        filterBar.Controls.Add(UiStyleHelper.FieldBlock("Tìm kiếm", searchTextBox, 260));
-        filterBar.Controls.Add(UiStyleHelper.FieldBlock("Thể loại", genreFilterCombo, 160));
-        filterBar.Controls.Add(UiStyleHelper.FieldBlock("Trạng thái", statusFilterCombo, 160));
+        filterBar.Controls.Add(searchFilterLabel);
+        filterBar.Controls.Add(searchTextBox);
+        filterBar.Controls.Add(genreFilterLabel);
+        filterBar.Controls.Add(genreFilterCombo);
+        filterBar.Controls.Add(statusFilterLabel);
+        filterBar.Controls.Add(statusFilterCombo);
         filterBar.Controls.Add(addMovieButton);
         filterBar.Controls.Add(addShowtimeButton);
         filterBar.Controls.Add(refreshButton);
@@ -131,16 +210,53 @@ partial class MovieManagementForm
         //
         // filter controls
         //
-        searchTextBox.Width = 260;
-        genreFilterCombo.Width = 160;
+        StyleInlineLabel(searchFilterLabel, "Tìm kiếm", 66);
+        searchTextBox.Margin = new Padding(0, 18, 16, 0);
+        searchTextBox.Size = new Size(250, 32);
+        StyleInlineLabel(genreFilterLabel, "Thể loại", 58);
+        genreFilterCombo.Margin = new Padding(0, 18, 16, 0);
+        genreFilterCombo.Size = new Size(148, 32);
         genreFilterCombo.Items.AddRange(new object[] { "Tất cả", "Hành động", "Hoạt hình", "Gia đình", "Khoa học viễn tưởng", "Tâm lý" });
         genreFilterCombo.SelectedIndex = 0;
-        statusFilterCombo.Width = 160;
+        StyleInlineLabel(statusFilterLabel, "Trạng thái", 76);
+        statusFilterCombo.Margin = new Padding(0, 18, 16, 0);
+        statusFilterCombo.Size = new Size(148, 32);
         statusFilterCombo.Items.AddRange(new object[] { "Tất cả", "Đang chiếu", "Sắp chiếu", "Ngừng chiếu" });
         statusFilterCombo.SelectedIndex = 0;
         addMovieButton.Width = 120;
+        addMovieButton.Height = 38;
+        addMovieButton.BackColor = UiStyleHelper.Primary;
+        addMovieButton.Cursor = Cursors.Hand;
+        addMovieButton.FlatStyle = FlatStyle.Flat;
+        addMovieButton.FlatAppearance.BorderSize = 0;
+        addMovieButton.Font = UiStyleHelper.SectionFont(9.5F);
+        addMovieButton.ForeColor = Color.White;
+        addMovieButton.Margin = new Padding(0, 18, 8, 0);
+        addMovieButton.Text = "Thêm phim";
+        addMovieButton.UseVisualStyleBackColor = false;
+        addShowtimeButton.Height = 38;
+        addShowtimeButton.BackColor = Color.White;
+        addShowtimeButton.Cursor = Cursors.Hand;
+        addShowtimeButton.FlatStyle = FlatStyle.Flat;
+        addShowtimeButton.FlatAppearance.BorderColor = ColorTranslator.FromHtml("#9BC2FF");
+        addShowtimeButton.FlatAppearance.BorderSize = 1;
+        addShowtimeButton.Font = UiStyleHelper.SectionFont(9.5F);
         addShowtimeButton.ForeColor = UiStyleHelper.Success;
+        addShowtimeButton.Margin = new Padding(0, 18, 8, 0);
+        addShowtimeButton.Text = "Thêm lịch chiếu";
+        addShowtimeButton.UseVisualStyleBackColor = false;
         addShowtimeButton.Width = 142;
+        refreshButton.Height = 38;
+        refreshButton.BackColor = Color.White;
+        refreshButton.Cursor = Cursors.Hand;
+        refreshButton.FlatStyle = FlatStyle.Flat;
+        refreshButton.FlatAppearance.BorderColor = ColorTranslator.FromHtml("#9BC2FF");
+        refreshButton.FlatAppearance.BorderSize = 1;
+        refreshButton.Font = UiStyleHelper.SectionFont(9.5F);
+        refreshButton.ForeColor = UiStyleHelper.Primary;
+        refreshButton.Margin = new Padding(0, 18, 8, 0);
+        refreshButton.Text = "Làm mới";
+        refreshButton.UseVisualStyleBackColor = false;
         refreshButton.Width = 112;
         //
         // mainLayout
@@ -158,6 +274,8 @@ partial class MovieManagementForm
         //
         // movieGridCard
         //
+        movieGridCard.BackColor = Color.White;
+        movieGridCard.BorderStyle = BorderStyle.FixedSingle;
         movieGridCard.Controls.Add(movieGridLayout);
         movieGridCard.Dock = DockStyle.Fill;
         movieGridCard.Margin = new Padding(0, 0, 12, 0);
@@ -168,12 +286,13 @@ partial class MovieManagementForm
         movieGridLayout.BackColor = Color.Transparent;
         movieGridLayout.ColumnCount = 1;
         movieGridLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-        movieGridLayout.Controls.Add(UiStyleHelper.CreateCardTitle("Danh sách phim"), 0, 0);
+        movieGridLayout.Controls.Add(movieGridTitleLabel, 0, 0);
         movieGridLayout.Controls.Add(_movieGrid, 0, 1);
         movieGridLayout.Dock = DockStyle.Fill;
         movieGridLayout.RowCount = 2;
         movieGridLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
         movieGridLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+        StyleCardTitle(movieGridTitleLabel, "DANH SÁCH PHIM");
         //
         // _movieGrid
         //
@@ -183,15 +302,42 @@ partial class MovieManagementForm
         _movieGrid.ColumnHeadersHeight = 40;
         _movieGrid.RowHeadersVisible = false;
         _movieGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        _movieGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "MovieId", DataPropertyName = "MovieId", HeaderText = "Mã phim", FillWeight = 80, MinimumWidth = 52 });
-        _movieGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Title", DataPropertyName = "Title", HeaderText = "Tên phim", FillWeight = 190, MinimumWidth = 52 });
-        _movieGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Genre", DataPropertyName = "Genre", HeaderText = "Thể loại", FillWeight = 100, MinimumWidth = 52 });
-        _movieGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Duration", DataPropertyName = "Duration", HeaderText = "Thời lượng", FillWeight = 82, MinimumWidth = 52 });
-        _movieGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Status", DataPropertyName = "Status", HeaderText = "Trạng thái", FillWeight = 95, MinimumWidth = 52 });
+        movieGridMovieIdColumn.Name = "MovieId";
+        movieGridMovieIdColumn.DataPropertyName = "MovieId";
+        movieGridMovieIdColumn.HeaderText = "Mã phim";
+        movieGridMovieIdColumn.FillWeight = 80F;
+        movieGridMovieIdColumn.MinimumWidth = 52;
+        _movieGrid.Columns.Add(movieGridMovieIdColumn);
+        movieGridTitleColumn.Name = "Title";
+        movieGridTitleColumn.DataPropertyName = "Title";
+        movieGridTitleColumn.HeaderText = "Tên phim";
+        movieGridTitleColumn.FillWeight = 190F;
+        movieGridTitleColumn.MinimumWidth = 52;
+        _movieGrid.Columns.Add(movieGridTitleColumn);
+        movieGridGenreColumn.Name = "Genre";
+        movieGridGenreColumn.DataPropertyName = "Genre";
+        movieGridGenreColumn.HeaderText = "Thể loại";
+        movieGridGenreColumn.FillWeight = 100F;
+        movieGridGenreColumn.MinimumWidth = 52;
+        _movieGrid.Columns.Add(movieGridGenreColumn);
+        movieGridDurationColumn.Name = "Duration";
+        movieGridDurationColumn.DataPropertyName = "Duration";
+        movieGridDurationColumn.HeaderText = "Thời lượng";
+        movieGridDurationColumn.FillWeight = 82F;
+        movieGridDurationColumn.MinimumWidth = 52;
+        _movieGrid.Columns.Add(movieGridDurationColumn);
+        movieGridStatusColumn.Name = "Status";
+        movieGridStatusColumn.DataPropertyName = "Status";
+        movieGridStatusColumn.HeaderText = "Trạng thái";
+        movieGridStatusColumn.FillWeight = 95F;
+        movieGridStatusColumn.MinimumWidth = 52;
+        _movieGrid.Columns.Add(movieGridStatusColumn);
         UiStyleHelper.ApplyStatusCellFormatting(_movieGrid, "Status");
         //
         // detailCard
         //
+        detailCard.BackColor = Color.White;
+        detailCard.BorderStyle = BorderStyle.FixedSingle;
         detailCard.Controls.Add(detailLayout);
         detailCard.Dock = DockStyle.Fill;
         detailCard.Padding = new Padding(16);
@@ -199,16 +345,22 @@ partial class MovieManagementForm
         // detailLayout
         //
         detailLayout.BackColor = Color.Transparent;
-        detailLayout.ColumnCount = 2;
+        detailLayout.ColumnCount = 3;
         detailLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 160F));
+        detailLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 92F));
         detailLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-        detailLayout.Controls.Add(UiStyleHelper.CreateCardTitle("Thông tin phim"), 0, 0);
+        detailLayout.Controls.Add(detailTitleLabel, 0, 0);
         detailLayout.Controls.Add(posterPreview, 0, 1);
-        detailLayout.Controls.Add(UiStyleHelper.FieldBlock("Tên phim", _titleBox), 1, 1);
-        detailLayout.Controls.Add(UiStyleHelper.FieldBlock("Thể loại", _genreCombo), 1, 2);
-        detailLayout.Controls.Add(UiStyleHelper.FieldBlock("Thời lượng", _durationBox), 1, 3);
-        detailLayout.Controls.Add(UiStyleHelper.FieldBlock("Định dạng", _formatCombo), 1, 4);
-        detailLayout.Controls.Add(UiStyleHelper.FieldBlock("Trạng thái", _statusCombo), 1, 5);
+        detailLayout.Controls.Add(titleInputLabel, 1, 1);
+        detailLayout.Controls.Add(_titleBox, 2, 1);
+        detailLayout.Controls.Add(genreInputLabel, 1, 2);
+        detailLayout.Controls.Add(_genreCombo, 2, 2);
+        detailLayout.Controls.Add(durationInputLabel, 1, 3);
+        detailLayout.Controls.Add(_durationBox, 2, 3);
+        detailLayout.Controls.Add(formatInputLabel, 1, 4);
+        detailLayout.Controls.Add(_formatCombo, 2, 4);
+        detailLayout.Controls.Add(movieStatusInputLabel, 1, 5);
+        detailLayout.Controls.Add(_statusCombo, 2, 5);
         detailLayout.Controls.Add(detailBottomLayout, 0, 6);
         detailLayout.Dock = DockStyle.Fill;
         detailLayout.RowCount = 7;
@@ -219,9 +371,22 @@ partial class MovieManagementForm
         detailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 62F));
         detailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 52F));
         detailLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        detailLayout.SetColumnSpan(detailLayout.GetControlFromPosition(0, 0)!, 2);
-        detailLayout.SetRowSpan(posterPreview, 4);
-        detailLayout.SetColumnSpan(detailBottomLayout, 2);
+        detailLayout.SetColumnSpan(detailTitleLabel, 3);
+        detailLayout.SetRowSpan(posterPreview, 5);
+        posterPreview.BackColor = ColorTranslator.FromHtml("#172554");
+        posterPreview.Margin = new Padding(0, 0, 14, 12);
+        detailLayout.SetColumnSpan(detailBottomLayout, 3);
+        StyleCardTitle(detailTitleLabel, "THÔNG TIN PHIM");
+        StyleFieldLabel(titleInputLabel, "Tên phim");
+        StyleFieldLabel(genreInputLabel, "Thể loại");
+        StyleFieldLabel(durationInputLabel, "Thời lượng");
+        StyleFieldLabel(formatInputLabel, "Định dạng");
+        StyleFieldLabel(movieStatusInputLabel, "Trạng thái");
+        DockFieldControl(_titleBox);
+        DockFieldControl(_genreCombo);
+        DockFieldControl(_durationBox);
+        DockFieldControl(_formatCombo);
+        DockFieldControl(_statusCombo);
         //
         // detail controls
         //
@@ -264,13 +429,39 @@ partial class MovieManagementForm
         detailButtonsLayout.RowCount = 1;
         detailButtonsLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
         saveButton.Dock = DockStyle.Fill;
+        saveButton.BackColor = UiStyleHelper.Primary;
+        saveButton.Cursor = Cursors.Hand;
+        saveButton.FlatStyle = FlatStyle.Flat;
+        saveButton.FlatAppearance.BorderSize = 0;
+        saveButton.Font = UiStyleHelper.SectionFont(9.5F);
+        saveButton.ForeColor = Color.White;
+        saveButton.Text = "Lưu";
+        saveButton.UseVisualStyleBackColor = false;
         updateButton.Dock = DockStyle.Fill;
-        deleteButton.BorderColor = ColorTranslator.FromHtml("#FFB4B4");
+        updateButton.BackColor = Color.White;
+        updateButton.Cursor = Cursors.Hand;
+        updateButton.FlatStyle = FlatStyle.Flat;
+        updateButton.FlatAppearance.BorderColor = ColorTranslator.FromHtml("#9BC2FF");
+        updateButton.FlatAppearance.BorderSize = 1;
+        updateButton.Font = UiStyleHelper.SectionFont(9.5F);
+        updateButton.ForeColor = UiStyleHelper.Primary;
+        updateButton.Text = "Cập nhật";
+        updateButton.UseVisualStyleBackColor = false;
+        deleteButton.BackColor = Color.White;
+        deleteButton.Cursor = Cursors.Hand;
         deleteButton.Dock = DockStyle.Fill;
+        deleteButton.FlatStyle = FlatStyle.Flat;
+        deleteButton.FlatAppearance.BorderColor = ColorTranslator.FromHtml("#FFB4B4");
+        deleteButton.FlatAppearance.BorderSize = 1;
+        deleteButton.Font = UiStyleHelper.SectionFont(9.5F);
         deleteButton.ForeColor = UiStyleHelper.Danger;
+        deleteButton.Text = "Xóa";
+        deleteButton.UseVisualStyleBackColor = false;
         //
         // showtimeCard
         //
+        showtimeCard.BackColor = Color.White;
+        showtimeCard.BorderStyle = BorderStyle.FixedSingle;
         showtimeCard.Controls.Add(showtimeLayout);
         showtimeCard.Dock = DockStyle.Fill;
         showtimeCard.Padding = new Padding(10);
@@ -280,12 +471,13 @@ partial class MovieManagementForm
         showtimeLayout.BackColor = Color.Transparent;
         showtimeLayout.ColumnCount = 1;
         showtimeLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-        showtimeLayout.Controls.Add(UiStyleHelper.CreateCardTitle("Lịch chiếu của phim đang chọn"), 0, 0);
+        showtimeLayout.Controls.Add(showtimeTitleLabel, 0, 0);
         showtimeLayout.Controls.Add(_showtimeGrid, 0, 1);
         showtimeLayout.Dock = DockStyle.Fill;
         showtimeLayout.RowCount = 2;
         showtimeLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
         showtimeLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+        StyleCardTitle(showtimeTitleLabel, "LỊCH CHIẾU CỦA PHIM ĐANG CHỌN");
         //
         // _showtimeGrid
         //
@@ -295,12 +487,42 @@ partial class MovieManagementForm
         _showtimeGrid.ColumnHeadersHeight = 40;
         _showtimeGrid.RowHeadersVisible = false;
         _showtimeGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        _showtimeGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "ShowtimeId", DataPropertyName = "ShowtimeId", HeaderText = "Mã lịch", FillWeight = 80, MinimumWidth = 52 });
-        _showtimeGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Room", DataPropertyName = "Room", HeaderText = "Phòng", FillWeight = 100, MinimumWidth = 52 });
-        _showtimeGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Date", DataPropertyName = "Date", HeaderText = "Ngày chiếu", FillWeight = 100, MinimumWidth = 52 });
-        _showtimeGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Start", DataPropertyName = "Start", HeaderText = "Giờ chiếu", FillWeight = 80, MinimumWidth = 52 });
-        _showtimeGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Price", DataPropertyName = "Price", HeaderText = "Giá vé", FillWeight = 90, MinimumWidth = 52 });
-        _showtimeGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Status", DataPropertyName = "Status", HeaderText = "Trạng thái", FillWeight = 100, MinimumWidth = 52 });
+        showtimeGridShowtimeIdColumn.Name = "ShowtimeId";
+        showtimeGridShowtimeIdColumn.DataPropertyName = "ShowtimeId";
+        showtimeGridShowtimeIdColumn.HeaderText = "Mã lịch";
+        showtimeGridShowtimeIdColumn.FillWeight = 80F;
+        showtimeGridShowtimeIdColumn.MinimumWidth = 52;
+        _showtimeGrid.Columns.Add(showtimeGridShowtimeIdColumn);
+        showtimeGridRoomColumn.Name = "Room";
+        showtimeGridRoomColumn.DataPropertyName = "Room";
+        showtimeGridRoomColumn.HeaderText = "Phòng";
+        showtimeGridRoomColumn.FillWeight = 100F;
+        showtimeGridRoomColumn.MinimumWidth = 52;
+        _showtimeGrid.Columns.Add(showtimeGridRoomColumn);
+        showtimeGridDateColumn.Name = "Date";
+        showtimeGridDateColumn.DataPropertyName = "Date";
+        showtimeGridDateColumn.HeaderText = "Ngày chiếu";
+        showtimeGridDateColumn.FillWeight = 100F;
+        showtimeGridDateColumn.MinimumWidth = 52;
+        _showtimeGrid.Columns.Add(showtimeGridDateColumn);
+        showtimeGridStartColumn.Name = "Start";
+        showtimeGridStartColumn.DataPropertyName = "Start";
+        showtimeGridStartColumn.HeaderText = "Giờ chiếu";
+        showtimeGridStartColumn.FillWeight = 80F;
+        showtimeGridStartColumn.MinimumWidth = 52;
+        _showtimeGrid.Columns.Add(showtimeGridStartColumn);
+        showtimeGridPriceColumn.Name = "Price";
+        showtimeGridPriceColumn.DataPropertyName = "Price";
+        showtimeGridPriceColumn.HeaderText = "Giá vé";
+        showtimeGridPriceColumn.FillWeight = 90F;
+        showtimeGridPriceColumn.MinimumWidth = 52;
+        _showtimeGrid.Columns.Add(showtimeGridPriceColumn);
+        showtimeGridStatusColumn.Name = "Status";
+        showtimeGridStatusColumn.DataPropertyName = "Status";
+        showtimeGridStatusColumn.HeaderText = "Trạng thái";
+        showtimeGridStatusColumn.FillWeight = 100F;
+        showtimeGridStatusColumn.MinimumWidth = 52;
+        _showtimeGrid.Columns.Add(showtimeGridStatusColumn);
         UiStyleHelper.ApplyStatusCellFormatting(_showtimeGrid, "Status");
         rootLayout.ResumeLayout(false);
         filterBar.ResumeLayout(false);
@@ -314,5 +536,40 @@ partial class MovieManagementForm
         showtimeCard.ResumeLayout(false);
         showtimeLayout.ResumeLayout(false);
         ResumeLayout(false);
+    }
+
+    private static void StyleInlineLabel(Label label, string text, int width)
+    {
+        label.Font = UiStyleHelper.SmallFont(9.25F);
+        label.ForeColor = UiStyleHelper.TextMuted;
+        label.Margin = new Padding(0, 21, 8, 0);
+        label.Size = new Size(width, 28);
+        label.Text = text;
+        label.TextAlign = ContentAlignment.MiddleLeft;
+    }
+
+    private static void StyleFieldLabel(Label label, string text)
+    {
+        label.Dock = DockStyle.Fill;
+        label.Font = UiStyleHelper.SmallFont(9.25F);
+        label.ForeColor = UiStyleHelper.TextMuted;
+        label.Margin = new Padding(0, 0, 8, 0);
+        label.Text = text;
+        label.TextAlign = ContentAlignment.MiddleLeft;
+    }
+
+    private static void DockFieldControl(Control control)
+    {
+        control.Dock = DockStyle.Fill;
+        control.Margin = new Padding(0, 12, 0, 12);
+    }
+
+    private static void StyleCardTitle(Label label, string text)
+    {
+        label.Dock = DockStyle.Fill;
+        label.Font = UiStyleHelper.SectionFont(10F);
+        label.ForeColor = UiStyleHelper.Primary;
+        label.Text = text;
+        label.TextAlign = ContentAlignment.MiddleLeft;
     }
 }

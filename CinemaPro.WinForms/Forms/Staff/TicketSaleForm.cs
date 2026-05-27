@@ -87,49 +87,16 @@ public sealed partial class TicketSaleForm : Form
     private void RenderSeats()
     {
         _seatGridPanel.SuspendLayout();
-        _seatGridPanel.Controls.Clear();
-
-        var seatRows = _seatStatuses.Keys
-            .OrderBy(code => code[0])
-            .ThenBy(code => int.Parse(code[1..]))
-            .GroupBy(code => code[0])
-            .OrderBy(group => group.Key)
-            .ToList();
-
-        for (var rowIndex = 0; rowIndex < seatRows.Count; rowIndex++)
+        foreach (var button in _seatGridPanel.Controls.OfType<Button>())
         {
-            var row = seatRows[rowIndex];
-            _seatGridPanel.Controls.Add(new Label
+            if (button.Tag is not string seatCode)
             {
-                Dock = DockStyle.Fill,
-                Text = row.Key.ToString(),
-                Font = UiStyleHelper.SectionFont(10),
-                ForeColor = UiStyleHelper.TextDark,
-                TextAlign = ContentAlignment.MiddleCenter,
-                Margin = new Padding(0, 4, 10, 4)
-            }, 0, rowIndex);
-
-            foreach (var seatCode in row)
-            {
-                var column = int.Parse(seatCode[1..]);
-                var status = _selectedSeats.Contains(seatCode) ? SeatStatus.Selected : _seatStatuses[seatCode];
-                var button = new Button
-                {
-                    Dock = DockStyle.Fill,
-                    Text = seatCode[1..],
-                    Tag = seatCode,
-                    FlatStyle = FlatStyle.Flat,
-                    UseVisualStyleBackColor = false,
-                    Font = UiStyleHelper.SectionFont(8.75f),
-                    ForeColor = UiStyleHelper.TextDark,
-                    Cursor = status is SeatStatus.Sold or SeatStatus.Maintenance ? Cursors.No : Cursors.Hand,
-                    Margin = new Padding(6, 4, 6, 4)
-                };
-                button.FlatAppearance.BorderSize = 1;
-                ApplySeatStyle(button, status);
-                button.Click += SeatButton_Click;
-                _seatGridPanel.Controls.Add(button, column, rowIndex);
+                continue;
             }
+
+            var status = _selectedSeats.Contains(seatCode) ? SeatStatus.Selected : _seatStatuses.GetValueOrDefault(seatCode, SeatStatus.Available);
+            button.Cursor = status is SeatStatus.Sold or SeatStatus.Maintenance ? Cursors.No : Cursors.Hand;
+            ApplySeatStyle(button, status);
         }
 
         _seatGridPanel.ResumeLayout();
@@ -190,11 +157,9 @@ public sealed partial class TicketSaleForm : Form
 
     private void UpdateTotals()
     {
-        _selectedSeatsPanel.Controls.Clear();
-        foreach (var seat in _selectedSeats.OrderBy(code => code))
-        {
-            _selectedSeatsPanel.Controls.Add(UiStyleHelper.CreateBadge(seat, UiStyleHelper.Success));
-        }
+        selectedSeatB5BadgeLabel.Text = _selectedSeats.Count == 0 ? "Chưa chọn" : string.Join(", ", _selectedSeats.OrderBy(code => code));
+        selectedSeatB5BadgeLabel.Visible = true;
+        selectedSeatB6BadgeLabel.Visible = false;
 
         _selectedCountLabel.Text = _selectedSeats.Count == 0
             ? "Chưa chọn ghế"
@@ -265,63 +230,5 @@ public sealed partial class TicketSaleForm : Form
                 Status = ticket.Status
             })
             .ToList();
-    }
-
-    private static Control LegendItem(string text, Color fill)
-    {
-        var panel = new FlowLayoutPanel
-        {
-            Width = 132,
-            Height = 24,
-            FlowDirection = FlowDirection.LeftToRight,
-            WrapContents = false,
-            Margin = new Padding(0, 2, 12, 0),
-            BackColor = Color.Transparent
-        };
-        panel.Controls.Add(new Label
-        {
-            Width = 22,
-            Height = 18,
-            BackColor = fill,
-            BorderStyle = BorderStyle.FixedSingle,
-            Margin = new Padding(0, 3, 8, 0)
-        });
-        panel.Controls.Add(new Label
-        {
-            Width = 98,
-            Height = 22,
-            Text = text,
-            Font = UiStyleHelper.SmallFont(9),
-            ForeColor = UiStyleHelper.TextMuted,
-            TextAlign = ContentAlignment.MiddleLeft
-        });
-        return panel;
-    }
-
-    private sealed class PosterPanel : Panel
-    {
-        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public string MovieTitle { get; set; } = "CinemaPro";
-
-        public PosterPanel()
-        {
-            DoubleBuffered = true;
-            BackColor = ColorTranslator.FromHtml("#172554");
-        }
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);
-            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            using var accent = new SolidBrush(ColorTranslator.FromHtml("#60A5FA"));
-            using var text = new SolidBrush(Color.White);
-            using var titleFont = UiStyleHelper.TitleFont(12);
-            using var smallFont = UiStyleHelper.SmallFont(8.5f);
-            using var softBrush = new SolidBrush(Color.FromArgb(90, Color.White));
-            e.Graphics.FillEllipse(accent, Width - 54, 12, 44, 44);
-            e.Graphics.FillEllipse(softBrush, 14, Height - 58, 74, 74);
-            e.Graphics.DrawString("CINEMA", smallFont, text, 14, 18);
-            e.Graphics.DrawString(MovieTitle, titleFont, text, new RectangleF(14, Height - 52, Width - 24, 42));
-        }
     }
 }

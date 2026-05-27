@@ -24,7 +24,9 @@ partial class UserManagementForm
     private Label lockedValueLabel;
     private Label lockedNoteLabel;
     private FlowLayoutPanel filterPanel;
+    private Label searchFilterLabel;
     private TextBox searchTextBox;
+    private Label roleFilterLabel;
     private ComboBox roleFilterCombo;
     private Button addButton;
     private Button updateButton;
@@ -38,14 +40,23 @@ partial class UserManagementForm
     private Panel detailPanel;
     private TableLayoutPanel detailLayout;
     private Label detailTitleLabel;
+    private Label fullNameInputLabel;
     private TextBox fullNameTextBox;
+    private Label usernameInputLabel;
     private TextBox usernameTextBox;
+    private Label roleInputLabel;
     private ComboBox roleCombo;
+    private Label accountStatusInputLabel;
     private ComboBox statusCombo;
     private Label detailLabel;
     private Button saveButton;
     private Button resetPasswordButton;
 
+    private DataGridViewTextBoxColumn userGridUserIdColumn;
+    private DataGridViewTextBoxColumn userGridFullNameColumn;
+    private DataGridViewTextBoxColumn userGridUsernameColumn;
+    private DataGridViewTextBoxColumn userGridRoleColumn;
+    private DataGridViewTextBoxColumn userGridStatusColumn;
     protected override void Dispose(bool disposing)
     {
         if (disposing && components != null)
@@ -59,6 +70,11 @@ partial class UserManagementForm
     private void InitializeComponent()
     {
         components = new System.ComponentModel.Container();
+        userGridUserIdColumn = new DataGridViewTextBoxColumn();
+        userGridFullNameColumn = new DataGridViewTextBoxColumn();
+        userGridUsernameColumn = new DataGridViewTextBoxColumn();
+        userGridRoleColumn = new DataGridViewTextBoxColumn();
+        userGridStatusColumn = new DataGridViewTextBoxColumn();
         rootLayout = new TableLayoutPanel();
         statLayout = new TableLayoutPanel();
         totalAccountsPanel = new Panel();
@@ -78,7 +94,9 @@ partial class UserManagementForm
         lockedValueLabel = new Label();
         lockedNoteLabel = new Label();
         filterPanel = new FlowLayoutPanel();
+        searchFilterLabel = new Label();
         searchTextBox = new TextBox();
+        roleFilterLabel = new Label();
         roleFilterCombo = new ComboBox();
         addButton = new Button();
         updateButton = new Button();
@@ -92,9 +110,13 @@ partial class UserManagementForm
         detailPanel = new Panel();
         detailLayout = new TableLayoutPanel();
         detailTitleLabel = new Label();
+        fullNameInputLabel = new Label();
         fullNameTextBox = new TextBox();
+        usernameInputLabel = new Label();
         usernameTextBox = new TextBox();
+        roleInputLabel = new Label();
         roleCombo = new ComboBox();
+        accountStatusInputLabel = new Label();
         statusCombo = new ComboBox();
         detailLabel = new Label();
         saveButton = new Button();
@@ -254,8 +276,10 @@ partial class UserManagementForm
         // filterPanel
         //
         filterPanel.BackColor = UiStyleHelper.ContentBackground;
-        filterPanel.Controls.Add(CreateFilterBlock("Tìm kiếm", searchTextBox, 270));
-        filterPanel.Controls.Add(CreateFilterBlock("Vai trò", roleFilterCombo, 150));
+        filterPanel.Controls.Add(searchFilterLabel);
+        filterPanel.Controls.Add(searchTextBox);
+        filterPanel.Controls.Add(roleFilterLabel);
+        filterPanel.Controls.Add(roleFilterCombo);
         filterPanel.Controls.Add(addButton);
         filterPanel.Controls.Add(updateButton);
         filterPanel.Controls.Add(lockUserButton);
@@ -264,8 +288,24 @@ partial class UserManagementForm
         filterPanel.FlowDirection = FlowDirection.LeftToRight;
         filterPanel.Padding = new Padding(0, 0, 0, 8);
         filterPanel.WrapContents = false;
+        searchFilterLabel.Font = UiStyleHelper.SmallFont(9.25F);
+        searchFilterLabel.ForeColor = UiStyleHelper.TextMuted;
+        searchFilterLabel.Margin = new Padding(0, 21, 8, 0);
+        searchFilterLabel.Size = new Size(70, 28);
+        searchFilterLabel.Text = "Tìm kiếm";
+        searchFilterLabel.TextAlign = ContentAlignment.MiddleLeft;
         ConfigureTextBox(searchTextBox, "Tìm theo họ tên hoặc username...");
+        searchTextBox.Margin = new Padding(0, 18, 16, 0);
+        searchTextBox.Size = new Size(270, 32);
+        roleFilterLabel.Font = UiStyleHelper.SmallFont(9.25F);
+        roleFilterLabel.ForeColor = UiStyleHelper.TextMuted;
+        roleFilterLabel.Margin = new Padding(0, 21, 8, 0);
+        roleFilterLabel.Size = new Size(52, 28);
+        roleFilterLabel.Text = "Vai trò";
+        roleFilterLabel.TextAlign = ContentAlignment.MiddleLeft;
         ConfigureCombo(roleFilterCombo);
+        roleFilterCombo.Margin = new Padding(0, 18, 16, 0);
+        roleFilterCombo.Size = new Size(150, 32);
         StylePrimaryButton(addButton, "Thêm", 92);
         StyleSecondaryButton(updateButton, "Sửa", 92);
         StyleDangerButton(lockUserButton, "Khóa tài khoản", 132);
@@ -312,11 +352,31 @@ partial class UserManagementForm
         userGrid.ColumnHeadersHeight = 40;
         userGrid.RowHeadersVisible = false;
         userGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        userGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "UserId", DataPropertyName = "UserId", HeaderText = "UserId", FillWeight = 80 });
-        userGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "FullName", DataPropertyName = "FullName", HeaderText = "Họ tên", FillWeight = 190 });
-        userGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Username", DataPropertyName = "Username", HeaderText = "Username", FillWeight = 120 });
-        userGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Role", DataPropertyName = "Role", HeaderText = "Role", FillWeight = 90 });
-        userGrid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Status", DataPropertyName = "Status", HeaderText = "Trạng thái", FillWeight = 120 });
+        userGridUserIdColumn.Name = "UserId";
+        userGridUserIdColumn.DataPropertyName = "UserId";
+        userGridUserIdColumn.HeaderText = "UserId";
+        userGridUserIdColumn.FillWeight = 80F;
+        userGrid.Columns.Add(userGridUserIdColumn);
+        userGridFullNameColumn.Name = "FullName";
+        userGridFullNameColumn.DataPropertyName = "FullName";
+        userGridFullNameColumn.HeaderText = "Họ tên";
+        userGridFullNameColumn.FillWeight = 190F;
+        userGrid.Columns.Add(userGridFullNameColumn);
+        userGridUsernameColumn.Name = "Username";
+        userGridUsernameColumn.DataPropertyName = "Username";
+        userGridUsernameColumn.HeaderText = "Username";
+        userGridUsernameColumn.FillWeight = 120F;
+        userGrid.Columns.Add(userGridUsernameColumn);
+        userGridRoleColumn.Name = "Role";
+        userGridRoleColumn.DataPropertyName = "Role";
+        userGridRoleColumn.HeaderText = "Role";
+        userGridRoleColumn.FillWeight = 90F;
+        userGrid.Columns.Add(userGridRoleColumn);
+        userGridStatusColumn.Name = "Status";
+        userGridStatusColumn.DataPropertyName = "Status";
+        userGridStatusColumn.HeaderText = "Trạng thái";
+        userGridStatusColumn.FillWeight = 120F;
+        userGrid.Columns.Add(userGridStatusColumn);
         //
         // detailPanel
         //
@@ -326,13 +386,18 @@ partial class UserManagementForm
         detailPanel.Dock = DockStyle.Fill;
         detailPanel.Padding = new Padding(14);
         detailLayout.BackColor = Color.White;
-        detailLayout.ColumnCount = 1;
+        detailLayout.ColumnCount = 2;
+        detailLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 88F));
         detailLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
         detailLayout.Controls.Add(detailTitleLabel, 0, 0);
-        detailLayout.Controls.Add(CreateFilterBlock("Họ tên", fullNameTextBox, 0), 0, 1);
-        detailLayout.Controls.Add(CreateFilterBlock("Username", usernameTextBox, 0), 0, 2);
-        detailLayout.Controls.Add(CreateFilterBlock("Vai trò", roleCombo, 0), 0, 3);
-        detailLayout.Controls.Add(CreateFilterBlock("Trạng thái", statusCombo, 0), 0, 4);
+        detailLayout.Controls.Add(fullNameInputLabel, 0, 1);
+        detailLayout.Controls.Add(fullNameTextBox, 1, 1);
+        detailLayout.Controls.Add(usernameInputLabel, 0, 2);
+        detailLayout.Controls.Add(usernameTextBox, 1, 2);
+        detailLayout.Controls.Add(roleInputLabel, 0, 3);
+        detailLayout.Controls.Add(roleCombo, 1, 3);
+        detailLayout.Controls.Add(accountStatusInputLabel, 0, 4);
+        detailLayout.Controls.Add(statusCombo, 1, 4);
         detailLayout.Controls.Add(detailLabel, 0, 5);
         detailLayout.Controls.Add(saveButton, 0, 6);
         detailLayout.Controls.Add(resetPasswordButton, 0, 7);
@@ -346,15 +411,27 @@ partial class UserManagementForm
         detailLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
         detailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 44F));
         detailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 44F));
+        detailLayout.SetColumnSpan(detailTitleLabel, 2);
+        detailLayout.SetColumnSpan(detailLabel, 2);
+        detailLayout.SetColumnSpan(saveButton, 2);
+        detailLayout.SetColumnSpan(resetPasswordButton, 2);
         detailTitleLabel.Dock = DockStyle.Fill;
         detailTitleLabel.Font = UiStyleHelper.SectionFont(10F);
         detailTitleLabel.ForeColor = UiStyleHelper.Primary;
         detailTitleLabel.Text = "HỒ SƠ NHÂN VIÊN";
         detailTitleLabel.TextAlign = ContentAlignment.MiddleLeft;
+        StyleFieldLabel(fullNameInputLabel, "Họ tên");
+        StyleFieldLabel(usernameInputLabel, "Username");
+        StyleFieldLabel(roleInputLabel, "Vai trò");
+        StyleFieldLabel(accountStatusInputLabel, "Trạng thái");
         ConfigureTextBox(fullNameTextBox);
         ConfigureTextBox(usernameTextBox);
         ConfigureCombo(roleCombo);
         ConfigureCombo(statusCombo);
+        DockFieldControl(fullNameTextBox);
+        DockFieldControl(usernameTextBox);
+        DockFieldControl(roleCombo);
+        DockFieldControl(statusCombo);
         fullNameTextBox.Text = "Nguyễn Văn Quản";
         usernameTextBox.Text = "admin";
         roleCombo.Items.AddRange(new object[] { "Admin", "Staff" });
@@ -388,44 +465,6 @@ partial class UserManagementForm
         ResumeLayout(false);
     }
 
-    private static TableLayoutPanel CreateFilterBlock(string label, Control control, int width)
-    {
-        var block = new TableLayoutPanel { ColumnCount = 1, Dock = width == 0 ? DockStyle.Fill : DockStyle.None, Height = 58, Margin = new Padding(0, 0, 12, 0), RowCount = 2, Width = width == 0 ? 150 : width };
-        block.RowStyles.Add(new RowStyle(SizeType.Absolute, 22F));
-        block.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));
-        block.Controls.Add(new Label { Dock = DockStyle.Fill, Text = label, Font = UiStyleHelper.SmallFont(9.25F), ForeColor = UiStyleHelper.TextMuted, TextAlign = ContentAlignment.BottomLeft }, 0, 0);
-        control.Dock = DockStyle.Fill;
-        block.Controls.Add(control, 0, 1);
-        return block;
-    }
-
-    private static Panel CreateStatPanel(string label, Label valueLabel, string note, Color accent)
-    {
-        var panel = new Panel { BackColor = Color.White, BorderStyle = BorderStyle.FixedSingle, Dock = DockStyle.Fill, Margin = new Padding(0, 0, 12, 0), Padding = new Padding(18, 14, 18, 14) };
-        var layout = new TableLayoutPanel { BackColor = Color.White, ColumnCount = 1, Dock = DockStyle.Fill, RowCount = 3 };
-        layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 22F));
-        layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 32F));
-        layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 22F));
-        layout.Controls.Add(new Label { Dock = DockStyle.Fill, Text = label, Font = UiStyleHelper.SmallFont(9.5F), ForeColor = UiStyleHelper.TextMuted, TextAlign = ContentAlignment.BottomLeft }, 0, 0);
-        valueLabel.Dock = DockStyle.Fill;
-        valueLabel.Font = UiStyleHelper.TitleFont(17F);
-        valueLabel.ForeColor = accent;
-        valueLabel.TextAlign = ContentAlignment.MiddleLeft;
-        layout.Controls.Add(valueLabel, 0, 1);
-        layout.Controls.Add(new Label { Dock = DockStyle.Fill, Text = note, Font = UiStyleHelper.SmallFont(8.75F), ForeColor = UiStyleHelper.TextMuted, TextAlign = ContentAlignment.TopLeft }, 0, 2);
-        panel.Controls.Add(layout);
-        return panel;
-    }
-
-    private static Label CreateCardTitleLabel(string text) => new()
-    {
-        Dock = DockStyle.Fill,
-        Font = UiStyleHelper.SectionFont(10F),
-        ForeColor = UiStyleHelper.Primary,
-        Text = text.ToUpperInvariant(),
-        TextAlign = ContentAlignment.MiddleLeft
-    };
-
     private static void ConfigureTextBox(TextBox textBox, string placeholder = "")
     {
         textBox.BorderStyle = BorderStyle.FixedSingle;
@@ -440,6 +479,22 @@ partial class UserManagementForm
         combo.FlatStyle = FlatStyle.Flat;
         combo.Font = UiStyleHelper.BodyFont(10F);
         combo.Height = 34;
+    }
+
+    private static void StyleFieldLabel(Label label, string text)
+    {
+        label.Dock = DockStyle.Fill;
+        label.Font = UiStyleHelper.SmallFont(9.25F);
+        label.ForeColor = UiStyleHelper.TextMuted;
+        label.Margin = new Padding(0, 0, 8, 0);
+        label.Text = text;
+        label.TextAlign = ContentAlignment.MiddleLeft;
+    }
+
+    private static void DockFieldControl(Control control)
+    {
+        control.Dock = DockStyle.Fill;
+        control.Margin = new Padding(0, 12, 0, 12);
     }
 
     private static void ConfigureGrid(DataGridView grid)
