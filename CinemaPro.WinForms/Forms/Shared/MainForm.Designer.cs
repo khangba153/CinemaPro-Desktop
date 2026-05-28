@@ -38,6 +38,11 @@ partial class MainForm
     private Label _userLabel;
     private Label _roleLabel;
     private Panel _contentPanel;
+    private Panel designerPreviewPanel;
+    private TableLayoutPanel designerPreviewLayout;
+    private Label designerPreviewTitleLabel;
+    private Label designerPreviewSubtitleLabel;
+    private Label designerPreviewStatusLabel;
     private Label _statusLabel;
     private System.Windows.Forms.Timer _clockTimer;
 
@@ -88,6 +93,11 @@ partial class MainForm
         _userLabel = new Label();
         _roleLabel = new Label();
         _contentPanel = new Panel();
+        designerPreviewPanel = new Panel();
+        designerPreviewLayout = new TableLayoutPanel();
+        designerPreviewTitleLabel = new Label();
+        designerPreviewSubtitleLabel = new Label();
+        designerPreviewStatusLabel = new Label();
         _statusLabel = new Label();
         _clockTimer = new System.Windows.Forms.Timer(components);
         shellLayout.SuspendLayout();
@@ -96,6 +106,9 @@ partial class MainForm
         mainLayout.SuspendLayout();
         topbarPanel.SuspendLayout();
         userPanel.SuspendLayout();
+        _contentPanel.SuspendLayout();
+        designerPreviewPanel.SuspendLayout();
+        designerPreviewLayout.SuspendLayout();
         SuspendLayout();
         //
         // MainForm
@@ -316,9 +329,58 @@ partial class MainForm
         // _contentPanel
         //
         _contentPanel.BackColor = UiStyleHelper.ContentBackground;
+        _contentPanel.Controls.Add(designerPreviewPanel);
         _contentPanel.Dock = DockStyle.Fill;
         _contentPanel.Margin = Padding.Empty;
         _contentPanel.Padding = new Padding(20, 16, 20, 14);
+        //
+        // designerPreviewPanel
+        //
+        designerPreviewPanel.BackColor = Color.White;
+        designerPreviewPanel.BorderStyle = BorderStyle.FixedSingle;
+        designerPreviewPanel.Controls.Add(designerPreviewLayout);
+        designerPreviewPanel.Dock = DockStyle.Fill;
+        designerPreviewPanel.Padding = new Padding(28);
+        //
+        // designerPreviewLayout
+        //
+        designerPreviewLayout.ColumnCount = 1;
+        designerPreviewLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+        designerPreviewLayout.Controls.Add(designerPreviewTitleLabel, 0, 0);
+        designerPreviewLayout.Controls.Add(designerPreviewSubtitleLabel, 0, 1);
+        designerPreviewLayout.Controls.Add(designerPreviewStatusLabel, 0, 2);
+        designerPreviewLayout.Dock = DockStyle.Fill;
+        designerPreviewLayout.RowCount = 4;
+        designerPreviewLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 48F));
+        designerPreviewLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+        designerPreviewLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 70F));
+        designerPreviewLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+        //
+        // designerPreviewTitleLabel
+        //
+        designerPreviewTitleLabel.Dock = DockStyle.Fill;
+        designerPreviewTitleLabel.Font = UiStyleHelper.TitleFont(18F);
+        designerPreviewTitleLabel.ForeColor = UiStyleHelper.TextDark;
+        designerPreviewTitleLabel.Text = "Khu vực hiển thị form chức năng";
+        designerPreviewTitleLabel.TextAlign = ContentAlignment.MiddleLeft;
+        //
+        // designerPreviewSubtitleLabel
+        //
+        designerPreviewSubtitleLabel.Dock = DockStyle.Fill;
+        designerPreviewSubtitleLabel.Font = UiStyleHelper.BodyFont(10F);
+        designerPreviewSubtitleLabel.ForeColor = UiStyleHelper.TextMuted;
+        designerPreviewSubtitleLabel.Text = "Khi chạy chương trình, Dashboard/Bán vé/Kiểm tra vé sẽ mở trực tiếp trong vùng này.";
+        designerPreviewSubtitleLabel.TextAlign = ContentAlignment.MiddleLeft;
+        //
+        // designerPreviewStatusLabel
+        //
+        designerPreviewStatusLabel.BackColor = ColorTranslator.FromHtml("#F0F6FF");
+        designerPreviewStatusLabel.Dock = DockStyle.Fill;
+        designerPreviewStatusLabel.Font = UiStyleHelper.SectionFont(10F);
+        designerPreviewStatusLabel.ForeColor = UiStyleHelper.Primary;
+        designerPreviewStatusLabel.Padding = new Padding(16, 0, 16, 0);
+        designerPreviewStatusLabel.Text = "Designer preview: sidebar + topbar + content shell đã sẵn sàng";
+        designerPreviewStatusLabel.TextAlign = ContentAlignment.MiddleLeft;
         //
         // _statusLabel
         //
@@ -339,6 +401,9 @@ partial class MainForm
         mainLayout.ResumeLayout(false);
         topbarPanel.ResumeLayout(false);
         userPanel.ResumeLayout(false);
+        _contentPanel.ResumeLayout(false);
+        designerPreviewPanel.ResumeLayout(false);
+        designerPreviewLayout.ResumeLayout(false);
         ResumeLayout(false);
     }
 

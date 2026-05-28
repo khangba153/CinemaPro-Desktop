@@ -44,6 +44,8 @@ public sealed partial class UserManagementForm : Form
 
     private void LoadData()
     {
+        UiStyleHelper.ResetGridForBinding(userGrid);
+
         totalAccountsValueLabel.Text = _employees.Count.ToString();
         adminValueLabel.Text = _employees.Count(employee => employee.Role == "Admin").ToString();
         staffValueLabel.Text = _employees.Count(employee => employee.Role == "Staff").ToString();

@@ -134,6 +134,8 @@ public sealed partial class TicketCheckForm : Form
 
     private void LoadHistory()
     {
+        UiStyleHelper.ResetGridForBinding(_historyGrid);
+
         _historyGrid.DataSource = AppServices.CinemaStore.GetTickets()
             .Take(6)
             .Select(ticket => new

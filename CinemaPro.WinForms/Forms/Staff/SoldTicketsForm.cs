@@ -51,6 +51,8 @@ public sealed partial class SoldTicketsForm : Form
 
     private void LoadTickets()
     {
+        UiStyleHelper.ResetGridForBinding(_grid);
+
         _tickets = AppServices.CinemaStore.GetTickets().ToList();
         _grid.DataSource = _tickets
             .Select(ticket => new
@@ -91,6 +93,8 @@ public sealed partial class SoldTicketsForm : Form
 
     private void UpdateDetail(TicketRow ticket)
     {
+        UiStyleHelper.ResetGridForBinding(_logGrid);
+
         qrCodeLabel.Text = $"QR\n{ticket.TicketId}";
         _detailLabel.Text =
             $"Mã vé: {ticket.TicketId}\n" +
@@ -129,5 +133,10 @@ public sealed partial class SoldTicketsForm : Form
         button.ForeColor = accent;
         button.Font = UiStyleHelper.SectionFont(9.5f);
         button.Cursor = Cursors.Hand;
+    }
+
+    private void _grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+    {
+
     }
 }

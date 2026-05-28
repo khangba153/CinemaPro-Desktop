@@ -141,7 +141,7 @@ partial class TicketCheckForm
         filterPanel.Margin = new Padding(3, 4, 3, 4);
         filterPanel.Name = "filterPanel";
         filterPanel.Padding = new Padding(0, 11, 0, 11);
-        filterPanel.Size = new Size(1251, 88);
+        filterPanel.Size = new Size(1094, 68);
         filterPanel.TabIndex = 0;
         filterPanel.WrapContents = false;
         //
@@ -152,7 +152,7 @@ partial class TicketCheckForm
         ticketCodeLabel.Location = new Point(0, 19);
         ticketCodeLabel.Margin = new Padding(0, 8, 11, 0);
         ticketCodeLabel.Name = "ticketCodeLabel";
-        ticketCodeLabel.Size = new Size(171, 59);
+        ticketCodeLabel.Size = new Size(136, 42);
         ticketCodeLabel.TabIndex = 0;
         ticketCodeLabel.Text = "Nhập mã vé hoặc QR";
         ticketCodeLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -161,28 +161,28 @@ partial class TicketCheckForm
         //
         _ticketCodeTextBox.BorderStyle = BorderStyle.FixedSingle;
         _ticketCodeTextBox.Font = new Font("Segoe UI", 10F);
-        _ticketCodeTextBox.Location = new Point(182, 24);
+        _ticketCodeTextBox.Location = new Point(147, 24);
         _ticketCodeTextBox.Margin = new Padding(0, 13, 14, 0);
         _ticketCodeTextBox.Name = "_ticketCodeTextBox";
         _ticketCodeTextBox.PlaceholderText = "Quét mã QR hoặc nhập mã vé...";
-        _ticketCodeTextBox.Size = new Size(594, 42);
+        _ticketCodeTextBox.Size = new Size(520, 42);
         _ticketCodeTextBox.TabIndex = 1;
         //
         // checkButton
         //
-        checkButton.Location = new Point(790, 22);
+        checkButton.Location = new Point(681, 22);
         checkButton.Margin = new Padding(0, 11, 14, 0);
         checkButton.Name = "checkButton";
-        checkButton.Size = new Size(194, 48);
+        checkButton.Size = new Size(158, 44);
         checkButton.TabIndex = 2;
         checkButton.Text = "Kiểm tra vé";
         //
         // refreshButton
         //
-        refreshButton.Location = new Point(998, 22);
+        refreshButton.Location = new Point(853, 22);
         refreshButton.Margin = new Padding(0, 11, 0, 0);
         refreshButton.Name = "refreshButton";
-        refreshButton.Size = new Size(149, 48);
+        refreshButton.Size = new Size(124, 44);
         refreshButton.TabIndex = 3;
         refreshButton.Text = "Làm mới";
         //
@@ -201,7 +201,7 @@ partial class TicketCheckForm
         middleLayout.Padding = new Padding(0, 0, 0, 13);
         middleLayout.RowCount = 1;
         middleLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        middleLayout.Size = new Size(1251, 470);
+        middleLayout.Size = new Size(1094, 366);
         middleLayout.TabIndex = 1;
         //
         // resultPanel
@@ -482,7 +482,7 @@ partial class TicketCheckForm
         historyPanel.Margin = new Padding(3, 4, 3, 4);
         historyPanel.Name = "historyPanel";
         historyPanel.Padding = new Padding(11, 13, 11, 13);
-        historyPanel.Size = new Size(1251, 245);
+        historyPanel.Size = new Size(1094, 166);
         historyPanel.TabIndex = 2;
         //
         // historyLayout
@@ -499,7 +499,7 @@ partial class TicketCheckForm
         historyLayout.RowCount = 2;
         historyLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 37F));
         historyLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        historyLayout.Size = new Size(1227, 217);
+        historyLayout.Size = new Size(1070, 138);
         historyLayout.TabIndex = 0;
         //
         // historyTitleLabel
@@ -509,7 +509,7 @@ partial class TicketCheckForm
         historyTitleLabel.ForeColor = Color.FromArgb(13, 110, 253);
         historyTitleLabel.Location = new Point(3, 0);
         historyTitleLabel.Name = "historyTitleLabel";
-        historyTitleLabel.Size = new Size(1221, 37);
+        historyTitleLabel.Size = new Size(1064, 37);
         historyTitleLabel.TabIndex = 0;
         historyTitleLabel.Text = "LỊCH SỬ KIỂM TRA VÉ";
         historyTitleLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -536,7 +536,7 @@ partial class TicketCheckForm
         _historyGrid.RowHeadersWidth = 51;
         _historyGrid.RowTemplate.Height = 34;
         _historyGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        _historyGrid.Size = new Size(1221, 172);
+        _historyGrid.Size = new Size(1064, 93);
         _historyGrid.TabIndex = 1;
         historyTicketIdColumn.Name = "TicketId";
         historyTicketIdColumn.DataPropertyName = "TicketId";
@@ -598,6 +598,7 @@ partial class TicketCheckForm
         historyPanel.ResumeLayout(false);
         historyLayout.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)_historyGrid).EndInit();
+        UiStyleHelper.CompleteDesignerGrid(_historyGrid);
         ResumeLayout(false);
     }
 }

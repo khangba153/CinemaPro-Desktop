@@ -190,9 +190,9 @@ partial class SettingsForm
         backupPanel.SuspendLayout();
         backupLayout.SuspendLayout();
         SuspendLayout();
-        //
+        // 
         // rootLayout
-        //
+        // 
         rootLayout.BackColor = Color.FromArgb(245, 248, 252);
         rootLayout.ColumnCount = 3;
         rootLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 34F));
@@ -207,28 +207,28 @@ partial class SettingsForm
         rootLayout.Controls.Add(backupPanel, 2, 2);
         rootLayout.Dock = DockStyle.Fill;
         rootLayout.Location = new Point(0, 0);
-        rootLayout.Margin = new Padding(3, 4, 3, 4);
+        rootLayout.Margin = new Padding(3, 5, 3, 5);
         rootLayout.Name = "rootLayout";
         rootLayout.RowCount = 3;
         rootLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 38F));
         rootLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 34F));
         rootLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 28F));
-        rootLayout.Size = new Size(1257, 827);
+        rootLayout.Size = new Size(1100, 620);
         rootLayout.TabIndex = 0;
-        //
+        // 
         // cinemaInfoPanel
-        //
+        // 
         cinemaInfoPanel.Controls.Add(cinemaInfoLayout);
-        cinemaInfoPanel.Location = new Point(3, 4);
-        cinemaInfoPanel.Margin = new Padding(3, 4, 3, 4);
+        cinemaInfoPanel.Location = new Point(3, 5);
+        cinemaInfoPanel.Margin = new Padding(3, 5, 3, 5);
         cinemaInfoPanel.Name = "cinemaInfoPanel";
-        cinemaInfoPanel.Size = new Size(229, 133);
+        cinemaInfoPanel.Size = new Size(262, 177);
         cinemaInfoPanel.TabIndex = 0;
-        //
+        // 
         // cinemaInfoLayout
-        //
-        cinemaInfoLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-        cinemaInfoLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+        // 
+        cinemaInfoLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 23F));
+        cinemaInfoLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 239F));
         cinemaInfoLayout.Controls.Add(cinemaInfoTitleLabel, 0, 0);
         cinemaInfoLayout.Controls.Add(cinemaNameLabel, 0, 1);
         cinemaInfoLayout.Controls.Add(cinemaNameTextBox, 1, 1);
@@ -239,97 +239,97 @@ partial class SettingsForm
         cinemaInfoLayout.Controls.Add(emailLabel, 0, 4);
         cinemaInfoLayout.Controls.Add(emailTextBox, 1, 4);
         cinemaInfoLayout.Location = new Point(0, 0);
-        cinemaInfoLayout.Margin = new Padding(3, 4, 3, 4);
+        cinemaInfoLayout.Margin = new Padding(3, 5, 3, 5);
         cinemaInfoLayout.Name = "cinemaInfoLayout";
-        cinemaInfoLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        cinemaInfoLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        cinemaInfoLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        cinemaInfoLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        cinemaInfoLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        cinemaInfoLayout.Size = new Size(229, 133);
+        cinemaInfoLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        cinemaInfoLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        cinemaInfoLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        cinemaInfoLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        cinemaInfoLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        cinemaInfoLayout.Size = new Size(262, 177);
         cinemaInfoLayout.TabIndex = 0;
-        //
+        // 
         // cinemaInfoTitleLabel
-        //
+        // 
         cinemaInfoLayout.SetColumnSpan(cinemaInfoTitleLabel, 2);
         cinemaInfoTitleLabel.Location = new Point(3, 0);
         cinemaInfoTitleLabel.Name = "cinemaInfoTitleLabel";
-        cinemaInfoTitleLabel.Size = new Size(114, 20);
+        cinemaInfoTitleLabel.Size = new Size(130, 27);
         cinemaInfoTitleLabel.TabIndex = 0;
-        //
+        // 
         // cinemaNameLabel
-        //
-        cinemaNameLabel.Location = new Point(3, 20);
+        // 
+        cinemaNameLabel.Location = new Point(3, 27);
         cinemaNameLabel.Name = "cinemaNameLabel";
-        cinemaNameLabel.Size = new Size(14, 20);
+        cinemaNameLabel.Size = new Size(16, 27);
         cinemaNameLabel.TabIndex = 1;
-        //
+        // 
         // cinemaNameTextBox
-        //
-        cinemaNameTextBox.Location = new Point(23, 24);
-        cinemaNameTextBox.Margin = new Padding(3, 4, 3, 4);
+        // 
+        cinemaNameTextBox.Location = new Point(26, 32);
+        cinemaNameTextBox.Margin = new Padding(3, 5, 3, 5);
         cinemaNameTextBox.Name = "cinemaNameTextBox";
-        cinemaNameTextBox.Size = new Size(114, 27);
+        cinemaNameTextBox.Size = new Size(130, 27);
         cinemaNameTextBox.TabIndex = 2;
-        //
+        // 
         // addressLabel
-        //
-        addressLabel.Location = new Point(3, 40);
+        // 
+        addressLabel.Location = new Point(3, 54);
         addressLabel.Name = "addressLabel";
-        addressLabel.Size = new Size(14, 20);
+        addressLabel.Size = new Size(16, 27);
         addressLabel.TabIndex = 3;
-        //
+        // 
         // addressTextBox
-        //
-        addressTextBox.Location = new Point(23, 44);
-        addressTextBox.Margin = new Padding(3, 4, 3, 4);
+        // 
+        addressTextBox.Location = new Point(26, 59);
+        addressTextBox.Margin = new Padding(3, 5, 3, 5);
         addressTextBox.Name = "addressTextBox";
-        addressTextBox.Size = new Size(114, 27);
+        addressTextBox.Size = new Size(130, 27);
         addressTextBox.TabIndex = 4;
-        //
+        // 
         // hotlineLabel
-        //
-        hotlineLabel.Location = new Point(3, 60);
+        // 
+        hotlineLabel.Location = new Point(3, 81);
         hotlineLabel.Name = "hotlineLabel";
-        hotlineLabel.Size = new Size(14, 20);
+        hotlineLabel.Size = new Size(16, 27);
         hotlineLabel.TabIndex = 5;
-        //
+        // 
         // hotlineTextBox
-        //
-        hotlineTextBox.Location = new Point(23, 64);
-        hotlineTextBox.Margin = new Padding(3, 4, 3, 4);
+        // 
+        hotlineTextBox.Location = new Point(26, 86);
+        hotlineTextBox.Margin = new Padding(3, 5, 3, 5);
         hotlineTextBox.Name = "hotlineTextBox";
-        hotlineTextBox.Size = new Size(114, 27);
+        hotlineTextBox.Size = new Size(130, 27);
         hotlineTextBox.TabIndex = 6;
-        //
+        // 
         // emailLabel
-        //
-        emailLabel.Location = new Point(3, 80);
+        // 
+        emailLabel.Location = new Point(3, 108);
         emailLabel.Name = "emailLabel";
-        emailLabel.Size = new Size(14, 31);
+        emailLabel.Size = new Size(16, 41);
         emailLabel.TabIndex = 7;
-        //
+        // 
         // emailTextBox
-        //
-        emailTextBox.Location = new Point(23, 84);
-        emailTextBox.Margin = new Padding(3, 4, 3, 4);
+        // 
+        emailTextBox.Location = new Point(26, 113);
+        emailTextBox.Margin = new Padding(3, 5, 3, 5);
         emailTextBox.Name = "emailTextBox";
-        emailTextBox.Size = new Size(114, 27);
+        emailTextBox.Size = new Size(130, 27);
         emailTextBox.TabIndex = 8;
-        //
+        // 
         // ticketConfigPanel
-        //
+        // 
         ticketConfigPanel.Controls.Add(ticketConfigLayout);
-        ticketConfigPanel.Location = new Point(430, 4);
-        ticketConfigPanel.Margin = new Padding(3, 4, 3, 4);
+        ticketConfigPanel.Location = new Point(377, 5);
+        ticketConfigPanel.Margin = new Padding(3, 5, 3, 5);
         ticketConfigPanel.Name = "ticketConfigPanel";
-        ticketConfigPanel.Size = new Size(229, 133);
+        ticketConfigPanel.Size = new Size(262, 177);
         ticketConfigPanel.TabIndex = 1;
-        //
+        // 
         // ticketConfigLayout
-        //
-        ticketConfigLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-        ticketConfigLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+        // 
+        ticketConfigLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 23F));
+        ticketConfigLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 239F));
         ticketConfigLayout.Controls.Add(ticketConfigTitleLabel, 0, 0);
         ticketConfigLayout.Controls.Add(defaultPriceLabel, 0, 1);
         ticketConfigLayout.Controls.Add(defaultPriceTextBox, 1, 1);
@@ -339,95 +339,95 @@ partial class SettingsForm
         ticketConfigLayout.Controls.Add(ticketFormatCombo, 1, 3);
         ticketConfigLayout.Controls.Add(autoPrintCheckBox, 0, 4);
         ticketConfigLayout.Location = new Point(0, 0);
-        ticketConfigLayout.Margin = new Padding(3, 4, 3, 4);
+        ticketConfigLayout.Margin = new Padding(3, 5, 3, 5);
         ticketConfigLayout.Name = "ticketConfigLayout";
-        ticketConfigLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        ticketConfigLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        ticketConfigLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        ticketConfigLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        ticketConfigLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        ticketConfigLayout.Size = new Size(229, 133);
+        ticketConfigLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        ticketConfigLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        ticketConfigLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        ticketConfigLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        ticketConfigLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        ticketConfigLayout.Size = new Size(262, 177);
         ticketConfigLayout.TabIndex = 0;
-        //
+        // 
         // ticketConfigTitleLabel
-        //
+        // 
         ticketConfigLayout.SetColumnSpan(ticketConfigTitleLabel, 2);
         ticketConfigTitleLabel.Location = new Point(3, 0);
         ticketConfigTitleLabel.Name = "ticketConfigTitleLabel";
-        ticketConfigTitleLabel.Size = new Size(114, 20);
+        ticketConfigTitleLabel.Size = new Size(130, 27);
         ticketConfigTitleLabel.TabIndex = 0;
-        //
+        // 
         // defaultPriceLabel
-        //
-        defaultPriceLabel.Location = new Point(3, 20);
+        // 
+        defaultPriceLabel.Location = new Point(3, 27);
         defaultPriceLabel.Name = "defaultPriceLabel";
-        defaultPriceLabel.Size = new Size(14, 20);
+        defaultPriceLabel.Size = new Size(16, 27);
         defaultPriceLabel.TabIndex = 1;
-        //
+        // 
         // defaultPriceTextBox
-        //
-        defaultPriceTextBox.Location = new Point(23, 24);
-        defaultPriceTextBox.Margin = new Padding(3, 4, 3, 4);
+        // 
+        defaultPriceTextBox.Location = new Point(26, 32);
+        defaultPriceTextBox.Margin = new Padding(3, 5, 3, 5);
         defaultPriceTextBox.Name = "defaultPriceTextBox";
-        defaultPriceTextBox.Size = new Size(114, 27);
+        defaultPriceTextBox.Size = new Size(130, 27);
         defaultPriceTextBox.TabIndex = 2;
-        //
+        // 
         // saleWindowLabel
-        //
-        saleWindowLabel.Location = new Point(3, 40);
+        // 
+        saleWindowLabel.Location = new Point(3, 54);
         saleWindowLabel.Name = "saleWindowLabel";
-        saleWindowLabel.Size = new Size(14, 20);
+        saleWindowLabel.Size = new Size(16, 27);
         saleWindowLabel.TabIndex = 3;
-        //
+        // 
         // saleWindowTextBox
-        //
-        saleWindowTextBox.Location = new Point(23, 44);
-        saleWindowTextBox.Margin = new Padding(3, 4, 3, 4);
+        // 
+        saleWindowTextBox.Location = new Point(26, 59);
+        saleWindowTextBox.Margin = new Padding(3, 5, 3, 5);
         saleWindowTextBox.Name = "saleWindowTextBox";
-        saleWindowTextBox.Size = new Size(114, 27);
+        saleWindowTextBox.Size = new Size(130, 27);
         saleWindowTextBox.TabIndex = 4;
-        //
+        // 
         // ticketFormatLabel
-        //
-        ticketFormatLabel.Location = new Point(3, 60);
+        // 
+        ticketFormatLabel.Location = new Point(3, 81);
         ticketFormatLabel.Name = "ticketFormatLabel";
-        ticketFormatLabel.Size = new Size(14, 20);
+        ticketFormatLabel.Size = new Size(16, 27);
         ticketFormatLabel.TabIndex = 5;
-        //
+        // 
         // ticketFormatCombo
-        //
+        // 
         ticketFormatCombo.Items.AddRange(new object[] { "A4 (210 x 297 mm)", "A5", "80mm thermal" });
-        ticketFormatCombo.Location = new Point(23, 64);
-        ticketFormatCombo.Margin = new Padding(3, 4, 3, 4);
+        ticketFormatCombo.Location = new Point(26, 86);
+        ticketFormatCombo.Margin = new Padding(3, 5, 3, 5);
         ticketFormatCombo.Name = "ticketFormatCombo";
-        ticketFormatCombo.Size = new Size(138, 28);
+        ticketFormatCombo.Size = new Size(157, 28);
         ticketFormatCombo.TabIndex = 6;
-        //
+        // 
         // autoPrintCheckBox
-        //
+        // 
         autoPrintCheckBox.Checked = true;
         autoPrintCheckBox.CheckState = CheckState.Checked;
         ticketConfigLayout.SetColumnSpan(autoPrintCheckBox, 2);
-        autoPrintCheckBox.Location = new Point(3, 84);
-        autoPrintCheckBox.Margin = new Padding(3, 4, 3, 4);
+        autoPrintCheckBox.Location = new Point(3, 113);
+        autoPrintCheckBox.Margin = new Padding(3, 5, 3, 5);
         autoPrintCheckBox.Name = "autoPrintCheckBox";
-        autoPrintCheckBox.Size = new Size(119, 32);
+        autoPrintCheckBox.Size = new Size(136, 43);
         autoPrintCheckBox.TabIndex = 7;
-        //
+        // 
         // systemInfoPanel
-        //
+        // 
         systemInfoPanel.Controls.Add(systemInfoLayout);
-        systemInfoPanel.Location = new Point(857, 4);
-        systemInfoPanel.Margin = new Padding(3, 4, 3, 4);
+        systemInfoPanel.Location = new Point(751, 5);
+        systemInfoPanel.Margin = new Padding(3, 5, 3, 5);
         systemInfoPanel.Name = "systemInfoPanel";
         rootLayout.SetRowSpan(systemInfoPanel, 2);
-        systemInfoPanel.Size = new Size(229, 133);
+        systemInfoPanel.Size = new Size(262, 177);
         systemInfoPanel.TabIndex = 2;
-        //
+        // 
         // systemInfoLayout
-        //
-        systemInfoLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-        systemInfoLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+        // 
+        systemInfoLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 23F));
+        systemInfoLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 239F));
         systemInfoLayout.Controls.Add(systemInfoTitleLabel, 0, 0);
         systemInfoLayout.Controls.Add(versionLabel, 0, 1);
         systemInfoLayout.Controls.Add(versionValueLabel, 1, 1);
@@ -444,138 +444,138 @@ partial class SettingsForm
         systemInfoLayout.Controls.Add(osLabel, 0, 7);
         systemInfoLayout.Controls.Add(osValueLabel, 1, 7);
         systemInfoLayout.Location = new Point(0, 0);
-        systemInfoLayout.Margin = new Padding(3, 4, 3, 4);
+        systemInfoLayout.Margin = new Padding(3, 5, 3, 5);
         systemInfoLayout.Name = "systemInfoLayout";
-        systemInfoLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        systemInfoLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        systemInfoLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        systemInfoLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        systemInfoLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        systemInfoLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        systemInfoLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        systemInfoLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        systemInfoLayout.Size = new Size(229, 133);
+        systemInfoLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        systemInfoLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        systemInfoLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        systemInfoLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        systemInfoLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        systemInfoLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        systemInfoLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        systemInfoLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        systemInfoLayout.Size = new Size(262, 177);
         systemInfoLayout.TabIndex = 0;
-        //
+        // 
         // systemInfoTitleLabel
-        //
+        // 
         systemInfoLayout.SetColumnSpan(systemInfoTitleLabel, 2);
         systemInfoTitleLabel.Location = new Point(3, 0);
         systemInfoTitleLabel.Name = "systemInfoTitleLabel";
-        systemInfoTitleLabel.Size = new Size(114, 20);
+        systemInfoTitleLabel.Size = new Size(130, 27);
         systemInfoTitleLabel.TabIndex = 0;
-        //
+        // 
         // versionLabel
-        //
-        versionLabel.Location = new Point(3, 20);
+        // 
+        versionLabel.Location = new Point(3, 27);
         versionLabel.Name = "versionLabel";
-        versionLabel.Size = new Size(14, 20);
+        versionLabel.Size = new Size(16, 27);
         versionLabel.TabIndex = 1;
-        //
+        // 
         // versionValueLabel
-        //
-        versionValueLabel.Location = new Point(23, 20);
+        // 
+        versionValueLabel.Location = new Point(26, 27);
         versionValueLabel.Name = "versionValueLabel";
-        versionValueLabel.Size = new Size(114, 20);
+        versionValueLabel.Size = new Size(130, 27);
         versionValueLabel.TabIndex = 2;
-        //
+        // 
         // dataStatusLabel
-        //
-        dataStatusLabel.Location = new Point(3, 40);
+        // 
+        dataStatusLabel.Location = new Point(3, 54);
         dataStatusLabel.Name = "dataStatusLabel";
-        dataStatusLabel.Size = new Size(14, 20);
+        dataStatusLabel.Size = new Size(16, 27);
         dataStatusLabel.TabIndex = 3;
-        //
+        // 
         // dataStatusValueLabel
-        //
-        dataStatusValueLabel.Location = new Point(23, 40);
+        // 
+        dataStatusValueLabel.Location = new Point(26, 54);
         dataStatusValueLabel.Name = "dataStatusValueLabel";
-        dataStatusValueLabel.Size = new Size(114, 20);
+        dataStatusValueLabel.Size = new Size(130, 27);
         dataStatusValueLabel.TabIndex = 4;
-        //
+        // 
         // databaseLabel
-        //
-        databaseLabel.Location = new Point(3, 60);
+        // 
+        databaseLabel.Location = new Point(3, 81);
         databaseLabel.Name = "databaseLabel";
-        databaseLabel.Size = new Size(14, 20);
+        databaseLabel.Size = new Size(16, 27);
         databaseLabel.TabIndex = 5;
-        //
+        // 
         // databaseValueLabel
-        //
-        databaseValueLabel.Location = new Point(23, 60);
+        // 
+        databaseValueLabel.Location = new Point(26, 81);
         databaseValueLabel.Name = "databaseValueLabel";
-        databaseValueLabel.Size = new Size(114, 20);
+        databaseValueLabel.Size = new Size(130, 27);
         databaseValueLabel.TabIndex = 6;
-        //
+        // 
         // syncLabel
-        //
-        syncLabel.Location = new Point(3, 80);
+        // 
+        syncLabel.Location = new Point(3, 108);
         syncLabel.Name = "syncLabel";
-        syncLabel.Size = new Size(14, 20);
+        syncLabel.Size = new Size(16, 27);
         syncLabel.TabIndex = 7;
-        //
+        // 
         // syncValueLabel
-        //
-        syncValueLabel.Location = new Point(23, 80);
+        // 
+        syncValueLabel.Location = new Point(26, 108);
         syncValueLabel.Name = "syncValueLabel";
-        syncValueLabel.Size = new Size(114, 20);
+        syncValueLabel.Size = new Size(130, 27);
         syncValueLabel.TabIndex = 8;
-        //
+        // 
         // workstationLabel
-        //
-        workstationLabel.Location = new Point(3, 100);
+        // 
+        workstationLabel.Location = new Point(3, 135);
         workstationLabel.Name = "workstationLabel";
-        workstationLabel.Size = new Size(14, 20);
+        workstationLabel.Size = new Size(16, 27);
         workstationLabel.TabIndex = 9;
-        //
+        // 
         // workstationValueLabel
-        //
-        workstationValueLabel.Location = new Point(23, 100);
+        // 
+        workstationValueLabel.Location = new Point(26, 135);
         workstationValueLabel.Name = "workstationValueLabel";
-        workstationValueLabel.Size = new Size(114, 20);
+        workstationValueLabel.Size = new Size(130, 27);
         workstationValueLabel.TabIndex = 10;
-        //
+        // 
         // serverLabel
-        //
-        serverLabel.Location = new Point(3, 120);
+        // 
+        serverLabel.Location = new Point(3, 162);
         serverLabel.Name = "serverLabel";
-        serverLabel.Size = new Size(14, 20);
+        serverLabel.Size = new Size(16, 27);
         serverLabel.TabIndex = 11;
-        //
+        // 
         // serverValueLabel
-        //
-        serverValueLabel.Location = new Point(23, 120);
+        // 
+        serverValueLabel.Location = new Point(26, 162);
         serverValueLabel.Name = "serverValueLabel";
-        serverValueLabel.Size = new Size(114, 20);
+        serverValueLabel.Size = new Size(130, 27);
         serverValueLabel.TabIndex = 12;
-        //
+        // 
         // osLabel
-        //
-        osLabel.Location = new Point(3, 140);
+        // 
+        osLabel.Location = new Point(3, 189);
         osLabel.Name = "osLabel";
-        osLabel.Size = new Size(14, 20);
+        osLabel.Size = new Size(16, 27);
         osLabel.TabIndex = 13;
-        //
+        // 
         // osValueLabel
-        //
-        osValueLabel.Location = new Point(23, 140);
+        // 
+        osValueLabel.Location = new Point(26, 189);
         osValueLabel.Name = "osValueLabel";
-        osValueLabel.Size = new Size(114, 20);
+        osValueLabel.Size = new Size(130, 27);
         osValueLabel.TabIndex = 14;
-        //
+        // 
         // paymentPanel
-        //
+        // 
         paymentPanel.Controls.Add(paymentLayout);
-        paymentPanel.Location = new Point(3, 318);
-        paymentPanel.Margin = new Padding(3, 4, 3, 4);
+        paymentPanel.Location = new Point(3, 240);
+        paymentPanel.Margin = new Padding(3, 5, 3, 5);
         paymentPanel.Name = "paymentPanel";
-        paymentPanel.Size = new Size(229, 133);
+        paymentPanel.Size = new Size(262, 177);
         paymentPanel.TabIndex = 3;
-        //
+        // 
         // paymentLayout
-        //
-        paymentLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-        paymentLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+        // 
+        paymentLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 23F));
+        paymentLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 239F));
         paymentLayout.Controls.Add(paymentTitleLabel, 0, 0);
         paymentLayout.Controls.Add(cashPaymentLabel, 0, 1);
         paymentLayout.Controls.Add(cashCheckBox, 1, 1);
@@ -586,101 +586,101 @@ partial class SettingsForm
         paymentLayout.Controls.Add(transferPaymentLabel, 0, 4);
         paymentLayout.Controls.Add(transferCheckBox, 1, 4);
         paymentLayout.Location = new Point(0, 0);
-        paymentLayout.Margin = new Padding(3, 4, 3, 4);
+        paymentLayout.Margin = new Padding(3, 5, 3, 5);
         paymentLayout.Name = "paymentLayout";
-        paymentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        paymentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        paymentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        paymentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        paymentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        paymentLayout.Size = new Size(229, 133);
+        paymentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        paymentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        paymentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        paymentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        paymentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        paymentLayout.Size = new Size(262, 177);
         paymentLayout.TabIndex = 0;
-        //
+        // 
         // paymentTitleLabel
-        //
+        // 
         paymentLayout.SetColumnSpan(paymentTitleLabel, 2);
         paymentTitleLabel.Location = new Point(3, 0);
         paymentTitleLabel.Name = "paymentTitleLabel";
-        paymentTitleLabel.Size = new Size(114, 20);
+        paymentTitleLabel.Size = new Size(130, 27);
         paymentTitleLabel.TabIndex = 0;
-        //
+        // 
         // cashPaymentLabel
-        //
-        cashPaymentLabel.Location = new Point(3, 20);
+        // 
+        cashPaymentLabel.Location = new Point(3, 27);
         cashPaymentLabel.Name = "cashPaymentLabel";
-        cashPaymentLabel.Size = new Size(14, 20);
+        cashPaymentLabel.Size = new Size(16, 27);
         cashPaymentLabel.TabIndex = 1;
-        //
+        // 
         // cashCheckBox
-        //
+        // 
         cashCheckBox.Checked = true;
         cashCheckBox.CheckState = CheckState.Checked;
-        cashCheckBox.Location = new Point(23, 24);
-        cashCheckBox.Margin = new Padding(3, 4, 3, 4);
+        cashCheckBox.Location = new Point(26, 32);
+        cashCheckBox.Margin = new Padding(3, 5, 3, 5);
         cashCheckBox.Name = "cashCheckBox";
-        cashCheckBox.Size = new Size(119, 12);
+        cashCheckBox.Size = new Size(136, 16);
         cashCheckBox.TabIndex = 2;
-        //
+        // 
         // vnpayPaymentLabel
-        //
-        vnpayPaymentLabel.Location = new Point(3, 40);
+        // 
+        vnpayPaymentLabel.Location = new Point(3, 54);
         vnpayPaymentLabel.Name = "vnpayPaymentLabel";
-        vnpayPaymentLabel.Size = new Size(14, 20);
+        vnpayPaymentLabel.Size = new Size(16, 27);
         vnpayPaymentLabel.TabIndex = 3;
-        //
+        // 
         // vnpayCheckBox
-        //
+        // 
         vnpayCheckBox.Checked = true;
         vnpayCheckBox.CheckState = CheckState.Checked;
-        vnpayCheckBox.Location = new Point(23, 44);
-        vnpayCheckBox.Margin = new Padding(3, 4, 3, 4);
+        vnpayCheckBox.Location = new Point(26, 59);
+        vnpayCheckBox.Margin = new Padding(3, 5, 3, 5);
         vnpayCheckBox.Name = "vnpayCheckBox";
-        vnpayCheckBox.Size = new Size(119, 12);
+        vnpayCheckBox.Size = new Size(136, 16);
         vnpayCheckBox.TabIndex = 4;
-        //
+        // 
         // momoPaymentLabel
-        //
-        momoPaymentLabel.Location = new Point(3, 60);
+        // 
+        momoPaymentLabel.Location = new Point(3, 81);
         momoPaymentLabel.Name = "momoPaymentLabel";
-        momoPaymentLabel.Size = new Size(14, 20);
+        momoPaymentLabel.Size = new Size(16, 27);
         momoPaymentLabel.TabIndex = 5;
-        //
+        // 
         // momoCheckBox
-        //
-        momoCheckBox.Location = new Point(23, 64);
-        momoCheckBox.Margin = new Padding(3, 4, 3, 4);
+        // 
+        momoCheckBox.Location = new Point(26, 86);
+        momoCheckBox.Margin = new Padding(3, 5, 3, 5);
         momoCheckBox.Name = "momoCheckBox";
-        momoCheckBox.Size = new Size(119, 12);
+        momoCheckBox.Size = new Size(136, 16);
         momoCheckBox.TabIndex = 6;
-        //
+        // 
         // transferPaymentLabel
-        //
-        transferPaymentLabel.Location = new Point(3, 80);
+        // 
+        transferPaymentLabel.Location = new Point(3, 108);
         transferPaymentLabel.Name = "transferPaymentLabel";
-        transferPaymentLabel.Size = new Size(14, 31);
+        transferPaymentLabel.Size = new Size(16, 41);
         transferPaymentLabel.TabIndex = 7;
-        //
+        // 
         // transferCheckBox
-        //
-        transferCheckBox.Location = new Point(23, 84);
-        transferCheckBox.Margin = new Padding(3, 4, 3, 4);
+        // 
+        transferCheckBox.Location = new Point(26, 113);
+        transferCheckBox.Margin = new Padding(3, 5, 3, 5);
         transferCheckBox.Name = "transferCheckBox";
-        transferCheckBox.Size = new Size(119, 32);
+        transferCheckBox.Size = new Size(136, 43);
         transferCheckBox.TabIndex = 8;
-        //
+        // 
         // permissionPanel
-        //
+        // 
         permissionPanel.Controls.Add(permissionLayout);
-        permissionPanel.Location = new Point(430, 318);
-        permissionPanel.Margin = new Padding(3, 4, 3, 4);
+        permissionPanel.Location = new Point(377, 240);
+        permissionPanel.Margin = new Padding(3, 5, 3, 5);
         permissionPanel.Name = "permissionPanel";
-        permissionPanel.Size = new Size(229, 133);
+        permissionPanel.Size = new Size(262, 177);
         permissionPanel.TabIndex = 4;
-        //
+        // 
         // permissionLayout
-        //
-        permissionLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-        permissionLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+        // 
+        permissionLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 23F));
+        permissionLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 239F));
         permissionLayout.Controls.Add(permissionTitleLabel, 0, 0);
         permissionLayout.Controls.Add(adminPermissionLabel, 0, 1);
         permissionLayout.Controls.Add(adminPermissionValueLabel, 1, 1);
@@ -688,77 +688,77 @@ partial class SettingsForm
         permissionLayout.Controls.Add(staffPermissionValueLabel, 1, 2);
         permissionLayout.Controls.Add(permissionSummaryLabel, 0, 3);
         permissionLayout.Location = new Point(0, 0);
-        permissionLayout.Margin = new Padding(3, 4, 3, 4);
+        permissionLayout.Margin = new Padding(3, 5, 3, 5);
         permissionLayout.Name = "permissionLayout";
-        permissionLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        permissionLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        permissionLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        permissionLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        permissionLayout.Size = new Size(229, 133);
+        permissionLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        permissionLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        permissionLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        permissionLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        permissionLayout.Size = new Size(262, 177);
         permissionLayout.TabIndex = 0;
-        //
+        // 
         // permissionTitleLabel
-        //
+        // 
         permissionLayout.SetColumnSpan(permissionTitleLabel, 2);
         permissionTitleLabel.Location = new Point(3, 0);
         permissionTitleLabel.Name = "permissionTitleLabel";
-        permissionTitleLabel.Size = new Size(114, 20);
+        permissionTitleLabel.Size = new Size(130, 27);
         permissionTitleLabel.TabIndex = 0;
-        //
+        // 
         // adminPermissionLabel
-        //
-        adminPermissionLabel.Location = new Point(3, 20);
+        // 
+        adminPermissionLabel.Location = new Point(3, 27);
         adminPermissionLabel.Name = "adminPermissionLabel";
-        adminPermissionLabel.Size = new Size(14, 20);
+        adminPermissionLabel.Size = new Size(16, 27);
         adminPermissionLabel.TabIndex = 1;
-        //
+        // 
         // adminPermissionValueLabel
-        //
-        adminPermissionValueLabel.Location = new Point(23, 20);
+        // 
+        adminPermissionValueLabel.Location = new Point(26, 27);
         adminPermissionValueLabel.Name = "adminPermissionValueLabel";
-        adminPermissionValueLabel.Size = new Size(114, 20);
+        adminPermissionValueLabel.Size = new Size(130, 27);
         adminPermissionValueLabel.TabIndex = 2;
-        //
+        // 
         // staffPermissionLabel
-        //
-        staffPermissionLabel.Location = new Point(3, 40);
+        // 
+        staffPermissionLabel.Location = new Point(3, 54);
         staffPermissionLabel.Name = "staffPermissionLabel";
-        staffPermissionLabel.Size = new Size(14, 20);
+        staffPermissionLabel.Size = new Size(16, 27);
         staffPermissionLabel.TabIndex = 3;
-        //
+        // 
         // staffPermissionValueLabel
-        //
-        staffPermissionValueLabel.Location = new Point(23, 40);
+        // 
+        staffPermissionValueLabel.Location = new Point(26, 54);
         staffPermissionValueLabel.Name = "staffPermissionValueLabel";
-        staffPermissionValueLabel.Size = new Size(114, 20);
+        staffPermissionValueLabel.Size = new Size(130, 27);
         staffPermissionValueLabel.TabIndex = 4;
-        //
+        // 
         // permissionSummaryLabel
-        //
+        // 
         permissionSummaryLabel.BackColor = Color.FromArgb(234, 243, 255);
         permissionLayout.SetColumnSpan(permissionSummaryLabel, 2);
         permissionSummaryLabel.Dock = DockStyle.Fill;
         permissionSummaryLabel.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
         permissionSummaryLabel.ForeColor = Color.FromArgb(13, 110, 253);
-        permissionSummaryLabel.Location = new Point(3, 60);
+        permissionSummaryLabel.Location = new Point(3, 81);
         permissionSummaryLabel.Name = "permissionSummaryLabel";
-        permissionSummaryLabel.Size = new Size(223, 73);
+        permissionSummaryLabel.Size = new Size(256, 96);
         permissionSummaryLabel.TabIndex = 5;
         permissionSummaryLabel.Text = "Tổng số tài khoản hoạt động: 15";
         permissionSummaryLabel.TextAlign = ContentAlignment.MiddleCenter;
-        //
+        // 
         // appearancePanel
-        //
+        // 
         rootLayout.SetColumnSpan(appearancePanel, 2);
         appearancePanel.Controls.Add(appearanceLayout);
-        appearancePanel.Location = new Point(3, 599);
-        appearancePanel.Margin = new Padding(3, 4, 3, 4);
+        appearancePanel.Location = new Point(3, 450);
+        appearancePanel.Margin = new Padding(3, 5, 3, 5);
         appearancePanel.Name = "appearancePanel";
-        appearancePanel.Size = new Size(229, 133);
+        appearancePanel.Size = new Size(262, 165);
         appearancePanel.TabIndex = 5;
-        //
+        // 
         // appearanceLayout
-        //
+        // 
         appearanceLayout.BackColor = Color.White;
         appearanceLayout.ColumnCount = 4;
         appearanceLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
@@ -775,93 +775,93 @@ partial class SettingsForm
         appearanceLayout.Controls.Add(saveSettingsButton, 3, 2);
         appearanceLayout.Dock = DockStyle.Fill;
         appearanceLayout.Location = new Point(0, 0);
-        appearanceLayout.Margin = new Padding(3, 4, 3, 4);
+        appearanceLayout.Margin = new Padding(3, 5, 3, 5);
         appearanceLayout.Name = "appearanceLayout";
         appearanceLayout.RowCount = 3;
-        appearanceLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
-        appearanceLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 32F));
+        appearanceLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 53F));
+        appearanceLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 43F));
         appearanceLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        appearanceLayout.Size = new Size(229, 133);
+        appearanceLayout.Size = new Size(262, 165);
         appearanceLayout.TabIndex = 0;
-        //
+        // 
         // appearanceTitleLabel
-        //
+        // 
         appearanceLayout.SetColumnSpan(appearanceTitleLabel, 4);
         appearanceTitleLabel.Location = new Point(3, 0);
         appearanceTitleLabel.Name = "appearanceTitleLabel";
-        appearanceTitleLabel.Size = new Size(114, 31);
+        appearanceTitleLabel.Size = new Size(130, 41);
         appearanceTitleLabel.TabIndex = 0;
-        //
+        // 
         // themeLabel
-        //
-        themeLabel.Location = new Point(3, 40);
+        // 
+        themeLabel.Location = new Point(3, 53);
         themeLabel.Name = "themeLabel";
-        themeLabel.Size = new Size(50, 31);
+        themeLabel.Size = new Size(57, 41);
         themeLabel.TabIndex = 1;
-        //
+        // 
         // languageLabel
-        //
-        languageLabel.Location = new Point(60, 40);
+        // 
+        languageLabel.Location = new Point(68, 53);
         languageLabel.Name = "languageLabel";
-        languageLabel.Size = new Size(50, 31);
+        languageLabel.Size = new Size(57, 41);
         languageLabel.TabIndex = 2;
-        //
+        // 
         // fontSizeLabel
-        //
-        fontSizeLabel.Location = new Point(117, 40);
+        // 
+        fontSizeLabel.Location = new Point(133, 53);
         fontSizeLabel.Name = "fontSizeLabel";
-        fontSizeLabel.Size = new Size(50, 31);
+        fontSizeLabel.Size = new Size(57, 41);
         fontSizeLabel.TabIndex = 3;
-        //
+        // 
         // themeCombo
-        //
+        // 
         themeCombo.Items.AddRange(new object[] { "Sáng", "Tối" });
-        themeCombo.Location = new Point(3, 76);
-        themeCombo.Margin = new Padding(3, 4, 3, 4);
+        themeCombo.Location = new Point(3, 101);
+        themeCombo.Margin = new Padding(3, 5, 3, 5);
         themeCombo.Name = "themeCombo";
-        themeCombo.Size = new Size(50, 28);
+        themeCombo.Size = new Size(57, 28);
         themeCombo.TabIndex = 4;
-        //
+        // 
         // languageCombo
-        //
+        // 
         languageCombo.Items.AddRange(new object[] { "Tiếng Việt", "English" });
-        languageCombo.Location = new Point(60, 76);
-        languageCombo.Margin = new Padding(3, 4, 3, 4);
+        languageCombo.Location = new Point(68, 101);
+        languageCombo.Margin = new Padding(3, 5, 3, 5);
         languageCombo.Name = "languageCombo";
-        languageCombo.Size = new Size(50, 28);
+        languageCombo.Size = new Size(57, 28);
         languageCombo.TabIndex = 5;
-        //
+        // 
         // fontSizeCombo
-        //
+        // 
         fontSizeCombo.Items.AddRange(new object[] { "Trung bình (M)", "Nhỏ (S)", "Lớn (L)" });
-        fontSizeCombo.Location = new Point(117, 76);
-        fontSizeCombo.Margin = new Padding(3, 4, 3, 4);
+        fontSizeCombo.Location = new Point(133, 101);
+        fontSizeCombo.Margin = new Padding(3, 5, 3, 5);
         fontSizeCombo.Name = "fontSizeCombo";
-        fontSizeCombo.Size = new Size(50, 28);
+        fontSizeCombo.Size = new Size(57, 28);
         fontSizeCombo.TabIndex = 6;
-        //
+        // 
         // saveSettingsButton
-        //
+        // 
         saveSettingsButton.Dock = DockStyle.Fill;
-        saveSettingsButton.Location = new Point(180, 72);
-        saveSettingsButton.Margin = new Padding(9, 0, 0, 0);
+        saveSettingsButton.Location = new Point(205, 96);
+        saveSettingsButton.Margin = new Padding(10, 0, 0, 0);
         saveSettingsButton.Name = "saveSettingsButton";
-        saveSettingsButton.Size = new Size(49, 61);
+        saveSettingsButton.Size = new Size(57, 69);
         saveSettingsButton.TabIndex = 7;
-        //
+        // 
         // backupPanel
-        //
+        // 
         backupPanel.Controls.Add(backupLayout);
-        backupPanel.Location = new Point(857, 599);
-        backupPanel.Margin = new Padding(3, 4, 3, 4);
+        backupPanel.Location = new Point(751, 450);
+        backupPanel.Margin = new Padding(3, 5, 3, 5);
         backupPanel.Name = "backupPanel";
-        backupPanel.Size = new Size(229, 133);
+        backupPanel.Size = new Size(262, 165);
         backupPanel.TabIndex = 6;
-        //
+        // 
         // backupLayout
-        //
-        backupLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-        backupLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+        // 
+        backupLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 23F));
+        backupLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 23F));
         backupLayout.Controls.Add(backupTitleLabel, 0, 0);
         backupLayout.Controls.Add(lastBackupLabel, 0, 1);
         backupLayout.Controls.Add(lastBackupValueLabel, 1, 1);
@@ -871,88 +871,88 @@ partial class SettingsForm
         backupLayout.Controls.Add(restoreButton, 1, 3);
         backupLayout.Controls.Add(testConnectionButton, 0, 4);
         backupLayout.Location = new Point(0, 0);
-        backupLayout.Margin = new Padding(3, 4, 3, 4);
+        backupLayout.Margin = new Padding(3, 5, 3, 5);
         backupLayout.Name = "backupLayout";
-        backupLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        backupLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        backupLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        backupLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        backupLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        backupLayout.Size = new Size(229, 133);
+        backupLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        backupLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        backupLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        backupLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        backupLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+        backupLayout.Size = new Size(262, 177);
         backupLayout.TabIndex = 0;
-        //
+        // 
         // backupTitleLabel
-        //
+        // 
         backupLayout.SetColumnSpan(backupTitleLabel, 2);
         backupTitleLabel.Location = new Point(3, 0);
         backupTitleLabel.Name = "backupTitleLabel";
-        backupTitleLabel.Size = new Size(114, 20);
+        backupTitleLabel.Size = new Size(130, 27);
         backupTitleLabel.TabIndex = 0;
-        //
+        // 
         // lastBackupLabel
-        //
-        lastBackupLabel.Location = new Point(3, 20);
+        // 
+        lastBackupLabel.Location = new Point(3, 27);
         lastBackupLabel.Name = "lastBackupLabel";
-        lastBackupLabel.Size = new Size(14, 20);
+        lastBackupLabel.Size = new Size(16, 27);
         lastBackupLabel.TabIndex = 1;
-        //
+        // 
         // lastBackupValueLabel
-        //
-        lastBackupValueLabel.Location = new Point(23, 20);
+        // 
+        lastBackupValueLabel.Location = new Point(26, 27);
         lastBackupValueLabel.Name = "lastBackupValueLabel";
-        lastBackupValueLabel.Size = new Size(114, 20);
+        lastBackupValueLabel.Size = new Size(130, 27);
         lastBackupValueLabel.TabIndex = 2;
-        //
+        // 
         // backupSizeLabel
-        //
-        backupSizeLabel.Location = new Point(3, 40);
+        // 
+        backupSizeLabel.Location = new Point(3, 54);
         backupSizeLabel.Name = "backupSizeLabel";
-        backupSizeLabel.Size = new Size(14, 20);
+        backupSizeLabel.Size = new Size(16, 27);
         backupSizeLabel.TabIndex = 3;
-        //
+        // 
         // backupSizeValueLabel
-        //
-        backupSizeValueLabel.Location = new Point(23, 40);
+        // 
+        backupSizeValueLabel.Location = new Point(26, 54);
         backupSizeValueLabel.Name = "backupSizeValueLabel";
-        backupSizeValueLabel.Size = new Size(114, 20);
+        backupSizeValueLabel.Size = new Size(130, 27);
         backupSizeValueLabel.TabIndex = 4;
-        //
+        // 
         // backupButton
-        //
+        // 
         backupButton.Dock = DockStyle.Fill;
-        backupButton.Location = new Point(0, 65);
-        backupButton.Margin = new Padding(0, 5, 7, 0);
+        backupButton.Location = new Point(0, 88);
+        backupButton.Margin = new Padding(0, 7, 8, 0);
         backupButton.Name = "backupButton";
-        backupButton.Size = new Size(13, 15);
+        backupButton.Size = new Size(15, 20);
         backupButton.TabIndex = 5;
-        //
+        // 
         // restoreButton
-        //
+        // 
         restoreButton.Dock = DockStyle.Fill;
-        restoreButton.Location = new Point(27, 65);
-        restoreButton.Margin = new Padding(7, 5, 0, 0);
+        restoreButton.Location = new Point(31, 88);
+        restoreButton.Margin = new Padding(8, 7, 0, 0);
         restoreButton.Name = "restoreButton";
-        restoreButton.Size = new Size(202, 15);
+        restoreButton.Size = new Size(231, 20);
         restoreButton.TabIndex = 6;
-        //
+        // 
         // testConnectionButton
-        //
+        // 
         backupLayout.SetColumnSpan(testConnectionButton, 2);
         testConnectionButton.Dock = DockStyle.Fill;
-        testConnectionButton.Location = new Point(0, 85);
-        testConnectionButton.Margin = new Padding(0, 5, 0, 0);
+        testConnectionButton.Location = new Point(0, 115);
+        testConnectionButton.Margin = new Padding(0, 7, 0, 0);
         testConnectionButton.Name = "testConnectionButton";
-        testConnectionButton.Size = new Size(229, 48);
+        testConnectionButton.Size = new Size(262, 62);
         testConnectionButton.TabIndex = 7;
-        //
+        // 
         // SettingsForm
-        //
-        AutoScaleDimensions = new SizeF(7F, 15F);
+        // 
+        AutoScaleDimensions = new SizeF(8F, 20F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.FromArgb(245, 248, 252);
         ClientSize = new Size(1100, 620);
         Controls.Add(rootLayout);
-        Margin = new Padding(3, 4, 3, 4);
+        Margin = new Padding(3, 5, 3, 5);
         Name = "SettingsForm";
         Text = "Cài đặt hệ thống";
         rootLayout.ResumeLayout(false);
@@ -975,6 +975,112 @@ partial class SettingsForm
         ResumeLayout(false);
     }
 
+    private void ConfigureDesignerSurface()
+    {
+        ConfigureCard(cinemaInfoPanel, new Padding(0, 0, 12, 12));
+        ConfigureCard(ticketConfigPanel, new Padding(0, 0, 12, 12));
+        ConfigureCard(systemInfoPanel, new Padding(0, 0, 0, 12));
+        ConfigureCard(paymentPanel, new Padding(0, 0, 12, 12));
+        ConfigureCard(permissionPanel, new Padding(0, 0, 12, 12));
+        ConfigureCard(appearancePanel, new Padding(0, 0, 12, 0));
+        ConfigureCard(backupPanel, new Padding(0));
+
+        ConfigureTwoColumnCardLayout(cinemaInfoLayout, 5, 100);
+        StyleCardTitle(cinemaInfoTitleLabel, "THÔNG TIN RẠP");
+        StyleFieldLabel(cinemaNameLabel, "Tên rạp");
+        StyleFieldLabel(addressLabel, "Địa chỉ");
+        StyleFieldLabel(hotlineLabel, "Hotline");
+        StyleFieldLabel(emailLabel, "Email");
+        ConfigureTextBox(cinemaNameTextBox, "CinemaPro Center");
+        ConfigureTextBox(addressTextBox, "123 Nguyễn Văn Linh");
+        ConfigureTextBox(hotlineTextBox, "0236 123 4567");
+        ConfigureTextBox(emailTextBox, "contact@cinemapro.vn");
+
+        ConfigureTwoColumnCardLayout(ticketConfigLayout, 5, 112);
+        StyleCardTitle(ticketConfigTitleLabel, "CẤU HÌNH BÁN VÉ");
+        StyleFieldLabel(defaultPriceLabel, "Giá mặc định");
+        StyleFieldLabel(saleWindowLabel, "Mở bán trước");
+        StyleFieldLabel(ticketFormatLabel, "Mẫu vé");
+        ConfigureTextBox(defaultPriceTextBox, "90.000");
+        ConfigureTextBox(saleWindowTextBox, "30 ngày");
+        ConfigureCombo(ticketFormatCombo);
+        ConfigureCheckBox(autoPrintCheckBox, "Tự in vé sau thanh toán");
+
+        ConfigureTwoColumnCardLayout(systemInfoLayout, 8, 116);
+        StyleCardTitle(systemInfoTitleLabel, "THÔNG TIN HỆ THỐNG");
+        StyleFieldLabel(versionLabel, "Phiên bản");
+        StyleFieldLabel(dataStatusLabel, "Dữ liệu");
+        StyleFieldLabel(databaseLabel, "Database");
+        StyleFieldLabel(syncLabel, "Đồng bộ");
+        StyleFieldLabel(workstationLabel, "Máy trạm");
+        StyleFieldLabel(serverLabel, "Máy chủ");
+        StyleFieldLabel(osLabel, "Hệ điều hành");
+        StyleValueLabel(versionValueLabel, "1.0.0");
+        StyleValueLabel(dataStatusValueLabel, "Demo RAM");
+        StyleValueLabel(databaseValueLabel, "Chưa kết nối");
+        StyleValueLabel(syncValueLabel, "28/05/2026 01:15");
+        StyleValueLabel(workstationValueLabel, "COUNTER-01");
+        StyleValueLabel(serverValueLabel, "Offline demo");
+        StyleValueLabel(osValueLabel, "Windows");
+
+        ConfigureTwoColumnCardLayout(paymentLayout, 5, 144);
+        StyleCardTitle(paymentTitleLabel, "PHƯƠNG THỨC THANH TOÁN");
+        StyleFieldLabel(cashPaymentLabel, "Tiền mặt");
+        StyleFieldLabel(vnpayPaymentLabel, "VNPAY Sandbox");
+        StyleFieldLabel(momoPaymentLabel, "MoMo demo");
+        StyleFieldLabel(transferPaymentLabel, "Chuyển khoản");
+        ConfigureCheckBox(cashCheckBox, "Bật");
+        ConfigureCheckBox(vnpayCheckBox, "Bật");
+        ConfigureCheckBox(momoCheckBox, "Tắt");
+        ConfigureCheckBox(transferCheckBox, "Tắt");
+
+        ConfigureTwoColumnCardLayout(permissionLayout, 4, 118);
+        StyleCardTitle(permissionTitleLabel, "PHÂN QUYỀN");
+        StyleFieldLabel(adminPermissionLabel, "Admin");
+        StyleFieldLabel(staffPermissionLabel, "Staff");
+        StyleValueLabel(adminPermissionValueLabel, "Toàn quyền");
+        StyleValueLabel(staffPermissionValueLabel, "Quầy vé");
+        permissionSummaryLabel.Font = UiStyleHelper.SectionFont(9.25F);
+        permissionSummaryLabel.Text = "15 tài khoản hoạt động";
+
+        ConfigureAppearanceLayout();
+        StyleCardTitle(appearanceTitleLabel, "GIAO DIỆN ỨNG DỤNG");
+        StyleFieldLabel(themeLabel, "Giao diện");
+        StyleFieldLabel(languageLabel, "Ngôn ngữ");
+        StyleFieldLabel(fontSizeLabel, "Cỡ chữ");
+        ConfigureCombo(themeCombo);
+        ConfigureCombo(languageCombo);
+        ConfigureCombo(fontSizeCombo);
+        StylePrimaryButton(saveSettingsButton, "Lưu cấu hình");
+
+        ConfigureTwoColumnCardLayout(backupLayout, 5, 116);
+        StyleCardTitle(backupTitleLabel, "SAO LƯU DEMO");
+        StyleFieldLabel(lastBackupLabel, "Lần gần nhất");
+        StyleFieldLabel(backupSizeLabel, "Dung lượng");
+        StyleValueLabel(lastBackupValueLabel, "28/05/2026 02:15");
+        StyleValueLabel(backupSizeValueLabel, "256.45 MB");
+        StylePrimaryButton(backupButton, "Sao lưu");
+        StyleSecondaryButton(restoreButton, "Khôi phục");
+        StyleSecondaryButton(testConnectionButton, "Kiểm tra demo");
+    }
+
+    private void ConfigureAppearanceLayout()
+    {
+        appearanceLayout.BackColor = Color.White;
+        appearanceLayout.ColumnStyles.Clear();
+        appearanceLayout.RowStyles.Clear();
+        appearanceLayout.ColumnCount = 4;
+        appearanceLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+        appearanceLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+        appearanceLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+        appearanceLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+        appearanceLayout.RowCount = 3;
+        appearanceLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 34F));
+        appearanceLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+        appearanceLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+        appearanceLayout.Dock = DockStyle.Fill;
+    }
+
     private static void ConfigureCard(Panel panel, Padding margin)
     {
         panel.BackColor = Color.White;
@@ -987,6 +1093,8 @@ partial class SettingsForm
     private static void ConfigureTwoColumnCardLayout(TableLayoutPanel layout, int rows, int labelWidth)
     {
         layout.BackColor = Color.White;
+        layout.ColumnStyles.Clear();
+        layout.RowStyles.Clear();
         layout.ColumnCount = 2;
         layout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, labelWidth));
         layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));

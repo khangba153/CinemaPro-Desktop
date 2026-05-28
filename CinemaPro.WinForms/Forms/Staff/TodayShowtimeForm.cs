@@ -39,6 +39,8 @@ public sealed partial class TodayShowtimeForm : Form
 
     private void LoadData()
     {
+        UiStyleHelper.ResetGridForBinding(_grid);
+
         totalShowtimeValueLabel.Text = $"{_showtimes.Count} suất";
         soldTicketValueLabel.Text = "1.072 vé";
         activeRoomValueLabel.Text = "4 / 5";

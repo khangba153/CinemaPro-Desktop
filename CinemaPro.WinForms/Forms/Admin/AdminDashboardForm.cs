@@ -20,6 +20,8 @@ public sealed partial class AdminDashboardForm : Form
 
     private void BindDashboard()
     {
+        UiStyleHelper.ResetGridForBinding(showtimeGrid, recentTicketGrid, revenueGrid);
+
         var movies = AppServices.CinemaStore.GetMovies();
         var rooms = AppServices.CinemaStore.GetRooms();
         var showtimes = AppServices.CinemaStore.GetShowtimes().Where(item => item.StartTime.Date == DateTime.Today).ToList();

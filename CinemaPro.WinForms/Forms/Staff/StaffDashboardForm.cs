@@ -33,6 +33,8 @@ public sealed partial class StaffDashboardForm : Form
 
     private void BindDashboard()
     {
+        UiStyleHelper.ResetGridForBinding(scheduleGrid);
+
         var tickets = AppServices.CinemaStore.GetTickets();
         var showtimes = AppServices.CinemaStore.GetShowtimes().Where(item => item.StartTime.Date == DateTime.Today).ToList();
 

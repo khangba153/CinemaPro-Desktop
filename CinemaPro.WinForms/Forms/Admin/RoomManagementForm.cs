@@ -40,6 +40,8 @@ public sealed partial class RoomManagementForm : Form
 
     private void LoadData()
     {
+        UiStyleHelper.ResetGridForBinding(roomGrid);
+
         totalRoomsValueLabel.Text = _rooms.Count.ToString();
         activeRoomsValueLabel.Text = _rooms.Count(room => room.Status != "Bảo trì").ToString();
         totalSeatsValueLabel.Text = _rooms.Sum(room => room.SeatRows * room.SeatsPerRow).ToString("N0");

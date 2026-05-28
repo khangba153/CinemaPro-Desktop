@@ -74,6 +74,8 @@ public sealed partial class ShowtimeManagementForm : Form
 
     private void LoadGrid()
     {
+        UiStyleHelper.ResetGridForBinding(showtimeGrid);
+
         var rows = FilterShowtimes().ToList();
         showtimeGrid.DataSource = rows.Select(showtime => new
         {

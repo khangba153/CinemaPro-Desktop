@@ -40,6 +40,8 @@ public sealed partial class RevenueReportForm : Form
 
     private void BindReport()
     {
+        UiStyleHelper.ResetGridForBinding(dailyRevenueGrid, movieRevenueGrid, reportGrid);
+
         var rows = AppServices.CinemaStore.GetRevenueRows();
         var todayRows = rows.Where(row => row.Date.Date == DateTime.Today).ToList();
         var bestRow = rows.OrderByDescending(row => row.TicketsSold).First();

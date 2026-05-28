@@ -830,6 +830,7 @@ partial class RoomManagementForm
         seatConfigLayout.ResumeLayout(false);
         previewPanel.ResumeLayout(false);
         previewLayout.ResumeLayout(false);
+        UiStyleHelper.CompleteDesignerGrid(roomGrid);
         ResumeLayout(false);
     }
 

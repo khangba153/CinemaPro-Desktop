@@ -39,7 +39,6 @@ partial class LoginForm
 
     private void InitializeComponent()
     {
-        components = new System.ComponentModel.Container();
         rootLayout = new TableLayoutPanel();
         brandPanel = new Panel();
         brandLayout = new TableLayoutPanel();
@@ -53,16 +52,8 @@ partial class LoginForm
         formSubtitleLabel = new Label();
         usernameInputLabel = new Label();
         _usernameTextBox = new TextBox();
-        _usernameTextBox.PlaceholderText = "Nhập tên đăng nhập";
-        _usernameTextBox.BorderStyle = BorderStyle.FixedSingle;
-        _usernameTextBox.Font = UiStyleHelper.BodyFont(10F);
-        _usernameTextBox.Height = 32;
         passwordInputLabel = new Label();
         _passwordTextBox = new TextBox();
-        _passwordTextBox.PlaceholderText = "Nhập mật khẩu";
-        _passwordTextBox.BorderStyle = BorderStyle.FixedSingle;
-        _passwordTextBox.Font = UiStyleHelper.BodyFont(10F);
-        _passwordTextBox.Height = 32;
         rememberCheckBox = new CheckBox();
         loginButton = new Button();
         exitButton = new Button();
@@ -76,23 +67,10 @@ partial class LoginForm
         loginCard.SuspendLayout();
         formLayout.SuspendLayout();
         SuspendLayout();
-        //
-        // LoginForm
-        //
-        AutoScaleDimensions = new SizeF(7F, 15F);
-        AutoScaleMode = AutoScaleMode.Font;
-        BackColor = UiStyleHelper.ContentBackground;
-        ClientSize = new Size(1120, 680);
-        Controls.Add(rootLayout);
-        Font = UiStyleHelper.BodyFont();
-        MinimumSize = new Size(1040, 640);
-        Name = "LoginForm";
-        StartPosition = FormStartPosition.CenterScreen;
-        Text = "CinemaPro - Đăng nhập";
-        //
+        // 
         // rootLayout
-        //
-        rootLayout.BackColor = UiStyleHelper.ContentBackground;
+        // 
+        rootLayout.BackColor = Color.FromArgb(245, 248, 252);
         rootLayout.ColumnCount = 2;
         rootLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 52F));
         rootLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 48F));
@@ -100,21 +78,30 @@ partial class LoginForm
         rootLayout.Controls.Add(loginHost, 1, 0);
         rootLayout.Controls.Add(footerLabel, 0, 1);
         rootLayout.Dock = DockStyle.Fill;
-        rootLayout.Padding = new Padding(32, 28, 32, 14);
+        rootLayout.Location = new Point(0, 0);
+        rootLayout.Margin = new Padding(3, 4, 3, 4);
+        rootLayout.Name = "rootLayout";
+        rootLayout.Padding = new Padding(37, 37, 37, 19);
         rootLayout.RowCount = 2;
         rootLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        rootLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 32F));
-        rootLayout.SetColumnSpan(footerLabel, 2);
-        //
+        rootLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 43F));
+        rootLayout.Size = new Size(1168, 791);
+        rootLayout.TabIndex = 0;
+        // 
         // brandPanel
-        //
-        brandPanel.BackColor = UiStyleHelper.ContentBackground;
+        // 
+        brandPanel.BackColor = Color.FromArgb(245, 248, 252);
         brandPanel.Controls.Add(brandLayout);
         brandPanel.Dock = DockStyle.Fill;
-        brandPanel.Padding = new Padding(48, 54, 48, 54);
-        //
+        brandPanel.Location = new Point(40, 41);
+        brandPanel.Margin = new Padding(3, 4, 3, 4);
+        brandPanel.Name = "brandPanel";
+        brandPanel.Padding = new Padding(55, 72, 55, 72);
+        brandPanel.Size = new Size(562, 684);
+        brandPanel.TabIndex = 0;
+        // 
         // brandLayout
-        //
+        // 
         brandLayout.BackColor = Color.Transparent;
         brandLayout.ColumnCount = 1;
         brandLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
@@ -122,54 +109,81 @@ partial class LoginForm
         brandLayout.Controls.Add(brandTitleLabel, 0, 2);
         brandLayout.Controls.Add(brandCopyLabel, 0, 3);
         brandLayout.Dock = DockStyle.Fill;
+        brandLayout.Location = new Point(55, 72);
+        brandLayout.Margin = new Padding(3, 4, 3, 4);
+        brandLayout.Name = "brandLayout";
         brandLayout.RowCount = 5;
         brandLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 34F));
-        brandLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 82F));
-        brandLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
-        brandLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 76F));
+        brandLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 109F));
+        brandLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 67F));
+        brandLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 101F));
         brandLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 66F));
-        //
+        brandLayout.Size = new Size(452, 540);
+        brandLayout.TabIndex = 0;
+        // 
         // logoLabel
-        //
+        // 
         logoLabel.Dock = DockStyle.Fill;
-        logoLabel.Font = UiStyleHelper.TitleFont(38);
-        logoLabel.ForeColor = UiStyleHelper.Primary;
+        logoLabel.Font = new Font("Segoe UI Semibold", 38F, FontStyle.Bold);
+        logoLabel.ForeColor = Color.FromArgb(13, 110, 253);
+        logoLabel.Location = new Point(3, 89);
+        logoLabel.Name = "logoLabel";
+        logoLabel.Size = new Size(446, 109);
+        logoLabel.TabIndex = 0;
         logoLabel.Text = "CP";
         logoLabel.TextAlign = ContentAlignment.BottomCenter;
-        //
+        // 
         // brandTitleLabel
-        //
+        // 
         brandTitleLabel.Dock = DockStyle.Fill;
-        brandTitleLabel.Font = UiStyleHelper.TitleFont(24);
-        brandTitleLabel.ForeColor = UiStyleHelper.Primary;
+        brandTitleLabel.Font = new Font("Segoe UI Semibold", 24F, FontStyle.Bold);
+        brandTitleLabel.ForeColor = Color.FromArgb(13, 110, 253);
+        brandTitleLabel.Location = new Point(3, 198);
+        brandTitleLabel.Name = "brandTitleLabel";
+        brandTitleLabel.Size = new Size(446, 67);
+        brandTitleLabel.TabIndex = 1;
         brandTitleLabel.Text = "CINEMAPRO";
         brandTitleLabel.TextAlign = ContentAlignment.MiddleCenter;
-        //
+        // 
         // brandCopyLabel
-        //
+        // 
         brandCopyLabel.Dock = DockStyle.Fill;
-        brandCopyLabel.Font = UiStyleHelper.BodyFont(11);
-        brandCopyLabel.ForeColor = UiStyleHelper.TextMuted;
+        brandCopyLabel.Font = new Font("Segoe UI", 11F);
+        brandCopyLabel.ForeColor = Color.FromArgb(100, 116, 139);
+        brandCopyLabel.Location = new Point(3, 265);
+        brandCopyLabel.Name = "brandCopyLabel";
+        brandCopyLabel.Size = new Size(446, 101);
+        brandCopyLabel.TabIndex = 2;
         brandCopyLabel.Text = "Hệ thống quản lý rạp chiếu phim\r\nBán vé, thanh toán và kiểm tra vé trong một phiên vận hành";
         brandCopyLabel.TextAlign = ContentAlignment.TopCenter;
-        //
+        // 
         // loginHost
-        //
-        loginHost.BackColor = UiStyleHelper.ContentBackground;
+        // 
+        loginHost.BackColor = Color.FromArgb(245, 248, 252);
         loginHost.Controls.Add(loginCard);
         loginHost.Dock = DockStyle.Fill;
-        loginHost.Padding = new Padding(42, 36, 42, 36);
-        //
+        loginHost.Location = new Point(608, 41);
+        loginHost.Margin = new Padding(3, 4, 3, 4);
+        loginHost.Name = "loginHost";
+        loginHost.Padding = new Padding(48);
+        loginHost.Size = new Size(520, 684);
+        loginHost.TabIndex = 1;
+        // 
         // loginCard
-        //
+        // 
         loginCard.BackColor = Color.White;
         loginCard.BorderStyle = BorderStyle.FixedSingle;
         loginCard.Controls.Add(formLayout);
         loginCard.Dock = DockStyle.Fill;
-        loginCard.Padding = new Padding(36, 34, 36, 28);
-        //
+        loginCard.Location = new Point(48, 48);
+        loginCard.Margin = new Padding(3, 4, 3, 4);
+        loginCard.Name = "loginCard";
+        loginCard.Padding = new Padding(41, 45, 41, 37);
+        loginCard.Size = new Size(424, 588);
+        loginCard.TabIndex = 0;
+        // 
         // formLayout
-        //
+        // 
         formLayout.BackColor = Color.Transparent;
         formLayout.ColumnCount = 1;
         formLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
@@ -185,91 +199,191 @@ partial class LoginForm
         formLayout.Controls.Add(demoAccountLabel, 0, 9);
         formLayout.Controls.Add(demoStatusLabel, 0, 10);
         formLayout.Dock = DockStyle.Fill;
+        formLayout.Location = new Point(41, 45);
+        formLayout.Margin = new Padding(3, 4, 3, 4);
+        formLayout.Name = "formLayout";
         formLayout.RowCount = 12;
-        formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 62F));
-        formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
-        formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 22F));
-        formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 44F));
-        formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 22F));
-        formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 44F));
-        formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 38F));
-        formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 48F));
-        formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 48F));
-        formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 52F));
-        formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
+        formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 83F));
+        formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 56F));
+        formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 29F));
+        formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 59F));
+        formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 29F));
+        formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 59F));
+        formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 51F));
+        formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 64F));
+        formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 64F));
+        formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 69F));
+        formLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 37F));
         formLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        //
-        // login controls
-        //
+        formLayout.Size = new Size(340, 504);
+        formLayout.TabIndex = 0;
+        // 
+        // formTitleLabel
+        // 
         formTitleLabel.Dock = DockStyle.Fill;
-        formTitleLabel.Font = UiStyleHelper.TitleFont(20);
-        formTitleLabel.ForeColor = UiStyleHelper.TextDark;
+        formTitleLabel.Font = new Font("Segoe UI Semibold", 20F, FontStyle.Bold);
+        formTitleLabel.ForeColor = Color.FromArgb(17, 27, 63);
+        formTitleLabel.Location = new Point(3, 0);
+        formTitleLabel.Name = "formTitleLabel";
+        formTitleLabel.Size = new Size(334, 83);
+        formTitleLabel.TabIndex = 0;
         formTitleLabel.Text = "Đăng nhập hệ thống";
         formTitleLabel.TextAlign = ContentAlignment.BottomLeft;
+        // 
+        // formSubtitleLabel
+        // 
         formSubtitleLabel.Dock = DockStyle.Fill;
-        formSubtitleLabel.Font = UiStyleHelper.SmallFont(9.75F);
-        formSubtitleLabel.ForeColor = UiStyleHelper.TextMuted;
+        formSubtitleLabel.Font = new Font("Segoe UI", 9.75F);
+        formSubtitleLabel.ForeColor = Color.FromArgb(100, 116, 139);
+        formSubtitleLabel.Location = new Point(3, 83);
+        formSubtitleLabel.Name = "formSubtitleLabel";
+        formSubtitleLabel.Size = new Size(334, 56);
+        formSubtitleLabel.TabIndex = 1;
         formSubtitleLabel.Text = "Sử dụng tài khoản được cấp cho ca làm việc tại rạp.";
-        formSubtitleLabel.TextAlign = ContentAlignment.TopLeft;
-        StyleFieldLabel(usernameInputLabel, "Tên đăng nhập");
-        StyleFieldLabel(passwordInputLabel, "Mật khẩu");
+        // 
+        // usernameInputLabel
+        // 
+        usernameInputLabel.Location = new Point(3, 139);
+        usernameInputLabel.Name = "usernameInputLabel";
+        usernameInputLabel.Size = new Size(41, 29);
+        usernameInputLabel.TabIndex = 2;
+        // 
+        // _usernameTextBox
+        // 
+        _usernameTextBox.BorderStyle = BorderStyle.FixedSingle;
         _usernameTextBox.Dock = DockStyle.Fill;
-        _usernameTextBox.Margin = new Padding(0, 0, 0, 10);
+        _usernameTextBox.Font = new Font("Segoe UI", 10F);
+        _usernameTextBox.Location = new Point(0, 168);
+        _usernameTextBox.Margin = new Padding(0, 0, 0, 13);
+        _usernameTextBox.Name = "_usernameTextBox";
+        _usernameTextBox.PlaceholderText = "Nhập tên đăng nhập";
+        _usernameTextBox.Size = new Size(340, 30);
+        _usernameTextBox.TabIndex = 3;
+        // 
+        // passwordInputLabel
+        // 
+        passwordInputLabel.Location = new Point(3, 227);
+        passwordInputLabel.Name = "passwordInputLabel";
+        passwordInputLabel.Size = new Size(41, 29);
+        passwordInputLabel.TabIndex = 4;
+        // 
+        // _passwordTextBox
+        // 
+        _passwordTextBox.BorderStyle = BorderStyle.FixedSingle;
         _passwordTextBox.Dock = DockStyle.Fill;
-        _passwordTextBox.Margin = new Padding(0, 0, 0, 10);
+        _passwordTextBox.Font = new Font("Segoe UI", 10F);
+        _passwordTextBox.Location = new Point(0, 256);
+        _passwordTextBox.Margin = new Padding(0, 0, 0, 13);
+        _passwordTextBox.Name = "_passwordTextBox";
+        _passwordTextBox.PlaceholderText = "Nhập mật khẩu";
+        _passwordTextBox.Size = new Size(340, 30);
+        _passwordTextBox.TabIndex = 5;
         _passwordTextBox.UseSystemPasswordChar = true;
+        // 
+        // rememberCheckBox
+        // 
         rememberCheckBox.Dock = DockStyle.Fill;
-        rememberCheckBox.Font = UiStyleHelper.SmallFont(9.25F);
-        rememberCheckBox.ForeColor = UiStyleHelper.TextMuted;
+        rememberCheckBox.Font = new Font("Segoe UI", 9.25F);
+        rememberCheckBox.ForeColor = Color.FromArgb(100, 116, 139);
+        rememberCheckBox.Location = new Point(3, 319);
+        rememberCheckBox.Margin = new Padding(3, 4, 3, 4);
+        rememberCheckBox.Name = "rememberCheckBox";
+        rememberCheckBox.Size = new Size(334, 43);
+        rememberCheckBox.TabIndex = 6;
         rememberCheckBox.Text = "Ghi nhớ đăng nhập";
-        rememberCheckBox.TextAlign = ContentAlignment.MiddleLeft;
-        loginButton.Dock = DockStyle.Fill;
-        loginButton.BackColor = UiStyleHelper.Primary;
+        // 
+        // loginButton
+        // 
+        loginButton.BackColor = Color.FromArgb(13, 110, 253);
         loginButton.Cursor = Cursors.Hand;
-        loginButton.FlatStyle = FlatStyle.Flat;
+        loginButton.Dock = DockStyle.Fill;
         loginButton.FlatAppearance.BorderSize = 0;
-        loginButton.Font = UiStyleHelper.SectionFont(9.5F);
+        loginButton.FlatStyle = FlatStyle.Flat;
+        loginButton.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
         loginButton.ForeColor = Color.White;
-        loginButton.Margin = new Padding(0, 0, 0, 8);
+        loginButton.Location = new Point(0, 366);
+        loginButton.Margin = new Padding(0, 0, 0, 11);
+        loginButton.Name = "loginButton";
+        loginButton.Size = new Size(340, 53);
+        loginButton.TabIndex = 7;
         loginButton.Text = "Đăng nhập";
         loginButton.UseVisualStyleBackColor = false;
         loginButton.Click += LoginButton_Click;
-        exitButton.Dock = DockStyle.Fill;
+        // 
+        // exitButton
+        // 
         exitButton.BackColor = Color.White;
         exitButton.Cursor = Cursors.Hand;
+        exitButton.Dock = DockStyle.Fill;
+        exitButton.FlatAppearance.BorderColor = Color.FromArgb(155, 194, 255);
         exitButton.FlatStyle = FlatStyle.Flat;
-        exitButton.FlatAppearance.BorderColor = ColorTranslator.FromHtml("#9BC2FF");
-        exitButton.FlatAppearance.BorderSize = 1;
-        exitButton.Font = UiStyleHelper.SectionFont(9.5F);
-        exitButton.ForeColor = UiStyleHelper.Primary;
-        exitButton.Margin = new Padding(0, 0, 0, 8);
+        exitButton.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
+        exitButton.ForeColor = Color.FromArgb(13, 110, 253);
+        exitButton.Location = new Point(0, 430);
+        exitButton.Margin = new Padding(0, 0, 0, 11);
+        exitButton.Name = "exitButton";
+        exitButton.Size = new Size(340, 53);
+        exitButton.TabIndex = 8;
         exitButton.Text = "Thoát";
         exitButton.UseVisualStyleBackColor = false;
         exitButton.Click += ExitButton_Click;
+        // 
+        // demoAccountLabel
+        // 
         demoAccountLabel.Dock = DockStyle.Fill;
-        demoAccountLabel.Font = UiStyleHelper.SmallFont(9F);
-        demoAccountLabel.ForeColor = UiStyleHelper.TextMuted;
+        demoAccountLabel.Font = new Font("Segoe UI", 9F);
+        demoAccountLabel.ForeColor = Color.FromArgb(100, 116, 139);
+        demoAccountLabel.Location = new Point(3, 494);
+        demoAccountLabel.Name = "demoAccountLabel";
+        demoAccountLabel.Size = new Size(334, 69);
+        demoAccountLabel.TabIndex = 9;
         demoAccountLabel.Text = "Tài khoản demo: admin / 123456 hoặc staff01 / 123456";
         demoAccountLabel.TextAlign = ContentAlignment.MiddleLeft;
+        // 
+        // demoStatusLabel
+        // 
         demoStatusLabel.Dock = DockStyle.Fill;
-        demoStatusLabel.Font = UiStyleHelper.SectionFont(9F);
-        demoStatusLabel.ForeColor = UiStyleHelper.Success;
+        demoStatusLabel.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+        demoStatusLabel.ForeColor = Color.FromArgb(22, 163, 74);
+        demoStatusLabel.Location = new Point(3, 563);
+        demoStatusLabel.Name = "demoStatusLabel";
+        demoStatusLabel.Size = new Size(334, 37);
+        demoStatusLabel.TabIndex = 10;
         demoStatusLabel.Text = "Trạng thái demo: dữ liệu giả, không kết nối database";
         demoStatusLabel.TextAlign = ContentAlignment.MiddleCenter;
-        //
+        // 
         // footerLabel
-        //
+        // 
+        rootLayout.SetColumnSpan(footerLabel, 2);
         footerLabel.Dock = DockStyle.Fill;
-        footerLabel.Font = UiStyleHelper.SmallFont(9F);
-        footerLabel.ForeColor = UiStyleHelper.TextMuted;
+        footerLabel.Font = new Font("Segoe UI", 9F);
+        footerLabel.ForeColor = Color.FromArgb(100, 116, 139);
+        footerLabel.Location = new Point(40, 729);
+        footerLabel.Name = "footerLabel";
+        footerLabel.Size = new Size(1088, 43);
+        footerLabel.TabIndex = 2;
         footerLabel.Text = "Phiên bản: 1.0.0   |   © 2026 CinemaPro";
         footerLabel.TextAlign = ContentAlignment.MiddleCenter;
+        // 
+        // LoginForm
+        // 
+        AutoScaleDimensions = new SizeF(8F, 20F);
+        AutoScaleMode = AutoScaleMode.Font;
+        BackColor = Color.FromArgb(245, 248, 252);
+        ClientSize = new Size(1168, 791);
+        Controls.Add(rootLayout);
+        Margin = new Padding(3, 4, 3, 4);
+        MinimumSize = new Size(1186, 838);
+        Name = "LoginForm";
+        StartPosition = FormStartPosition.CenterScreen;
+        Text = "CinemaPro - Đăng nhập";
         rootLayout.ResumeLayout(false);
         brandPanel.ResumeLayout(false);
         brandLayout.ResumeLayout(false);
         loginHost.ResumeLayout(false);
         loginCard.ResumeLayout(false);
         formLayout.ResumeLayout(false);
+        formLayout.PerformLayout();
         ResumeLayout(false);
     }
 

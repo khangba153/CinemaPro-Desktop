@@ -462,6 +462,7 @@ partial class UserManagementForm
         ((System.ComponentModel.ISupportInitialize)userGrid).EndInit();
         detailPanel.ResumeLayout(false);
         detailLayout.ResumeLayout(false);
+        UiStyleHelper.CompleteDesignerGrid(userGrid);
         ResumeLayout(false);
     }
 

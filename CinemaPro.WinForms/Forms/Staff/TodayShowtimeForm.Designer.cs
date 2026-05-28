@@ -168,7 +168,7 @@ partial class TodayShowtimeForm
         statLayout.Padding = new Padding(0, 0, 0, 13);
         statLayout.RowCount = 1;
         statLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        statLayout.Size = new Size(1251, 131);
+        statLayout.Size = new Size(1094, 96);
         statLayout.TabIndex = 0;
         //
         // totalShowtimeValueLabel
@@ -363,7 +363,7 @@ partial class TodayShowtimeForm
         middleLayout.Padding = new Padding(0, 0, 0, 13);
         middleLayout.RowCount = 1;
         middleLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        middleLayout.Size = new Size(1251, 427);
+        middleLayout.Size = new Size(1094, 318);
         middleLayout.TabIndex = 1;
         //
         // gridPanel
@@ -561,7 +561,7 @@ partial class TodayShowtimeForm
         timelinePanel.Margin = new Padding(3, 4, 3, 4);
         timelinePanel.Name = "timelinePanel";
         timelinePanel.Padding = new Padding(14, 16, 14, 16);
-        timelinePanel.Size = new Size(1251, 245);
+        timelinePanel.Size = new Size(1094, 182);
         timelinePanel.TabIndex = 2;
         //
         // timelineLayout
@@ -578,7 +578,7 @@ partial class TodayShowtimeForm
         timelineLayout.RowCount = 2;
         timelineLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
         timelineLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        timelineLayout.Size = new Size(1221, 211);
+        timelineLayout.Size = new Size(1062, 148);
         timelineLayout.TabIndex = 0;
         //
         // timelineTitleLabel
@@ -597,7 +597,7 @@ partial class TodayShowtimeForm
         _timelinePanel.Location = new Point(3, 44);
         _timelinePanel.Margin = new Padding(3, 4, 3, 4);
         _timelinePanel.Name = "_timelinePanel";
-        _timelinePanel.Size = new Size(1215, 163);
+        _timelinePanel.Size = new Size(1056, 100);
         _timelinePanel.TabIndex = 1;
         _timelinePanel.WrapContents = false;
         _timelinePanel.Controls.Add(todayTimeline1Label);
@@ -635,6 +635,7 @@ partial class TodayShowtimeForm
         detailLayout.ResumeLayout(false);
         timelinePanel.ResumeLayout(false);
         timelineLayout.ResumeLayout(false);
+        UiStyleHelper.CompleteDesignerGrid(_grid);
         ResumeLayout(false);
     }
 

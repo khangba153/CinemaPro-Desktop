@@ -115,6 +115,7 @@ partial class PaymentForm
         // detailsTable
         //
         detailsTable.BackColor = UiStyleHelper.SurfaceMuted;
+        detailsTable.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
         detailsTable.ColumnCount = 2;
         detailsTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 36F));
         detailsTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 64F));

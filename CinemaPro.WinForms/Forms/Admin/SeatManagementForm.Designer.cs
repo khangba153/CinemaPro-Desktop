@@ -526,7 +526,21 @@ partial class SeatManagementForm
         button.Margin = new Padding(6, 4, 6, 4);
         button.Name = "seat" + seatCode + "Button";
         button.Tag = seatCode;
-        button.Text = seatCode[1..];
+        button.Text = seatCode;
+        if (seatCode is "B5" or "B6")
+        {
+            button.BackColor = UiStyleHelper.SeatSelected;
+            button.FlatAppearance.BorderColor = UiStyleHelper.Success;
+        }
+        else if (seatCode is "C3" or "C4")
+        {
+            button.BackColor = UiStyleHelper.SeatSold;
+            button.FlatAppearance.BorderColor = ColorTranslator.FromHtml("#FFA3A3");
+        }
+        else if (seatCode is "D7")
+        {
+            button.BackColor = UiStyleHelper.SeatMaintenance;
+        }
         button.UseVisualStyleBackColor = false;
     }
 }

@@ -452,6 +452,7 @@ partial class ShowtimeManagementForm
         editorButtonLayout.ResumeLayout(false);
         timelineCard.ResumeLayout(false);
         timelineLayout.ResumeLayout(false);
+        UiStyleHelper.CompleteDesignerGrid(showtimeGrid);
         ResumeLayout(false);
     }
 

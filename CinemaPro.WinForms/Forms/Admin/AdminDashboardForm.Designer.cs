@@ -612,6 +612,9 @@ partial class AdminDashboardForm
         recentTicketPanel.ResumeLayout(false);
         recentTicketLayout.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)recentTicketGrid).EndInit();
+        UiStyleHelper.CompleteDesignerGrid(showtimeGrid);
+        UiStyleHelper.CompleteDesignerGrid(revenueGrid);
+        UiStyleHelper.CompleteDesignerGrid(recentTicketGrid);
         ResumeLayout(false);
     }
 

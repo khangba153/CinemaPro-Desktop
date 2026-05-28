@@ -212,18 +212,18 @@ partial class MovieManagementForm
         //
         StyleInlineLabel(searchFilterLabel, "Tìm kiếm", 66);
         searchTextBox.Margin = new Padding(0, 18, 16, 0);
-        searchTextBox.Size = new Size(250, 32);
-        StyleInlineLabel(genreFilterLabel, "Thể loại", 58);
+        searchTextBox.Size = new Size(190, 32);
+        StyleInlineLabel(genreFilterLabel, "Thể loại", 50);
         genreFilterCombo.Margin = new Padding(0, 18, 16, 0);
-        genreFilterCombo.Size = new Size(148, 32);
+        genreFilterCombo.Size = new Size(120, 32);
         genreFilterCombo.Items.AddRange(new object[] { "Tất cả", "Hành động", "Hoạt hình", "Gia đình", "Khoa học viễn tưởng", "Tâm lý" });
         genreFilterCombo.SelectedIndex = 0;
-        StyleInlineLabel(statusFilterLabel, "Trạng thái", 76);
+        StyleInlineLabel(statusFilterLabel, "Trạng thái", 66);
         statusFilterCombo.Margin = new Padding(0, 18, 16, 0);
-        statusFilterCombo.Size = new Size(148, 32);
+        statusFilterCombo.Size = new Size(120, 32);
         statusFilterCombo.Items.AddRange(new object[] { "Tất cả", "Đang chiếu", "Sắp chiếu", "Ngừng chiếu" });
         statusFilterCombo.SelectedIndex = 0;
-        addMovieButton.Width = 120;
+        addMovieButton.Width = 104;
         addMovieButton.Height = 38;
         addMovieButton.BackColor = UiStyleHelper.Primary;
         addMovieButton.Cursor = Cursors.Hand;
@@ -245,7 +245,7 @@ partial class MovieManagementForm
         addShowtimeButton.Margin = new Padding(0, 18, 8, 0);
         addShowtimeButton.Text = "Thêm lịch chiếu";
         addShowtimeButton.UseVisualStyleBackColor = false;
-        addShowtimeButton.Width = 142;
+        addShowtimeButton.Width = 124;
         refreshButton.Height = 38;
         refreshButton.BackColor = Color.White;
         refreshButton.Cursor = Cursors.Hand;
@@ -257,7 +257,7 @@ partial class MovieManagementForm
         refreshButton.Margin = new Padding(0, 18, 8, 0);
         refreshButton.Text = "Làm mới";
         refreshButton.UseVisualStyleBackColor = false;
-        refreshButton.Width = 112;
+        refreshButton.Width = 96;
         //
         // mainLayout
         //
@@ -535,6 +535,8 @@ partial class MovieManagementForm
         detailButtonsLayout.ResumeLayout(false);
         showtimeCard.ResumeLayout(false);
         showtimeLayout.ResumeLayout(false);
+        UiStyleHelper.CompleteDesignerGrid(_movieGrid);
+        UiStyleHelper.CompleteDesignerGrid(_showtimeGrid);
         ResumeLayout(false);
     }
 

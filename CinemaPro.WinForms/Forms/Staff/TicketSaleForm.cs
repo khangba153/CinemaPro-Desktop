@@ -95,6 +95,7 @@ public sealed partial class TicketSaleForm : Form
             }
 
             var status = _selectedSeats.Contains(seatCode) ? SeatStatus.Selected : _seatStatuses.GetValueOrDefault(seatCode, SeatStatus.Available);
+            button.Text = seatCode;
             button.Cursor = status is SeatStatus.Sold or SeatStatus.Maintenance ? Cursors.No : Cursors.Hand;
             ApplySeatStyle(button, status);
         }
@@ -215,6 +216,8 @@ public sealed partial class TicketSaleForm : Form
 
     private void LoadRecentTickets()
     {
+        UiStyleHelper.ResetGridForBinding(_recentGrid);
+
         _recentGrid.DataSource = AppServices.CinemaStore.GetTickets()
             .Take(5)
             .Select(ticket => new

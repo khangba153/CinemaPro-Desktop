@@ -60,6 +60,8 @@ public sealed partial class MovieManagementForm : Form
 
     private void BindMovieGrid(IReadOnlyList<MovieRow> movies)
     {
+        UiStyleHelper.ResetGridForBinding(_movieGrid);
+
         _movieGrid.DataSource = movies.Select(movie => new
         {
             movie.MovieId,
@@ -96,6 +98,8 @@ public sealed partial class MovieManagementForm : Form
 
     private void UpdateDetail(MovieRow movie)
     {
+        UiStyleHelper.ResetGridForBinding(_showtimeGrid);
+
         _titleBox.Text = movie.Title;
         _genreCombo.SelectedItem = movie.Genre;
         _durationBox.Text = movie.Duration.ToString();
@@ -117,6 +121,8 @@ public sealed partial class MovieManagementForm : Form
 
     private void ClearDetail()
     {
+        UiStyleHelper.ResetGridForBinding(_showtimeGrid);
+
         _titleBox.Clear();
         _durationBox.Clear();
         _detailLabel.Text = "Không tìm thấy phim phù hợp với bộ lọc hiện tại.";

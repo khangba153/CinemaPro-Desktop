@@ -64,19 +64,6 @@ partial class SoldTicketsForm
 
     private void InitializeComponent()
     {
-        components = new System.ComponentModel.Container();
-        gridTicketIdColumn = new DataGridViewTextBoxColumn();
-        gridMovieColumn = new DataGridViewTextBoxColumn();
-        gridShowtimeColumn = new DataGridViewTextBoxColumn();
-        gridRoomColumn = new DataGridViewTextBoxColumn();
-        gridSeatsColumn = new DataGridViewTextBoxColumn();
-        gridQuantityColumn = new DataGridViewTextBoxColumn();
-        gridTotalColumn = new DataGridViewTextBoxColumn();
-        gridPaymentMethodColumn = new DataGridViewTextBoxColumn();
-        gridStatusColumn = new DataGridViewTextBoxColumn();
-        logGridTimeColumn = new DataGridViewTextBoxColumn();
-        logGridActionColumn = new DataGridViewTextBoxColumn();
-        logGridContentColumn = new DataGridViewTextBoxColumn();
         rootLayout = new TableLayoutPanel();
         filterPanel = new FlowLayoutPanel();
         fromDateFilterLabel = new Label();
@@ -111,6 +98,18 @@ partial class SoldTicketsForm
         logLayout = new TableLayoutPanel();
         logTitleLabel = new Label();
         _logGrid = new DataGridView();
+        gridTicketIdColumn = new DataGridViewTextBoxColumn();
+        gridMovieColumn = new DataGridViewTextBoxColumn();
+        gridShowtimeColumn = new DataGridViewTextBoxColumn();
+        gridRoomColumn = new DataGridViewTextBoxColumn();
+        gridSeatsColumn = new DataGridViewTextBoxColumn();
+        gridQuantityColumn = new DataGridViewTextBoxColumn();
+        gridTotalColumn = new DataGridViewTextBoxColumn();
+        gridPaymentMethodColumn = new DataGridViewTextBoxColumn();
+        gridStatusColumn = new DataGridViewTextBoxColumn();
+        logGridTimeColumn = new DataGridViewTextBoxColumn();
+        logGridActionColumn = new DataGridViewTextBoxColumn();
+        logGridContentColumn = new DataGridViewTextBoxColumn();
         rootLayout.SuspendLayout();
         filterPanel.SuspendLayout();
         contentLayout.SuspendLayout();
@@ -125,33 +124,27 @@ partial class SoldTicketsForm
         logLayout.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)_logGrid).BeginInit();
         SuspendLayout();
-        //
-        // SoldTicketsForm
-        //
-        AutoScaleDimensions = new SizeF(7F, 15F);
-        AutoScaleMode = AutoScaleMode.Font;
-        BackColor = UiStyleHelper.ContentBackground;
-        ClientSize = new Size(1100, 620);
-        Controls.Add(rootLayout);
-        Font = UiStyleHelper.BodyFont();
-        Name = "SoldTicketsForm";
-        Text = "Vé đã bán";
-        //
+        // 
         // rootLayout
-        //
-        rootLayout.BackColor = UiStyleHelper.ContentBackground;
+        // 
+        rootLayout.BackColor = Color.FromArgb(245, 248, 252);
         rootLayout.ColumnCount = 1;
         rootLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
         rootLayout.Controls.Add(filterPanel, 0, 0);
         rootLayout.Controls.Add(contentLayout, 0, 1);
         rootLayout.Dock = DockStyle.Fill;
+        rootLayout.Location = new Point(0, 0);
+        rootLayout.Margin = new Padding(3, 4, 3, 4);
+        rootLayout.Name = "rootLayout";
         rootLayout.RowCount = 2;
-        rootLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 64F));
+        rootLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 85F));
         rootLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        //
+        rootLayout.Size = new Size(1100, 620);
+        rootLayout.TabIndex = 0;
+        // 
         // filterPanel
-        //
-        filterPanel.BackColor = UiStyleHelper.ContentBackground;
+        // 
+        filterPanel.BackColor = Color.FromArgb(245, 248, 252);
         filterPanel.Controls.Add(fromDateFilterLabel);
         filterPanel.Controls.Add(fromDatePicker);
         filterPanel.Controls.Add(toDateFilterLabel);
@@ -165,155 +158,217 @@ partial class SoldTicketsForm
         filterPanel.Controls.Add(searchButton);
         filterPanel.Controls.Add(refreshButton);
         filterPanel.Dock = DockStyle.Fill;
-        filterPanel.FlowDirection = FlowDirection.LeftToRight;
-        filterPanel.Padding = new Padding(0, 0, 0, 8);
+        filterPanel.Location = new Point(3, 4);
+        filterPanel.Margin = new Padding(3, 4, 3, 4);
+        filterPanel.Name = "filterPanel";
+        filterPanel.Padding = new Padding(0, 0, 0, 11);
+        filterPanel.Size = new Size(1094, 77);
+        filterPanel.TabIndex = 0;
         filterPanel.WrapContents = false;
-        StyleInlineLabel(fromDateFilterLabel, "Từ", 32);
+        // 
+        // fromDateFilterLabel
+        // 
+        fromDateFilterLabel.Location = new Point(3, 0);
+        fromDateFilterLabel.Name = "fromDateFilterLabel";
+        fromDateFilterLabel.Size = new Size(114, 31);
+        fromDateFilterLabel.TabIndex = 0;
+        // 
+        // fromDatePicker
+        // 
         fromDatePicker.Format = DateTimePickerFormat.Short;
-        fromDatePicker.Margin = new Padding(0, 18, 10, 0);
-        fromDatePicker.Size = new Size(102, 32);
-        fromDatePicker.Value = DateTime.Today.AddDays(-7);
-        StyleInlineLabel(toDateFilterLabel, "Đến", 38);
+        fromDatePicker.Location = new Point(120, 24);
+        fromDatePicker.Margin = new Padding(0, 24, 11, 0);
+        fromDatePicker.Name = "fromDatePicker";
+        fromDatePicker.Size = new Size(116, 27);
+        fromDatePicker.TabIndex = 1;
+        fromDatePicker.Value = new DateTime(2026, 5, 21, 0, 0, 0, 0);
+        // 
+        // toDateFilterLabel
+        // 
+        toDateFilterLabel.Location = new Point(250, 0);
+        toDateFilterLabel.Name = "toDateFilterLabel";
+        toDateFilterLabel.Size = new Size(114, 31);
+        toDateFilterLabel.TabIndex = 2;
+        // 
+        // toDatePicker
+        // 
         toDatePicker.Format = DateTimePickerFormat.Short;
-        toDatePicker.Margin = new Padding(0, 18, 10, 0);
-        toDatePicker.Size = new Size(102, 32);
-        StyleInlineLabel(movieFilterLabel, "Phim", 38);
+        toDatePicker.Location = new Point(367, 24);
+        toDatePicker.Margin = new Padding(0, 24, 11, 0);
+        toDatePicker.Name = "toDatePicker";
+        toDatePicker.Size = new Size(116, 27);
+        toDatePicker.TabIndex = 3;
+        // 
+        // movieFilterLabel
+        // 
+        movieFilterLabel.Location = new Point(497, 0);
+        movieFilterLabel.Name = "movieFilterLabel";
+        movieFilterLabel.Size = new Size(114, 31);
+        movieFilterLabel.TabIndex = 4;
+        // 
+        // movieCombo
+        // 
         movieCombo.DropDownStyle = ComboBoxStyle.DropDownList;
-        movieCombo.Margin = new Padding(0, 18, 10, 0);
-        movieCombo.Size = new Size(118, 32);
-        StyleInlineLabel(statusFilterLabel, "Trạng thái", 70);
-        statusCombo.DropDownStyle = ComboBoxStyle.DropDownList;
-        statusCombo.Margin = new Padding(0, 18, 10, 0);
-        statusCombo.Size = new Size(108, 32);
         movieCombo.Items.AddRange(new object[] { "Tất cả phim", "Avengers: Endgame", "Dune: Phần Hai" });
-        movieCombo.SelectedIndex = 0;
+        movieCombo.Location = new Point(614, 24);
+        movieCombo.Margin = new Padding(0, 24, 11, 0);
+        movieCombo.Name = "movieCombo";
+        movieCombo.Size = new Size(134, 28);
+        movieCombo.TabIndex = 5;
+        // 
+        // statusFilterLabel
+        // 
+        statusFilterLabel.Location = new Point(762, 0);
+        statusFilterLabel.Name = "statusFilterLabel";
+        statusFilterLabel.Size = new Size(114, 31);
+        statusFilterLabel.TabIndex = 6;
+        // 
+        // statusCombo
+        // 
+        statusCombo.DropDownStyle = ComboBoxStyle.DropDownList;
         statusCombo.Items.AddRange(new object[] { "Tất cả trạng thái", "Chưa sử dụng", "Đã sử dụng", "Đã hủy" });
-        statusCombo.SelectedIndex = 0;
-        searchTextBox.AutoSize = false;
+        statusCombo.Location = new Point(879, 24);
+        statusCombo.Margin = new Padding(0, 24, 11, 0);
+        statusCombo.Name = "statusCombo";
+        statusCombo.Size = new Size(123, 28);
+        statusCombo.TabIndex = 7;
+        // 
+        // searchFilterLabel
+        // 
+        searchFilterLabel.Location = new Point(1016, 0);
+        searchFilterLabel.Name = "searchFilterLabel";
+        searchFilterLabel.Size = new Size(114, 31);
+        searchFilterLabel.TabIndex = 8;
+        // 
+        // searchTextBox
+        // 
         searchTextBox.BorderStyle = BorderStyle.FixedSingle;
-        searchTextBox.Margin = new Padding(0, 18, 10, 0);
+        searchTextBox.Location = new Point(1133, 24);
+        searchTextBox.Margin = new Padding(0, 24, 11, 0);
+        searchTextBox.Name = "searchTextBox";
         searchTextBox.PlaceholderText = "Nhập mã vé hoặc tên phim...";
-        searchTextBox.Size = new Size(138, 32);
-        StyleInlineLabel(searchFilterLabel, "Tìm", 34);
-        searchButton.Margin = new Padding(0, 18, 8, 0);
-        searchButton.Size = new Size(90, 36);
+        searchTextBox.Size = new Size(157, 42);
+        searchTextBox.TabIndex = 9;
+        // 
+        // searchButton
+        // 
+        searchButton.Location = new Point(1301, 24);
+        searchButton.Margin = new Padding(0, 24, 9, 0);
+        searchButton.Name = "searchButton";
+        searchButton.Size = new Size(103, 48);
+        searchButton.TabIndex = 10;
         searchButton.Text = "Tìm kiếm";
-        refreshButton.Margin = new Padding(0, 18, 0, 0);
-        refreshButton.Size = new Size(90, 36);
+        // 
+        // refreshButton
+        // 
+        refreshButton.Location = new Point(1413, 24);
+        refreshButton.Margin = new Padding(0, 24, 0, 0);
+        refreshButton.Name = "refreshButton";
+        refreshButton.Size = new Size(103, 48);
+        refreshButton.TabIndex = 11;
         refreshButton.Text = "Làm mới";
-        //
+        // 
         // contentLayout
-        //
-        contentLayout.BackColor = UiStyleHelper.ContentBackground;
+        // 
+        contentLayout.BackColor = Color.FromArgb(245, 248, 252);
         contentLayout.ColumnCount = 2;
         contentLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 70F));
         contentLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
         contentLayout.Controls.Add(gridPanel, 0, 0);
         contentLayout.Controls.Add(rightLayout, 1, 0);
         contentLayout.Dock = DockStyle.Fill;
+        contentLayout.Location = new Point(3, 89);
+        contentLayout.Margin = new Padding(3, 4, 3, 4);
+        contentLayout.Name = "contentLayout";
         contentLayout.RowCount = 1;
         contentLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        //
+        contentLayout.Size = new Size(1094, 527);
+        contentLayout.TabIndex = 1;
+        // 
         // gridPanel
-        //
+        // 
         gridPanel.BackColor = Color.White;
         gridPanel.BorderStyle = BorderStyle.FixedSingle;
         gridPanel.Controls.Add(gridLayout);
         gridPanel.Dock = DockStyle.Fill;
-        gridPanel.Margin = new Padding(0, 0, 12, 0);
-        gridPanel.Padding = new Padding(10);
-        //
+        gridPanel.Location = new Point(0, 0);
+        gridPanel.Margin = new Padding(0, 0, 14, 0);
+        gridPanel.Name = "gridPanel";
+        gridPanel.Padding = new Padding(11, 13, 11, 13);
+        gridPanel.Size = new Size(861, 734);
+        gridPanel.TabIndex = 0;
+        // 
         // gridLayout
-        //
+        // 
         gridLayout.BackColor = Color.White;
         gridLayout.ColumnCount = 1;
         gridLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
         gridLayout.Controls.Add(gridTitleLabel, 0, 0);
         gridLayout.Controls.Add(_grid, 0, 1);
         gridLayout.Dock = DockStyle.Fill;
+        gridLayout.Location = new Point(11, 13);
+        gridLayout.Margin = new Padding(3, 4, 3, 4);
+        gridLayout.Name = "gridLayout";
         gridLayout.RowCount = 2;
-        gridLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+        gridLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
         gridLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        StyleCardTitle(gridTitleLabel, "DANH SÁCH VÉ ĐÃ BÁN");
-        //
+        gridLayout.Size = new Size(837, 706);
+        gridLayout.TabIndex = 0;
+        // 
+        // gridTitleLabel
+        // 
+        gridTitleLabel.Location = new Point(3, 0);
+        gridTitleLabel.Name = "gridTitleLabel";
+        gridTitleLabel.Size = new Size(114, 31);
+        gridTitleLabel.TabIndex = 0;
+        // 
         // _grid
-        //
-        ConfigureGrid(_grid);
-        _grid.Dock = DockStyle.Fill;
-        _grid.AutoGenerateColumns = false;
+        // 
         _grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         _grid.ColumnHeadersHeight = 40;
+        _grid.Dock = DockStyle.Fill;
+        _grid.Location = new Point(3, 44);
+        _grid.Margin = new Padding(3, 4, 3, 4);
+        _grid.Name = "_grid";
         _grid.RowHeadersVisible = false;
+        _grid.RowHeadersWidth = 51;
         _grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        gridTicketIdColumn.Name = "TicketId";
-        gridTicketIdColumn.DataPropertyName = "TicketId";
-        gridTicketIdColumn.HeaderText = "Mã vé";
-        gridTicketIdColumn.FillWeight = 92F;
-        _grid.Columns.Add(gridTicketIdColumn);
-        gridMovieColumn.Name = "Movie";
-        gridMovieColumn.DataPropertyName = "Movie";
-        gridMovieColumn.HeaderText = "Phim";
-        gridMovieColumn.FillWeight = 160F;
-        _grid.Columns.Add(gridMovieColumn);
-        gridShowtimeColumn.Name = "Showtime";
-        gridShowtimeColumn.DataPropertyName = "Showtime";
-        gridShowtimeColumn.HeaderText = "Suất chiếu";
-        gridShowtimeColumn.FillWeight = 110F;
-        _grid.Columns.Add(gridShowtimeColumn);
-        gridRoomColumn.Name = "Room";
-        gridRoomColumn.DataPropertyName = "Room";
-        gridRoomColumn.HeaderText = "Phòng";
-        gridRoomColumn.FillWeight = 78F;
-        _grid.Columns.Add(gridRoomColumn);
-        gridSeatsColumn.Name = "Seats";
-        gridSeatsColumn.DataPropertyName = "Seats";
-        gridSeatsColumn.HeaderText = "Ghế";
-        gridSeatsColumn.FillWeight = 78F;
-        _grid.Columns.Add(gridSeatsColumn);
-        gridQuantityColumn.Name = "Quantity";
-        gridQuantityColumn.DataPropertyName = "Quantity";
-        gridQuantityColumn.HeaderText = "SL";
-        gridQuantityColumn.FillWeight = 42F;
-        _grid.Columns.Add(gridQuantityColumn);
-        gridTotalColumn.Name = "Total";
-        gridTotalColumn.DataPropertyName = "Total";
-        gridTotalColumn.HeaderText = "Tổng tiền";
-        gridTotalColumn.FillWeight = 92F;
-        _grid.Columns.Add(gridTotalColumn);
-        gridPaymentMethodColumn.Name = "PaymentMethod";
-        gridPaymentMethodColumn.DataPropertyName = "PaymentMethod";
-        gridPaymentMethodColumn.HeaderText = "Thanh toán";
-        gridPaymentMethodColumn.FillWeight = 108F;
-        _grid.Columns.Add(gridPaymentMethodColumn);
-        gridStatusColumn.Name = "Status";
-        gridStatusColumn.DataPropertyName = "Status";
-        gridStatusColumn.HeaderText = "Trạng thái";
-        gridStatusColumn.FillWeight = 90F;
-        _grid.Columns.Add(gridStatusColumn);
-        //
+        _grid.Size = new Size(831, 658);
+        _grid.TabIndex = 1;
+        _grid.CellContentClick += _grid_CellContentClick;
+        // 
         // rightLayout
-        //
-        rightLayout.BackColor = UiStyleHelper.ContentBackground;
+        // 
+        rightLayout.BackColor = Color.FromArgb(245, 248, 252);
         rightLayout.ColumnCount = 1;
         rightLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
         rightLayout.Controls.Add(detailPanel, 0, 0);
         rightLayout.Controls.Add(logPanel, 0, 1);
         rightLayout.Dock = DockStyle.Fill;
+        rightLayout.Location = new Point(878, 4);
+        rightLayout.Margin = new Padding(3, 4, 3, 4);
+        rightLayout.Name = "rightLayout";
         rightLayout.RowCount = 2;
         rightLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 60F));
         rightLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 40F));
-        //
+        rightLayout.Size = new Size(370, 726);
+        rightLayout.TabIndex = 1;
+        // 
         // detailPanel
-        //
+        // 
         detailPanel.BackColor = Color.White;
         detailPanel.BorderStyle = BorderStyle.FixedSingle;
         detailPanel.Controls.Add(detailLayout);
         detailPanel.Dock = DockStyle.Fill;
-        detailPanel.Margin = new Padding(0, 0, 0, 10);
-        detailPanel.Padding = new Padding(16);
-        //
+        detailPanel.Location = new Point(0, 0);
+        detailPanel.Margin = new Padding(0, 0, 0, 13);
+        detailPanel.Name = "detailPanel";
+        detailPanel.Padding = new Padding(18, 21, 18, 21);
+        detailPanel.Size = new Size(370, 422);
+        detailPanel.TabIndex = 0;
+        // 
         // detailLayout
-        //
+        // 
         detailLayout.BackColor = Color.White;
         detailLayout.ColumnCount = 1;
         detailLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
@@ -323,83 +378,165 @@ partial class SoldTicketsForm
         detailLayout.Controls.Add(_statusLabel, 0, 3);
         detailLayout.Controls.Add(actionPanel, 0, 4);
         detailLayout.Dock = DockStyle.Fill;
+        detailLayout.Location = new Point(18, 21);
+        detailLayout.Margin = new Padding(3, 4, 3, 4);
+        detailLayout.Name = "detailLayout";
         detailLayout.RowCount = 5;
-        detailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+        detailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
         detailLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        detailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 124F));
-        detailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
-        detailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
-        StyleCardTitle(detailTitleLabel, "CHI TIẾT VÉ");
+        detailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 165F));
+        detailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+        detailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 56F));
+        detailLayout.Size = new Size(332, 378);
+        detailLayout.TabIndex = 0;
+        // 
+        // detailTitleLabel
+        // 
+        detailTitleLabel.Location = new Point(3, 0);
+        detailTitleLabel.Name = "detailTitleLabel";
+        detailTitleLabel.Size = new Size(114, 31);
+        detailTitleLabel.TabIndex = 0;
+        // 
+        // _detailLabel
+        // 
         _detailLabel.Dock = DockStyle.Fill;
-        _detailLabel.Font = UiStyleHelper.BodyFont(9.75F);
-        _detailLabel.ForeColor = UiStyleHelper.TextDark;
+        _detailLabel.Font = new Font("Segoe UI", 9.75F);
+        _detailLabel.ForeColor = Color.FromArgb(17, 27, 63);
+        _detailLabel.Location = new Point(3, 40);
+        _detailLabel.Name = "_detailLabel";
+        _detailLabel.Size = new Size(326, 77);
+        _detailLabel.TabIndex = 1;
         _detailLabel.Text = "TK000001\r\n\r\nPhim: Avengers: Endgame\r\nSuất chiếu: 19:30 - 22:32\r\nPhòng: Phòng 2\r\nGhế: B5, B6\r\nTổng tiền: 180.000 đ\r\nThanh toán: Tiền mặt";
         _detailLabel.TextAlign = ContentAlignment.MiddleLeft;
+        // 
+        // qrCodeLabel
+        // 
         qrCodeLabel.BackColor = Color.White;
         qrCodeLabel.BorderStyle = BorderStyle.FixedSingle;
         qrCodeLabel.Dock = DockStyle.Fill;
-        qrCodeLabel.Font = UiStyleHelper.SectionFont(13F);
-        qrCodeLabel.Margin = new Padding(76, 0, 76, 0);
+        qrCodeLabel.Font = new Font("Segoe UI Semibold", 13F, FontStyle.Bold);
+        qrCodeLabel.Location = new Point(87, 117);
+        qrCodeLabel.Margin = new Padding(87, 0, 87, 0);
+        qrCodeLabel.Name = "qrCodeLabel";
+        qrCodeLabel.Size = new Size(158, 165);
+        qrCodeLabel.TabIndex = 2;
         qrCodeLabel.Text = "QR\r\nTK000001";
         qrCodeLabel.TextAlign = ContentAlignment.MiddleCenter;
+        // 
+        // _statusLabel
+        // 
         _statusLabel.Dock = DockStyle.Fill;
-        _statusLabel.Font = UiStyleHelper.SectionFont(10F);
-        _statusLabel.ForeColor = UiStyleHelper.Success;
+        _statusLabel.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+        _statusLabel.ForeColor = Color.FromArgb(22, 163, 74);
+        _statusLabel.Location = new Point(3, 282);
+        _statusLabel.Name = "_statusLabel";
+        _statusLabel.Size = new Size(326, 40);
+        _statusLabel.TabIndex = 3;
         _statusLabel.Text = "Vé chưa sử dụng";
         _statusLabel.TextAlign = ContentAlignment.MiddleCenter;
+        // 
+        // actionPanel
+        // 
         actionPanel.BackColor = Color.White;
         actionPanel.Controls.Add(printButton);
         actionPanel.Controls.Add(cancelTicketButton);
         actionPanel.Controls.Add(viewLogButton);
         actionPanel.Dock = DockStyle.Fill;
-        actionPanel.FlowDirection = FlowDirection.LeftToRight;
+        actionPanel.Location = new Point(3, 326);
+        actionPanel.Margin = new Padding(3, 4, 3, 4);
+        actionPanel.Name = "actionPanel";
+        actionPanel.Size = new Size(326, 48);
+        actionPanel.TabIndex = 4;
         actionPanel.WrapContents = false;
-        printButton.Size = new Size(86, 36);
+        // 
+        // printButton
+        // 
+        printButton.Location = new Point(3, 4);
+        printButton.Margin = new Padding(3, 4, 3, 4);
+        printButton.Name = "printButton";
+        printButton.Size = new Size(98, 48);
+        printButton.TabIndex = 0;
         printButton.Text = "In vé";
-        cancelTicketButton.Size = new Size(86, 36);
+        // 
+        // cancelTicketButton
+        // 
+        cancelTicketButton.Location = new Point(107, 4);
+        cancelTicketButton.Margin = new Padding(3, 4, 3, 4);
+        cancelTicketButton.Name = "cancelTicketButton";
+        cancelTicketButton.Size = new Size(98, 48);
+        cancelTicketButton.TabIndex = 1;
         cancelTicketButton.Text = "Hủy vé";
-        viewLogButton.Size = new Size(86, 36);
+        // 
+        // viewLogButton
+        // 
+        viewLogButton.Location = new Point(211, 4);
+        viewLogButton.Margin = new Padding(3, 4, 3, 4);
+        viewLogButton.Name = "viewLogButton";
+        viewLogButton.Size = new Size(98, 48);
+        viewLogButton.TabIndex = 2;
         viewLogButton.Text = "Xem log";
-        //
+        // 
         // logPanel
-        //
+        // 
         logPanel.BackColor = Color.White;
         logPanel.BorderStyle = BorderStyle.FixedSingle;
         logPanel.Controls.Add(logLayout);
         logPanel.Dock = DockStyle.Fill;
-        logPanel.Padding = new Padding(10);
+        logPanel.Location = new Point(3, 439);
+        logPanel.Margin = new Padding(3, 4, 3, 4);
+        logPanel.Name = "logPanel";
+        logPanel.Padding = new Padding(11, 13, 11, 13);
+        logPanel.Size = new Size(364, 283);
+        logPanel.TabIndex = 1;
+        // 
+        // logLayout
+        // 
         logLayout.BackColor = Color.White;
         logLayout.ColumnCount = 1;
         logLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
         logLayout.Controls.Add(logTitleLabel, 0, 0);
         logLayout.Controls.Add(_logGrid, 0, 1);
         logLayout.Dock = DockStyle.Fill;
+        logLayout.Location = new Point(11, 13);
+        logLayout.Margin = new Padding(3, 4, 3, 4);
+        logLayout.Name = "logLayout";
         logLayout.RowCount = 2;
-        logLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
+        logLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 37F));
         logLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        StyleCardTitle(logTitleLabel, "NHẬT KÝ GIAO DỊCH");
-        ConfigureGrid(_logGrid);
-        _logGrid.Dock = DockStyle.Fill;
-        _logGrid.AutoGenerateColumns = false;
+        logLayout.Size = new Size(340, 255);
+        logLayout.TabIndex = 0;
+        // 
+        // logTitleLabel
+        // 
+        logTitleLabel.Location = new Point(3, 0);
+        logTitleLabel.Name = "logTitleLabel";
+        logTitleLabel.Size = new Size(114, 31);
+        logTitleLabel.TabIndex = 0;
+        // 
+        // _logGrid
+        // 
         _logGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         _logGrid.ColumnHeadersHeight = 40;
+        _logGrid.Dock = DockStyle.Fill;
+        _logGrid.Location = new Point(3, 41);
+        _logGrid.Margin = new Padding(3, 4, 3, 4);
+        _logGrid.Name = "_logGrid";
         _logGrid.RowHeadersVisible = false;
+        _logGrid.RowHeadersWidth = 51;
         _logGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        logGridTimeColumn.Name = "Time";
-        logGridTimeColumn.DataPropertyName = "Time";
-        logGridTimeColumn.HeaderText = "Thời gian";
-        logGridTimeColumn.FillWeight = 100F;
-        _logGrid.Columns.Add(logGridTimeColumn);
-        logGridActionColumn.Name = "Action";
-        logGridActionColumn.DataPropertyName = "Action";
-        logGridActionColumn.HeaderText = "Hành động";
-        logGridActionColumn.FillWeight = 90F;
-        _logGrid.Columns.Add(logGridActionColumn);
-        logGridContentColumn.Name = "Content";
-        logGridContentColumn.DataPropertyName = "Content";
-        logGridContentColumn.HeaderText = "Nội dung";
-        logGridContentColumn.FillWeight = 150F;
-        _logGrid.Columns.Add(logGridContentColumn);
+        _logGrid.Size = new Size(334, 210);
+        _logGrid.TabIndex = 1;
+        // 
+        // SoldTicketsForm
+        // 
+        AutoScaleDimensions = new SizeF(8F, 20F);
+        AutoScaleMode = AutoScaleMode.Font;
+        BackColor = Color.FromArgb(245, 248, 252);
+        ClientSize = new Size(1100, 620);
+        Controls.Add(rootLayout);
+        Margin = new Padding(3, 4, 3, 4);
+        Name = "SoldTicketsForm";
+        Text = "Vé đã bán";
         rootLayout.ResumeLayout(false);
         filterPanel.ResumeLayout(false);
         contentLayout.ResumeLayout(false);
@@ -413,7 +550,60 @@ partial class SoldTicketsForm
         logPanel.ResumeLayout(false);
         logLayout.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)_logGrid).EndInit();
+        ConfigureDesignerSurface();
         ResumeLayout(false);
+    }
+
+    private void ConfigureDesignerSurface()
+    {
+        StyleInlineLabel(fromDateFilterLabel, "Từ ngày", 58);
+        StyleInlineLabel(toDateFilterLabel, "Đến ngày", 62);
+        StyleInlineLabel(movieFilterLabel, "Phim", 42);
+        StyleInlineLabel(statusFilterLabel, "Trạng thái", 72);
+        StyleInlineLabel(searchFilterLabel, "Tìm", 34);
+        fromDatePicker.Size = new Size(104, 27);
+        toDatePicker.Size = new Size(104, 27);
+        movieCombo.Size = new Size(122, 28);
+        statusCombo.Size = new Size(118, 28);
+        searchTextBox.Size = new Size(136, 27);
+        searchButton.Size = new Size(88, 40);
+        refreshButton.Size = new Size(82, 40);
+
+        StyleCardTitle(gridTitleLabel, "DANH SÁCH VÉ ĐÃ BÁN");
+        StyleCardTitle(detailTitleLabel, "CHI TIẾT VÉ");
+        StyleCardTitle(logTitleLabel, "NHẬT KÝ GIAO DỊCH");
+
+        ConfigureColumn(gridTicketIdColumn, "TicketId", "Mã vé", 86F);
+        ConfigureColumn(gridMovieColumn, "Movie", "Phim", 160F);
+        ConfigureColumn(gridShowtimeColumn, "Showtime", "Suất chiếu", 110F);
+        ConfigureColumn(gridRoomColumn, "Room", "Phòng", 80F);
+        ConfigureColumn(gridSeatsColumn, "Seats", "Ghế", 70F);
+        ConfigureColumn(gridQuantityColumn, "Quantity", "SL", 45F);
+        ConfigureColumn(gridTotalColumn, "Total", "Tổng tiền", 95F);
+        ConfigureColumn(gridPaymentMethodColumn, "PaymentMethod", "Thanh toán", 105F);
+        ConfigureColumn(gridStatusColumn, "Status", "Trạng thái", 95F);
+        ConfigureGridWithColumns(_grid, gridTicketIdColumn, gridMovieColumn, gridShowtimeColumn, gridRoomColumn, gridSeatsColumn, gridQuantityColumn, gridTotalColumn, gridPaymentMethodColumn, gridStatusColumn);
+
+        ConfigureColumn(logGridTimeColumn, "Time", "Thời gian", 84F);
+        ConfigureColumn(logGridActionColumn, "Action", "Thao tác", 98F);
+        ConfigureColumn(logGridContentColumn, "Content", "Nội dung", 180F);
+        ConfigureGridWithColumns(_logGrid, logGridTimeColumn, logGridActionColumn, logGridContentColumn);
+    }
+
+    private static void ConfigureColumn(DataGridViewTextBoxColumn column, string dataPropertyName, string headerText, float fillWeight)
+    {
+        column.Name = dataPropertyName;
+        column.DataPropertyName = dataPropertyName;
+        column.HeaderText = headerText;
+        column.FillWeight = fillWeight;
+    }
+
+    private static void ConfigureGridWithColumns(DataGridView grid, params DataGridViewTextBoxColumn[] columns)
+    {
+        grid.Columns.Clear();
+        grid.Columns.AddRange(columns);
+        ConfigureGrid(grid);
+        UiStyleHelper.CompleteDesignerGrid(grid);
     }
 
     private static void StyleInlineLabel(Label label, string text, int width)

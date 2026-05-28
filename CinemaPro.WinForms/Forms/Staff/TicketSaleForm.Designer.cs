@@ -374,21 +374,21 @@ partial class TicketSaleForm
         filterBar.WrapContents = false;
         StyleInlineLabel(searchFilterLabel, "Phim", 38);
         searchTextBox.Margin = new Padding(0, 18, 16, 0);
-        searchTextBox.Size = new Size(240, 32);
+        searchTextBox.Size = new Size(188, 32);
         StyleInlineLabel(saleDateFilterLabel, "Ngày", 44);
         saleDatePicker.Margin = new Padding(0, 18, 16, 0);
-        saleDatePicker.Size = new Size(124, 32);
+        saleDatePicker.Size = new Size(112, 32);
         StyleInlineLabel(roomFilterLabel, "Phòng", 48);
         _roomCombo.Margin = new Padding(0, 18, 16, 0);
-        _roomCombo.Size = new Size(150, 32);
+        _roomCombo.Size = new Size(128, 32);
         StyleInlineLabel(showtimeFilterLabel, "Suất", 38);
         _showtimeCombo.Margin = new Padding(0, 18, 16, 0);
-        _showtimeCombo.Size = new Size(200, 32);
+        _showtimeCombo.Size = new Size(172, 32);
         _roomCombo.Items.AddRange(new object[] { "Phòng 1", "Phòng 2", "Phòng 3", "Phòng 4" });
         _roomCombo.SelectedIndex = 1;
         _showtimeCombo.Items.AddRange(new object[] { "19:30 - Avengers: Endgame", "21:15 - Dune: Phần Hai" });
         _showtimeCombo.SelectedIndex = 0;
-        refreshButton.Width = 120;
+        refreshButton.Width = 96;
         refreshButton.Height = 38;
         refreshButton.BackColor = Color.White;
         refreshButton.Cursor = Cursors.Hand;
@@ -859,6 +859,7 @@ partial class TicketSaleForm
         bookingLayout.ResumeLayout(false);
         recentCard.ResumeLayout(false);
         recentLayout.ResumeLayout(false);
+        UiStyleHelper.CompleteDesignerGrid(_recentGrid);
         ResumeLayout(false);
     }
 
@@ -951,7 +952,21 @@ partial class TicketSaleForm
         button.Margin = new Padding(6, 4, 6, 4);
         button.Name = "seat" + seatCode + "Button";
         button.Tag = seatCode;
-        button.Text = seatCode[1..];
+        button.Text = seatCode;
+        if (seatCode is "B5" or "B6")
+        {
+            button.BackColor = UiStyleHelper.SeatSelected;
+            button.FlatAppearance.BorderColor = UiStyleHelper.Success;
+        }
+        else if (seatCode is "C3" or "C4")
+        {
+            button.BackColor = UiStyleHelper.SeatSold;
+            button.FlatAppearance.BorderColor = ColorTranslator.FromHtml("#FFA3A3");
+        }
+        else if (seatCode is "D7")
+        {
+            button.BackColor = UiStyleHelper.SeatMaintenance;
+        }
         button.UseVisualStyleBackColor = false;
     }
 }

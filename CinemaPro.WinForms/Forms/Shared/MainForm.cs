@@ -30,13 +30,13 @@ public sealed partial class MainForm : Form
     {
         if (_currentChildForm is not null)
         {
-            _contentPanel.Controls.Remove(_currentChildForm);
             _currentChildForm.Close();
             _currentChildForm.Dispose();
         }
 
         _currentChildForm = childForm;
         UiStyleHelper.PrepareChildForm(childForm);
+        _contentPanel.Controls.Clear();
         _contentPanel.Controls.Add(childForm);
         _titleLabel.Text = title;
         _pageIconLabel.Text = icon;
