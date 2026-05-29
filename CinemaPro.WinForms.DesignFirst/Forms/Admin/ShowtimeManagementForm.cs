@@ -10,6 +10,14 @@ public partial class ShowtimeManagementForm : Form
     {
         InitializeComponent();
         UiStyleHelper.StyleGrid(showtimeGrid);
+        showtimeGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+        SetColumnWidth("colId", 70);
+        SetColumnWidth("colMovie", 170);
+        SetColumnWidth("colRoom", 88);
+        SetColumnWidth("colDate", 96);
+        SetColumnWidth("colTime", 120);
+        SetColumnWidth("colPrice", 90);
+        SetColumnWidth("colStatus", 90);
     }
 
     private void ShowtimeManagementForm_Load(object? sender, EventArgs e)
@@ -48,5 +56,13 @@ public partial class ShowtimeManagementForm : Form
     private void ActionButton_Click(object? sender, EventArgs e)
     {
         MessageBox.Show("Thao tác lịch chiếu chỉ mô phỏng trên UI demo.", "CinemaPro", MessageBoxButtons.OK, MessageBoxIcon.Information);
+    }
+
+    private void SetColumnWidth(string columnName, int width)
+    {
+        if (showtimeGrid.Columns[columnName] is DataGridViewColumn column)
+        {
+            column.Width = width;
+        }
     }
 }

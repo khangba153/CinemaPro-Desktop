@@ -362,7 +362,7 @@ partial class TicketSaleForm
         selectedSeatListBox.Font = new Font("Segoe UI", 10F);
         selectedSeatListBox.FormattingEnabled = true;
         selectedSeatListBox.ItemHeight = 17;
-        selectedSeatListBox.Items.AddRange(new object[] { "B6", "B7" });
+        selectedSeatListBox.Items.AddRange(new object[] { "Chưa chọn ghế" });
         selectedSeatListBox.Location = new Point(18, 54);
         selectedSeatListBox.Name = "selectedSeatListBox";
         selectedSeatListBox.Size = new Size(212, 89);
@@ -399,6 +399,7 @@ partial class TicketSaleForm
         totalValueLabel.TabIndex = 6;
         totalValueLabel.Text = "0 đ";
         paymentButton.BackColor = Color.FromArgb(37, 99, 235);
+        paymentButton.Enabled = false;
         paymentButton.FlatAppearance.BorderSize = 0;
         paymentButton.FlatStyle = FlatStyle.Flat;
         paymentButton.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
@@ -428,9 +429,9 @@ partial class TicketSaleForm
         recentPanel.BorderStyle = BorderStyle.FixedSingle;
         recentPanel.Controls.Add(recentTicketsGrid);
         recentPanel.Controls.Add(recentTitleLabel);
-        recentPanel.Location = new Point(18, 450);
+        recentPanel.Location = new Point(18, 444);
         recentPanel.Name = "recentPanel";
-        recentPanel.Size = new Size(1048, 140);
+        recentPanel.Size = new Size(1048, 146);
         recentPanel.TabIndex = 4;
         recentTitleLabel.AutoSize = true;
         recentTitleLabel.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
@@ -449,7 +450,7 @@ partial class TicketSaleForm
         recentTicketsGrid.Name = "recentTicketsGrid";
         recentTicketsGrid.ReadOnly = true;
         recentTicketsGrid.RowHeadersVisible = false;
-        recentTicketsGrid.Size = new Size(1010, 82);
+        recentTicketsGrid.Size = new Size(1010, 90);
         recentTicketsGrid.TabIndex = 1;
         recentTicketsGrid.Rows.Add("TK000001", "Avengers: Endgame", "B6", "90.000 đ", "Chưa sử dụng");
         colTicketCode.HeaderText = "Mã vé";

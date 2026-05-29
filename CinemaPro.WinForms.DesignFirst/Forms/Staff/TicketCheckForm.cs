@@ -12,6 +12,7 @@ public partial class TicketCheckForm : Form
     {
         InitializeComponent();
         UiStyleHelper.StyleGrid(historyGrid);
+        SetConfirmButtonState(false);
     }
 
     private void TicketCheckForm_Load(object? sender, EventArgs e)
@@ -35,7 +36,7 @@ public partial class TicketCheckForm : Form
             resultTitleLabel.Text = "Không tìm thấy vé";
             resultTitleLabel.ForeColor = Color.FromArgb(220, 38, 38);
             resultDetailLabel.Text = $"Mã vé {code} không tồn tại trong dữ liệu demo.";
-            confirmEntryButton.Enabled = false;
+            SetConfirmButtonState(false);
             AddHistory(code, "Không tìm thấy");
             return;
         }
@@ -50,7 +51,7 @@ public partial class TicketCheckForm : Form
             $"Phòng: {_currentTicket.RoomName}\r\n" +
             $"Ghế: {_currentTicket.Seats}\r\n" +
             $"Trạng thái: {statusText}";
-        confirmEntryButton.Enabled = _currentTicket.Status == "Unused";
+        SetConfirmButtonState(_currentTicket.Status == "Unused");
         AddHistory(_currentTicket.TicketCode, statusText);
     }
 
@@ -66,7 +67,7 @@ public partial class TicketCheckForm : Form
             resultTitleLabel.Text = "Đã xác nhận vào rạp";
             resultTitleLabel.ForeColor = Color.FromArgb(37, 99, 235);
             resultDetailLabel.Text += "\r\n\r\nKhách đã được xác nhận vào rạp.";
-            confirmEntryButton.Enabled = false;
+            SetConfirmButtonState(false);
             AddHistory(_currentTicket.TicketCode, "Đã sử dụng");
             TicketCheckForm_Load(sender, e);
         }
@@ -80,11 +81,19 @@ public partial class TicketCheckForm : Form
         resultTitleLabel.Text = "Sẵn sàng kiểm tra";
         resultTitleLabel.ForeColor = Color.FromArgb(17, 24, 39);
         resultDetailLabel.Text = "Nhập mã vé demo TK000001, TK000002 hoặc mã vé mới tạo từ màn Bán vé.";
-        confirmEntryButton.Enabled = false;
+        SetConfirmButtonState(false);
     }
 
     private void AddHistory(string code, string result)
     {
         historyGrid.Rows.Insert(0, DateTime.Now.ToString("HH:mm:ss"), code, result);
+    }
+
+    private void SetConfirmButtonState(bool canConfirm)
+    {
+        confirmEntryButton.Enabled = canConfirm;
+        confirmEntryButton.BackColor = canConfirm ? Color.FromArgb(22, 163, 74) : Color.FromArgb(226, 232, 240);
+        confirmEntryButton.ForeColor = canConfirm ? Color.White : Color.FromArgb(100, 116, 139);
+        confirmEntryButton.Text = canConfirm ? "Xác nhận cho khách vào rạp" : "Kiểm tra vé hợp lệ để xác nhận";
     }
 }

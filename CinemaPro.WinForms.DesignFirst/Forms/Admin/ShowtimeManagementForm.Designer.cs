@@ -83,12 +83,14 @@ partial class ShowtimeManagementForm
         showDatePicker.Format = DateTimePickerFormat.Short;
         showDatePicker.Location = new Point(366, 50);
         showDatePicker.Size = new Size(110, 23);
-        startTimePicker.Format = DateTimePickerFormat.Time;
+        startTimePicker.CustomFormat = "HH:mm";
+        startTimePicker.Format = DateTimePickerFormat.Custom;
         startTimePicker.ShowUpDown = true;
         startTimePicker.Value = DateTime.Today.AddHours(19);
         startTimePicker.Location = new Point(490, 50);
         startTimePicker.Size = new Size(90, 23);
-        endTimePicker.Format = DateTimePickerFormat.Time;
+        endTimePicker.CustomFormat = "HH:mm";
+        endTimePicker.Format = DateTimePickerFormat.Custom;
         endTimePicker.ShowUpDown = true;
         endTimePicker.Value = DateTime.Today.AddHours(21);
         endTimePicker.Location = new Point(594, 50);

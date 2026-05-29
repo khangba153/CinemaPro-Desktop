@@ -13,6 +13,7 @@ public partial class RoomManagementForm : Form
 
     private void RoomManagementForm_Load(object? sender, EventArgs e)
     {
+        roomTypeComboBox.SelectedIndex = 0;
         LoadRooms();
     }
 

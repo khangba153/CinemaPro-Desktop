@@ -182,14 +182,24 @@ public partial class TicketSaleForm : Form
     private void UpdateSummary()
     {
         selectedSeatListBox.Items.Clear();
-        foreach (var seat in _selectedSeats.OrderBy(item => item))
+        if (_selectedSeats.Count == 0)
         {
-            selectedSeatListBox.Items.Add(seat);
+            selectedSeatListBox.Items.Add("Chưa chọn ghế");
+        }
+        else
+        {
+            foreach (var seat in _selectedSeats.OrderBy(item => item))
+            {
+                selectedSeatListBox.Items.Add(seat);
+            }
         }
 
         var price = _currentShowtime?.Price ?? 0;
         totalValueLabel.Text = FormatHelper.Vnd(_selectedSeats.Count * price);
         selectedCountLabel.Text = $"{_selectedSeats.Count} ghế";
+        paymentButton.Enabled = _selectedSeats.Count > 0;
+        paymentButton.BackColor = paymentButton.Enabled ? Color.FromArgb(37, 99, 235) : Color.FromArgb(226, 232, 240);
+        paymentButton.ForeColor = paymentButton.Enabled ? Color.White : Color.FromArgb(100, 116, 139);
     }
 
     private void PaymentButton_Click(object? sender, EventArgs e)

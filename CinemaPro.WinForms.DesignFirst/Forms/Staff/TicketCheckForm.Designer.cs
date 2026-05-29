@@ -144,17 +144,17 @@ partial class TicketCheckForm
         resultDetailLabel.Size = new Size(330, 190);
         resultDetailLabel.TabIndex = 1;
         resultDetailLabel.Text = "Nhập mã vé demo TK000001, TK000002 hoặc mã vé mới tạo từ màn Bán vé.";
-        confirmEntryButton.BackColor = Color.FromArgb(22, 163, 74);
+        confirmEntryButton.BackColor = Color.FromArgb(226, 232, 240);
         confirmEntryButton.Enabled = false;
         confirmEntryButton.FlatAppearance.BorderSize = 0;
         confirmEntryButton.FlatStyle = FlatStyle.Flat;
         confirmEntryButton.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-        confirmEntryButton.ForeColor = Color.White;
+        confirmEntryButton.ForeColor = Color.FromArgb(100, 116, 139);
         confirmEntryButton.Location = new Point(28, 226);
         confirmEntryButton.Name = "confirmEntryButton";
         confirmEntryButton.Size = new Size(638, 46);
         confirmEntryButton.TabIndex = 2;
-        confirmEntryButton.Text = "Xác nhận cho khách vào rạp";
+        confirmEntryButton.Text = "Kiểm tra vé hợp lệ để xác nhận";
         confirmEntryButton.UseVisualStyleBackColor = false;
         confirmEntryButton.Click += ConfirmEntryButton_Click;
         // 

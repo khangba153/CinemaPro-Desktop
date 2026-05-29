@@ -10,6 +10,15 @@ public partial class SoldTicketsForm : Form
     {
         InitializeComponent();
         UiStyleHelper.StyleGrid(ticketGrid);
+        ticketGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+        colCode.Width = 86;
+        colMovie.Width = 160;
+        colShowtime.Width = 100;
+        colRoom.Width = 76;
+        colSeats.Width = 70;
+        colAmount.Width = 92;
+        colPayment.Width = 86;
+        colStatus.Width = 92;
     }
 
     private void SoldTicketsForm_Load(object? sender, EventArgs e)
@@ -57,7 +66,15 @@ public partial class SoldTicketsForm : Form
         ticketGrid.Rows.Clear();
         foreach (var ticket in tickets)
         {
-            ticketGrid.Rows.Add(ticket.TicketCode, ticket.MovieTitle, ticket.ShowtimeText, ticket.RoomName, ticket.Seats, FormatHelper.Vnd(ticket.TotalAmount), ticket.PaymentMethod, FormatHelper.TicketStatusText(ticket.Status));
+            ticketGrid.Rows.Add(
+                ticket.TicketCode,
+                ShortMovieTitle(ticket.MovieTitle),
+                ticket.ShowtimeText,
+                ticket.RoomName,
+                ticket.Seats,
+                FormatHelper.Vnd(ticket.TotalAmount),
+                ShortPayment(ticket.PaymentMethod),
+                ShortStatus(ticket.Status));
         }
 
         ticketCountLabel.Text = $"{ticketGrid.Rows.Count} vé";
@@ -94,5 +111,26 @@ public partial class SoldTicketsForm : Form
             $"Tổng tiền: {row.Cells[5].Value}\r\n" +
             $"Thanh toán: {row.Cells[6].Value}\r\n" +
             $"Trạng thái: {row.Cells[7].Value}";
+    }
+
+    private static string ShortMovieTitle(string title)
+    {
+        return title.Length <= 18 ? title : title[..18] + "...";
+    }
+
+    private static string ShortPayment(string payment)
+    {
+        return payment == "VNPAY Sandbox" ? "VNPAY" : payment;
+    }
+
+    private static string ShortStatus(string status)
+    {
+        return status switch
+        {
+            "Unused" => "Chưa dùng",
+            "Used" => "Đã dùng",
+            "Canceled" => "Đã hủy",
+            _ => status
+        };
     }
 }

@@ -13,6 +13,7 @@ public partial class MainForm : Form
     public MainForm()
     {
         InitializeComponent();
+        StyleSidebarButtons();
         _clockTimer.Interval = 1000;
         _clockTimer.Tick += (_, _) => currentTimeLabel.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
     }
@@ -80,6 +81,7 @@ public partial class MainForm : Form
         {
             _activeMenuButton.BackColor = Color.White;
             _activeMenuButton.ForeColor = Color.FromArgb(45, 55, 72);
+            _activeMenuButton.FlatAppearance.BorderColor = Color.FromArgb(203, 213, 225);
         }
 
         _activeMenuButton = button;
@@ -87,7 +89,27 @@ public partial class MainForm : Form
         {
             _activeMenuButton.BackColor = Color.FromArgb(219, 234, 254);
             _activeMenuButton.ForeColor = Color.FromArgb(37, 99, 235);
+            _activeMenuButton.FlatAppearance.BorderColor = Color.FromArgb(37, 99, 235);
         }
+    }
+
+    private void StyleSidebarButtons()
+    {
+        var menuButtons = new[]
+        {
+            adminDashboardButton, movieButton, roomButton, seatButton, showtimeButton,
+            userButton, revenueButton, settingsButton, staffDashboardButton, ticketSaleButton,
+            ticketCheckButton, soldTicketsButton, todayShowtimeButton
+        };
+
+        foreach (var button in menuButtons)
+        {
+            button.FlatAppearance.BorderColor = Color.FromArgb(203, 213, 225);
+            button.FlatAppearance.MouseOverBackColor = Color.FromArgb(239, 246, 255);
+        }
+
+        logoutButton.FlatAppearance.BorderColor = Color.FromArgb(252, 165, 165);
+        logoutButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(254, 242, 242);
     }
 
     private void OpenAdminDashboardButton_Click(object? sender, EventArgs e)

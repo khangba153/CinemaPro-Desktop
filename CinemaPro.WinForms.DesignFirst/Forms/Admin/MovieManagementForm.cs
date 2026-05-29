@@ -15,6 +15,7 @@ public partial class MovieManagementForm : Form
     {
         genreComboBox.SelectedIndex = 0;
         statusComboBox.SelectedIndex = 0;
+        ageComboBox.SelectedIndex = 1;
         LoadMovies();
     }
 

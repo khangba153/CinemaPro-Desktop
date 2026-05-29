@@ -13,6 +13,8 @@ public partial class UserManagementForm : Form
 
     private void UserManagementForm_Load(object? sender, EventArgs e)
     {
+        roleComboBox.SelectedIndex = 0;
+        statusComboBox.SelectedIndex = 0;
         userGrid.Rows.Clear();
         foreach (var employee in AppServices.CinemaStore.GetEmployees())
         {
