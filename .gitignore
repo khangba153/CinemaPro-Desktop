@@ -481,4 +481,6 @@ $RECYCLE.BIN/
 # Vim temporary swap files
 *.swp
 
+# Local WinForms screenshots / visual QA captures
+Image Winform test/
 

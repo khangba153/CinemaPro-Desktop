@@ -1,0 +1,288 @@
+namespace CinemaPro.WinForms.DesignFirst.Forms.Staff;
+
+partial class SoldTicketsForm
+{
+    private System.ComponentModel.IContainer components = null!;
+    private Panel filterPanel = null!;
+    private DateTimePicker soldDatePicker = null!;
+    private ComboBox movieFilterComboBox = null!;
+    private ComboBox statusFilterComboBox = null!;
+    private ComboBox paymentFilterComboBox = null!;
+    private Button filterButton = null!;
+    private Panel gridPanel = null!;
+    private Label listTitleLabel = null!;
+    private Label ticketCountLabel = null!;
+    private DataGridView ticketGrid = null!;
+    private DataGridViewTextBoxColumn colCode = null!;
+    private DataGridViewTextBoxColumn colMovie = null!;
+    private DataGridViewTextBoxColumn colShowtime = null!;
+    private DataGridViewTextBoxColumn colRoom = null!;
+    private DataGridViewTextBoxColumn colSeats = null!;
+    private DataGridViewTextBoxColumn colAmount = null!;
+    private DataGridViewTextBoxColumn colPayment = null!;
+    private DataGridViewTextBoxColumn colStatus = null!;
+    private Panel detailPanel = null!;
+    private Label detailTitleLabel = null!;
+    private Label detailValueLabel = null!;
+    private Panel qrPanel = null!;
+    private Label qrLabel = null!;
+    private Label logTitleLabel = null!;
+    private Label logValueLabel = null!;
+
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing && (components != null))
+        {
+            components.Dispose();
+        }
+
+        base.Dispose(disposing);
+    }
+
+    private void InitializeComponent()
+    {
+        filterPanel = new Panel();
+        filterButton = new Button();
+        paymentFilterComboBox = new ComboBox();
+        statusFilterComboBox = new ComboBox();
+        movieFilterComboBox = new ComboBox();
+        soldDatePicker = new DateTimePicker();
+        gridPanel = new Panel();
+        ticketGrid = new DataGridView();
+        colCode = new DataGridViewTextBoxColumn();
+        colMovie = new DataGridViewTextBoxColumn();
+        colShowtime = new DataGridViewTextBoxColumn();
+        colRoom = new DataGridViewTextBoxColumn();
+        colSeats = new DataGridViewTextBoxColumn();
+        colAmount = new DataGridViewTextBoxColumn();
+        colPayment = new DataGridViewTextBoxColumn();
+        colStatus = new DataGridViewTextBoxColumn();
+        ticketCountLabel = new Label();
+        listTitleLabel = new Label();
+        detailPanel = new Panel();
+        logValueLabel = new Label();
+        logTitleLabel = new Label();
+        qrPanel = new Panel();
+        qrLabel = new Label();
+        detailValueLabel = new Label();
+        detailTitleLabel = new Label();
+        filterPanel.SuspendLayout();
+        gridPanel.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)ticketGrid).BeginInit();
+        detailPanel.SuspendLayout();
+        qrPanel.SuspendLayout();
+        SuspendLayout();
+        // 
+        // filterPanel
+        // 
+        filterPanel.BackColor = Color.White;
+        filterPanel.BorderStyle = BorderStyle.FixedSingle;
+        filterPanel.Controls.Add(filterButton);
+        filterPanel.Controls.Add(paymentFilterComboBox);
+        filterPanel.Controls.Add(statusFilterComboBox);
+        filterPanel.Controls.Add(movieFilterComboBox);
+        filterPanel.Controls.Add(soldDatePicker);
+        filterPanel.Location = new Point(18, 14);
+        filterPanel.Name = "filterPanel";
+        filterPanel.Size = new Size(1048, 62);
+        filterPanel.TabIndex = 0;
+        soldDatePicker.Font = new Font("Segoe UI", 9.5F);
+        soldDatePicker.Format = DateTimePickerFormat.Short;
+        soldDatePicker.Location = new Point(18, 19);
+        soldDatePicker.Name = "soldDatePicker";
+        soldDatePicker.Size = new Size(135, 24);
+        soldDatePicker.TabIndex = 0;
+        movieFilterComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+        movieFilterComboBox.Font = new Font("Segoe UI", 9.5F);
+        movieFilterComboBox.FormattingEnabled = true;
+        movieFilterComboBox.Items.AddRange(new object[] { "Tất cả phim", "Avengers: Endgame" });
+        movieFilterComboBox.Location = new Point(174, 19);
+        movieFilterComboBox.Name = "movieFilterComboBox";
+        movieFilterComboBox.Size = new Size(270, 25);
+        movieFilterComboBox.TabIndex = 1;
+        statusFilterComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+        statusFilterComboBox.Font = new Font("Segoe UI", 9.5F);
+        statusFilterComboBox.FormattingEnabled = true;
+        statusFilterComboBox.Items.AddRange(new object[] { "Tất cả", "Unused", "Used", "Canceled" });
+        statusFilterComboBox.Location = new Point(462, 19);
+        statusFilterComboBox.Name = "statusFilterComboBox";
+        statusFilterComboBox.Size = new Size(150, 25);
+        statusFilterComboBox.TabIndex = 2;
+        paymentFilterComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+        paymentFilterComboBox.Font = new Font("Segoe UI", 9.5F);
+        paymentFilterComboBox.FormattingEnabled = true;
+        paymentFilterComboBox.Items.AddRange(new object[] { "Tất cả", "Tiền mặt", "VNPAY Sandbox" });
+        paymentFilterComboBox.Location = new Point(630, 19);
+        paymentFilterComboBox.Name = "paymentFilterComboBox";
+        paymentFilterComboBox.Size = new Size(160, 25);
+        paymentFilterComboBox.TabIndex = 3;
+        filterButton.BackColor = Color.FromArgb(37, 99, 235);
+        filterButton.FlatAppearance.BorderSize = 0;
+        filterButton.FlatStyle = FlatStyle.Flat;
+        filterButton.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+        filterButton.ForeColor = Color.White;
+        filterButton.Location = new Point(812, 16);
+        filterButton.Name = "filterButton";
+        filterButton.Size = new Size(120, 32);
+        filterButton.TabIndex = 4;
+        filterButton.Text = "Lọc vé";
+        filterButton.UseVisualStyleBackColor = false;
+        filterButton.Click += FilterButton_Click;
+        // 
+        // gridPanel
+        // 
+        gridPanel.BackColor = Color.White;
+        gridPanel.BorderStyle = BorderStyle.FixedSingle;
+        gridPanel.Controls.Add(ticketGrid);
+        gridPanel.Controls.Add(ticketCountLabel);
+        gridPanel.Controls.Add(listTitleLabel);
+        gridPanel.Location = new Point(18, 94);
+        gridPanel.Name = "gridPanel";
+        gridPanel.Size = new Size(710, 496);
+        gridPanel.TabIndex = 1;
+        listTitleLabel.AutoSize = true;
+        listTitleLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+        listTitleLabel.ForeColor = Color.FromArgb(17, 24, 39);
+        listTitleLabel.Location = new Point(18, 18);
+        listTitleLabel.Name = "listTitleLabel";
+        listTitleLabel.Size = new Size(130, 21);
+        listTitleLabel.TabIndex = 0;
+        listTitleLabel.Text = "Danh sách vé bán";
+        ticketCountLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+        ticketCountLabel.ForeColor = Color.FromArgb(37, 99, 235);
+        ticketCountLabel.Location = new Point(578, 18);
+        ticketCountLabel.Name = "ticketCountLabel";
+        ticketCountLabel.Size = new Size(110, 20);
+        ticketCountLabel.TabIndex = 1;
+        ticketCountLabel.Text = "4 vé";
+        ticketCountLabel.TextAlign = ContentAlignment.MiddleRight;
+        ticketGrid.AllowUserToAddRows = false;
+        ticketGrid.AllowUserToDeleteRows = false;
+        ticketGrid.BackgroundColor = Color.White;
+        ticketGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+        ticketGrid.Columns.AddRange(new DataGridViewColumn[] { colCode, colMovie, colShowtime, colRoom, colSeats, colAmount, colPayment, colStatus });
+        ticketGrid.Location = new Point(18, 56);
+        ticketGrid.MultiSelect = false;
+        ticketGrid.Name = "ticketGrid";
+        ticketGrid.ReadOnly = true;
+        ticketGrid.RowHeadersVisible = false;
+        ticketGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        ticketGrid.Size = new Size(670, 418);
+        ticketGrid.TabIndex = 2;
+        ticketGrid.Rows.Add("TK000001", "Avengers: Endgame", "19:30 - 22:32", "Phòng 2", "B6", "90.000 đ", "Tiền mặt", "Chưa sử dụng");
+        ticketGrid.SelectionChanged += TicketGrid_SelectionChanged;
+        colCode.HeaderText = "Mã vé";
+        colCode.Name = "colCode";
+        colCode.ReadOnly = true;
+        colCode.Width = 90;
+        colMovie.HeaderText = "Phim";
+        colMovie.Name = "colMovie";
+        colMovie.ReadOnly = true;
+        colMovie.Width = 170;
+        colShowtime.HeaderText = "Suất chiếu";
+        colShowtime.Name = "colShowtime";
+        colShowtime.ReadOnly = true;
+        colShowtime.Width = 110;
+        colRoom.HeaderText = "Phòng";
+        colRoom.Name = "colRoom";
+        colRoom.ReadOnly = true;
+        colRoom.Width = 80;
+        colSeats.HeaderText = "Ghế";
+        colSeats.Name = "colSeats";
+        colSeats.ReadOnly = true;
+        colSeats.Width = 70;
+        colAmount.HeaderText = "Tổng tiền";
+        colAmount.Name = "colAmount";
+        colAmount.ReadOnly = true;
+        colAmount.Width = 100;
+        colPayment.HeaderText = "Thanh toán";
+        colPayment.Name = "colPayment";
+        colPayment.ReadOnly = true;
+        colPayment.Width = 120;
+        colStatus.HeaderText = "Trạng thái";
+        colStatus.Name = "colStatus";
+        colStatus.ReadOnly = true;
+        colStatus.Width = 110;
+        // 
+        // detailPanel
+        // 
+        detailPanel.BackColor = Color.White;
+        detailPanel.BorderStyle = BorderStyle.FixedSingle;
+        detailPanel.Controls.Add(logValueLabel);
+        detailPanel.Controls.Add(logTitleLabel);
+        detailPanel.Controls.Add(qrPanel);
+        detailPanel.Controls.Add(detailValueLabel);
+        detailPanel.Controls.Add(detailTitleLabel);
+        detailPanel.Location = new Point(746, 94);
+        detailPanel.Name = "detailPanel";
+        detailPanel.Size = new Size(320, 496);
+        detailPanel.TabIndex = 2;
+        detailTitleLabel.AutoSize = true;
+        detailTitleLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+        detailTitleLabel.ForeColor = Color.FromArgb(17, 24, 39);
+        detailTitleLabel.Location = new Point(18, 18);
+        detailTitleLabel.Name = "detailTitleLabel";
+        detailTitleLabel.Size = new Size(83, 21);
+        detailTitleLabel.TabIndex = 0;
+        detailTitleLabel.Text = "Chi tiết vé";
+        detailValueLabel.Font = new Font("Segoe UI", 10F);
+        detailValueLabel.ForeColor = Color.FromArgb(17, 24, 39);
+        detailValueLabel.Location = new Point(20, 56);
+        detailValueLabel.Name = "detailValueLabel";
+        detailValueLabel.Size = new Size(280, 178);
+        detailValueLabel.TabIndex = 1;
+        detailValueLabel.Text = "Mã vé: TK000001\r\nPhim: Avengers: Endgame\r\nSuất chiếu: 19:30 - 22:32\r\nPhòng: Phòng 2\r\nGhế: B6\r\nTổng tiền: 90.000 đ\r\nThanh toán: Tiền mặt\r\nTrạng thái: Chưa sử dụng";
+        qrPanel.BackColor = Color.FromArgb(248, 250, 252);
+        qrPanel.BorderStyle = BorderStyle.FixedSingle;
+        qrPanel.Controls.Add(qrLabel);
+        qrPanel.Location = new Point(20, 248);
+        qrPanel.Name = "qrPanel";
+        qrPanel.Size = new Size(280, 82);
+        qrPanel.TabIndex = 2;
+        qrLabel.Dock = DockStyle.Fill;
+        qrLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+        qrLabel.ForeColor = Color.FromArgb(100, 116, 139);
+        qrLabel.Location = new Point(0, 0);
+        qrLabel.Name = "qrLabel";
+        qrLabel.Size = new Size(278, 80);
+        qrLabel.TabIndex = 0;
+        qrLabel.Text = "QR giả | CinemaPro";
+        qrLabel.TextAlign = ContentAlignment.MiddleCenter;
+        logTitleLabel.AutoSize = true;
+        logTitleLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+        logTitleLabel.ForeColor = Color.FromArgb(17, 24, 39);
+        logTitleLabel.Location = new Point(20, 352);
+        logTitleLabel.Name = "logTitleLabel";
+        logTitleLabel.Size = new Size(90, 19);
+        logTitleLabel.TabIndex = 3;
+        logTitleLabel.Text = "Log giao dịch";
+        logValueLabel.Font = new Font("Segoe UI", 9F);
+        logValueLabel.ForeColor = Color.FromArgb(89, 100, 117);
+        logValueLabel.Location = new Point(20, 382);
+        logValueLabel.Name = "logValueLabel";
+        logValueLabel.Size = new Size(280, 82);
+        logValueLabel.TabIndex = 4;
+        logValueLabel.Text = "Tạo vé tại quầy POS\r\nThanh toán giả lập thành công\r\nSẵn sàng kiểm tra vé";
+        // 
+        // SoldTicketsForm
+        // 
+        AutoScaleDimensions = new SizeF(7F, 15F);
+        AutoScaleMode = AutoScaleMode.Font;
+        BackColor = Color.FromArgb(245, 247, 251);
+        ClientSize = new Size(1084, 606);
+        Controls.Add(detailPanel);
+        Controls.Add(gridPanel);
+        Controls.Add(filterPanel);
+        Name = "SoldTicketsForm";
+        Text = "Vé đã bán";
+        Load += SoldTicketsForm_Load;
+        filterPanel.ResumeLayout(false);
+        gridPanel.ResumeLayout(false);
+        gridPanel.PerformLayout();
+        ((System.ComponentModel.ISupportInitialize)ticketGrid).EndInit();
+        detailPanel.ResumeLayout(false);
+        detailPanel.PerformLayout();
+        qrPanel.ResumeLayout(false);
+        ResumeLayout(false);
+    }
+}

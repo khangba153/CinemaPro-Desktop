@@ -1,5 +1,3 @@
 <Solution>
-  <Project Path="CinemaPro.Api/CinemaPro.Api.csproj" />
-  <Project Path="CinemaPro.Shared/CinemaPro.Shared.csproj" />
-  <Project Path="CinemaPro.WinForms/CinemaPro.WinForms.csproj" />
+  <Project Path="CinemaPro.WinForms.DesignFirst/CinemaPro.WinForms.DesignFirst.csproj" />
 </Solution>
