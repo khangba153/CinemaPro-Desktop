@@ -106,6 +106,8 @@ public static class FakeDataProvider
                     {
                         RoomId = room.RoomId,
                         SeatCode = $"{rowName}{col}",
+                        RowIndex = row,
+                        ColumnIndex = col - 1,
                         Status = SeatStatus.Available
                     });
                 }

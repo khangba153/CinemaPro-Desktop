@@ -12,6 +12,7 @@ public interface ICinemaDataStore
     IReadOnlyList<EmployeeRow> GetEmployees();
     IReadOnlyList<RevenueRow> GetRevenueRows();
     IReadOnlyList<SeatInfo> GetSeats(string roomId);
+    void UpdateRoomSeatLayout(string roomId, int rowCount, int columnCount, IReadOnlyList<SeatInfo> seats);
     ShowtimeRow? FindShowtime(string showtimeId);
     TicketRow? FindTicket(string ticketCode);
     TicketRow CreateTicket(PaymentSummary summary, string staffName);

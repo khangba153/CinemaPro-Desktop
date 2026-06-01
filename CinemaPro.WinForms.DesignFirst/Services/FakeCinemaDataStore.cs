@@ -36,6 +36,21 @@ public sealed class FakeCinemaDataStore : ICinemaDataStore
         return _seatsByRoom.TryGetValue(roomId, out var seats) ? seats : [];
     }
 
+    public void UpdateRoomSeatLayout(string roomId, int rowCount, int columnCount, IReadOnlyList<SeatInfo> seats)
+    {
+        _seatsByRoom[roomId] = seats
+            .OrderBy(seat => seat.RowIndex)
+            .ThenBy(seat => seat.ColumnIndex)
+            .ToList();
+
+        var room = _rooms.FirstOrDefault(item => item.RoomId == roomId);
+        if (room is not null)
+        {
+            room.Rows = rowCount;
+            room.SeatsPerRow = columnCount;
+        }
+    }
+
     public ShowtimeRow? FindShowtime(string showtimeId)
     {
         return _showtimes.FirstOrDefault(showtime => showtime.ShowtimeId == showtimeId);

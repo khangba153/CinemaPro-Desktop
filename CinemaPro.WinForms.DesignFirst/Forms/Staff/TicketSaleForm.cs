@@ -14,6 +14,7 @@ public partial class TicketSaleForm : Form
     {
         InitializeComponent();
         UiStyleHelper.StyleGrid(recentTicketsGrid);
+        seatMapPanel.AutoScroll = true;
     }
 
     private void TicketSaleForm_Load(object? sender, EventArgs e)
@@ -93,25 +94,36 @@ public partial class TicketSaleForm : Form
             return;
         }
 
-        var seats = AppServices.CinemaStore.GetSeats(_currentShowtime.RoomId);
-        var startX = 50;
-        var startY = 64;
-        var width = 42;
-        var height = 32;
+        var seats = AppServices.CinemaStore
+            .GetSeats(_currentShowtime.RoomId)
+            .OrderBy(seat => seat.RowIndex)
+            .ThenBy(seat => seat.ColumnIndex)
+            .ToList();
+
+        if (seats.Count == 0)
+        {
+            return;
+        }
+
         var gap = 8;
+        var width = 42;
+        var height = 30;
+        var startX = 38;
+        var startY = 58;
 
         foreach (var seat in seats)
         {
-            var rowIndex = seat.SeatCode[0] - 'A';
-            var colIndex = int.Parse(seat.SeatCode[1..]) - 1;
             var button = new Button
             {
                 Text = seat.SeatCode,
                 Tag = seat,
                 Size = new Size(width, height),
-                Location = new Point(startX + colIndex * (width + gap), startY + rowIndex * (height + gap)),
+                Location = new Point(
+                    startX + seat.ColumnIndex * (width + gap),
+                    startY + seat.RowIndex * (height + gap)),
                 FlatStyle = FlatStyle.Flat,
                 Font = new Font("Segoe UI", 8F, FontStyle.Bold),
+                TextAlign = ContentAlignment.MiddleCenter,
                 Cursor = Cursors.Hand
             };
             button.FlatAppearance.BorderSize = 1;
