@@ -1,0 +1,18 @@
+global using System;
+global using System.Collections.Generic;
+global using System.Data;
+global using System.Drawing;
+global using System.Linq;
+global using System.Windows.Forms;
+global using Microsoft.Data.SqlClient;
+
+global using CinemaPro.WinForms.DesignFirst.Data;
+global using CinemaPro.WinForms.DesignFirst.Forms.Admin;
+global using CinemaPro.WinForms.DesignFirst.Forms.Auth;
+global using CinemaPro.WinForms.DesignFirst.Forms.Shared;
+global using CinemaPro.WinForms.DesignFirst.Forms.Staff;
+global using CinemaPro.WinForms.DesignFirst.Helpers;
+global using CinemaPro.WinForms.DesignFirst.Services;
+global using CinemaPro.WinForms.DesignFirst.Services.Interfaces;
+global using CinemaPro.WinForms.DesignFirst.Session;
+global using CinemaPro.WinForms.DesignFirst.ViewModels;

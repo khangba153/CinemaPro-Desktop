@@ -1,3 +1,4 @@
+using CinemaPro.WinForms.DesignFirst.Data;
 using CinemaPro.WinForms.DesignFirst.Forms.Auth;
 
 namespace CinemaPro.WinForms.DesignFirst;
@@ -14,5 +15,5 @@ static class Program
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
         Application.Run(new LoginForm());
-    }    
+    }
 }
