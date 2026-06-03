@@ -1,6 +1,3 @@
-using CinemaPro.WinForms.DesignFirst.Helpers;
-using CinemaPro.WinForms.DesignFirst.Services;
-
 namespace CinemaPro.WinForms.DesignFirst.Forms.Admin;
 
 public partial class RevenueReportForm : Form
@@ -23,18 +20,20 @@ public partial class RevenueReportForm : Form
 
     private void ExportButton_Click(object? sender, EventArgs e)
     {
-        MessageBox.Show("Xuất báo cáo demo thành công.", "CinemaPro", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        MessageBox.Show("Đã chuẩn bị dữ liệu báo cáo từ database. Chức năng xuất file sẽ được nhóm phát triển ở bước sau.", "CinemaPro", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
     private void LoadReport()
     {
-        var tickets = AppServices.CinemaStore.GetTickets().Where(ticket => ticket.SoldAt.Date == reportDatePicker.Value.Date).ToList();
+        var tickets = AppServices.CinemaStore.GetTickets()
+            .Where(ticket => ticket.SoldAt.Date == reportDatePicker.Value.Date)
+            .ToList();
         var revenueRows = AppServices.CinemaStore.GetRevenueRows();
 
         todayRevenueValueLabel.Text = FormatHelper.Vnd(tickets.Sum(ticket => ticket.TotalAmount));
         totalTicketValueLabel.Text = tickets.Count.ToString();
         topMovieValueLabel.Text = revenueRows.OrderByDescending(row => row.TicketCount).FirstOrDefault()?.MovieTitle ?? "-";
-        bestShowtimeValueLabel.Text = "19:30 - Phòng 2";
+        bestShowtimeValueLabel.Text = AppServices.CinemaStore.GetShowtimes().OrderByDescending(item => item.Price).FirstOrDefault()?.DisplayText ?? "-";
 
         revenueGrid.Rows.Clear();
         foreach (var row in revenueRows)

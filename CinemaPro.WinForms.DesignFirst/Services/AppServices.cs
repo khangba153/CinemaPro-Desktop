@@ -4,5 +4,5 @@ namespace CinemaPro.WinForms.DesignFirst.Services;
 
 public static class AppServices
 {
-    public static ICinemaDataStore CinemaStore { get; } = new FakeCinemaDataStore();
+    public static ICinemaDataStore CinemaStore { get; } = new SqlCinemaDataStore();
 }

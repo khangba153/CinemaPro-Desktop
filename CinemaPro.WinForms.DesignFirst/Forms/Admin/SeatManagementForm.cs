@@ -1,10 +1,10 @@
-using CinemaPro.WinForms.DesignFirst.Services;
-using CinemaPro.WinForms.DesignFirst.ViewModels;
-
 namespace CinemaPro.WinForms.DesignFirst.Forms.Admin;
 
 public partial class SeatManagementForm : Form
 {
+    private readonly SeatService _seatService = new();
+    private SeatInfo? _selectedSeat;
+
     public SeatManagementForm()
     {
         InitializeComponent();
@@ -17,12 +17,14 @@ public partial class SeatManagementForm : Form
         roomComboBox.ValueMember = nameof(RoomRow.RoomId);
         roomComboBox.DataSource = AppServices.CinemaStore.GetRooms().ToList();
 
+        FixRuntimeText();
         FillRoomSizeInputs();
         RenderSeatMap();
     }
 
     private void RoomComboBox_SelectedIndexChanged(object? sender, EventArgs e)
     {
+        _selectedSeat = null;
         FillRoomSizeInputs();
         RenderSeatMap();
     }
@@ -91,6 +93,7 @@ public partial class SeatManagementForm : Form
 
     private void RefreshButton_Click(object? sender, EventArgs e)
     {
+        _selectedSeat = null;
         FillRoomSizeInputs();
         RenderSeatMap();
     }
@@ -114,11 +117,6 @@ public partial class SeatManagementForm : Form
             .ThenBy(seat => seat.ColumnIndex)
             .ToList();
 
-        if (seats.Count == 0)
-        {
-            return;
-        }
-
         const int gap = 8;
         const int buttonWidth = 48;
         const int buttonHeight = 32;
@@ -137,13 +135,36 @@ public partial class SeatManagementForm : Form
                     startY + seat.RowIndex * (buttonHeight + gap)),
                 FlatStyle = FlatStyle.Flat,
                 Font = new Font("Segoe UI", 8F, FontStyle.Bold),
-                TextAlign = ContentAlignment.MiddleCenter
+                TextAlign = ContentAlignment.MiddleCenter,
+                Cursor = Cursors.Hand
             };
 
             button.FlatAppearance.BorderSize = 1;
             ApplySeatStyle(button, seat.Status);
+            button.Click += SeatButton_Click;
             seatPanel.Controls.Add(button);
         }
+    }
+
+    private void SeatButton_Click(object? sender, EventArgs e)
+    {
+        if (sender is not Button button || button.Tag is not SeatInfo seat)
+        {
+            return;
+        }
+
+        _selectedSeat = seat;
+        foreach (var seatButton in seatPanel.Controls.OfType<Button>())
+        {
+            if (seatButton.Tag is SeatInfo item)
+            {
+                ApplySeatStyle(seatButton, item.Status);
+            }
+        }
+
+        button.BackColor = Color.FromArgb(37, 99, 235);
+        button.ForeColor = Color.White;
+        button.FlatAppearance.BorderColor = Color.FromArgb(37, 99, 235);
     }
 
     private static void ApplySeatStyle(Button button, SeatStatus status)
@@ -175,6 +196,30 @@ public partial class SeatManagementForm : Form
 
     private void ActionButton_Click(object? sender, EventArgs e)
     {
-        MessageBox.Show("Thao tác ghế chỉ mô phỏng trên giao diện demo.", "CinemaPro", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        if (_selectedSeat is null)
+        {
+            MessageBox.Show("Vui lòng chọn ghế trên sơ đồ.", "CinemaPro", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return;
+        }
+
+        var nextStatus = sender == maintenanceButton ? SeatStatus.Maintenance : SeatStatus.Available;
+        if (_seatService.SetSeatStatus(_selectedSeat.RoomId, _selectedSeat.SeatCode, nextStatus, out var message))
+        {
+            MessageBox.Show(message, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            _selectedSeat = null;
+            RenderSeatMap();
+            return;
+        }
+
+        MessageBox.Show(message, "Không thể xử lý", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+    }
+
+    private void FixRuntimeText()
+    {
+        Text = "Quản lý ghế";
+        createLayoutButton.Text = "Tạo sơ đồ";
+        changeStatusButton.Text = "Cho sử dụng";
+        maintenanceButton.Text = "Đặt bảo trì";
+        refreshButton.Text = "Làm mới";
     }
 }

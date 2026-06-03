@@ -95,7 +95,7 @@ public partial class TicketSaleForm : Form
         }
 
         var seats = AppServices.CinemaStore
-            .GetSeats(_currentShowtime.RoomId)
+            .GetSeatsForShowtime(_currentShowtime.ShowtimeId)
             .OrderBy(seat => seat.RowIndex)
             .ThenBy(seat => seat.ColumnIndex)
             .ToList();
@@ -249,14 +249,6 @@ public partial class TicketSaleForm : Form
 
     private void ClearButton_Click(object? sender, EventArgs e)
     {
-        if (_currentShowtime is not null)
-        {
-            foreach (var seat in AppServices.CinemaStore.GetSeats(_currentShowtime.RoomId).Where(item => _selectedSeats.Contains(item.SeatCode)))
-            {
-                seat.Status = SeatStatus.Available;
-            }
-        }
-
         _selectedSeats.Clear();
         UpdateSummary();
         RenderSeatMap();

@@ -35,7 +35,7 @@ public partial class TicketCheckForm : Form
         {
             resultTitleLabel.Text = "Không tìm thấy vé";
             resultTitleLabel.ForeColor = Color.FromArgb(220, 38, 38);
-            resultDetailLabel.Text = $"Mã vé {code} không tồn tại trong dữ liệu demo.";
+            resultDetailLabel.Text = $"Mã vé {code} không tồn tại trong database.";
             SetConfirmButtonState(false);
             AddHistory(code, "Không tìm thấy");
             return;
@@ -80,7 +80,7 @@ public partial class TicketCheckForm : Form
         _currentTicket = null;
         resultTitleLabel.Text = "Sẵn sàng kiểm tra";
         resultTitleLabel.ForeColor = Color.FromArgb(17, 24, 39);
-        resultDetailLabel.Text = "Nhập mã vé demo TK000001, TK000002 hoặc mã vé mới tạo từ màn Bán vé.";
+        resultDetailLabel.Text = "Nhập mã vé trong database, ví dụ TK000001, TK000002 hoặc mã vé mới tạo từ màn Bán vé.";
         SetConfirmButtonState(false);
     }
 

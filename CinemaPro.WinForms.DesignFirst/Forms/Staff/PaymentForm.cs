@@ -1,6 +1,3 @@
-using CinemaPro.WinForms.DesignFirst.Helpers;
-using CinemaPro.WinForms.DesignFirst.ViewModels;
-
 namespace CinemaPro.WinForms.DesignFirst.Forms.Staff;
 
 public partial class PaymentForm : Form
@@ -42,11 +39,11 @@ public partial class PaymentForm : Form
     {
         if (_summary.PaymentMethod == "VNPAY Sandbox")
         {
-            MessageBox.Show("Đang chuyển đến cổng thanh toán VNPAY Sandbox...", "Thanh toán giả lập", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Đang chuyển đến cổng thanh toán VNPAY Sandbox...", "Thanh toán", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         else
         {
-            MessageBox.Show("Thanh toán tiền mặt thành công.", "Thanh toán giả lập", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Thanh toán tiền mặt thành công.", "Thanh toán", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         DialogResult = DialogResult.OK;

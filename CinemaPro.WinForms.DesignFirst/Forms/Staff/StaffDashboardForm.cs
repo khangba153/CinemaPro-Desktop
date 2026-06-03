@@ -1,7 +1,3 @@
-using CinemaPro.WinForms.DesignFirst.Forms.Shared;
-using CinemaPro.WinForms.DesignFirst.Helpers;
-using CinemaPro.WinForms.DesignFirst.Services;
-
 namespace CinemaPro.WinForms.DesignFirst.Forms.Staff;
 
 public partial class StaffDashboardForm : Form
@@ -26,7 +22,12 @@ public partial class StaffDashboardForm : Form
         todayShowtimeGrid.Rows.Clear();
         foreach (var showtime in todayShowtimes)
         {
-            todayShowtimeGrid.Rows.Add(showtime.MovieTitle, showtime.RoomName, showtime.TimeText, FormatHelper.Vnd(showtime.Price), showtime.Status);
+            todayShowtimeGrid.Rows.Add(
+                showtime.MovieTitle,
+                showtime.RoomName,
+                showtime.TimeText,
+                FormatHelper.Vnd(showtime.Price),
+                FormatHelper.ShowtimeStatusText(showtime.Status));
         }
     }
 
