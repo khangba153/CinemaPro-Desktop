@@ -1,7 +1,3 @@
-using CinemaPro.WinForms.DesignFirst.Forms.Admin;
-using CinemaPro.WinForms.DesignFirst.Forms.Staff;
-using CinemaPro.WinForms.DesignFirst.Session;
-
 namespace CinemaPro.WinForms.DesignFirst.Forms.Shared;
 
 public partial class MainForm : Form
@@ -13,6 +9,7 @@ public partial class MainForm : Form
     public MainForm()
     {
         InitializeComponent();
+        FixVietnameseText();
         StyleSidebarButtons();
         _clockTimer.Interval = 1000;
         _clockTimer.Tick += (_, _) => currentTimeLabel.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
@@ -24,6 +21,7 @@ public partial class MainForm : Form
         userRoleLabel.Text = UserSession.Role;
         currentTimeLabel.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
         _clockTimer.Start();
+
         ApplyRoleMenu();
 
         if (UserSession.IsAdmin)
@@ -53,63 +51,6 @@ public partial class MainForm : Form
         pageTitleLabel.Text = pageTitle;
         statusLabel.Text = $"Đang mở: {pageTitle}";
         HighlightMenu(menuButton);
-    }
-
-    private void ApplyRoleMenu()
-    {
-        adminGroupLabel.Visible = UserSession.IsAdmin;
-        adminDashboardButton.Visible = UserSession.IsAdmin;
-        movieButton.Visible = UserSession.IsAdmin;
-        roomButton.Visible = UserSession.IsAdmin;
-        seatButton.Visible = UserSession.IsAdmin;
-        showtimeButton.Visible = UserSession.IsAdmin;
-        userButton.Visible = UserSession.IsAdmin;
-        revenueButton.Visible = UserSession.IsAdmin;
-        settingsButton.Visible = UserSession.IsAdmin;
-
-        staffGroupLabel.Visible = UserSession.IsStaff;
-        staffDashboardButton.Visible = UserSession.IsStaff;
-        ticketSaleButton.Visible = UserSession.IsStaff;
-        ticketCheckButton.Visible = UserSession.IsStaff;
-        soldTicketsButton.Visible = UserSession.IsStaff;
-        todayShowtimeButton.Visible = UserSession.IsStaff;
-    }
-
-    private void HighlightMenu(Button? button)
-    {
-        if (_activeMenuButton is not null)
-        {
-            _activeMenuButton.BackColor = Color.White;
-            _activeMenuButton.ForeColor = Color.FromArgb(45, 55, 72);
-            _activeMenuButton.FlatAppearance.BorderColor = Color.FromArgb(203, 213, 225);
-        }
-
-        _activeMenuButton = button;
-        if (_activeMenuButton is not null)
-        {
-            _activeMenuButton.BackColor = Color.FromArgb(219, 234, 254);
-            _activeMenuButton.ForeColor = Color.FromArgb(37, 99, 235);
-            _activeMenuButton.FlatAppearance.BorderColor = Color.FromArgb(37, 99, 235);
-        }
-    }
-
-    private void StyleSidebarButtons()
-    {
-        var menuButtons = new[]
-        {
-            adminDashboardButton, movieButton, roomButton, seatButton, showtimeButton,
-            userButton, revenueButton, settingsButton, staffDashboardButton, ticketSaleButton,
-            ticketCheckButton, soldTicketsButton, todayShowtimeButton
-        };
-
-        foreach (var button in menuButtons)
-        {
-            button.FlatAppearance.BorderColor = Color.FromArgb(203, 213, 225);
-            button.FlatAppearance.MouseOverBackColor = Color.FromArgb(239, 246, 255);
-        }
-
-        logoutButton.FlatAppearance.BorderColor = Color.FromArgb(252, 165, 165);
-        logoutButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(254, 242, 242);
     }
 
     private void OpenAdminDashboardButton_Click(object? sender, EventArgs e)
@@ -181,5 +122,102 @@ public partial class MainForm : Form
     {
         _clockTimer.Stop();
         Close();
+    }
+
+    private void ApplyRoleMenu()
+    {
+        SetAdminMenuVisible(UserSession.IsAdmin);
+        SetStaffMenuVisible(UserSession.IsStaff);
+
+        if (UserSession.IsStaff)
+        {
+            staffGroupLabel.Location = adminGroupLabel.Location;
+            staffDashboardButton.Location = adminDashboardButton.Location;
+            ticketSaleButton.Location = movieButton.Location;
+            ticketCheckButton.Location = roomButton.Location;
+            soldTicketsButton.Location = seatButton.Location;
+            todayShowtimeButton.Location = showtimeButton.Location;
+        }
+    }
+
+    private void SetAdminMenuVisible(bool visible)
+    {
+        adminGroupLabel.Visible = visible;
+        adminDashboardButton.Visible = visible;
+        movieButton.Visible = visible;
+        roomButton.Visible = visible;
+        seatButton.Visible = visible;
+        showtimeButton.Visible = visible;
+        userButton.Visible = visible;
+        revenueButton.Visible = visible;
+        settingsButton.Visible = visible;
+    }
+
+    private void SetStaffMenuVisible(bool visible)
+    {
+        staffGroupLabel.Visible = visible;
+        staffDashboardButton.Visible = visible;
+        ticketSaleButton.Visible = visible;
+        ticketCheckButton.Visible = visible;
+        soldTicketsButton.Visible = visible;
+        todayShowtimeButton.Visible = visible;
+    }
+
+    private void HighlightMenu(Button? button)
+    {
+        if (_activeMenuButton is not null)
+        {
+            _activeMenuButton.BackColor = Color.White;
+            _activeMenuButton.ForeColor = Color.FromArgb(45, 55, 72);
+            _activeMenuButton.FlatAppearance.BorderColor = Color.FromArgb(203, 213, 225);
+        }
+
+        _activeMenuButton = button;
+        if (_activeMenuButton is not null)
+        {
+            _activeMenuButton.BackColor = Color.FromArgb(219, 234, 254);
+            _activeMenuButton.ForeColor = Color.FromArgb(37, 99, 235);
+            _activeMenuButton.FlatAppearance.BorderColor = Color.FromArgb(37, 99, 235);
+        }
+    }
+
+    private void StyleSidebarButtons()
+    {
+        var buttons = new[]
+        {
+            adminDashboardButton, movieButton, roomButton, seatButton, showtimeButton,
+            userButton, revenueButton, settingsButton, staffDashboardButton, ticketSaleButton,
+            ticketCheckButton, soldTicketsButton, todayShowtimeButton
+        };
+
+        foreach (var button in buttons)
+        {
+            button.FlatAppearance.BorderColor = Color.FromArgb(203, 213, 225);
+            button.FlatAppearance.MouseOverBackColor = Color.FromArgb(239, 246, 255);
+        }
+
+        logoutButton.FlatAppearance.BorderColor = Color.FromArgb(252, 165, 165);
+        logoutButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(254, 242, 242);
+    }
+
+    private void FixVietnameseText()
+    {
+        Text = "CinemaPro - Core Auth/User/Settings";
+        adminGroupLabel.Text = "QUẢN TRỊ";
+        staffGroupLabel.Text = "NHÂN VIÊN";
+        movieButton.Text = "Quản lý phim";
+        roomButton.Text = "Quản lý phòng chiếu";
+        seatButton.Text = "Quản lý ghế";
+        showtimeButton.Text = "Quản lý lịch chiếu";
+        userButton.Text = "Quản lý nhân viên";
+        revenueButton.Text = "Thống kê doanh thu";
+        settingsButton.Text = "Cài đặt";
+        ticketSaleButton.Text = "Bán vé";
+        ticketCheckButton.Text = "Kiểm tra vé";
+        soldTicketsButton.Text = "Vé đã bán";
+        todayShowtimeButton.Text = "Lịch chiếu hôm nay";
+        logoutButton.Text = "Đăng xuất";
+        contentPlaceholderLabel.Text = "Chọn chức năng từ sidebar để mở màn hình vận hành.";
+        statusLabel.Text = "CinemaPro sẵn sàng";
     }
 }

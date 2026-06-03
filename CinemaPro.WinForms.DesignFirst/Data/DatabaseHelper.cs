@@ -7,13 +7,15 @@ public static class DatabaseHelper
 {
     public static DataTable ExecuteQuery(string sql, params SqlParameter[] parameters)
     {
-        using var conn = DbConnectionFactory.CreateConnection();
-        using var cmd = new SqlCommand(sql, conn);
+        using var connection = DbConnectionFactory.CreateConnection();
+        using var command = new SqlCommand(sql, connection);
 
         if (parameters.Length > 0)
-            cmd.Parameters.AddRange(parameters);
+        {
+            command.Parameters.AddRange(parameters);
+        }
 
-        using var adapter = new SqlDataAdapter(cmd);
+        using var adapter = new SqlDataAdapter(command);
         var table = new DataTable();
 
         adapter.Fill(table);
@@ -22,34 +24,38 @@ public static class DatabaseHelper
 
     public static int ExecuteNonQuery(string sql, params SqlParameter[] parameters)
     {
-        using var conn = DbConnectionFactory.CreateConnection();
-        using var cmd = new SqlCommand(sql, conn);
+        using var connection = DbConnectionFactory.CreateConnection();
+        using var command = new SqlCommand(sql, connection);
 
         if (parameters.Length > 0)
-            cmd.Parameters.AddRange(parameters);
+        {
+            command.Parameters.AddRange(parameters);
+        }
 
-        conn.Open();
-        return cmd.ExecuteNonQuery();
+        connection.Open();
+        return command.ExecuteNonQuery();
     }
 
     public static object? ExecuteScalar(string sql, params SqlParameter[] parameters)
     {
-        using var conn = DbConnectionFactory.CreateConnection();
-        using var cmd = new SqlCommand(sql, conn);
+        using var connection = DbConnectionFactory.CreateConnection();
+        using var command = new SqlCommand(sql, connection);
 
         if (parameters.Length > 0)
-            cmd.Parameters.AddRange(parameters);
+        {
+            command.Parameters.AddRange(parameters);
+        }
 
-        conn.Open();
-        return cmd.ExecuteScalar();
+        connection.Open();
+        return command.ExecuteScalar();
     }
 
     public static bool CanConnect()
     {
         try
         {
-            using var conn = DbConnectionFactory.CreateConnection();
-            conn.Open();
+            using var connection = DbConnectionFactory.CreateConnection();
+            connection.Open();
 
             return true;
         }
@@ -63,8 +69,8 @@ public static class DatabaseHelper
     {
         try
         {
-            using var conn = DbConnectionFactory.CreateConnection();
-            conn.Open();
+            using var connection = DbConnectionFactory.CreateConnection();
+            connection.Open();
 
             return "Kết nối database thành công.";
         }
