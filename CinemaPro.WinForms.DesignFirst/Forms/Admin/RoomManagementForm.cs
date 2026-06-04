@@ -24,7 +24,10 @@ public partial class RoomManagementForm : Form
 
     private void AddRoomButton_Click(object sender, EventArgs e)
     {
+        _roomService.AddRoom(roomNameTextBox.Text, roomTypeComboBox.Text, (int)rowCountInput.Value, (int)seatPerRowInput.Value, out string message);
 
+
+        LoadRooms();
     }
 
     private void LoadRooms()

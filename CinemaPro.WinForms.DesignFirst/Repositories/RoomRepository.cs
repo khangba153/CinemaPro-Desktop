@@ -47,4 +47,34 @@ public class RoomRepository
 
         return rooms;
     }
+
+    public void Insert(string roomName, string roomType, int rowCount, int seatsPerRow, string status)
+    {
+        const string sql = """
+            INSERT INTO dbo.Rooms (RoomCode, RoomName, RoomType, SeatRowCount, SeatsPerRow, RoomStatus)
+            VALUES (@RoomCode, @RoomName, @RoomType, @SeatRowCount, @SeatsPerRow, @RoomStatus);
+            """;
+        using var connection = new SqlConnection(AppDbConfig.ConnectionString);
+        using var command = new SqlCommand(sql, connection);
+        command.Parameters.AddWithValue("@RoomCode", GenerateRoomCode());
+        command.Parameters.AddWithValue("@RoomName", roomName);
+        command.Parameters.AddWithValue("@RoomType", roomType);
+        command.Parameters.AddWithValue("@SeatRowCount", rowCount);
+        command.Parameters.AddWithValue("@SeatsPerRow", seatsPerRow);
+        command.Parameters.AddWithValue("@RoomStatus", status);
+        connection.Open();
+        command.ExecuteNonQuery();
+    }
+
+    public string GenerateRoomCode()
+    {
+        const string sql = """
+            SELECT ISNULL(MAX(TRY_CONVERT(INT, SUBSTRING(RoomCode, 2, 10))), 0) + 1
+            FROM dbo.Rooms
+            WHERE RoomCode LIKE N'R%';
+            """;
+
+        var number = Convert.ToInt32(DatabaseHelper.ExecuteScalar(sql));
+        return "R" + number.ToString("000");
+    }
 }

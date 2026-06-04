@@ -1,4 +1,4 @@
-using CinemaPro.WinForms.DesignFirst.Models;
+﻿using CinemaPro.WinForms.DesignFirst.Models;
 
 namespace CinemaPro.WinForms.DesignFirst.Services;
 
@@ -12,8 +12,10 @@ public sealed class RoomService
         return _roomRepository.GetRooms();
     }
 
-    //public void AddRoom(Room room)
-    //{
-    //    _roomRepository.AddRoom(room);
-    //}
+    public bool AddRoom(string roomName, string roomType, int rowCount, int seatsPerRow, out string message)
+    {
+        _roomRepository.Insert(roomName.Trim(), roomType, rowCount, seatsPerRow, "Active");
+        message = "Đã thêm phòng chiếu.";
+        return true;
+    }
 }
