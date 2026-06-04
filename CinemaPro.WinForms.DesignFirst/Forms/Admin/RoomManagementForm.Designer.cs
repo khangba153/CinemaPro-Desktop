@@ -31,6 +31,12 @@ partial class RoomManagementForm
         addRoomButton = new Button();
         gridPanel = new Panel();
         roomGrid = new DataGridView();
+        dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+        dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+        dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+        dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
+        dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
+        dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
         title = new Label();
         detailPanel = new Panel();
         seatLabel = new Label();
@@ -42,12 +48,6 @@ partial class RoomManagementForm
         nameLabel = new Label();
         roomNameTextBox = new TextBox();
         detailTitle = new Label();
-        dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-        dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
-        dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
-        dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
-        dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
-        dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
         actionPanel.SuspendLayout();
         gridPanel.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)roomGrid).BeginInit();
@@ -82,7 +82,6 @@ partial class RoomManagementForm
         maintenanceButton.TabIndex = 0;
         maintenanceButton.Text = "Bảo trì phòng";
         maintenanceButton.UseVisualStyleBackColor = false;
-     
         // 
         // createSeatButton
         // 
@@ -95,7 +94,6 @@ partial class RoomManagementForm
         createSeatButton.TabIndex = 1;
         createSeatButton.Text = "Tạo ghế";
         createSeatButton.UseVisualStyleBackColor = false;
-        
         // 
         // editRoomButton
         // 
@@ -108,7 +106,6 @@ partial class RoomManagementForm
         editRoomButton.TabIndex = 2;
         editRoomButton.Text = "Sửa phòng";
         editRoomButton.UseVisualStyleBackColor = false;
-       
         // 
         // addRoomButton
         // 
@@ -150,8 +147,58 @@ partial class RoomManagementForm
         roomGrid.ReadOnly = true;
         roomGrid.RowHeadersVisible = false;
         roomGrid.RowHeadersWidth = 51;
+        roomGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         roomGrid.Size = new Size(745, 560);
         roomGrid.TabIndex = 0;
+        roomGrid.SelectionChanged += RoomGrid_SelectionChanged;
+        // 
+        // dataGridViewTextBoxColumn1
+        // 
+        dataGridViewTextBoxColumn1.HeaderText = "Mã phòng";
+        dataGridViewTextBoxColumn1.MinimumWidth = 6;
+        dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+        dataGridViewTextBoxColumn1.ReadOnly = true;
+        dataGridViewTextBoxColumn1.Width = 125;
+        // 
+        // dataGridViewTextBoxColumn2
+        // 
+        dataGridViewTextBoxColumn2.HeaderText = "Tên phòng";
+        dataGridViewTextBoxColumn2.MinimumWidth = 6;
+        dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+        dataGridViewTextBoxColumn2.ReadOnly = true;
+        dataGridViewTextBoxColumn2.Width = 125;
+        // 
+        // dataGridViewTextBoxColumn3
+        // 
+        dataGridViewTextBoxColumn3.HeaderText = "Loại phòng";
+        dataGridViewTextBoxColumn3.MinimumWidth = 6;
+        dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+        dataGridViewTextBoxColumn3.ReadOnly = true;
+        dataGridViewTextBoxColumn3.Width = 125;
+        // 
+        // dataGridViewTextBoxColumn4
+        // 
+        dataGridViewTextBoxColumn4.HeaderText = "Số hàng";
+        dataGridViewTextBoxColumn4.MinimumWidth = 6;
+        dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+        dataGridViewTextBoxColumn4.ReadOnly = true;
+        dataGridViewTextBoxColumn4.Width = 125;
+        // 
+        // dataGridViewTextBoxColumn5
+        // 
+        dataGridViewTextBoxColumn5.HeaderText = "Ghế/hàng";
+        dataGridViewTextBoxColumn5.MinimumWidth = 6;
+        dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+        dataGridViewTextBoxColumn5.ReadOnly = true;
+        dataGridViewTextBoxColumn5.Width = 125;
+        // 
+        // dataGridViewTextBoxColumn6
+        // 
+        dataGridViewTextBoxColumn6.HeaderText = "Trạng thái";
+        dataGridViewTextBoxColumn6.MinimumWidth = 6;
+        dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+        dataGridViewTextBoxColumn6.ReadOnly = true;
+        dataGridViewTextBoxColumn6.Width = 125;
         // 
         // title
         // 
@@ -259,54 +306,6 @@ partial class RoomManagementForm
         detailTitle.Size = new Size(170, 28);
         detailTitle.TabIndex = 8;
         detailTitle.Text = "Thông tin phòng";
-        // 
-        // dataGridViewTextBoxColumn1
-        // 
-        dataGridViewTextBoxColumn1.HeaderText = "Mã phòng";
-        dataGridViewTextBoxColumn1.MinimumWidth = 6;
-        dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-        dataGridViewTextBoxColumn1.ReadOnly = true;
-        dataGridViewTextBoxColumn1.Width = 125;
-        // 
-        // dataGridViewTextBoxColumn2
-        // 
-        dataGridViewTextBoxColumn2.HeaderText = "Tên phòng";
-        dataGridViewTextBoxColumn2.MinimumWidth = 6;
-        dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-        dataGridViewTextBoxColumn2.ReadOnly = true;
-        dataGridViewTextBoxColumn2.Width = 125;
-        // 
-        // dataGridViewTextBoxColumn3
-        // 
-        dataGridViewTextBoxColumn3.HeaderText = "Loại phòng";
-        dataGridViewTextBoxColumn3.MinimumWidth = 6;
-        dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-        dataGridViewTextBoxColumn3.ReadOnly = true;
-        dataGridViewTextBoxColumn3.Width = 125;
-        // 
-        // dataGridViewTextBoxColumn4
-        // 
-        dataGridViewTextBoxColumn4.HeaderText = "Số hàng";
-        dataGridViewTextBoxColumn4.MinimumWidth = 6;
-        dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-        dataGridViewTextBoxColumn4.ReadOnly = true;
-        dataGridViewTextBoxColumn4.Width = 125;
-        // 
-        // dataGridViewTextBoxColumn5
-        // 
-        dataGridViewTextBoxColumn5.HeaderText = "Ghế/hàng";
-        dataGridViewTextBoxColumn5.MinimumWidth = 6;
-        dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-        dataGridViewTextBoxColumn5.ReadOnly = true;
-        dataGridViewTextBoxColumn5.Width = 125;
-        // 
-        // dataGridViewTextBoxColumn6
-        // 
-        dataGridViewTextBoxColumn6.HeaderText = "Trạng thái";
-        dataGridViewTextBoxColumn6.MinimumWidth = 6;
-        dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-        dataGridViewTextBoxColumn6.ReadOnly = true;
-        dataGridViewTextBoxColumn6.Width = 125;
         // 
         // RoomManagementForm
         // 

@@ -6,7 +6,7 @@ namespace CinemaPro.WinForms.DesignFirst.Services;
 
 public class RoomRepository
 {
-    public List<Room> GetRooms()
+    public List<RoomRow> GetRooms()
     {
         const string sql = """
             SELECT
@@ -23,33 +23,25 @@ public class RoomRepository
             ORDER BY RoomId;
             """;
 
-        var rooms = new List<Room>();
-
-        using var connection =
-            new SqlConnection(AppDbConfig.ConnectionString);
-
-        using var command =
-            new SqlCommand(sql, connection);
+        using var connection = new SqlConnection(AppDbConfig.ConnectionString);
+        using var command = new SqlCommand(sql, connection);
 
         connection.Open();
 
         using var reader = command.ExecuteReader();
 
+        var rooms = new List<RoomRow>();
+
         while (reader.Read())
         {
-            rooms.Add(new Room
+            rooms.Add(new RoomRow
             {
-                RoomId = Convert.ToInt32(reader["RoomId"]),
-                RoomCode = reader["RoomCode"].ToString() ?? "",
+                RoomId = reader["RoomId"].ToString() ?? "",
                 RoomName = reader["RoomName"].ToString() ?? "",
                 RoomType = reader["RoomType"].ToString() ?? "",
-                SeatRowCount = Convert.ToInt32(reader["SeatRowCount"]),
+                Rows = Convert.ToInt32(reader["SeatRowCount"]),
                 SeatsPerRow = Convert.ToInt32(reader["SeatsPerRow"]),
-                RoomStatus = reader["RoomStatus"].ToString() ?? "",
-                CreatedAt = Convert.ToDateTime(reader["CreatedAt"]),
-                UpdatedAt = reader["UpdatedAt"] == DBNull.Value
-                    ? null
-                    : Convert.ToDateTime(reader["UpdatedAt"])
+                Status = reader["RoomStatus"].ToString() ?? ""
             });
         }
 

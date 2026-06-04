@@ -7,7 +7,7 @@ public sealed class RoomService
     private readonly RoomRepository _roomRepository = new();
 
 
-    public List<Room> GetRooms()
+    public List<RoomRow> GetRooms()
     {
         return _roomRepository.GetRooms();
     }
