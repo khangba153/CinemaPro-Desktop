@@ -12,30 +12,198 @@ public sealed class RoomService
         return _roomRepository.GetRooms();
     }
 
-    public bool AddRoom(string roomName, string roomType, int rowCount, int seatsPerRow, out string message)
+
+    public bool AddRoom(
+        string roomName,
+        string roomType,
+        int rowCount,
+        int seatsPerRow,
+        out string message)
     {
-        _roomRepository.Insert(roomName.Trim(), roomType, rowCount, seatsPerRow, "Active");
-        message = "Đã thêm phòng chiếu.";
+        if (!ValidateInput(roomName, roomType, rowCount, seatsPerRow, out message))
+            return false;
+
+        roomName = roomName.Trim();
+
+        try
+        {
+            if (_roomRepository.ExistsByName(roomName))
+            {
+                message = "Tên phòng đã tồn tại.";
+                return false;
+            }
+
+            _roomRepository.Insert(roomName, roomType, rowCount, seatsPerRow, "Active");
+
+            message = "Đã thêm phòng chiếu thành công.";
+            return true;
+        }
+        catch
+        {
+            message = "Lỗi hệ thống khi thêm phòng.";
+            return false;
+        }
+    }
+
+
+    public bool EditRoom(
+        string roomId,
+        string roomName,
+        string roomType,
+        int rowCount,
+        int seatsPerRow,
+        string status,
+        out string message)
+    {
+        if (string.IsNullOrWhiteSpace(roomId))
+        {
+            message = "Vui lòng chọn phòng cần sửa.";
+            return false;
+        }
+
+        if (!ValidateInput(roomName, roomType, rowCount, seatsPerRow, out message))
+            return false;
+
+        roomName = roomName.Trim();
+
+        try
+        {
+            var room = _roomRepository.GetById(roomId);
+            if (room == null)
+            {
+                message = "Không tìm thấy phòng.";
+                return false;
+            }
+
+            // BUSINESS RULE: duplicate name (exclude current)
+            if (_roomRepository.ExistsByNameExceptId(roomName, roomId))
+            {
+                message = "Tên phòng đã tồn tại.";
+                return false;
+            }
+
+            _roomRepository.Update(roomId, roomName, roomType, rowCount, seatsPerRow, status);
+
+            message = "Đã cập nhật phòng chiếu.";
+            return true;
+        }
+        catch
+        {
+            message = "Lỗi hệ thống khi cập nhật phòng.";
+            return false;
+        }
+    }
+
+    public bool SetMaintenance(string roomId, out string message)
+    {
+        if (!ValidateRoomId(roomId, out message))
+            return false;
+
+        try
+        {
+            var room = _roomRepository.GetById(roomId);
+            if (room == null)
+            {
+                message = "Không tìm thấy phòng.";
+                return false;
+            }
+
+            if (room.Status == "Maintenance")
+            {
+                message = "Phòng đã ở trạng thái bảo trì.";
+                return false;
+            }
+
+            _roomRepository.SetMaintenance(roomId);
+
+            message = "Đã chuyển phòng sang trạng thái bảo trì.";
+            return true;
+        }
+        catch
+        {
+            message = "Lỗi hệ thống khi cập nhật trạng thái.";
+            return false;
+        }
+    }
+
+    public bool SetActive(string roomId, out string message)
+    {
+        if (!ValidateRoomId(roomId, out message))
+            return false;
+
+        try
+        {
+            var room = _roomRepository.GetById(roomId);
+            if (room == null)
+            {
+                message = "Không tìm thấy phòng.";
+                return false;
+            }
+
+            if (room.Status == "Active")
+            {
+                message = "Phòng đã ở trạng thái hoạt động.";
+                return false;
+            }
+
+            _roomRepository.SetActive(roomId);
+
+            message = "Đã chuyển phòng sang trạng thái hoạt động.";
+            return true;
+        }
+        catch
+        {
+            message = "Lỗi hệ thống khi cập nhật trạng thái.";
+            return false;
+        }
+    }
+
+    private static bool ValidateInput(
+        string roomName,
+        string roomType,
+        int rowCount,
+        int seatsPerRow,
+        out string message)
+    {
+        if (string.IsNullOrWhiteSpace(roomName))
+        {
+            message = "Tên phòng không được để trống.";
+            return false;
+        }
+
+        roomName = roomName.Trim();
+
+        if (roomType is not ("2D" or "3D" or "IMAX" or "VIP"))
+        {
+            message = "Loại phòng không hợp lệ.";
+            return false;
+        }
+
+        if (rowCount <= 0 || rowCount > 100)
+        {
+            message = "Số hàng phải từ 1 đến 100.";
+            return false;
+        }
+
+        if (seatsPerRow <= 0 || seatsPerRow > 100)
+        {
+            message = "Số ghế mỗi hàng phải từ 1 đến 100.";
+            return false;
+        }
+
+        message = "";
         return true;
     }
 
-    public bool EditRoom(string roomId, string roomName, string roomType, int rowCount, int seatsPerRow, string status, out string message)
+    private static bool ValidateRoomId(string roomId, out string message)
     {
-        _roomRepository.Update(roomId, roomName.Trim(), roomType, rowCount, seatsPerRow, status);
-        message = "Đã cập nhật phòng chiếu.";
-        return true;
-    }
+        if (string.IsNullOrWhiteSpace(roomId))
+        {
+            message = "Vui lòng chọn phòng.";
+            return false;
+        }
 
-    public bool SetMaintenance(string id, out string message)
-    {
-        _roomRepository.SetMaintenance(id);
-        message = "Đã chuyển phòng sang trạng thái bảo trì.";
-        return true; 
-    }
-    public bool SetActive(string id, out string message)
-    {
-        _roomRepository.SetActive(id);
-        message = "Đã chuyển phòng sang trạng thái hoạt động.";
+        message = "";
         return true;
     }
 }
