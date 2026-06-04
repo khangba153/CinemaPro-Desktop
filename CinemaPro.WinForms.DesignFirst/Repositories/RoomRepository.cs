@@ -77,4 +77,28 @@ public class RoomRepository
         var number = Convert.ToInt32(DatabaseHelper.ExecuteScalar(sql));
         return "R" + number.ToString("000");
     }
+
+    public void Update(string roomId, string roomName, string roomType, int rowCount, int seatsPerRow, string status)
+    {
+        const string sql = """
+            UPDATE dbo.Rooms
+            SET RoomName = @RoomName,
+                RoomType = @RoomType,
+                SeatRowCount = @SeatRowCount,
+                SeatsPerRow = @SeatsPerRow,
+                RoomStatus = @RoomStatus,
+                UpdatedAt = GETDATE()
+            WHERE RoomId = @RoomId;
+            """;
+        using var connection = new SqlConnection(AppDbConfig.ConnectionString);
+        using var command = new SqlCommand(sql, connection);
+        command.Parameters.AddWithValue("@RoomId", roomId);
+        command.Parameters.AddWithValue("@RoomName", roomName);
+        command.Parameters.AddWithValue("@RoomType", roomType);
+        command.Parameters.AddWithValue("@SeatRowCount", rowCount);
+        command.Parameters.AddWithValue("@SeatsPerRow", seatsPerRow);
+        command.Parameters.AddWithValue("@RoomStatus", status);
+        connection.Open();
+        command.ExecuteNonQuery();
+    }
 }

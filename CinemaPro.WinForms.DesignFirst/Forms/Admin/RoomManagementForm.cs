@@ -44,7 +44,7 @@ public partial class RoomManagementForm : Form
                 room.Status);
             roomGrid.Rows[rowIndex].Tag = room;
         }
-       
+
         if (roomGrid.Rows.Count > 0)
         {
             roomGrid.ClearSelection();
@@ -72,4 +72,9 @@ public partial class RoomManagementForm : Form
         seatPerRowInput.Value = Math.Max(seatPerRowInput.Minimum, Math.Min(seatPerRowInput.Maximum, room.SeatsPerRow));
     }
 
+    private void EditRoomButton_Click(object sender, EventArgs e)
+    {
+        _roomService.EditRoom(_selectedRoomId, roomNameTextBox.Text, roomTypeComboBox.Text, (int)rowCountInput.Value, (int)seatPerRowInput.Value, _selectedRoomStatus, out string message);
+        LoadRooms();
+    }
 }

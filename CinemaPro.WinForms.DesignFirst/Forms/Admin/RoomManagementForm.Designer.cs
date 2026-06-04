@@ -106,6 +106,7 @@ partial class RoomManagementForm
         editRoomButton.TabIndex = 2;
         editRoomButton.Text = "Sửa phòng";
         editRoomButton.UseVisualStyleBackColor = false;
+        editRoomButton.Click += EditRoomButton_Click;
         // 
         // addRoomButton
         // 

@@ -18,4 +18,11 @@ public sealed class RoomService
         message = "Đã thêm phòng chiếu.";
         return true;
     }
+
+    public bool EditRoom(string roomId, string roomName, string roomType, int rowCount, int seatsPerRow, string status, out string message)
+    {
+        _roomRepository.Update(roomId, roomName.Trim(), roomType, rowCount, seatsPerRow, status);
+        message = "Đã cập nhật phòng chiếu.";
+        return true;
+    }
 }
