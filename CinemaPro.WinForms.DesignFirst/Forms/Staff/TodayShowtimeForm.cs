@@ -2,6 +2,8 @@ namespace CinemaPro.WinForms.DesignFirst.Forms.Staff;
 
 public partial class TodayShowtimeForm : Form
 {
+    private readonly ShowtimeService _showtimeService = new();
+
     public TodayShowtimeForm()
     {
         InitializeComponent();
@@ -10,7 +12,7 @@ public partial class TodayShowtimeForm : Form
 
     private void TodayShowtimeForm_Load(object? sender, EventArgs e)
     {
-        var showtimes = AppServices.CinemaStore.GetShowtimes()
+        var showtimes = _showtimeService.GetShowtimes()
             .Where(item => item.Date.Date == DateTime.Today)
             .ToList();
 

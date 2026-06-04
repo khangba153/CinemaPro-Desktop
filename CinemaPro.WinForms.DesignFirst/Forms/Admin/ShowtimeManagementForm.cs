@@ -2,6 +2,8 @@ namespace CinemaPro.WinForms.DesignFirst.Forms.Admin;
 
 public partial class ShowtimeManagementForm : Form
 {
+    private readonly MovieService _movieService = new();
+    private readonly RoomService _roomService = new();
     private readonly ShowtimeService _showtimeService = new();
     private string _selectedShowtimeId = "";
 
@@ -26,11 +28,11 @@ public partial class ShowtimeManagementForm : Form
     {
         movieComboBox.DisplayMember = nameof(MovieRow.Title);
         movieComboBox.ValueMember = nameof(MovieRow.MovieId);
-        movieComboBox.DataSource = AppServices.CinemaStore.GetMovies().ToList();
+        movieComboBox.DataSource = _movieService.GetMovies().ToList();
 
         roomComboBox.DisplayMember = nameof(RoomRow.RoomName);
         roomComboBox.ValueMember = nameof(RoomRow.RoomId);
-        roomComboBox.DataSource = AppServices.CinemaStore.GetRooms().ToList();
+        roomComboBox.DataSource = _roomService.GetRooms().ToList();
 
         formatComboBox.Items.Clear();
         formatComboBox.Items.AddRange(new object[] { "2D", "3D", "IMAX", "VIP" });
@@ -46,7 +48,7 @@ public partial class ShowtimeManagementForm : Form
     private void LoadShowtimes()
     {
         showtimeGrid.Rows.Clear();
-        foreach (var showtime in AppServices.CinemaStore.GetShowtimes())
+        foreach (var showtime in _showtimeService.GetShowtimes())
         {
             var rowIndex = showtimeGrid.Rows.Add(
                 showtime.ShowtimeId,

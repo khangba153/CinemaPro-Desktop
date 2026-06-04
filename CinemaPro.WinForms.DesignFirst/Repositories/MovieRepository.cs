@@ -2,6 +2,43 @@ namespace CinemaPro.WinForms.DesignFirst.Repositories;
 
 public sealed class MovieRepository
 {
+    public IReadOnlyList<MovieRow> GetMovies()
+    {
+        const string sql = """
+            SELECT
+                Movie.MovieId,
+                Movie.MovieTitle,
+                Genre.GenreName,
+                Movie.DurationMinutes,
+                Movie.AgeRating,
+                Movie.Director,
+                Movie.MovieStatus
+            FROM dbo.Movies AS Movie
+            INNER JOIN dbo.Genres AS Genre
+                ON Genre.GenreId = Movie.GenreId
+            ORDER BY Movie.MovieTitle;
+            """;
+
+        var table = DatabaseHelper.ExecuteQuery(sql);
+        var movies = new List<MovieRow>();
+
+        foreach (DataRow row in table.Rows)
+        {
+            movies.Add(new MovieRow
+            {
+                MovieId = row["MovieId"].ToString() ?? "",
+                Title = row["MovieTitle"].ToString() ?? "",
+                Genre = row["GenreName"].ToString() ?? "",
+                DurationMinutes = Convert.ToInt32(row["DurationMinutes"]),
+                AgeRating = row["AgeRating"].ToString() ?? "",
+                Director = row["Director"].ToString() ?? "",
+                Status = row["MovieStatus"].ToString() ?? ""
+            });
+        }
+
+        return movies;
+    }
+
     public IReadOnlyList<string> GetGenreNames()
     {
         const string sql = """

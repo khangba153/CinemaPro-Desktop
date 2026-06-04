@@ -2,6 +2,39 @@ namespace CinemaPro.WinForms.DesignFirst.Repositories;
 
 public sealed class PaymentRepository
 {
+    public void InsertSuccessfulPayment(SqlConnection connection, SqlTransaction transaction, string paymentCode, int ticketId, string paymentMethod, decimal amount)
+    {
+        using var command = new SqlCommand("""
+            INSERT INTO dbo.Payments
+            (
+                PaymentCode,
+                TicketId,
+                PaymentMethod,
+                Amount,
+                Status,
+                TransactionRef,
+                PaidAt
+            )
+            VALUES
+            (
+                @PaymentCode,
+                @TicketId,
+                @PaymentMethod,
+                @Amount,
+                N'Success',
+                @TransactionRef,
+                SYSDATETIME()
+            );
+            """, connection, transaction);
+
+        command.Parameters.AddWithValue("@PaymentCode", paymentCode);
+        command.Parameters.AddWithValue("@TicketId", ticketId);
+        command.Parameters.AddWithValue("@PaymentMethod", paymentMethod);
+        command.Parameters.AddWithValue("@Amount", amount);
+        command.Parameters.AddWithValue("@TransactionRef", paymentMethod == "VNPAY_SANDBOX" ? $"VNPAY-DEMO-{paymentCode}" : DBNull.Value);
+        command.ExecuteNonQuery();
+    }
+
     public IReadOnlyList<Payment> GetRecentPayments(int take = 20)
     {
         const string sql = """

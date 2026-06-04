@@ -2,6 +2,7 @@ namespace CinemaPro.WinForms.DesignFirst.Forms.Admin;
 
 public partial class SeatManagementForm : Form
 {
+    private readonly RoomService _roomService = new();
     private readonly SeatService _seatService = new();
     private SeatInfo? _selectedSeat;
 
@@ -15,7 +16,7 @@ public partial class SeatManagementForm : Form
     {
         roomComboBox.DisplayMember = nameof(RoomRow.RoomName);
         roomComboBox.ValueMember = nameof(RoomRow.RoomId);
-        roomComboBox.DataSource = AppServices.CinemaStore.GetRooms().ToList();
+        roomComboBox.DataSource = _roomService.GetRooms().ToList();
 
         FixRuntimeText();
         FillRoomSizeInputs();
@@ -55,7 +56,7 @@ public partial class SeatManagementForm : Form
             return;
         }
 
-        var existingSeats = AppServices.CinemaStore.GetSeats(room.RoomId).ToList();
+        var existingSeats = _seatService.GetSeats(room.RoomId).ToList();
         using var builderForm = new SeatLayoutBuilderForm(room.RoomId, room.RoomName, rowCount, columnCount, existingSeats);
 
         if (builderForm.ShowDialog(this) != DialogResult.OK)
@@ -63,7 +64,7 @@ public partial class SeatManagementForm : Form
             return;
         }
 
-        AppServices.CinemaStore.UpdateRoomSeatLayout(room.RoomId, rowCount, columnCount, builderForm.CreatedSeats);
+        _seatService.UpdateRoomSeatLayout(room.RoomId, rowCount, columnCount, builderForm.CreatedSeats);
         FillRoomSizeInputs();
         RenderSeatMap();
 
@@ -111,7 +112,7 @@ public partial class SeatManagementForm : Form
             return;
         }
 
-        var seats = AppServices.CinemaStore
+        var seats = _seatService
             .GetSeats(room.RoomId)
             .OrderBy(seat => seat.RowIndex)
             .ThenBy(seat => seat.ColumnIndex)

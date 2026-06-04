@@ -2,6 +2,9 @@ namespace CinemaPro.WinForms.DesignFirst.Forms.Staff;
 
 public partial class StaffDashboardForm : Form
 {
+    private readonly ShowtimeService _showtimeService = new();
+    private readonly TicketService _ticketService = new();
+
     public StaffDashboardForm()
     {
         InitializeComponent();
@@ -10,9 +13,8 @@ public partial class StaffDashboardForm : Form
 
     private void StaffDashboardForm_Load(object? sender, EventArgs e)
     {
-        var store = AppServices.CinemaStore;
-        var todayShowtimes = store.GetShowtimes().Where(item => item.Date.Date == DateTime.Today).ToList();
-        var todayTickets = store.GetTickets().Where(item => item.SoldAt.Date == DateTime.Today).ToList();
+        var todayShowtimes = _showtimeService.GetShowtimes().Where(item => item.Date.Date == DateTime.Today).ToList();
+        var todayTickets = _ticketService.GetTickets().Where(item => item.SoldAt.Date == DateTime.Today).ToList();
 
         todayShowtimeValueLabel.Text = todayShowtimes.Count.ToString();
         shiftTicketValueLabel.Text = todayTickets.Count.ToString();

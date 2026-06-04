@@ -7,6 +7,10 @@ namespace CinemaPro.WinForms.DesignFirst.Forms.Staff;
 
 public partial class TicketSaleForm : Form
 {
+    private readonly MovieService _movieService = new();
+    private readonly ShowtimeService _showtimeService = new();
+    private readonly SeatService _seatService = new();
+    private readonly TicketService _ticketService = new();
     private readonly List<string> _selectedSeats = [];
     private ShowtimeRow? _currentShowtime;
 
@@ -21,7 +25,7 @@ public partial class TicketSaleForm : Form
     {
         movieComboBox.DisplayMember = nameof(MovieRow.Title);
         movieComboBox.ValueMember = nameof(MovieRow.MovieId);
-        movieComboBox.DataSource = AppServices.CinemaStore.GetMovies().ToList();
+        movieComboBox.DataSource = _movieService.GetMovies().ToList();
 
         paymentMethodComboBox.Items.Clear();
         paymentMethodComboBox.Items.AddRange(["Tiền mặt", "VNPAY Sandbox"]);
@@ -37,7 +41,7 @@ public partial class TicketSaleForm : Form
             return;
         }
 
-        var showtimes = AppServices.CinemaStore
+        var showtimes = _showtimeService
             .GetShowtimes()
             .Where(item => item.MovieId == movie.MovieId)
             .ToList();
@@ -94,7 +98,7 @@ public partial class TicketSaleForm : Form
             return;
         }
 
-        var seats = AppServices.CinemaStore
+        var seats = _seatService
             .GetSeatsForShowtime(_currentShowtime.ShowtimeId)
             .OrderBy(seat => seat.RowIndex)
             .ThenBy(seat => seat.ColumnIndex)
@@ -238,7 +242,7 @@ public partial class TicketSaleForm : Form
         using var paymentForm = new PaymentForm(summary);
         if (paymentForm.ShowDialog(this) == DialogResult.OK)
         {
-            var ticket = AppServices.CinemaStore.CreateTicket(summary, UserSession.FullName);
+            var ticket = _ticketService.CreateTicket(summary, UserSession.FullName);
             MessageBox.Show($"Đã tạo vé {ticket.TicketCode}.", "Bán vé thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
             _selectedSeats.Clear();
             UpdateSummary();
@@ -257,7 +261,7 @@ public partial class TicketSaleForm : Form
     private void LoadRecentTickets()
     {
         recentTicketsGrid.Rows.Clear();
-        foreach (var ticket in AppServices.CinemaStore.GetTickets().Take(5))
+        foreach (var ticket in _ticketService.GetTickets().Take(5))
         {
             recentTicketsGrid.Rows.Add(ticket.TicketCode, ticket.MovieTitle, ticket.Seats, FormatHelper.Vnd(ticket.TotalAmount), FormatHelper.TicketStatusText(ticket.Status));
         }

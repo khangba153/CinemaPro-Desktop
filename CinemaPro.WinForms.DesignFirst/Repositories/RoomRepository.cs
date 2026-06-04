@@ -2,6 +2,39 @@ namespace CinemaPro.WinForms.DesignFirst.Repositories;
 
 public sealed class RoomRepository
 {
+    public IReadOnlyList<RoomRow> GetRooms()
+    {
+        const string sql = """
+            SELECT
+                RoomId,
+                RoomName,
+                RoomType,
+                SeatRowCount,
+                SeatsPerRow,
+                RoomStatus
+            FROM dbo.Rooms
+            ORDER BY RoomId;
+            """;
+
+        var table = DatabaseHelper.ExecuteQuery(sql);
+        var rooms = new List<RoomRow>();
+
+        foreach (DataRow row in table.Rows)
+        {
+            rooms.Add(new RoomRow
+            {
+                RoomId = row["RoomId"].ToString() ?? "",
+                RoomName = row["RoomName"].ToString() ?? "",
+                RoomType = row["RoomType"].ToString() ?? "",
+                Rows = Convert.ToInt32(row["SeatRowCount"]),
+                SeatsPerRow = Convert.ToInt32(row["SeatsPerRow"]),
+                Status = row["RoomStatus"].ToString() ?? ""
+            });
+        }
+
+        return rooms;
+    }
+
     public string GetNextRoomCode()
     {
         const string sql = """

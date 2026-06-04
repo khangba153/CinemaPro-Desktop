@@ -57,7 +57,7 @@ public partial class RoomManagementForm : Form
     private void LoadRooms()
     {
         roomGrid.Rows.Clear();
-        foreach (var room in AppServices.CinemaStore.GetRooms())
+        foreach (var room in _roomService.GetRooms())
         {
             var rowIndex = roomGrid.Rows.Add(room.RoomId, room.RoomName, room.RoomType, room.Rows, room.SeatsPerRow, room.Status);
             roomGrid.Rows[rowIndex].Tag = room;

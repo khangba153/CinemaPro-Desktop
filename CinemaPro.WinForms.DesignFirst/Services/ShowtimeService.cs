@@ -4,6 +4,13 @@ public sealed class ShowtimeService
 {
     private readonly ShowtimeRepository _showtimeRepository = new();
 
+    public IReadOnlyList<ShowtimeRow> GetShowtimes() => _showtimeRepository.GetShowtimes();
+
+    public ShowtimeRow? FindShowtime(string showtimeId)
+    {
+        return GetShowtimes().FirstOrDefault(showtime => showtime.ShowtimeId == showtimeId);
+    }
+
     public bool HasConflict(string roomId, DateTime startAt, DateTime endAt, string? exceptShowtimeId, out string message)
     {
         if (!int.TryParse(roomId, out var parsedRoomId))

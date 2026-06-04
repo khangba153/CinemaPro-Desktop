@@ -2,6 +2,56 @@ namespace CinemaPro.WinForms.DesignFirst.Repositories;
 
 public sealed class ShowtimeRepository
 {
+    public IReadOnlyList<ShowtimeRow> GetShowtimes()
+    {
+        const string sql = """
+            SELECT
+                Showtime.ShowtimeId,
+                Showtime.MovieId,
+                Movie.MovieTitle,
+                Showtime.RoomId,
+                Room.RoomName,
+                Showtime.StartAt,
+                Showtime.EndAt,
+                Showtime.BasePrice,
+                Showtime.ShowtimeFormat,
+                Showtime.ShowtimeStatus
+            FROM dbo.Showtimes AS Showtime
+            INNER JOIN dbo.Movies AS Movie
+                ON Movie.MovieId = Showtime.MovieId
+            INNER JOIN dbo.Rooms AS Room
+                ON Room.RoomId = Showtime.RoomId
+            WHERE Showtime.ShowtimeStatus <> N'Cancelled'
+            ORDER BY Showtime.StartAt;
+            """;
+
+        var table = DatabaseHelper.ExecuteQuery(sql);
+        var showtimes = new List<ShowtimeRow>();
+
+        foreach (DataRow row in table.Rows)
+        {
+            var startAt = Convert.ToDateTime(row["StartAt"]);
+            var endAt = Convert.ToDateTime(row["EndAt"]);
+
+            showtimes.Add(new ShowtimeRow
+            {
+                ShowtimeId = row["ShowtimeId"].ToString() ?? "",
+                MovieId = row["MovieId"].ToString() ?? "",
+                MovieTitle = row["MovieTitle"].ToString() ?? "",
+                RoomId = row["RoomId"].ToString() ?? "",
+                RoomName = row["RoomName"].ToString() ?? "",
+                Date = startAt.Date,
+                StartTime = startAt.TimeOfDay,
+                EndTime = endAt.TimeOfDay,
+                Price = Convert.ToDecimal(row["BasePrice"]),
+                Format = row["ShowtimeFormat"].ToString() ?? "",
+                Status = row["ShowtimeStatus"].ToString() ?? ""
+            });
+        }
+
+        return showtimes;
+    }
+
     public string GetNextShowtimeCode()
     {
         const string sql = """

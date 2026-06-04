@@ -4,6 +4,8 @@ public sealed class MovieService
 {
     private readonly MovieRepository _movieRepository = new();
 
+    public IReadOnlyList<MovieRow> GetMovies() => _movieRepository.GetMovies();
+
     public IReadOnlyList<string> GetGenres() => _movieRepository.GetGenreNames();
 
     public bool AddMovie(string title, string genre, string durationText, string ageRating, string director, string status, out string message)

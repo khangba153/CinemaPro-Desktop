@@ -201,4 +201,9 @@ public partial class UserManagementForm : Form
         roleComboBox.SelectedIndex = 1;
         statusComboBox.SelectedIndex = 0;
     }
+
+    private void userGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+    {
+
+    }
 }

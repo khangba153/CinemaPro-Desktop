@@ -62,7 +62,7 @@ public partial class MovieManagementForm : Form
 
     private void LoadMovies()
     {
-        var movies = AppServices.CinemaStore.GetMovies().AsEnumerable();
+        var movies = _movieService.GetMovies().AsEnumerable();
         if (!string.IsNullOrWhiteSpace(searchTextBox.Text))
         {
             movies = movies.Where(movie => movie.Title.Contains(searchTextBox.Text, StringComparison.OrdinalIgnoreCase));

@@ -6,6 +6,9 @@ namespace CinemaPro.WinForms.DesignFirst.Forms.Staff;
 
 public partial class SoldTicketsForm : Form
 {
+    private readonly MovieService _movieService = new();
+    private readonly TicketService _ticketService = new();
+
     public SoldTicketsForm()
     {
         InitializeComponent();
@@ -25,7 +28,7 @@ public partial class SoldTicketsForm : Form
     {
         movieFilterComboBox.Items.Clear();
         movieFilterComboBox.Items.Add("Tất cả phim");
-        movieFilterComboBox.Items.AddRange(AppServices.CinemaStore.GetMovies().Select(item => item.Title).Cast<object>().ToArray());
+        movieFilterComboBox.Items.AddRange(_movieService.GetMovies().Select(item => item.Title).Cast<object>().ToArray());
         movieFilterComboBox.SelectedIndex = 0;
 
         statusFilterComboBox.Items.Clear();
@@ -47,7 +50,7 @@ public partial class SoldTicketsForm : Form
 
     private void LoadTickets()
     {
-        var tickets = AppServices.CinemaStore.GetTickets().Where(ticket => ticket.SoldAt.Date == soldDatePicker.Value.Date);
+        var tickets = _ticketService.GetTickets().Where(ticket => ticket.SoldAt.Date == soldDatePicker.Value.Date);
         if (movieFilterComboBox.Text != "Tất cả phim")
         {
             tickets = tickets.Where(ticket => ticket.MovieTitle == movieFilterComboBox.Text);

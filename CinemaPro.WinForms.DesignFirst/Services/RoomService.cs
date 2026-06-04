@@ -4,6 +4,8 @@ public sealed class RoomService
 {
     private readonly RoomRepository _roomRepository = new();
 
+    public IReadOnlyList<RoomRow> GetRooms() => _roomRepository.GetRooms();
+
     public bool AddRoom(string roomName, string roomType, int rowCount, int seatsPerRow, out string message)
     {
         if (!Validate(roomName, roomType, rowCount, seatsPerRow, out message))

@@ -2,6 +2,10 @@ namespace CinemaPro.WinForms.DesignFirst.Forms.Admin;
 
 public partial class RevenueReportForm : Form
 {
+    private readonly TicketService _ticketService = new();
+    private readonly ReportService _reportService = new();
+    private readonly ShowtimeService _showtimeService = new();
+
     public RevenueReportForm()
     {
         InitializeComponent();
@@ -25,15 +29,15 @@ public partial class RevenueReportForm : Form
 
     private void LoadReport()
     {
-        var tickets = AppServices.CinemaStore.GetTickets()
+        var tickets = _ticketService.GetTickets()
             .Where(ticket => ticket.SoldAt.Date == reportDatePicker.Value.Date)
             .ToList();
-        var revenueRows = AppServices.CinemaStore.GetRevenueRows();
+        var revenueRows = _reportService.GetRevenueRows();
 
         todayRevenueValueLabel.Text = FormatHelper.Vnd(tickets.Sum(ticket => ticket.TotalAmount));
         totalTicketValueLabel.Text = tickets.Count.ToString();
         topMovieValueLabel.Text = revenueRows.OrderByDescending(row => row.TicketCount).FirstOrDefault()?.MovieTitle ?? "-";
-        bestShowtimeValueLabel.Text = AppServices.CinemaStore.GetShowtimes().OrderByDescending(item => item.Price).FirstOrDefault()?.DisplayText ?? "-";
+        bestShowtimeValueLabel.Text = _showtimeService.GetShowtimes().OrderByDescending(item => item.Price).FirstOrDefault()?.DisplayText ?? "-";
 
         revenueGrid.Rows.Clear();
         foreach (var row in revenueRows)

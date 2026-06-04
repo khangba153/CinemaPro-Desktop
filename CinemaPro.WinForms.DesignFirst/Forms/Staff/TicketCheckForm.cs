@@ -6,6 +6,8 @@ namespace CinemaPro.WinForms.DesignFirst.Forms.Staff;
 
 public partial class TicketCheckForm : Form
 {
+    private readonly TicketService _ticketService = new();
+    private readonly TicketCheckService _ticketCheckService = new();
     private TicketRow? _currentTicket;
 
     public TicketCheckForm()
@@ -17,8 +19,9 @@ public partial class TicketCheckForm : Form
 
     private void TicketCheckForm_Load(object? sender, EventArgs e)
     {
-        unusedValueLabel.Text = AppServices.CinemaStore.GetTickets().Count(item => item.Status == "Unused").ToString();
-        usedValueLabel.Text = AppServices.CinemaStore.GetTickets().Count(item => item.Status == "Used").ToString();
+        var tickets = _ticketService.GetTickets();
+        unusedValueLabel.Text = tickets.Count(item => item.Status == "Unused").ToString();
+        usedValueLabel.Text = tickets.Count(item => item.Status == "Used").ToString();
     }
 
     private void CheckButton_Click(object? sender, EventArgs e)
@@ -30,7 +33,7 @@ public partial class TicketCheckForm : Form
             return;
         }
 
-        _currentTicket = AppServices.CinemaStore.FindTicket(code);
+        _currentTicket = _ticketService.FindTicket(code);
         if (_currentTicket is null)
         {
             resultTitleLabel.Text = "Không tìm thấy vé";
@@ -62,7 +65,7 @@ public partial class TicketCheckForm : Form
             return;
         }
 
-        if (AppServices.CinemaStore.MarkTicketUsed(_currentTicket.TicketCode))
+        if (_ticketCheckService.MarkTicketUsed(_currentTicket.TicketCode))
         {
             resultTitleLabel.Text = "Đã xác nhận vào rạp";
             resultTitleLabel.ForeColor = Color.FromArgb(37, 99, 235);
