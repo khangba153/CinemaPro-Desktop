@@ -82,6 +82,7 @@ partial class RoomManagementForm
         maintenanceButton.TabIndex = 0;
         maintenanceButton.Text = "Bảo trì phòng";
         maintenanceButton.UseVisualStyleBackColor = false;
+        maintenanceButton.Click += SetMaintenance;
         // 
         // createSeatButton
         // 

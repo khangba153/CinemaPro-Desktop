@@ -101,4 +101,32 @@ public class RoomRepository
         connection.Open();
         command.ExecuteNonQuery();
     }
+    public void SetMaintenance(string roomId)
+    {
+        const string sql = """
+            UPDATE dbo.Rooms
+            SET RoomStatus = 'Maintenance',
+                UpdatedAt = GETDATE()
+            WHERE RoomId = @RoomId;
+            """;
+        using var connection = new SqlConnection(AppDbConfig.ConnectionString);
+        using var command = new SqlCommand(sql, connection);
+        command.Parameters.AddWithValue("@RoomId", roomId);
+        connection.Open();
+        command.ExecuteNonQuery();
+    }
+    public void SetActive(string roomId)
+    {
+        const string sql = """
+            UPDATE dbo.Rooms
+            SET RoomStatus = 'Active',
+                UpdatedAt = GETDATE()
+            WHERE RoomId = @RoomId;
+            """;
+        using var connection = new SqlConnection(AppDbConfig.ConnectionString);
+        using var command = new SqlCommand(sql, connection);
+        command.Parameters.AddWithValue("@RoomId", roomId);
+        connection.Open();
+        command.ExecuteNonQuery();
+    }
 }

@@ -25,4 +25,17 @@ public sealed class RoomService
         message = "Đã cập nhật phòng chiếu.";
         return true;
     }
+
+    public bool SetMaintenance(string id, out string message)
+    {
+        _roomRepository.SetMaintenance(id);
+        message = "Đã chuyển phòng sang trạng thái bảo trì.";
+        return true; 
+    }
+    public bool SetActive(string id, out string message)
+    {
+        _roomRepository.SetActive(id);
+        message = "Đã chuyển phòng sang trạng thái hoạt động.";
+        return true;
+    }
 }

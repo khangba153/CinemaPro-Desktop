@@ -1,4 +1,6 @@
 using CinemaPro.WinForms.DesignFirst.Models;
+using CinemaPro.WinForms.DesignFirst.Services;
+using System.Windows.Forms;
 
 namespace CinemaPro.WinForms.DesignFirst.Forms.Admin;
 
@@ -76,5 +78,17 @@ public partial class RoomManagementForm : Form
     {
         _roomService.EditRoom(_selectedRoomId, roomNameTextBox.Text, roomTypeComboBox.Text, (int)rowCountInput.Value, (int)seatPerRowInput.Value, _selectedRoomStatus, out string message);
         LoadRooms();
+    }
+
+    private void SetMaintenance(object sender, EventArgs e)
+    {   if(_selectedRoomStatus == "Active")
+        {
+            _roomService.SetMaintenance(_selectedRoomId, out string message);
+        }
+        else if(_selectedRoomStatus == "Maintenance")
+        {
+            _roomService.SetActive(_selectedRoomId, out string message);
+        }    
+            LoadRooms();
     }
 }
