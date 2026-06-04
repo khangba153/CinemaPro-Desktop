@@ -1,4 +1,5 @@
 ﻿using CinemaPro.WinForms.DesignFirst.Models;
+using CinemaPro.WinForms.DesignFirst.Repositories;
 
 namespace CinemaPro.WinForms.DesignFirst.Services;
 
@@ -45,7 +46,6 @@ public sealed class RoomService
         }
     }
 
-
     public bool EditRoom(
         string roomId,
         string roomName,
@@ -75,7 +75,6 @@ public sealed class RoomService
                 return false;
             }
 
-            // BUSINESS RULE: duplicate name (exclude current)
             if (_roomRepository.ExistsByNameExceptId(roomName, roomId))
             {
                 message = "Tên phòng đã tồn tại.";
