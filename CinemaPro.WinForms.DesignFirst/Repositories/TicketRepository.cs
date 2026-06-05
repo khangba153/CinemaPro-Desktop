@@ -183,17 +183,18 @@ public sealed class TicketRepository
     {
         return paymentMethod switch
         {
-            "Cash" => "Tiá»n máº·t",
+            "Cash" => "Tiền mặt",
             "VNPAY_SANDBOX" => "VNPAY Sandbox",
+            "MOMO" => "Ví MoMo",
             _ => paymentMethod
         };
     }
 
     private static string ToDatabasePaymentMethod(string paymentMethod)
     {
-        return paymentMethod.Contains("VNPAY", StringComparison.OrdinalIgnoreCase)
-            ? "VNPAY_SANDBOX"
-            : "Cash";
+        if (paymentMethod.Contains("VNPAY", StringComparison.OrdinalIgnoreCase)) return "VNPAY_SANDBOX";
+        if (paymentMethod.Contains("MoMo", StringComparison.OrdinalIgnoreCase)) return "MOMO";
+        return "Cash";
     }
 
     private static string ToAppTicketStatus(string ticketStatus)

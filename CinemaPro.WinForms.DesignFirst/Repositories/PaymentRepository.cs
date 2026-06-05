@@ -31,7 +31,10 @@ public sealed class PaymentRepository
         command.Parameters.AddWithValue("@TicketId", ticketId);
         command.Parameters.AddWithValue("@PaymentMethod", paymentMethod);
         command.Parameters.AddWithValue("@Amount", amount);
-        command.Parameters.AddWithValue("@TransactionRef", paymentMethod == "VNPAY_SANDBOX" ? $"VNPAY-DEMO-{paymentCode}" : DBNull.Value);
+        command.Parameters.AddWithValue("@TransactionRef", 
+            paymentMethod == "VNPAY_SANDBOX" ? $"VNPAY-DEMO-{paymentCode}" : 
+            paymentMethod == "MOMO_SANDBOX" ? $"MOMO-DEMO-{paymentCode}" : 
+            DBNull.Value);
         command.ExecuteNonQuery();
     }
 

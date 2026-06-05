@@ -36,7 +36,7 @@ public partial class SoldTicketsForm : Form
         statusFilterComboBox.SelectedIndex = 0;
 
         paymentFilterComboBox.Items.Clear();
-        paymentFilterComboBox.Items.AddRange(["Tất cả", "Tiền mặt", "VNPAY Sandbox"]);
+        paymentFilterComboBox.Items.AddRange(["Tất cả", "Tiền mặt", "Ví MoMo"]);
         paymentFilterComboBox.SelectedIndex = 0;
         soldDatePicker.Value = DateTime.Today;
 
@@ -123,7 +123,8 @@ public partial class SoldTicketsForm : Form
 
     private static string ShortPayment(string payment)
     {
-        return payment == "VNPAY Sandbox" ? "VNPAY" : payment;
+        if (payment == "Ví MoMo") return "MoMo";
+        return payment;
     }
 
     private static string ShortStatus(string status)

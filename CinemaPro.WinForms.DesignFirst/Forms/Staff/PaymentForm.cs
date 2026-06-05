@@ -41,6 +41,15 @@ public partial class PaymentForm : Form
         {
             MessageBox.Show("Đang chuyển đến cổng thanh toán VNPAY Sandbox...", "Thanh toán", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+        else if (_summary.PaymentMethod == "Ví MoMo")
+        {
+            var momoForm = new MoMoQRForm(_summary.TotalAmount, _summary.TicketCode);
+            var result = momoForm.ShowDialog();
+            if (result != DialogResult.OK)
+            {
+                return; // Ngừng nếu người dùng huỷ thanh toán MoMo
+            }
+        }
         else
         {
             MessageBox.Show("Thanh toán tiền mặt thành công.", "Thanh toán", MessageBoxButtons.OK, MessageBoxIcon.Information);
