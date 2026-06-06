@@ -28,7 +28,12 @@ public partial class TicketSaleForm : Form
         movieComboBox.DataSource = _movieService.GetMovies().ToList();
 
         paymentMethodComboBox.Items.Clear();
-        paymentMethodComboBox.Items.AddRange(["Tiền mặt", "Ví MoMo"]);
+        paymentMethodComboBox.Items.AddRange(
+        [
+            PaymentMethodHelper.CashDisplay,
+            PaymentMethodHelper.VnPaySandboxDisplay,
+            PaymentMethodHelper.MomoSandboxDisplay
+        ]);
         paymentMethodComboBox.SelectedIndex = 0;
 
         LoadRecentTickets();

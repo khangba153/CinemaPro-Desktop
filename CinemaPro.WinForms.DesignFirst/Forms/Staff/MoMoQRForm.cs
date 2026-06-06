@@ -3,13 +3,13 @@ namespace CinemaPro.WinForms.DesignFirst.Forms.Staff;
 public partial class MoMoQRForm : Form
 {
     private readonly Services.MoMoPaymentService _momoService = new();
-    private System.Windows.Forms.Timer _pollingTimer;
+    private readonly System.Windows.Forms.Timer _pollingTimer;
     private int _pollingCount = 0;
     private const int MaxPollingCount = 60; // Poll for 3 minutes (every 3s)
-    private string _currentOrderId = "";
-    private string _currentRequestId = "";
-    private decimal _amount;
-    private string _orderInfo;
+    private readonly string _currentOrderId = "";
+    private readonly string _currentRequestId = "";
+    private readonly decimal _amount;
+    private readonly string _orderInfo;
     private string _payUrl = "";
 
     public MoMoQRForm(decimal amount, string orderInfo)
@@ -19,9 +19,11 @@ public partial class MoMoQRForm : Form
         _orderInfo = orderInfo;
         _currentOrderId = Guid.NewGuid().ToString();
         _currentRequestId = Guid.NewGuid().ToString();
-        
-        _pollingTimer = new System.Windows.Forms.Timer();
-        _pollingTimer.Interval = 3000; // 3 seconds
+
+        _pollingTimer = new System.Windows.Forms.Timer
+        {
+            Interval = 3000
+        };
         _pollingTimer.Tick += PollingTimer_Tick;
     }
 
@@ -67,6 +69,7 @@ public partial class MoMoQRForm : Form
 
     private async void PollingTimer_Tick(object? sender, EventArgs e)
     {
+        _pollingTimer.Stop();
         _pollingCount++;
         
         bool isPaid = await _momoService.CheckTransactionStatusAsync(_currentOrderId, _currentRequestId);
@@ -85,6 +88,10 @@ public partial class MoMoQRForm : Form
             MessageBox.Show("Đã hết thời gian thanh toán.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             DialogResult = DialogResult.Cancel;
             Close();
+        }
+        else
+        {
+            _pollingTimer.Start();
         }
     }
 
@@ -117,5 +124,12 @@ public partial class MoMoQRForm : Form
         MessageBox.Show("Giả lập giao dịch MoMo thành công!", "Bypass", MessageBoxButtons.OK, MessageBoxIcon.Information);
         DialogResult = DialogResult.OK;
         Close();
+    }
+
+    protected override void OnFormClosed(FormClosedEventArgs e)
+    {
+        _pollingTimer.Stop();
+        _pollingTimer.Dispose();
+        base.OnFormClosed(e);
     }
 }

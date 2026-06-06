@@ -12,7 +12,7 @@ public partial class PaymentForm : Form
         RoomName = "Phòng 2",
         Seats = ["B6", "B7"],
         TotalAmount = 180000,
-        PaymentMethod = "Tiền mặt"
+        PaymentMethod = PaymentMethodHelper.CashDisplay
     })
     {
     }
@@ -37,13 +37,15 @@ public partial class PaymentForm : Form
 
     private void ConfirmButton_Click(object? sender, EventArgs e)
     {
-        if (_summary.PaymentMethod == "VNPAY Sandbox")
+        var paymentMethod = PaymentMethodHelper.ToDatabaseValue(_summary.PaymentMethod);
+
+        if (paymentMethod == PaymentMethodHelper.VnPaySandbox)
         {
             MessageBox.Show("Đang chuyển đến cổng thanh toán VNPAY Sandbox...", "Thanh toán", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-        else if (_summary.PaymentMethod == "Ví MoMo")
+        else if (paymentMethod == PaymentMethodHelper.MomoSandbox)
         {
-            var momoForm = new MoMoQRForm(_summary.TotalAmount, _summary.TicketCode);
+            var momoForm = new MoMoQRForm(_summary.TotalAmount, BuildMomoOrderInfo());
             var result = momoForm.ShowDialog();
             if (result != DialogResult.OK)
             {
@@ -63,5 +65,15 @@ public partial class PaymentForm : Form
     {
         DialogResult = DialogResult.Cancel;
         Close();
+    }
+
+    private string BuildMomoOrderInfo()
+    {
+        var seatText = _summary.Seats.Count == 0
+            ? _summary.TicketCode
+            : string.Join(", ", _summary.Seats);
+
+        var orderInfo = $"CinemaPro - {_summary.MovieTitle} - Ghế {seatText}";
+        return orderInfo.Length <= 250 ? orderInfo : orderInfo[..250];
     }
 }

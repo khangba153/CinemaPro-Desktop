@@ -39,7 +39,7 @@ public sealed class TicketRepository
                 RoomName = row["RoomName"].ToString() ?? "",
                 Seats = row["SeatCodes"].ToString() ?? "",
                 TotalAmount = Convert.ToDecimal(row["TotalAmount"]),
-                PaymentMethod = ToDisplayPaymentMethod(row["PaymentMethod"].ToString() ?? ""),
+                PaymentMethod = PaymentMethodHelper.ToDisplayText(row["PaymentMethod"].ToString() ?? ""),
                 Status = ToAppTicketStatus(row["TicketStatus"].ToString() ?? ""),
                 SoldAt = Convert.ToDateTime(row["SoldAt"]),
                 StaffName = row["SoldBy"].ToString() ?? ""
@@ -104,7 +104,7 @@ public sealed class TicketRepository
             var ticketCode = _codeSequenceRepository.GetNextCode(connection, transaction, "dbo.Tickets", "TicketCode", "TK", 6);
             var paymentCode = _codeSequenceRepository.GetNextCode(connection, transaction, "dbo.Payments", "PaymentCode", "PM", 6);
             var soldByUserId = _userRepository.GetCurrentSessionUserId(connection, transaction);
-            var paymentMethod = ToDatabasePaymentMethod(summary.PaymentMethod);
+            var paymentMethod = PaymentMethodHelper.ToDatabaseValue(summary.PaymentMethod);
             var showtimeId = ToInt(summary.ShowtimeId);
 
             var ticketId = InsertTicket(connection, transaction, ticketCode, showtimeId, soldByUserId, summary.TotalAmount);
@@ -177,24 +177,6 @@ public sealed class TicketRepository
     private static int ToInt(string value)
     {
         return int.TryParse(value, out var number) ? number : 0;
-    }
-
-    private static string ToDisplayPaymentMethod(string paymentMethod)
-    {
-        return paymentMethod switch
-        {
-            "Cash" => "Tiền mặt",
-            "VNPAY_SANDBOX" => "VNPAY Sandbox",
-            "MOMO" => "Ví MoMo",
-            _ => paymentMethod
-        };
-    }
-
-    private static string ToDatabasePaymentMethod(string paymentMethod)
-    {
-        if (paymentMethod.Contains("VNPAY", StringComparison.OrdinalIgnoreCase)) return "VNPAY_SANDBOX";
-        if (paymentMethod.Contains("MoMo", StringComparison.OrdinalIgnoreCase)) return "MOMO";
-        return "Cash";
     }
 
     private static string ToAppTicketStatus(string ticketStatus)
