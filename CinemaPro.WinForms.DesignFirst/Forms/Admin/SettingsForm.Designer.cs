@@ -93,7 +93,7 @@ partial class SettingsForm
         configText.Font = new Font("Segoe UI", 10F);
         configText.Location = new Point(22, 62);
         configText.Size = new Size(420, 104);
-        configText.Text = "Giữ ghế tạm: 05 phút\r\nCho phép đổi phương thức thanh toán: Có\r\nIn vé sau thanh toán: Bật\r\nDữ liệu chỉ mô phỏng trong RAM";
+        configText.Text = "Giữ ghế tạm: 05 phút\r\nCho phép đổi phương thức thanh toán: Có\r\nIn vé sau thanh toán: Bật\r\nDữ liệu lưu trong SQL Server";
         paymentPanel.BackColor = Color.White;
         paymentPanel.BorderStyle = BorderStyle.FixedSingle;
         paymentPanel.Controls.Add(saveButton);
@@ -139,7 +139,7 @@ partial class SettingsForm
         systemText.Font = new Font("Segoe UI", 10F);
         systemText.Location = new Point(22, 62);
         systemText.Size = new Size(420, 70);
-        systemText.Text = "CinemaPro DesignFirst\r\nWinForms UI demo\r\nKhông kết nối database/API thật";
+        systemText.Text = "CinemaPro DesignFirst\r\nWinForms + SQL Server\r\nKhông dùng API/backend trong giai đoạn này";
         backupButton.BackColor = Color.White;
         backupButton.FlatStyle = FlatStyle.Flat;
         backupButton.Location = new Point(22, 158);
