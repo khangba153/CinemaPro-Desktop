@@ -151,14 +151,22 @@ public sealed class MovieRepository
 
     public void Stop(int movieId)
     {
+        UpdateStatus(movieId, "Stopped");
+    }
+
+    public void UpdateStatus(int movieId, string status)
+    {
         const string sql = """
             UPDATE dbo.Movies
             SET
-                MovieStatus = N'Stopped',
+                MovieStatus = @MovieStatus,
                 UpdatedAt = SYSDATETIME()
             WHERE MovieId = @MovieId;
             """;
 
-        DatabaseHelper.ExecuteNonQuery(sql, new SqlParameter("@MovieId", movieId));
+        DatabaseHelper.ExecuteNonQuery(
+            sql,
+            new SqlParameter("@MovieId", movieId),
+            new SqlParameter("@MovieStatus", status));
     }
 }

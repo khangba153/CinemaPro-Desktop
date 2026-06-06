@@ -11,6 +11,7 @@ public partial class TicketSaleForm : Form
     private readonly ShowtimeService _showtimeService = new();
     private readonly SeatService _seatService = new();
     private readonly TicketService _ticketService = new();
+    private readonly SettingService _settingService = new();
     private readonly List<string> _selectedSeats = [];
     private ShowtimeRow? _currentShowtime;
 
@@ -27,16 +28,50 @@ public partial class TicketSaleForm : Form
         movieComboBox.ValueMember = nameof(MovieRow.MovieId);
         movieComboBox.DataSource = _movieService.GetMovies().ToList();
 
-        paymentMethodComboBox.Items.Clear();
-        paymentMethodComboBox.Items.AddRange(
-        [
-            PaymentMethodHelper.CashDisplay,
-            PaymentMethodHelper.VnPaySandboxDisplay,
-            PaymentMethodHelper.MomoSandboxDisplay
-        ]);
-        paymentMethodComboBox.SelectedIndex = 0;
+        LoadPaymentMethods();
 
         LoadRecentTickets();
+    }
+
+    private void LoadPaymentMethods()
+    {
+        var settings = _settingService.GetSettings();
+
+        paymentMethodComboBox.Items.Clear();
+
+        if (GetBool(settings, "AllowCashPayment", true))
+        {
+            paymentMethodComboBox.Items.Add(PaymentMethodHelper.CashDisplay);
+        }
+
+        if (GetBool(settings, "AllowVnPaySandbox", true))
+        {
+            paymentMethodComboBox.Items.Add(PaymentMethodHelper.VnPaySandboxDisplay);
+        }
+
+        if (GetBool(settings, "AllowMomoSandbox", true))
+        {
+            paymentMethodComboBox.Items.Add(PaymentMethodHelper.MomoSandboxDisplay);
+        }
+
+        if (paymentMethodComboBox.Items.Count == 0)
+        {
+            paymentMethodComboBox.Items.Add(PaymentMethodHelper.CashDisplay);
+        }
+
+        paymentMethodComboBox.SelectedIndex = 0;
+    }
+
+    private static bool GetBool(Dictionary<string, string> settings, string key, bool fallback)
+    {
+        if (!settings.TryGetValue(key, out var value))
+        {
+            return fallback;
+        }
+
+        return value.Equals("true", StringComparison.OrdinalIgnoreCase)
+            || value.Equals("1", StringComparison.OrdinalIgnoreCase)
+            || value.Equals("yes", StringComparison.OrdinalIgnoreCase);
     }
 
     private void MovieComboBox_SelectedIndexChanged(object? sender, EventArgs e)
@@ -115,7 +150,7 @@ public partial class TicketSaleForm : Form
         }
 
         var gap = 8;
-        var width = 42;
+        var width = 48;
         var height = 30;
         var startX = 38;
         var startY = 58;

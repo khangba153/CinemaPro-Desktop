@@ -48,7 +48,7 @@ public partial class ShowtimeManagementForm : Form
     private void LoadShowtimes()
     {
         showtimeGrid.Rows.Clear();
-        foreach (var showtime in _showtimeService.GetShowtimes())
+        foreach (var showtime in _showtimeService.GetShowtimes(includeCancelled: true))
         {
             var rowIndex = showtimeGrid.Rows.Add(
                 showtime.ShowtimeId,
@@ -67,7 +67,10 @@ public partial class ShowtimeManagementForm : Form
             showtimeGrid.ClearSelection();
             showtimeGrid.Rows[0].Selected = true;
             FillInputFromSelectedRow();
+            return;
         }
+
+        ClearInput();
     }
 
     private void CheckConflictButton_Click(object? sender, EventArgs e)
@@ -94,6 +97,12 @@ public partial class ShowtimeManagementForm : Form
 
             if (sender == cancelButton)
             {
+                if (statusComboBox.Text == "Cancelled")
+                {
+                    ShowResult(_showtimeService.UpdateShowtime(_selectedShowtimeId, GetSelectedMovieId(), GetSelectedRoomId(), BuildStartAt(), BuildEndAt(), priceTextBox.Text, formatComboBox.Text, "Open", out var reopenMessage), reopenMessage);
+                    return;
+                }
+
                 ShowResult(_showtimeService.CancelShowtime(_selectedShowtimeId, out var message), message);
             }
         }
@@ -119,6 +128,39 @@ public partial class ShowtimeManagementForm : Form
         priceTextBox.Text = showtime.Price.ToString("0");
         formatComboBox.Text = showtime.Format;
         statusComboBox.Text = showtime.Status;
+        cancelButton.Text = showtime.Status == "Cancelled" ? "Mở lại" : "Hủy suất chiếu";
+        cancelButton.ForeColor = showtime.Status == "Cancelled" ? Color.FromArgb(22, 163, 74) : Color.FromArgb(220, 38, 38);
+    }
+
+    private void ClearInput()
+    {
+        _selectedShowtimeId = "";
+        if (movieComboBox.Items.Count > 0)
+        {
+            movieComboBox.SelectedIndex = 0;
+        }
+
+        if (roomComboBox.Items.Count > 0)
+        {
+            roomComboBox.SelectedIndex = 0;
+        }
+
+        showDatePicker.Value = DateTime.Today;
+        startTimePicker.Value = DateTime.Today.AddHours(9);
+        endTimePicker.Value = DateTime.Today.AddHours(11);
+        priceTextBox.Clear();
+        if (formatComboBox.Items.Count > 0)
+        {
+            formatComboBox.SelectedIndex = 0;
+        }
+
+        if (statusComboBox.Items.Count > 0)
+        {
+            statusComboBox.SelectedIndex = 0;
+        }
+
+        cancelButton.Text = "Hủy suất chiếu";
+        cancelButton.ForeColor = Color.FromArgb(220, 38, 38);
     }
 
     private string GetSelectedMovieId()

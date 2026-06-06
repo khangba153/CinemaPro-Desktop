@@ -31,6 +31,12 @@ public sealed class RoomService
             return false;
         }
 
+        if (status is not ("Active" or "Maintenance" or "Inactive"))
+        {
+            message = "Trạng thái phòng không hợp lệ.";
+            return false;
+        }
+
         _roomRepository.Update(id, roomName.Trim(), roomType, rowCount, seatsPerRow, status);
         message = "Đã cập nhật phòng chiếu.";
         return true;
@@ -38,14 +44,30 @@ public sealed class RoomService
 
     public bool SetMaintenance(string roomId, out string message)
     {
+        return SetRoomStatus(roomId, "Maintenance", out message);
+    }
+
+    public bool SetRoomStatus(string roomId, string status, out string message)
+    {
         if (!int.TryParse(roomId, out var id))
         {
-            message = "Vui lòng chọn phòng cần bảo trì.";
+            message = "Vui lòng chọn phòng cần đổi trạng thái.";
             return false;
         }
 
-        _roomRepository.SetMaintenance(id);
-        message = "Đã chuyển phòng sang trạng thái bảo trì.";
+        if (status is not ("Active" or "Maintenance" or "Inactive"))
+        {
+            message = "Trạng thái phòng không hợp lệ.";
+            return false;
+        }
+
+        _roomRepository.UpdateStatus(id, status);
+        message = status switch
+        {
+            "Active" => "Đã đưa phòng vào hoạt động.",
+            "Maintenance" => "Đã chuyển phòng sang trạng thái bảo trì.",
+            _ => "Đã ngừng sử dụng phòng."
+        };
         return true;
     }
 

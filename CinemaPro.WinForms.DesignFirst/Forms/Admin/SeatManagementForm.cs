@@ -65,6 +65,8 @@ public partial class SeatManagementForm : Form
         }
 
         _seatService.UpdateRoomSeatLayout(room.RoomId, rowCount, columnCount, builderForm.CreatedSeats);
+        room.Rows = rowCount;
+        room.SeatsPerRow = columnCount;
         FillRoomSizeInputs();
         RenderSeatMap();
 
@@ -119,7 +121,7 @@ public partial class SeatManagementForm : Form
             .ToList();
 
         const int gap = 8;
-        const int buttonWidth = 48;
+        const int buttonWidth = 54;
         const int buttonHeight = 32;
         const int startX = 90;
         const int startY = 120;
@@ -135,7 +137,7 @@ public partial class SeatManagementForm : Form
                     startX + seat.ColumnIndex * (buttonWidth + gap),
                     startY + seat.RowIndex * (buttonHeight + gap)),
                 FlatStyle = FlatStyle.Flat,
-                Font = new Font("Segoe UI", 8F, FontStyle.Bold),
+                Font = new Font("Segoe UI", 8.5F, FontStyle.Bold),
                 TextAlign = ContentAlignment.MiddleCenter,
                 Cursor = Cursors.Hand
             };

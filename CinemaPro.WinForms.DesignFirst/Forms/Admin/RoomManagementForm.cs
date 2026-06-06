@@ -18,6 +18,7 @@ public partial class RoomManagementForm : Form
     private void RoomManagementForm_Load(object? sender, EventArgs e)
     {
         roomTypeComboBox.SelectedIndex = 0;
+        roomStatusComboBox.SelectedIndex = 0;
         LoadRooms();
     }
 
@@ -33,13 +34,14 @@ public partial class RoomManagementForm : Form
 
             if (sender == editRoomButton)
             {
-                ShowResult(_roomService.UpdateRoom(_selectedRoomId, roomNameTextBox.Text, roomTypeComboBox.Text, (int)rowCountInput.Value, (int)seatPerRowInput.Value, _selectedRoomStatus, out var message), message);
+                ShowResult(_roomService.UpdateRoom(_selectedRoomId, roomNameTextBox.Text, roomTypeComboBox.Text, (int)rowCountInput.Value, (int)seatPerRowInput.Value, roomStatusComboBox.Text, out var message), message);
                 return;
             }
 
             if (sender == maintenanceButton)
             {
-                ShowResult(_roomService.SetMaintenance(_selectedRoomId, out var message), message);
+                var nextStatus = _selectedRoomStatus == "Maintenance" ? "Active" : "Maintenance";
+                ShowResult(_roomService.SetRoomStatus(_selectedRoomId, nextStatus, out var message), message);
                 return;
             }
 
@@ -68,7 +70,10 @@ public partial class RoomManagementForm : Form
             roomGrid.ClearSelection();
             roomGrid.Rows[0].Selected = true;
             FillDetailFromSelectedRow();
+            return;
         }
+
+        ClearDetail();
     }
 
     private void FillDetailFromSelectedRow()
@@ -82,8 +87,32 @@ public partial class RoomManagementForm : Form
         _selectedRoomStatus = room.Status;
         roomNameTextBox.Text = room.RoomName;
         roomTypeComboBox.Text = room.RoomType;
+        roomStatusComboBox.Text = room.Status;
         rowCountInput.Value = Math.Max(rowCountInput.Minimum, Math.Min(rowCountInput.Maximum, room.Rows));
         seatPerRowInput.Value = Math.Max(seatPerRowInput.Minimum, Math.Min(seatPerRowInput.Maximum, room.SeatsPerRow));
+        maintenanceButton.Text = room.Status == "Maintenance" ? "Đưa vào hoạt động" : "Bảo trì phòng";
+        maintenanceButton.ForeColor = room.Status == "Maintenance" ? Color.FromArgb(22, 163, 74) : Color.FromArgb(220, 38, 38);
+    }
+
+    private void ClearDetail()
+    {
+        _selectedRoomId = "";
+        _selectedRoomStatus = "Active";
+        roomNameTextBox.Clear();
+        if (roomTypeComboBox.Items.Count > 0)
+        {
+            roomTypeComboBox.SelectedIndex = 0;
+        }
+
+        if (roomStatusComboBox.Items.Count > 0)
+        {
+            roomStatusComboBox.SelectedIndex = 0;
+        }
+
+        rowCountInput.Value = rowCountInput.Minimum;
+        seatPerRowInput.Value = seatPerRowInput.Minimum;
+        maintenanceButton.Text = "Bảo trì phòng";
+        maintenanceButton.ForeColor = Color.FromArgb(220, 38, 38);
     }
 
     private void ShowResult(bool success, string message)

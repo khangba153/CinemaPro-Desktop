@@ -30,12 +30,8 @@ public partial class MovieManagementForm : Form
     {
         try
         {
-            var status = statusComboBox.Text.StartsWith("Tất cả", StringComparison.OrdinalIgnoreCase)
-                ? "NowShowing"
-                : statusComboBox.Text;
-            var genre = genreComboBox.Text.StartsWith("Tất cả", StringComparison.OrdinalIgnoreCase)
-                ? _movieService.GetGenres().FirstOrDefault() ?? ""
-                : genreComboBox.Text;
+            var status = movieStatusComboBox.Text;
+            var genre = movieGenreComboBox.Text;
 
             if (sender == addButton)
             {
@@ -51,7 +47,8 @@ public partial class MovieManagementForm : Form
 
             if (sender == deleteButton)
             {
-                ShowResult(_movieService.StopMovie(_selectedMovieId, out var message), message);
+                var nextStatus = movieStatusComboBox.Text == "Stopped" ? "NowShowing" : "Stopped";
+                ShowResult(_movieService.SetMovieStatus(_selectedMovieId, nextStatus, out var message), message);
             }
         }
         catch (Exception ex)
@@ -90,7 +87,10 @@ public partial class MovieManagementForm : Form
             movieGrid.ClearSelection();
             movieGrid.Rows[0].Selected = true;
             FillDetailFromSelectedRow();
+            return;
         }
+
+        ClearDetail();
     }
 
     private void LoadComboboxes()
@@ -100,9 +100,20 @@ public partial class MovieManagementForm : Form
         genreComboBox.Items.AddRange(_movieService.GetGenres().Cast<object>().ToArray());
         genreComboBox.SelectedIndex = 0;
 
+        movieGenreComboBox.Items.Clear();
+        movieGenreComboBox.Items.AddRange(_movieService.GetGenres().Cast<object>().ToArray());
+        if (movieGenreComboBox.Items.Count > 0)
+        {
+            movieGenreComboBox.SelectedIndex = 0;
+        }
+
         statusComboBox.Items.Clear();
         statusComboBox.Items.AddRange(new object[] { "Tất cả trạng thái", "NowShowing", "ComingSoon", "Stopped" });
         statusComboBox.SelectedIndex = 0;
+
+        movieStatusComboBox.Items.Clear();
+        movieStatusComboBox.Items.AddRange(new object[] { "NowShowing", "ComingSoon", "Stopped" });
+        movieStatusComboBox.SelectedIndex = 0;
     }
 
     private void FillDetailFromSelectedRow()
@@ -117,8 +128,35 @@ public partial class MovieManagementForm : Form
         directorTextBox.Text = movie.Director;
         durationTextBox.Text = movie.DurationMinutes.ToString();
         ageComboBox.Text = movie.AgeRating;
-        genreComboBox.Text = movie.Genre;
-        statusComboBox.Text = movie.Status;
+        movieGenreComboBox.Text = movie.Genre;
+        movieStatusComboBox.Text = movie.Status;
+        deleteButton.Text = movie.Status == "Stopped" ? "Mở chiếu lại" : "Ngừng chiếu";
+        deleteButton.ForeColor = movie.Status == "Stopped" ? Color.FromArgb(22, 163, 74) : Color.FromArgb(220, 38, 38);
+    }
+
+    private void ClearDetail()
+    {
+        _selectedMovieId = "";
+        titleTextBox.Clear();
+        directorTextBox.Clear();
+        durationTextBox.Clear();
+        if (ageComboBox.Items.Count > 0)
+        {
+            ageComboBox.SelectedIndex = 0;
+        }
+
+        if (movieGenreComboBox.Items.Count > 0)
+        {
+            movieGenreComboBox.SelectedIndex = 0;
+        }
+
+        if (movieStatusComboBox.Items.Count > 0)
+        {
+            movieStatusComboBox.SelectedIndex = 0;
+        }
+
+        deleteButton.Text = "Ngừng chiếu";
+        deleteButton.ForeColor = Color.FromArgb(220, 38, 38);
     }
 
     private void ShowResult(bool success, string message)

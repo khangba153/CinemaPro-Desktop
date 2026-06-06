@@ -2,7 +2,7 @@ namespace CinemaPro.WinForms.DesignFirst.Repositories;
 
 public sealed class ShowtimeRepository
 {
-    public IReadOnlyList<ShowtimeRow> GetShowtimes()
+    public IReadOnlyList<ShowtimeRow> GetShowtimes(bool includeCancelled = false)
     {
         const string sql = """
             SELECT
@@ -21,11 +21,13 @@ public sealed class ShowtimeRepository
                 ON Movie.MovieId = Showtime.MovieId
             INNER JOIN dbo.Rooms AS Room
                 ON Room.RoomId = Showtime.RoomId
-            WHERE Showtime.ShowtimeStatus <> N'Cancelled'
+            WHERE (@IncludeCancelled = 1 OR Showtime.ShowtimeStatus <> N'Cancelled')
             ORDER BY Showtime.StartAt;
             """;
 
-        var table = DatabaseHelper.ExecuteQuery(sql);
+        var table = DatabaseHelper.ExecuteQuery(
+            sql,
+            new SqlParameter("@IncludeCancelled", includeCancelled ? 1 : 0));
         var showtimes = new List<ShowtimeRow>();
 
         foreach (DataRow row in table.Rows)

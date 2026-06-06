@@ -13,6 +13,7 @@ partial class RoomManagementForm
     private Panel detailPanel = null!;
     private TextBox roomNameTextBox = null!;
     private ComboBox roomTypeComboBox = null!;
+    private ComboBox roomStatusComboBox = null!;
     private NumericUpDown rowCountInput = null!;
     private NumericUpDown seatPerRowInput = null!;
 
@@ -34,6 +35,7 @@ partial class RoomManagementForm
         detailPanel = new Panel();
         roomNameTextBox = new TextBox();
         roomTypeComboBox = new ComboBox();
+        roomStatusComboBox = new ComboBox();
         rowCountInput = new NumericUpDown();
         seatPerRowInput = new NumericUpDown();
         var title = new Label();
@@ -42,6 +44,7 @@ partial class RoomManagementForm
         var typeLabel = new Label();
         var rowLabel = new Label();
         var seatLabel = new Label();
+        var statusLabel = new Label();
         actionPanel.SuspendLayout();
         gridPanel.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)roomGrid).BeginInit();
@@ -117,6 +120,8 @@ partial class RoomManagementForm
         detailPanel.Controls.Add(rowCountInput);
         detailPanel.Controls.Add(typeLabel);
         detailPanel.Controls.Add(roomTypeComboBox);
+        detailPanel.Controls.Add(statusLabel);
+        detailPanel.Controls.Add(roomStatusComboBox);
         detailPanel.Controls.Add(nameLabel);
         detailPanel.Controls.Add(roomNameTextBox);
         detailPanel.Controls.Add(detailTitle);
@@ -144,6 +149,13 @@ partial class RoomManagementForm
         seatLabel.Text = "Ghế mỗi hàng";
         seatPerRowInput.Location = new Point(174, 220);
         seatPerRowInput.Value = 8;
+        statusLabel.Location = new Point(22, 262);
+        statusLabel.Size = new Size(120, 20);
+        statusLabel.Text = "Trạng thái";
+        roomStatusComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+        roomStatusComboBox.Items.AddRange(new object[] { "Active", "Maintenance", "Inactive" });
+        roomStatusComboBox.Location = new Point(22, 286);
+        roomStatusComboBox.Size = new Size(290, 23);
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.FromArgb(245, 247, 251);

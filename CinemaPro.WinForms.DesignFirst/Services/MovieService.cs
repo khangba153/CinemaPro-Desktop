@@ -40,14 +40,27 @@ public sealed class MovieService
 
     public bool StopMovie(string movieId, out string message)
     {
+        return SetMovieStatus(movieId, "Stopped", out message);
+    }
+
+    public bool SetMovieStatus(string movieId, string status, out string message)
+    {
         if (!int.TryParse(movieId, out var id))
         {
-            message = "Vui lòng chọn phim cần ngừng chiếu.";
+            message = "Vui lòng chọn phim cần đổi trạng thái.";
             return false;
         }
 
-        _movieRepository.Stop(id);
-        message = "Đã ngừng chiếu phim.";
+        if (status is not ("NowShowing" or "ComingSoon" or "Stopped"))
+        {
+            message = "Trạng thái phim không hợp lệ.";
+            return false;
+        }
+
+        _movieRepository.UpdateStatus(id, status);
+        message = status == "Stopped"
+            ? "Đã ngừng chiếu phim."
+            : "Đã mở chiếu lại phim.";
         return true;
     }
 

@@ -106,14 +106,22 @@ public sealed class RoomRepository
 
     public void SetMaintenance(int roomId)
     {
+        UpdateStatus(roomId, "Maintenance");
+    }
+
+    public void UpdateStatus(int roomId, string status)
+    {
         const string sql = """
             UPDATE dbo.Rooms
             SET
-                RoomStatus = N'Maintenance',
+                RoomStatus = @RoomStatus,
                 UpdatedAt = SYSDATETIME()
             WHERE RoomId = @RoomId;
             """;
 
-        DatabaseHelper.ExecuteNonQuery(sql, new SqlParameter("@RoomId", roomId));
+        DatabaseHelper.ExecuteNonQuery(
+            sql,
+            new SqlParameter("@RoomId", roomId),
+            new SqlParameter("@RoomStatus", status));
     }
 }
