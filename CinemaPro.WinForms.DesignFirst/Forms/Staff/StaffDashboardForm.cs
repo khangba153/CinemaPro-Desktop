@@ -4,6 +4,7 @@ public partial class StaffDashboardForm : Form
 {
     private readonly ShowtimeService _showtimeService = new();
     private readonly TicketService _ticketService = new();
+    private readonly ReportService _reportService = new();
 
     public StaffDashboardForm()
     {
@@ -15,10 +16,11 @@ public partial class StaffDashboardForm : Form
     {
         var todayShowtimes = _showtimeService.GetShowtimes().Where(item => item.Date.Date == DateTime.Today).ToList();
         var todayTickets = _ticketService.GetTickets().Where(item => item.SoldAt.Date == DateTime.Today).ToList();
+        var todayRevenueRows = _reportService.GetRevenueRows().Where(item => item.Date.Date == DateTime.Today).ToList();
 
         todayShowtimeValueLabel.Text = todayShowtimes.Count.ToString();
-        shiftTicketValueLabel.Text = todayTickets.Count.ToString();
-        shiftRevenueValueLabel.Text = FormatHelper.Vnd(todayTickets.Sum(item => item.TotalAmount));
+        shiftTicketValueLabel.Text = todayRevenueRows.Sum(item => item.TicketCount).ToString();
+        shiftRevenueValueLabel.Text = FormatHelper.Vnd(todayRevenueRows.Sum(item => item.Revenue));
         pendingCheckValueLabel.Text = todayTickets.Count(item => item.Status == "Unused").ToString();
 
         todayShowtimeGrid.Rows.Clear();

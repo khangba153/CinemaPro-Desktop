@@ -2,7 +2,7 @@ namespace CinemaPro.WinForms.DesignFirst.Services;
 
 public sealed class MovieService
 {
-    private readonly MovieRepository _movieRepository = new();
+    private readonly EfMovieRepository _movieRepository = new();
 
     public IReadOnlyList<MovieRow> GetMovies() => _movieRepository.GetMovies();
 

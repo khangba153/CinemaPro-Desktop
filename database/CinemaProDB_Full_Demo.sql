@@ -233,7 +233,8 @@ GO
    - Ban ve theo tung ghe.
 
    Luu y:
-   - SeatStatus chi co Active/Maintenance.
+   - SeatStatus co Active/Maintenance/Inactive.
+   - PhysicalRowIndex va PhysicalColumnIndex dung de giu dung vi tri ghe/lối đi tren so do ghe.
    - Trang thai Sold khong luu o Seats, vi ghe chi Sold theo tung suat chieu.
    - Ghe da ban se duoc xac dinh qua TicketDetails.
 ------------------------------------------------------------ */
@@ -245,6 +246,10 @@ CREATE TABLE dbo.Seats
     SeatCode NVARCHAR(20) NOT NULL,
     RowLabel NVARCHAR(5) NOT NULL,
     SeatNumber INT NOT NULL,
+    PhysicalRowIndex INT NOT NULL
+        CONSTRAINT DF_Seats_PhysicalRowIndex DEFAULT 0,
+    PhysicalColumnIndex INT NOT NULL
+        CONSTRAINT DF_Seats_PhysicalColumnIndex DEFAULT 0,
     SeatStatus NVARCHAR(30) NOT NULL
         CONSTRAINT DF_Seats_SeatStatus DEFAULT N'Active',
 
@@ -261,8 +266,11 @@ CREATE TABLE dbo.Seats
     CONSTRAINT CK_Seats_SeatNumber
         CHECK (SeatNumber > 0),
 
+    CONSTRAINT CK_Seats_PhysicalPosition
+        CHECK (PhysicalRowIndex >= 0 AND PhysicalColumnIndex >= 0),
+
     CONSTRAINT CK_Seats_SeatStatus
-        CHECK (SeatStatus IN (N'Active', N'Maintenance'))
+        CHECK (SeatStatus IN (N'Active', N'Maintenance', N'Inactive'))
 );
 GO
 
@@ -652,7 +660,7 @@ GO
    Trigger nay chan 3 loi:
    1. ShowtimeId trong TicketDetails khong khop ShowtimeId cua Tickets.
    2. Ghe khong thuoc phong cua suat chieu.
-   3. Ghe dang Maintenance nhung van bi ban.
+   3. Ghe dang Maintenance/Inactive nhung van bi ban.
 ------------------------------------------------------------ */
 
 CREATE TRIGGER dbo.trg_TicketDetails_ValidateSeat
@@ -703,10 +711,10 @@ BEGIN
         INNER JOIN dbo.Seats AS Seat
             ON Seat.SeatId = InsertedTicketDetail.SeatId
         WHERE InsertedTicketDetail.TicketDetailStatus = N'Active'
-            AND Seat.SeatStatus = N'Maintenance'
+            AND Seat.SeatStatus IN (N'Maintenance', N'Inactive')
     )
     BEGIN
-        RAISERROR(N'Ghế đang bảo trì, không được bán vé.', 16, 1);
+        RAISERROR(N'Ghế đang bảo trì hoặc không hoạt động, không được bán vé.', 16, 1);
         RETURN;
     END;
 END;
@@ -987,6 +995,8 @@ BEGIN
                 SeatCode,
                 RowLabel,
                 SeatNumber,
+                PhysicalRowIndex,
+                PhysicalColumnIndex,
                 SeatStatus
             )
             VALUES
@@ -995,6 +1005,8 @@ BEGIN
                 @CurrentSeatCode,
                 @CurrentRowLabel,
                 @CurrentSeatNumber,
+                @CurrentRowIndex - 1,
+                @CurrentSeatNumber - 1,
                 N'Active'
             );
 
@@ -1542,9 +1554,19 @@ VALUES
     N'Don vi tien te mac dinh'
 ),
 (
+    N'AllowCashPayment',
+    N'true',
+    N'Bat/tat thanh toan tien mat'
+),
+(
     N'AllowVnPaySandbox',
     N'true',
     N'Bat/tat thanh toan VNPAY Sandbox gia lap'
+),
+(
+    N'AllowMomoSandbox',
+    N'true',
+    N'Bat/tat thanh toan MoMo Sandbox gia lap'
 ),
 (
     N'TicketCodePrefix',

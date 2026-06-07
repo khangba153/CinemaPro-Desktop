@@ -2,7 +2,7 @@ namespace CinemaPro.WinForms.DesignFirst.Services;
 
 public sealed class SettingService
 {
-    private readonly AppSettingRepository _settingRepository = new();
+    private readonly EfAppSettingRepository _settingRepository = new();
 
     public Dictionary<string, string> GetSettings()
     {
