@@ -7,8 +7,6 @@ namespace CinemaPro.WinForms.DesignFirst.Forms.Admin;
 public partial class RoomManagementForm : Form
 {
     private readonly RoomService _roomService = new();
-    private string _selectedRoomId = "";
-    private string _selectedRoomStatus = "Active";
     public const string Active = "Active";
     public const string Maintenance = "Maintenance";
 
