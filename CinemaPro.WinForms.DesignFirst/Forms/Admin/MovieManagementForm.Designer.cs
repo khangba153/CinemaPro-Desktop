@@ -18,6 +18,8 @@ partial class MovieManagementForm
     private TextBox directorTextBox = null!;
     private TextBox durationTextBox = null!;
     private ComboBox ageComboBox = null!;
+    private ComboBox movieGenreComboBox = null!;
+    private ComboBox movieStatusComboBox = null!;
 
     protected override void Dispose(bool disposing)
     {
@@ -46,6 +48,8 @@ partial class MovieManagementForm
         directorTextBox = new TextBox();
         durationTextBox = new TextBox();
         ageComboBox = new ComboBox();
+        movieGenreComboBox = new ComboBox();
+        movieStatusComboBox = new ComboBox();
         var detailTitleLabel = new Label();
         var posterBox = new Panel();
         var posterLabel = new Label();
@@ -53,6 +57,8 @@ partial class MovieManagementForm
         var directorLabel = new Label();
         var durationLabel = new Label();
         var ageLabel = new Label();
+        var movieGenreLabel = new Label();
+        var movieStatusLabel = new Label();
         var listTitleLabel = new Label();
         filterPanel.SuspendLayout();
         gridPanel.SuspendLayout();
@@ -141,6 +147,10 @@ partial class MovieManagementForm
         movieGrid.Rows.Add("MV001", "Avengers: Endgame", "Hành động", "182 phút", "C13", "Anthony Russo", "Đang chiếu");
         detailPanel.BackColor = Color.White;
         detailPanel.BorderStyle = BorderStyle.FixedSingle;
+        detailPanel.Controls.Add(movieStatusLabel);
+        detailPanel.Controls.Add(movieStatusComboBox);
+        detailPanel.Controls.Add(movieGenreLabel);
+        detailPanel.Controls.Add(movieGenreComboBox);
         detailPanel.Controls.Add(ageLabel);
         detailPanel.Controls.Add(ageComboBox);
         detailPanel.Controls.Add(durationLabel);
@@ -189,6 +199,20 @@ partial class MovieManagementForm
         ageComboBox.Items.AddRange(new object[] { "P", "C13", "C16", "C18" });
         ageComboBox.Location = new Point(174, 326);
         ageComboBox.Size = new Size(138, 23);
+        movieGenreLabel.AutoSize = true;
+        movieGenreLabel.Location = new Point(22, 366);
+        movieGenreLabel.Text = "Thể loại";
+        movieGenreComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+        movieGenreComboBox.Items.AddRange(new object[] { "Hành động", "Tâm lý", "Hoạt hình" });
+        movieGenreComboBox.Location = new Point(22, 388);
+        movieGenreComboBox.Size = new Size(138, 23);
+        movieStatusLabel.AutoSize = true;
+        movieStatusLabel.Location = new Point(174, 366);
+        movieStatusLabel.Text = "Trạng thái";
+        movieStatusComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+        movieStatusComboBox.Items.AddRange(new object[] { "NowShowing", "ComingSoon", "Stopped" });
+        movieStatusComboBox.Location = new Point(174, 388);
+        movieStatusComboBox.Size = new Size(138, 23);
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.FromArgb(245, 247, 251);

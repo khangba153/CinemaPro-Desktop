@@ -1,13 +1,11 @@
-using System.Data;
 using Microsoft.Data.SqlClient;
 
-namespace CinemaPro.WinForms.DesignFirst.Data
+namespace CinemaPro.WinForms.DesignFirst.Data;
+
+public static class DbConnectionFactory
 {
-    public static class DbConnectionFactory
+    public static SqlConnection CreateConnection()
     {
-        public static SqlConnection CreateConnection()
-        {
-            return new SqlConnection(AppDbConfig.ConnectionString);
-        }
+        return new SqlConnection(AppDbConfig.ConnectionString);
     }
 }

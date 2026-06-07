@@ -213,7 +213,7 @@ partial class LoginForm
         loginSubtitleLabel.Name = "loginSubtitleLabel";
         loginSubtitleLabel.Size = new Size(284, 38);
         loginSubtitleLabel.TabIndex = 1;
-        loginSubtitleLabel.Text = "Đăng nhập bằng tài khoản demo để bắt đầu phiên vận hành.";
+        loginSubtitleLabel.Text = "Đăng nhập bằng tài khoản trong database để bắt đầu phiên vận hành.";
         // 
         // loginTitleLabel
         // 

@@ -1,29 +1,309 @@
+using CinemaPro.WinForms.DesignFirst.Helpers;
+using CinemaPro.WinForms.DesignFirst.Services;
+using CinemaPro.WinForms.DesignFirst.Session;
+using CinemaPro.WinForms.DesignFirst.ViewModels;
+
 namespace CinemaPro.WinForms.DesignFirst.Forms.Staff;
 
 public partial class TicketSaleForm : Form
 {
+    private readonly MovieService _movieService = new();
+    private readonly ShowtimeService _showtimeService = new();
+    private readonly SeatService _seatService = new();
+    private readonly TicketService _ticketService = new();
+    private readonly SettingService _settingService = new();
+    private readonly List<string> _selectedSeats = [];
+    private ShowtimeRow? _currentShowtime;
+
     public TicketSaleForm()
     {
         InitializeComponent();
+        UiStyleHelper.StyleGrid(recentTicketsGrid);
+        seatMapPanel.AutoScroll = true;
     }
 
     private void TicketSaleForm_Load(object? sender, EventArgs e)
     {
+        movieComboBox.DisplayMember = nameof(MovieRow.Title);
+        movieComboBox.ValueMember = nameof(MovieRow.MovieId);
+        movieComboBox.DataSource = _movieService.GetMovies().ToList();
+
+        LoadPaymentMethods();
+
+        LoadRecentTickets();
+    }
+
+    private void LoadPaymentMethods()
+    {
+        var settings = _settingService.GetSettings();
+
+        paymentMethodComboBox.Items.Clear();
+
+        if (GetBool(settings, "AllowCashPayment", true))
+        {
+            paymentMethodComboBox.Items.Add(PaymentMethodHelper.CashDisplay);
+        }
+
+        if (GetBool(settings, "AllowVnPaySandbox", true))
+        {
+            paymentMethodComboBox.Items.Add(PaymentMethodHelper.VnPaySandboxDisplay);
+        }
+
+        if (GetBool(settings, "AllowMomoSandbox", true))
+        {
+            paymentMethodComboBox.Items.Add(PaymentMethodHelper.MomoSandboxDisplay);
+        }
+
+        if (paymentMethodComboBox.Items.Count == 0)
+        {
+            paymentMethodComboBox.Items.Add(PaymentMethodHelper.CashDisplay);
+        }
+
+        paymentMethodComboBox.SelectedIndex = 0;
+    }
+
+    private static bool GetBool(Dictionary<string, string> settings, string key, bool fallback)
+    {
+        if (!settings.TryGetValue(key, out var value))
+        {
+            return fallback;
+        }
+
+        return value.Equals("true", StringComparison.OrdinalIgnoreCase)
+            || value.Equals("1", StringComparison.OrdinalIgnoreCase)
+            || value.Equals("yes", StringComparison.OrdinalIgnoreCase);
     }
 
     private void MovieComboBox_SelectedIndexChanged(object? sender, EventArgs e)
     {
+        if (movieComboBox.SelectedItem is not MovieRow movie)
+        {
+            return;
+        }
+
+        var showtimes = _showtimeService
+            .GetShowtimes()
+            .Where(item => item.MovieId == movie.MovieId)
+            .ToList();
+
+        showtimeComboBox.DisplayMember = nameof(ShowtimeRow.DisplayText);
+        showtimeComboBox.ValueMember = nameof(ShowtimeRow.ShowtimeId);
+        showtimeComboBox.DataSource = showtimes;
     }
 
     private void ShowtimeComboBox_SelectedIndexChanged(object? sender, EventArgs e)
     {
+        _currentShowtime = showtimeComboBox.SelectedItem as ShowtimeRow;
+        _selectedSeats.Clear();
+        UpdateSummary();
+        FillShowtimeInfo();
+        RenderSeatMap();
+    }
+
+    private void FillShowtimeInfo()
+    {
+        if (_currentShowtime is null)
+        {
+            movieTitleValueLabel.Text = "-";
+            roomValueLabel.Text = "-";
+            formatValueLabel.Text = "-";
+            priceValueLabel.Text = "-";
+            return;
+        }
+
+        movieTitleValueLabel.Text = _currentShowtime.MovieTitle;
+        roomValueLabel.Text = _currentShowtime.RoomName;
+        formatValueLabel.Text = _currentShowtime.Format;
+        priceValueLabel.Text = FormatHelper.Vnd(_currentShowtime.Price);
+    }
+
+    private void RenderSeatMap()
+    {
+        seatMapPanel.Controls.Clear();
+
+        var screenLabel = new Label
+        {
+            Text = "MÀN HÌNH",
+            BackColor = Color.FromArgb(226, 232, 240),
+            ForeColor = Color.FromArgb(71, 85, 105),
+            Font = new Font("Segoe UI", 9F, FontStyle.Bold),
+            TextAlign = ContentAlignment.MiddleCenter,
+            Location = new Point(70, 14),
+            Size = new Size(360, 28)
+        };
+        seatMapPanel.Controls.Add(screenLabel);
+
+        if (_currentShowtime is null)
+        {
+            return;
+        }
+
+        var seats = _seatService
+            .GetSeatsForShowtime(_currentShowtime.ShowtimeId)
+            .OrderBy(seat => seat.RowIndex)
+            .ThenBy(seat => seat.ColumnIndex)
+            .ToList();
+
+        if (seats.Count == 0)
+        {
+            return;
+        }
+
+        var gap = 8;
+        var width = 48;
+        var height = 30;
+        var startX = 38;
+        var startY = 58;
+
+        foreach (var seat in seats)
+        {
+            var button = new Button
+            {
+                Text = seat.SeatCode,
+                Tag = seat,
+                Size = new Size(width, height),
+                Location = new Point(
+                    startX + seat.ColumnIndex * (width + gap),
+                    startY + seat.RowIndex * (height + gap)),
+                FlatStyle = FlatStyle.Flat,
+                Font = new Font("Segoe UI", 8F, FontStyle.Bold),
+                TextAlign = ContentAlignment.MiddleCenter,
+                Cursor = Cursors.Hand
+            };
+            button.FlatAppearance.BorderSize = 1;
+            ApplySeatStyle(button, seat.Status);
+            button.Click += SeatButton_Click;
+            seatMapPanel.Controls.Add(button);
+        }
+    }
+
+    private static void ApplySeatStyle(Button button, SeatStatus status)
+    {
+        switch (status)
+        {
+            case SeatStatus.Available:
+                button.BackColor = Color.White;
+                button.ForeColor = Color.FromArgb(17, 24, 39);
+                button.FlatAppearance.BorderColor = Color.FromArgb(203, 213, 225);
+                button.Enabled = true;
+                break;
+            case SeatStatus.Selected:
+                button.BackColor = Color.FromArgb(37, 99, 235);
+                button.ForeColor = Color.White;
+                button.FlatAppearance.BorderColor = Color.FromArgb(37, 99, 235);
+                button.Enabled = true;
+                break;
+            case SeatStatus.Sold:
+                button.BackColor = Color.FromArgb(220, 38, 38);
+                button.ForeColor = Color.White;
+                button.FlatAppearance.BorderColor = Color.FromArgb(220, 38, 38);
+                button.Enabled = false;
+                break;
+            case SeatStatus.Maintenance:
+                button.BackColor = Color.FromArgb(148, 163, 184);
+                button.ForeColor = Color.White;
+                button.FlatAppearance.BorderColor = Color.FromArgb(148, 163, 184);
+                button.Enabled = false;
+                break;
+        }
+    }
+
+    private void SeatButton_Click(object? sender, EventArgs e)
+    {
+        if (sender is not Button button || button.Tag is not SeatInfo seat)
+        {
+            return;
+        }
+
+        if (seat.Status is SeatStatus.Sold or SeatStatus.Maintenance)
+        {
+            return;
+        }
+
+        if (_selectedSeats.Contains(seat.SeatCode))
+        {
+            _selectedSeats.Remove(seat.SeatCode);
+            seat.Status = SeatStatus.Available;
+        }
+        else
+        {
+            _selectedSeats.Add(seat.SeatCode);
+            seat.Status = SeatStatus.Selected;
+        }
+
+        ApplySeatStyle(button, seat.Status);
+        UpdateSummary();
+    }
+
+    private void UpdateSummary()
+    {
+        selectedSeatListBox.Items.Clear();
+        if (_selectedSeats.Count == 0)
+        {
+            selectedSeatListBox.Items.Add("Chưa chọn ghế");
+        }
+        else
+        {
+            foreach (var seat in _selectedSeats.OrderBy(item => item))
+            {
+                selectedSeatListBox.Items.Add(seat);
+            }
+        }
+
+        var price = _currentShowtime?.Price ?? 0;
+        totalValueLabel.Text = FormatHelper.Vnd(_selectedSeats.Count * price);
+        selectedCountLabel.Text = $"{_selectedSeats.Count} ghế";
+        paymentButton.Enabled = _selectedSeats.Count > 0;
+        paymentButton.BackColor = paymentButton.Enabled ? Color.FromArgb(37, 99, 235) : Color.FromArgb(226, 232, 240);
+        paymentButton.ForeColor = paymentButton.Enabled ? Color.White : Color.FromArgb(100, 116, 139);
     }
 
     private void PaymentButton_Click(object? sender, EventArgs e)
     {
+        if (_currentShowtime is null || _selectedSeats.Count == 0)
+        {
+            MessageBox.Show("Vui lòng chọn suất chiếu và ghế trước khi thanh toán.", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return;
+        }
+
+        var summary = new PaymentSummary
+        {
+            TicketCode = "TK-TẠM",
+            MovieTitle = _currentShowtime.MovieTitle,
+            ShowtimeId = _currentShowtime.ShowtimeId,
+            ShowtimeText = _currentShowtime.TimeText,
+            RoomId = _currentShowtime.RoomId,
+            RoomName = _currentShowtime.RoomName,
+            Seats = _selectedSeats.OrderBy(item => item).ToList(),
+            TotalAmount = _selectedSeats.Count * _currentShowtime.Price,
+            PaymentMethod = paymentMethodComboBox.Text
+        };
+
+        using var paymentForm = new PaymentForm(summary);
+        if (paymentForm.ShowDialog(this) == DialogResult.OK)
+        {
+            var ticket = _ticketService.CreateTicket(summary, UserSession.FullName);
+            MessageBox.Show($"Đã tạo vé {ticket.TicketCode}.", "Bán vé thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            _selectedSeats.Clear();
+            UpdateSummary();
+            RenderSeatMap();
+            LoadRecentTickets();
+        }
     }
 
     private void ClearButton_Click(object? sender, EventArgs e)
     {
+        _selectedSeats.Clear();
+        UpdateSummary();
+        RenderSeatMap();
+    }
+
+    private void LoadRecentTickets()
+    {
+        recentTicketsGrid.Rows.Clear();
+        foreach (var ticket in _ticketService.GetTickets().Take(5))
+        {
+            recentTicketsGrid.Rows.Add(ticket.TicketCode, ticket.MovieTitle, ticket.Seats, FormatHelper.Vnd(ticket.TotalAmount), FormatHelper.TicketStatusText(ticket.Status));
+        }
     }
 }
