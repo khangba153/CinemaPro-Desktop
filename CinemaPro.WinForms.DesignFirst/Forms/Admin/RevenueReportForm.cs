@@ -37,7 +37,7 @@ public partial class RevenueReportForm : Form
         todayRevenueValueLabel.Text = FormatHelper.Vnd(tickets.Sum(ticket => ticket.TotalAmount));
         totalTicketValueLabel.Text = tickets.Count.ToString();
         topMovieValueLabel.Text = revenueRows.OrderByDescending(row => row.TicketCount).FirstOrDefault()?.MovieTitle ?? "-";
-        bestShowtimeValueLabel.Text = _showtimeService.GetShowtimes().OrderByDescending(item => item.Price).FirstOrDefault()?.DisplayText ?? "-";
+        bestShowtimeValueLabel.Text = "-";
 
         revenueGrid.Rows.Clear();
         foreach (var row in revenueRows)

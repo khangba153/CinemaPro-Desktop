@@ -22,7 +22,7 @@ public partial class AdminDashboardForm : Form
     {
         var movies = _movieService.GetMovies();
         var rooms = _roomService.GetRooms();
-        var showtimes = _showtimeService.GetShowtimes();
+        var showtimes = _showtimeService.GetAllShowtimes();
         var tickets = _ticketService.GetTickets();
 
         totalMovieValueLabel.Text = movies.Count.ToString();

@@ -82,7 +82,7 @@ public partial class TicketSaleForm : Form
         }
 
         var showtimes = _showtimeService
-            .GetShowtimes()
+            .GetAllShowtimes()
             .Where(item => item.MovieId == movie.MovieId)
             .ToList();
 

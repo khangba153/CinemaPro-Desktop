@@ -13,7 +13,7 @@ public partial class StaffDashboardForm : Form
 
     private void StaffDashboardForm_Load(object? sender, EventArgs e)
     {
-        var todayShowtimes = _showtimeService.GetShowtimes().Where(item => item.Date.Date == DateTime.Today).ToList();
+        var todayShowtimes = _showtimeService.GetAllShowtimes().Where(item => item.Date.Date == DateTime.Today).ToList();
         var todayTickets = _ticketService.GetTickets().Where(item => item.SoldAt.Date == DateTime.Today).ToList();
 
         todayShowtimeValueLabel.Text = todayShowtimes.Count.ToString();
