@@ -4,16 +4,21 @@ public sealed class SeatRepository
 {
     public IReadOnlyList<SeatInfo> GetSeats(string roomId)
     {
+        SeatLayoutRepository.EnsureSeatPositionSchema();
+
         const string sql = """
             SELECT
                 Seat.RoomId,
                 Seat.SeatCode,
                 Seat.RowLabel,
                 Seat.SeatNumber,
+                ISNULL(Seat.PhysicalRowIndex, 0) AS PhysicalRowIndex,
+                ISNULL(Seat.PhysicalColumnIndex, Seat.SeatNumber - 1) AS PhysicalColumnIndex,
                 Seat.SeatStatus
             FROM dbo.Seats AS Seat
             WHERE Seat.RoomId = @RoomId
-            ORDER BY Seat.RowLabel, Seat.SeatNumber;
+                AND Seat.SeatStatus <> N'Inactive'
+            ORDER BY PhysicalRowIndex, PhysicalColumnIndex;
             """;
 
         var table = DatabaseHelper.ExecuteQuery(sql, new SqlParameter("@RoomId", ToInt(roomId)));
@@ -22,12 +27,16 @@ public sealed class SeatRepository
 
     public IReadOnlyList<SeatInfo> GetSeatsForShowtime(string showtimeId)
     {
+        SeatLayoutRepository.EnsureSeatPositionSchema();
+
         const string sql = """
             SELECT
                 Seat.RoomId,
                 Seat.SeatCode,
                 Seat.RowLabel,
                 Seat.SeatNumber,
+                ISNULL(Seat.PhysicalRowIndex, 0) AS PhysicalRowIndex,
+                ISNULL(Seat.PhysicalColumnIndex, Seat.SeatNumber - 1) AS PhysicalColumnIndex,
                 Seat.SeatStatus,
                 CASE
                     WHEN EXISTS
@@ -48,7 +57,8 @@ public sealed class SeatRepository
             INNER JOIN dbo.Showtimes AS Showtime
                 ON Showtime.RoomId = Seat.RoomId
             WHERE Showtime.ShowtimeId = @ShowtimeId
-            ORDER BY Seat.RowLabel, Seat.SeatNumber;
+                AND Seat.SeatStatus <> N'Inactive'
+            ORDER BY PhysicalRowIndex, PhysicalColumnIndex;
             """;
 
         var table = DatabaseHelper.ExecuteQuery(sql, new SqlParameter("@ShowtimeId", ToInt(showtimeId)));
@@ -105,8 +115,8 @@ public sealed class SeatRepository
             {
                 RoomId = row["RoomId"].ToString() ?? "",
                 SeatCode = row["SeatCode"].ToString() ?? "",
-                RowIndex = RowLabelToIndex(row["RowLabel"].ToString() ?? "A"),
-                ColumnIndex = Convert.ToInt32(row["SeatNumber"]) - 1,
+                RowIndex = Convert.ToInt32(row["PhysicalRowIndex"]),
+                ColumnIndex = Convert.ToInt32(row["PhysicalColumnIndex"]),
                 Status = isSold
                     ? SeatStatus.Sold
                     : seatStatus == "Maintenance" ? SeatStatus.Maintenance : SeatStatus.Available
@@ -119,23 +129,6 @@ public sealed class SeatRepository
     private static int ToInt(string value)
     {
         return int.TryParse(value, out var number) ? number : 0;
-    }
-
-    private static int RowLabelToIndex(string rowLabel)
-    {
-        var value = 0;
-
-        foreach (var character in rowLabel.ToUpperInvariant())
-        {
-            if (character < 'A' || character > 'Z')
-            {
-                continue;
-            }
-
-            value = value * 26 + character - 'A' + 1;
-        }
-
-        return Math.Max(0, value - 1);
     }
 
 }

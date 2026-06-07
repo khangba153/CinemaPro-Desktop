@@ -1,3 +1,7 @@
+﻿using CinemaPro.WinForms.DesignFirst.Models;
+using CinemaPro.WinForms.DesignFirst.Services;
+using System.Windows.Forms;
+
 namespace CinemaPro.WinForms.DesignFirst.Forms.Admin;
 
 public partial class RoomManagementForm : Form
@@ -5,6 +9,8 @@ public partial class RoomManagementForm : Form
     private readonly RoomService _roomService = new();
     private string _selectedRoomId = "";
     private string _selectedRoomStatus = "Active";
+    public const string Active = "Active";
+    public const string Maintenance = "Maintenance";
 
     public RoomManagementForm()
     {
@@ -17,81 +23,149 @@ public partial class RoomManagementForm : Form
 
     private void RoomManagementForm_Load(object? sender, EventArgs e)
     {
-        roomTypeComboBox.SelectedIndex = 0;
         LoadRooms();
     }
 
-    private void ActionButton_Click(object? sender, EventArgs e)
+    private void AddRoomButton_Click(object sender, EventArgs e)
     {
-        try
+        if (!ValidateInput()) return;
+
+        var success = _roomService.AddRoom(
+            roomNameTextBox.Text,
+            roomTypeComboBox.Text,
+            out string message);
+
+        MessageBox.Show(message);
+
+        if (success)
         {
-            if (sender == addRoomButton)
-            {
-                ShowResult(_roomService.AddRoom(roomNameTextBox.Text, roomTypeComboBox.Text, (int)rowCountInput.Value, (int)seatPerRowInput.Value, out var message), message);
-                return;
-            }
-
-            if (sender == editRoomButton)
-            {
-                ShowResult(_roomService.UpdateRoom(_selectedRoomId, roomNameTextBox.Text, roomTypeComboBox.Text, (int)rowCountInput.Value, (int)seatPerRowInput.Value, _selectedRoomStatus, out var message), message);
-                return;
-            }
-
-            if (sender == maintenanceButton)
-            {
-                ShowResult(_roomService.SetMaintenance(_selectedRoomId, out var message), message);
-                return;
-            }
-
-            if (sender == createSeatButton)
-            {
-                MessageBox.Show("Mở màn Quản lý ghế để tạo sơ đồ ghế chi tiết cho phòng.", "CinemaPro", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            LoadRooms();
         }
-        catch (Exception ex)
+    }
+
+    private void EditRoomButton_Click(object sender, EventArgs e)
+    {
+        var room = GetSelectedRoom();
+        if (room == null) return;
+
+        var success = _roomService.EditRoom(
+            room.RoomId,
+            roomNameTextBox.Text,
+            roomTypeComboBox.Text,
+            room.Status,
+            out string message);
+
+        MessageBox.Show(message);
+
+        if (success)
         {
-            MessageBox.Show("Không thể xử lý phòng chiếu.\n\n" + ex.Message, "Lỗi database", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            LoadRooms();
+        }
+    }
+
+    private void SetMaintenanceButton_Click(object sender, EventArgs e)
+    {
+        var room = GetSelectedRoom();
+        if (room == null) return;
+
+        bool success;
+        string message;
+
+        if (room.Status == Active)
+        {
+            success = _roomService.SetMaintenance(room.RoomId, out message);
+        }
+        else
+        {
+            success = _roomService.SetActive(room.RoomId, out message);
+        }
+
+        MessageBox.Show(message);
+
+        if (success)
+        {
+            LoadRooms();
         }
     }
 
     private void LoadRooms()
     {
+        string? selectedRoomId = GetSelectedRoom()?.RoomId;
         roomGrid.Rows.Clear();
+
         foreach (var room in _roomService.GetRooms())
         {
-            var rowIndex = roomGrid.Rows.Add(room.RoomId, room.RoomName, room.RoomType, room.Rows, room.SeatsPerRow, room.Status);
+            int rowIndex = roomGrid.Rows.Add(
+                room.RoomId,
+                room.RoomName,
+                room.RoomType,
+                room.Status);
+
             roomGrid.Rows[rowIndex].Tag = room;
         }
 
-        if (roomGrid.Rows.Count > 0)
-        {
-            roomGrid.ClearSelection();
-            roomGrid.Rows[0].Selected = true;
-            FillDetailFromSelectedRow();
-        }
+        RestoreSelection(selectedRoomId);
+    }
+
+    private void RoomGrid_SelectionChanged(object? sender, EventArgs e)
+    {
+        FillDetailFromSelectedRow();
     }
 
     private void FillDetailFromSelectedRow()
     {
-        if (roomGrid.SelectedRows.Count == 0 || roomGrid.SelectedRows[0].Tag is not RoomRow room)
-        {
-            return;
-        }
+        var room = GetSelectedRoom();
+        if (room == null) return;
 
-        _selectedRoomId = room.RoomId;
-        _selectedRoomStatus = room.Status;
         roomNameTextBox.Text = room.RoomName;
         roomTypeComboBox.Text = room.RoomType;
-        rowCountInput.Value = Math.Max(rowCountInput.Minimum, Math.Min(rowCountInput.Maximum, room.Rows));
-        seatPerRowInput.Value = Math.Max(seatPerRowInput.Minimum, Math.Min(seatPerRowInput.Maximum, room.SeatsPerRow));
     }
 
-    private void ShowResult(bool success, string message)
+    private RoomRow? GetSelectedRoom()
     {
-        MessageBox.Show(message, success ? "Thành công" : "Không thể xử lý", MessageBoxButtons.OK, success ? MessageBoxIcon.Information : MessageBoxIcon.Warning);
-        if (success)
+        if (roomGrid.SelectedRows.Count == 0)
+            return null;
+
+        return roomGrid.SelectedRows[0].Tag as RoomRow;
+    }
+
+    private bool ValidateInput()
+    {
+        if (string.IsNullOrWhiteSpace(roomNameTextBox.Text))
         {
-            LoadRooms();
+            MessageBox.Show("Tên phòng không được để trống");
+            return false;
+        }
+
+        return true;
+    }
+    private void RestoreSelection(string? roomId)
+    {
+        roomGrid.ClearSelection();
+
+        DataGridViewRow? targetRow = null;
+
+        if (!string.IsNullOrWhiteSpace(roomId))
+        {
+            foreach (DataGridViewRow row in roomGrid.Rows)
+            {
+                if (row.Tag is RoomRow room && room.RoomId == roomId)
+                {
+                    targetRow = row;
+                    break;
+                }
+            }
+        }
+
+        if (targetRow == null && roomGrid.Rows.Count > 0)
+        {
+            targetRow = roomGrid.Rows[0];
+        }
+
+        if (targetRow != null)
+        {
+            targetRow.Selected = true;
+            roomGrid.CurrentCell = targetRow.Cells[0];
         }
     }
 }

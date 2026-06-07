@@ -1,3 +1,5 @@
+﻿using CinemaPro.WinForms.DesignFirst.Repositories;
+
 namespace CinemaPro.WinForms.DesignFirst.Services;
 
 public sealed class SeatService
