@@ -6,15 +6,12 @@ partial class RoomManagementForm
     private Panel actionPanel = null!;
     private Button addRoomButton = null!;
     private Button editRoomButton = null!;
-    private Button createSeatButton = null!;
     private Button maintenanceButton = null!;
     private Panel gridPanel = null!;
     private DataGridView roomGrid = null!;
     private Panel detailPanel = null!;
     private TextBox roomNameTextBox = null!;
     private ComboBox roomTypeComboBox = null!;
-    private NumericUpDown rowCountInput = null!;
-    private NumericUpDown seatPerRowInput = null!;
 
     protected override void Dispose(bool disposing)
     {
@@ -26,7 +23,6 @@ partial class RoomManagementForm
     {
         actionPanel = new Panel();
         maintenanceButton = new Button();
-        createSeatButton = new Button();
         editRoomButton = new Button();
         addRoomButton = new Button();
         gridPanel = new Panel();
@@ -34,15 +30,9 @@ partial class RoomManagementForm
         dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
         dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
         dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
-        dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
-        dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
         dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
         title = new Label();
         detailPanel = new Panel();
-        seatLabel = new Label();
-        seatPerRowInput = new NumericUpDown();
-        rowLabel = new Label();
-        rowCountInput = new NumericUpDown();
         typeLabel = new Label();
         roomTypeComboBox = new ComboBox();
         nameLabel = new Label();
@@ -52,8 +42,6 @@ partial class RoomManagementForm
         gridPanel.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)roomGrid).BeginInit();
         detailPanel.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)seatPerRowInput).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)rowCountInput).BeginInit();
         SuspendLayout();
         // 
         // actionPanel
@@ -61,7 +49,6 @@ partial class RoomManagementForm
         actionPanel.BackColor = Color.White;
         actionPanel.BorderStyle = BorderStyle.FixedSingle;
         actionPanel.Controls.Add(maintenanceButton);
-        actionPanel.Controls.Add(createSeatButton);
         actionPanel.Controls.Add(editRoomButton);
         actionPanel.Controls.Add(addRoomButton);
         actionPanel.Location = new Point(21, 19);
@@ -75,7 +62,7 @@ partial class RoomManagementForm
         maintenanceButton.BackColor = Color.White;
         maintenanceButton.FlatStyle = FlatStyle.Flat;
         maintenanceButton.ForeColor = Color.FromArgb(220, 38, 38);
-        maintenanceButton.Location = new Point(480, 21);
+        maintenanceButton.Location = new Point(331, 21);
         maintenanceButton.Margin = new Padding(3, 4, 3, 4);
         maintenanceButton.Name = "maintenanceButton";
         maintenanceButton.Size = new Size(160, 43);
@@ -83,18 +70,6 @@ partial class RoomManagementForm
         maintenanceButton.Text = "Bảo trì phòng";
         maintenanceButton.UseVisualStyleBackColor = false;
         maintenanceButton.Click += SetMaintenanceButton_Click;
-        // 
-        // createSeatButton
-        // 
-        createSeatButton.BackColor = Color.White;
-        createSeatButton.FlatStyle = FlatStyle.Flat;
-        createSeatButton.Location = new Point(327, 21);
-        createSeatButton.Margin = new Padding(3, 4, 3, 4);
-        createSeatButton.Name = "createSeatButton";
-        createSeatButton.Size = new Size(137, 43);
-        createSeatButton.TabIndex = 1;
-        createSeatButton.Text = "Tạo ghế";
-        createSeatButton.UseVisualStyleBackColor = false;
         // 
         // editRoomButton
         // 
@@ -140,9 +115,11 @@ partial class RoomManagementForm
         // 
         roomGrid.AllowUserToAddRows = false;
         roomGrid.AllowUserToDeleteRows = false;
+        roomGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        roomGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
         roomGrid.BackgroundColor = Color.White;
         roomGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        roomGrid.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6 });
+        roomGrid.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn6 });
         roomGrid.Location = new Point(21, 75);
         roomGrid.Margin = new Padding(3, 4, 3, 4);
         roomGrid.Name = "roomGrid";
@@ -160,7 +137,6 @@ partial class RoomManagementForm
         dataGridViewTextBoxColumn1.MinimumWidth = 6;
         dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
         dataGridViewTextBoxColumn1.ReadOnly = true;
-        dataGridViewTextBoxColumn1.Width = 125;
         // 
         // dataGridViewTextBoxColumn2
         // 
@@ -168,7 +144,6 @@ partial class RoomManagementForm
         dataGridViewTextBoxColumn2.MinimumWidth = 6;
         dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
         dataGridViewTextBoxColumn2.ReadOnly = true;
-        dataGridViewTextBoxColumn2.Width = 125;
         // 
         // dataGridViewTextBoxColumn3
         // 
@@ -176,23 +151,6 @@ partial class RoomManagementForm
         dataGridViewTextBoxColumn3.MinimumWidth = 6;
         dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
         dataGridViewTextBoxColumn3.ReadOnly = true;
-        dataGridViewTextBoxColumn3.Width = 125;
-        // 
-        // dataGridViewTextBoxColumn4
-        // 
-        dataGridViewTextBoxColumn4.HeaderText = "Số hàng";
-        dataGridViewTextBoxColumn4.MinimumWidth = 6;
-        dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-        dataGridViewTextBoxColumn4.ReadOnly = true;
-        dataGridViewTextBoxColumn4.Width = 125;
-        // 
-        // dataGridViewTextBoxColumn5
-        // 
-        dataGridViewTextBoxColumn5.HeaderText = "Ghế/hàng";
-        dataGridViewTextBoxColumn5.MinimumWidth = 6;
-        dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-        dataGridViewTextBoxColumn5.ReadOnly = true;
-        dataGridViewTextBoxColumn5.Width = 125;
         // 
         // dataGridViewTextBoxColumn6
         // 
@@ -200,7 +158,6 @@ partial class RoomManagementForm
         dataGridViewTextBoxColumn6.MinimumWidth = 6;
         dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
         dataGridViewTextBoxColumn6.ReadOnly = true;
-        dataGridViewTextBoxColumn6.Width = 125;
         // 
         // title
         // 
@@ -216,10 +173,6 @@ partial class RoomManagementForm
         // 
         detailPanel.BackColor = Color.White;
         detailPanel.BorderStyle = BorderStyle.FixedSingle;
-        detailPanel.Controls.Add(seatLabel);
-        detailPanel.Controls.Add(seatPerRowInput);
-        detailPanel.Controls.Add(rowLabel);
-        detailPanel.Controls.Add(rowCountInput);
         detailPanel.Controls.Add(typeLabel);
         detailPanel.Controls.Add(roomTypeComboBox);
         detailPanel.Controls.Add(nameLabel);
@@ -230,40 +183,6 @@ partial class RoomManagementForm
         detailPanel.Name = "detailPanel";
         detailPanel.Size = new Size(391, 661);
         detailPanel.TabIndex = 0;
-        // 
-        // seatLabel
-        // 
-        seatLabel.Location = new Point(199, 261);
-        seatLabel.Name = "seatLabel";
-        seatLabel.Size = new Size(114, 31);
-        seatLabel.TabIndex = 0;
-        seatLabel.Text = "Ghế mỗi hàng";
-        // 
-        // seatPerRowInput
-        // 
-        seatPerRowInput.Location = new Point(199, 293);
-        seatPerRowInput.Margin = new Padding(3, 4, 3, 4);
-        seatPerRowInput.Name = "seatPerRowInput";
-        seatPerRowInput.Size = new Size(137, 27);
-        seatPerRowInput.TabIndex = 1;
-        seatPerRowInput.Value = new decimal(new int[] { 8, 0, 0, 0 });
-        // 
-        // rowLabel
-        // 
-        rowLabel.Location = new Point(25, 261);
-        rowLabel.Name = "rowLabel";
-        rowLabel.Size = new Size(114, 31);
-        rowLabel.TabIndex = 2;
-        rowLabel.Text = "Số hàng ghế";
-        // 
-        // rowCountInput
-        // 
-        rowCountInput.Location = new Point(25, 293);
-        rowCountInput.Margin = new Padding(3, 4, 3, 4);
-        rowCountInput.Name = "rowCountInput";
-        rowCountInput.Size = new Size(137, 27);
-        rowCountInput.TabIndex = 3;
-        rowCountInput.Value = new decimal(new int[] { 6, 0, 0, 0 });
         // 
         // typeLabel
         // 
@@ -328,20 +247,14 @@ partial class RoomManagementForm
         ((System.ComponentModel.ISupportInitialize)roomGrid).EndInit();
         detailPanel.ResumeLayout(false);
         detailPanel.PerformLayout();
-        ((System.ComponentModel.ISupportInitialize)seatPerRowInput).EndInit();
-        ((System.ComponentModel.ISupportInitialize)rowCountInput).EndInit();
         ResumeLayout(false);
     }
-    private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-    private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-    private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-    private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-    private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-    private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
     private Label title;
-    private Label seatLabel;
-    private Label rowLabel;
     private Label typeLabel;
     private Label nameLabel;
     private Label detailTitle;
+    private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+    private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+    private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+    private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
 }

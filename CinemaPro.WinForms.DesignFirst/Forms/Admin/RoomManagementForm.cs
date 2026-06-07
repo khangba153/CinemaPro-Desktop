@@ -31,8 +31,6 @@ public partial class RoomManagementForm : Form
         var success = _roomService.AddRoom(
             roomNameTextBox.Text,
             roomTypeComboBox.Text,
-            (int)rowCountInput.Value,
-            (int)seatPerRowInput.Value,
             out string message);
 
         MessageBox.Show(message);
@@ -52,8 +50,6 @@ public partial class RoomManagementForm : Form
             room.RoomId,
             roomNameTextBox.Text,
             roomTypeComboBox.Text,
-            (int)rowCountInput.Value,
-            (int)seatPerRowInput.Value,
             room.Status,
             out string message);
 
@@ -101,8 +97,6 @@ public partial class RoomManagementForm : Form
                 room.RoomId,
                 room.RoomName,
                 room.RoomType,
-                room.Rows,
-                room.SeatsPerRow,
                 room.Status);
 
             roomGrid.Rows[rowIndex].Tag = room;
@@ -123,9 +117,6 @@ public partial class RoomManagementForm : Form
 
         roomNameTextBox.Text = room.RoomName;
         roomTypeComboBox.Text = room.RoomType;
-
-        rowCountInput.Value = Clamp(room.Rows, rowCountInput);
-        seatPerRowInput.Value = Clamp(room.SeatsPerRow, seatPerRowInput);
     }
 
     private RoomRow? GetSelectedRoom()
@@ -145,11 +136,6 @@ public partial class RoomManagementForm : Form
         }
 
         return true;
-    }
-
-    private decimal Clamp(int value, NumericUpDown control)
-    {
-        return Math.Max(control.Minimum, Math.Min(control.Maximum, value));
     }
     private void RestoreSelection(string? roomId)
     {

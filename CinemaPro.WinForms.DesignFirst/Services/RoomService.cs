@@ -17,11 +17,9 @@ public sealed class RoomService
     public bool AddRoom(
         string roomName,
         string roomType,
-        int rowCount,
-        int seatsPerRow,
         out string message)
     {
-        if (!ValidateInput(roomName, roomType, rowCount, seatsPerRow, out message))
+        if (!ValidateInput(roomName, roomType, out message))
             return false;
 
         roomName = roomName.Trim();
@@ -34,7 +32,7 @@ public sealed class RoomService
                 return false;
             }
 
-            _roomRepository.Insert(roomName, roomType, rowCount, seatsPerRow, "Active");
+            _roomRepository.Insert(roomName, roomType, 1, 1, "Active");
 
             message = "Đã thêm phòng chiếu thành công.";
             return true;
@@ -50,8 +48,6 @@ public sealed class RoomService
         string roomId,
         string roomName,
         string roomType,
-        int rowCount,
-        int seatsPerRow,
         string status,
         out string message)
     {
@@ -61,7 +57,7 @@ public sealed class RoomService
             return false;
         }
 
-        if (!ValidateInput(roomName, roomType, rowCount, seatsPerRow, out message))
+        if (!ValidateInput(roomName, roomType, out message))
             return false;
 
         roomName = roomName.Trim();
@@ -81,7 +77,7 @@ public sealed class RoomService
                 return false;
             }
 
-            _roomRepository.Update(roomId, roomName, roomType, rowCount, seatsPerRow, status);
+            _roomRepository.Update(roomId, roomName, roomType, status);
 
             message = "Đã cập nhật phòng chiếu.";
             return true;
@@ -160,8 +156,6 @@ public sealed class RoomService
     private static bool ValidateInput(
         string roomName,
         string roomType,
-        int rowCount,
-        int seatsPerRow,
         out string message)
     {
         if (string.IsNullOrWhiteSpace(roomName))
@@ -177,19 +171,6 @@ public sealed class RoomService
             message = "Loại phòng không hợp lệ.";
             return false;
         }
-
-        if (rowCount <= 0 || rowCount > 100)
-        {
-            message = "Số hàng phải từ 1 đến 100.";
-            return false;
-        }
-
-        if (seatsPerRow <= 0 || seatsPerRow > 100)
-        {
-            message = "Số ghế mỗi hàng phải từ 1 đến 100.";
-            return false;
-        }
-
         message = "";
         return true;
     }

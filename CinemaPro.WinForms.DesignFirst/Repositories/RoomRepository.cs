@@ -100,7 +100,7 @@ public class RoomRepository
         return Convert.ToInt32(result) > 0;
     }
 
-    public void Insert(string roomName, string roomType, int rowCount, int seatsPerRow, string status)
+    public void Insert(string roomName, string roomType, int rows, int seatsPerRow, string status)
     {
         const string sql = """
             INSERT INTO dbo.Rooms
@@ -114,20 +114,18 @@ public class RoomRepository
             new SqlParameter("@RoomCode", GenerateRoomCode()),
             new SqlParameter("@RoomName", roomName),
             new SqlParameter("@RoomType", roomType),
-            new SqlParameter("@SeatRowCount", rowCount),
+            new SqlParameter("@SeatRowCount", rows),
             new SqlParameter("@SeatsPerRow", seatsPerRow),
             new SqlParameter("@RoomStatus", status)
         );
     }
 
-    public void Update(string roomId, string roomName, string roomType, int rowCount, int seatsPerRow, string status)
+    public void Update(string roomId, string roomName, string roomType, string status)
     {
         const string sql = """
             UPDATE dbo.Rooms
             SET RoomName = @RoomName,
                 RoomType = @RoomType,
-                SeatRowCount = @SeatRowCount,
-                SeatsPerRow = @SeatsPerRow,
                 RoomStatus = @RoomStatus,
                 UpdatedAt = GETDATE()
             WHERE RoomId = @RoomId;
@@ -138,8 +136,6 @@ public class RoomRepository
             new SqlParameter("@RoomId", roomId),
             new SqlParameter("@RoomName", roomName),
             new SqlParameter("@RoomType", roomType),
-            new SqlParameter("@SeatRowCount", rowCount),
-            new SqlParameter("@SeatsPerRow", seatsPerRow),
             new SqlParameter("@RoomStatus", status)
         );
     }
