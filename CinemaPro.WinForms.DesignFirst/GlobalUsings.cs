@@ -14,7 +14,6 @@ global using CinemaPro.WinForms.DesignFirst.Forms.Staff;
 global using CinemaPro.WinForms.DesignFirst.Helpers;
 global using CinemaPro.WinForms.DesignFirst.Models;
 global using CinemaPro.WinForms.DesignFirst.Repositories;
-global using CinemaPro.WinForms.DesignFirst.Repositories.Ef;
 global using CinemaPro.WinForms.DesignFirst.Services;
 global using CinemaPro.WinForms.DesignFirst.Session;
 global using CinemaPro.WinForms.DesignFirst.ViewModels;

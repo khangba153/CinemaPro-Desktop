@@ -2,7 +2,7 @@ namespace CinemaPro.WinForms.DesignFirst.Services;
 
 public sealed class AuthService
 {
-    private readonly EfUserRepository _userRepository = new();
+    private readonly UserRepository _userRepository = new();
 
     public AppUser? Login(string username, string password, out string message)
     {

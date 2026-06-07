@@ -135,7 +135,7 @@ partial class SoldTicketsForm
         paymentFilterComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
         paymentFilterComboBox.Font = new Font("Segoe UI", 9.5F);
         paymentFilterComboBox.FormattingEnabled = true;
-        paymentFilterComboBox.Items.AddRange(new object[] { "Tất cả", "Tiền mặt", "VNPAY Sandbox" });
+        paymentFilterComboBox.Items.AddRange(new object[] { "Tất cả", "Tiền mặt", "Ví MoMo" });
         paymentFilterComboBox.Location = new Point(630, 36);
         paymentFilterComboBox.Name = "paymentFilterComboBox";
         paymentFilterComboBox.Size = new Size(160, 25);

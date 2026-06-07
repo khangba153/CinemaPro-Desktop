@@ -378,7 +378,7 @@ partial class TicketSaleForm
         paymentMethodComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
         paymentMethodComboBox.Font = new Font("Segoe UI", 10F);
         paymentMethodComboBox.FormattingEnabled = true;
-        paymentMethodComboBox.Items.AddRange(new object[] { "Tiền mặt", "VNPAY Sandbox" });
+        paymentMethodComboBox.Items.AddRange(new object[] { "Tiền mặt", "VNPAY Sandbox", "Ví MoMo" });
         paymentMethodComboBox.Location = new Point(18, 182);
         paymentMethodComboBox.Name = "paymentMethodComboBox";
         paymentMethodComboBox.Size = new Size(212, 25);

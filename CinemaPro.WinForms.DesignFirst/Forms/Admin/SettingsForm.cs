@@ -56,7 +56,6 @@ public partial class SettingsForm : Form
         hotlineTextBox.Text = GetValue(settings, "CinemaHotline", "1900 0000");
         cashCheckBox.Checked = GetBool(settings, "AllowCashPayment", true);
         vnpayCheckBox.Checked = GetBool(settings, "AllowVnPaySandbox", true);
-        momoCheckBox.Checked = GetBool(settings, "AllowMomoSandbox", true);
     }
 
     private void SaveSettings()
@@ -73,8 +72,7 @@ public partial class SettingsForm : Form
             addressTextBox.Text,
             hotlineTextBox.Text,
             cashCheckBox.Checked,
-            vnpayCheckBox.Checked,
-            momoCheckBox.Checked);
+            vnpayCheckBox.Checked);
 
         MessageBox.Show("Đã lưu cài đặt hệ thống.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
@@ -103,7 +101,6 @@ public partial class SettingsForm : Form
         Text = "Cài đặt hệ thống";
         cashCheckBox.Text = "Tiền mặt";
         vnpayCheckBox.Text = "VNPAY Sandbox";
-        momoCheckBox.Text = "MoMo Sandbox";
         saveButton.Text = "Lưu cài đặt";
         backupButton.Text = "Sao lưu";
         restoreButton.Text = "Khôi phục";

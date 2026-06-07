@@ -143,7 +143,7 @@ partial class TicketCheckForm
         resultDetailLabel.Name = "resultDetailLabel";
         resultDetailLabel.Size = new Size(330, 190);
         resultDetailLabel.TabIndex = 1;
-        resultDetailLabel.Text = "Nhập mã vé demo TK000001, TK000002 hoặc mã vé mới tạo từ màn Bán vé.";
+        resultDetailLabel.Text = "Nhập mã vé trong database, ví dụ TK000001, TK000002 hoặc mã vé mới tạo từ màn Bán vé.";
         confirmEntryButton.BackColor = Color.FromArgb(226, 232, 240);
         confirmEntryButton.Enabled = false;
         confirmEntryButton.FlatAppearance.BorderSize = 0;
@@ -215,7 +215,7 @@ partial class TicketCheckForm
         demoCodeLabel.Name = "demoCodeLabel";
         demoCodeLabel.Size = new Size(270, 88);
         demoCodeLabel.TabIndex = 5;
-        demoCodeLabel.Text = "Mã demo:\r\nTK000001: hợp lệ\r\nTK000002: đã sử dụng\r\nTK000003: đã hủy";
+        demoCodeLabel.Text = "Mã vé mẫu:\r\nTK000001: hợp lệ\r\nTK000002: đã sử dụng\r\nTK000003: đã hủy";
         demoCodeLabel.TextAlign = ContentAlignment.MiddleLeft;
         // 
         // historyPanel

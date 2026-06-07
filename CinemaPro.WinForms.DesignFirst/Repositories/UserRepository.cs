@@ -179,6 +179,28 @@ public sealed class UserRepository
             new SqlParameter("@UserStatus", status));
     }
 
+    public int GetCurrentSessionUserId(SqlConnection connection, SqlTransaction transaction)
+    {
+        using var command = new SqlCommand("""
+            SELECT TOP 1 UserId
+            FROM dbo.Users
+            WHERE UserCode = @UserCode
+                OR Username = @Username
+            ORDER BY UserId;
+            """, connection, transaction);
+
+        command.Parameters.AddWithValue("@UserCode", UserSession.UserId);
+        command.Parameters.AddWithValue("@Username", UserSession.Username);
+
+        var result = command.ExecuteScalar();
+        if (result is not null)
+        {
+            return Convert.ToInt32(result);
+        }
+
+        throw new InvalidOperationException("Khong tim thay tai khoan nhan vien hien tai trong database.");
+    }
+
     private static User MapUser(DataRow row)
     {
         return new User

@@ -3,7 +3,7 @@ namespace CinemaPro.WinForms.DesignFirst.Services;
 public sealed class UserService
 {
     private const string DefaultPassword = "123456";
-    private readonly EfUserRepository _userRepository = new();
+    private readonly UserRepository _userRepository = new();
 
     public IReadOnlyList<EmployeeRow> GetEmployees()
     {
