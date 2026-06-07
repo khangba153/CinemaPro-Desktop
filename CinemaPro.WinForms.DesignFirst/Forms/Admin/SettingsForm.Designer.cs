@@ -12,6 +12,7 @@ partial class SettingsForm
     private TextBox hotlineTextBox = null!;
     private CheckBox cashCheckBox = null!;
     private CheckBox vnpayCheckBox = null!;
+    private CheckBox momoCheckBox = null!;
     private Button saveButton = null!;
     private Button backupButton = null!;
     private Button restoreButton = null!;
@@ -33,6 +34,7 @@ partial class SettingsForm
         hotlineTextBox = new TextBox();
         cashCheckBox = new CheckBox();
         vnpayCheckBox = new CheckBox();
+        momoCheckBox = new CheckBox();
         saveButton = new Button();
         backupButton = new Button();
         restoreButton = new Button();
@@ -97,6 +99,7 @@ partial class SettingsForm
         paymentPanel.BackColor = Color.White;
         paymentPanel.BorderStyle = BorderStyle.FixedSingle;
         paymentPanel.Controls.Add(saveButton);
+        paymentPanel.Controls.Add(momoCheckBox);
         paymentPanel.Controls.Add(vnpayCheckBox);
         paymentPanel.Controls.Add(cashCheckBox);
         paymentPanel.Controls.Add(title3);
@@ -116,11 +119,16 @@ partial class SettingsForm
         vnpayCheckBox.Location = new Point(24, 100);
         vnpayCheckBox.Size = new Size(240, 28);
         vnpayCheckBox.Text = "VNPAY Sandbox";
+        momoCheckBox.Checked = true;
+        momoCheckBox.CheckState = CheckState.Checked;
+        momoCheckBox.Location = new Point(24, 136);
+        momoCheckBox.Size = new Size(240, 28);
+        momoCheckBox.Text = "MoMo Sandbox";
         saveButton.BackColor = Color.FromArgb(37, 99, 235);
         saveButton.FlatAppearance.BorderSize = 0;
         saveButton.FlatStyle = FlatStyle.Flat;
         saveButton.ForeColor = Color.White;
-        saveButton.Location = new Point(24, 158);
+        saveButton.Location = new Point(24, 188);
         saveButton.Size = new Size(140, 36);
         saveButton.Text = "Lưu cài đặt";
         saveButton.Click += FakeActionButton_Click;

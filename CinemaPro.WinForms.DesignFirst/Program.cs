@@ -1,4 +1,3 @@
-using CinemaPro.WinForms.DesignFirst.Data;
 using CinemaPro.WinForms.DesignFirst.Forms.Auth;
 
 namespace CinemaPro.WinForms.DesignFirst;
