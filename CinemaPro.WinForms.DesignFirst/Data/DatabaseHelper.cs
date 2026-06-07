@@ -7,49 +7,60 @@ public static class DatabaseHelper
 {
     public static DataTable ExecuteQuery(string sql, params SqlParameter[] parameters)
     {
-        using var conn = DbConnectionFactory.CreateConnection();
-        using var cmd = new SqlCommand(sql, conn);
+        using var connection = DbConnectionFactory.CreateConnection();
+        using var command = new SqlCommand(sql, connection);
 
         if (parameters.Length > 0)
-            cmd.Parameters.AddRange(parameters);
+        {
+            command.Parameters.AddRange(parameters);
+        }
 
-        using var adapter = new SqlDataAdapter(cmd);
+        using var adapter = new SqlDataAdapter(command);
         var table = new DataTable();
 
+        connection.Open();
+        PrepareConnection(connection);
         adapter.Fill(table);
         return table;
     }
 
     public static int ExecuteNonQuery(string sql, params SqlParameter[] parameters)
     {
-        using var conn = DbConnectionFactory.CreateConnection();
-        using var cmd = new SqlCommand(sql, conn);
+        using var connection = DbConnectionFactory.CreateConnection();
+        using var command = new SqlCommand(sql, connection);
 
         if (parameters.Length > 0)
-            cmd.Parameters.AddRange(parameters);
+        {
+            command.Parameters.AddRange(parameters);
+        }
 
-        conn.Open();
-        return cmd.ExecuteNonQuery();
+        connection.Open();
+        PrepareConnection(connection);
+        return command.ExecuteNonQuery();
     }
 
     public static object? ExecuteScalar(string sql, params SqlParameter[] parameters)
     {
-        using var conn = DbConnectionFactory.CreateConnection();
-        using var cmd = new SqlCommand(sql, conn);
+        using var connection = DbConnectionFactory.CreateConnection();
+        using var command = new SqlCommand(sql, connection);
 
         if (parameters.Length > 0)
-            cmd.Parameters.AddRange(parameters);
+        {
+            command.Parameters.AddRange(parameters);
+        }
 
-        conn.Open();
-        return cmd.ExecuteScalar();
+        connection.Open();
+        PrepareConnection(connection);
+        return command.ExecuteScalar();
     }
 
     public static bool CanConnect()
     {
         try
         {
-            using var conn = DbConnectionFactory.CreateConnection();
-            conn.Open();
+            using var connection = DbConnectionFactory.CreateConnection();
+            connection.Open();
+            PrepareConnection(connection);
 
             return true;
         }
@@ -63,8 +74,9 @@ public static class DatabaseHelper
     {
         try
         {
-            using var conn = DbConnectionFactory.CreateConnection();
-            conn.Open();
+            using var connection = DbConnectionFactory.CreateConnection();
+            connection.Open();
+            PrepareConnection(connection);
 
             return "Kết nối database thành công.";
         }
@@ -72,5 +84,20 @@ public static class DatabaseHelper
         {
             return "Kết nối database thất bại: " + ex.Message;
         }
+    }
+
+    public static void PrepareConnection(SqlConnection connection)
+    {
+        using var command = new SqlCommand("""
+            SET QUOTED_IDENTIFIER ON;
+            SET ANSI_NULLS ON;
+            SET ANSI_WARNINGS ON;
+            SET ANSI_PADDING ON;
+            SET CONCAT_NULL_YIELDS_NULL ON;
+            SET ARITHABORT ON;
+            SET NUMERIC_ROUNDABORT OFF;
+            """, connection);
+
+        command.ExecuteNonQuery();
     }
 }
