@@ -144,7 +144,7 @@ partial class StaffDashboardForm
         shiftTicketNoteLabel.Name = "shiftTicketNoteLabel";
         shiftTicketNoteLabel.Size = new Size(200, 18);
         shiftTicketNoteLabel.TabIndex = 2;
-        shiftTicketNoteLabel.Text = "Tính trong phiên demo";
+        shiftTicketNoteLabel.Text = "Tính theo dữ liệu database";
         shiftRevenuePanel.BackColor = Color.White;
         shiftRevenuePanel.BorderStyle = BorderStyle.FixedSingle;
         shiftRevenuePanel.Controls.Add(shiftRevenueTitleLabel);

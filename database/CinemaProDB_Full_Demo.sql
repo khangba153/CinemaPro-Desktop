@@ -468,7 +468,15 @@ CREATE TABLE dbo.Payments
         REFERENCES dbo.Tickets(TicketId),
 
     CONSTRAINT CK_Payments_PaymentMethod
-        CHECK (PaymentMethod IN (N'Cash', N'VNPAY_SANDBOX')),
+        CHECK
+        (
+            PaymentMethod IN
+            (
+                N'Cash',
+                N'VNPAY_SANDBOX',
+                N'MOMO_SANDBOX'
+            )
+        ),
 
     CONSTRAINT CK_Payments_Amount
         CHECK (Amount >= 0),

@@ -276,7 +276,7 @@ partial class AdminDashboardForm
         todayTicketNoteLabel.Name = "todayTicketNoteLabel";
         todayTicketNoteLabel.Size = new Size(152, 18);
         todayTicketNoteLabel.TabIndex = 2;
-        todayTicketNoteLabel.Text = "Dữ liệu demo";
+        todayTicketNoteLabel.Text = "Dữ liệu database";
         // 
         // statRevenuePanel
         // 

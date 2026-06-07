@@ -2,31 +2,222 @@ namespace CinemaPro.WinForms.DesignFirst.Forms.Shared;
 
 public partial class MainForm : Form
 {
+    private Button? _activeMenuButton;
+    private Form? _activeChildForm;
+    private readonly System.Windows.Forms.Timer _clockTimer = new();
+
     public MainForm()
     {
         InitializeComponent();
+        FixVietnameseText();
+        StyleSidebarButtons();
+        _clockTimer.Interval = 1000;
+        _clockTimer.Tick += (_, _) => currentTimeLabel.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
     }
 
     private void MainForm_Load(object? sender, EventArgs e)
     {
+        userNameLabel.Text = UserSession.FullName;
+        userRoleLabel.Text = UserSession.Role;
+        currentTimeLabel.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
+        _clockTimer.Start();
+
+        ApplyRoleMenu();
+
+        if (UserSession.IsAdmin)
+        {
+            OpenAdminDashboardButton_Click(adminDashboardButton, EventArgs.Empty);
+        }
+        else
+        {
+            OpenStaffDashboardButton_Click(staffDashboardButton, EventArgs.Empty);
+        }
     }
 
     public void OpenChildForm(Form childForm, string pageTitle, Button? menuButton = null)
     {
+        _activeChildForm?.Close();
+        _activeChildForm?.Dispose();
+        _activeChildForm = childForm;
+
+        childForm.TopLevel = false;
+        childForm.FormBorderStyle = FormBorderStyle.None;
+        childForm.Dock = DockStyle.Fill;
+
+        contentPanel.Controls.Clear();
+        contentPanel.Controls.Add(childForm);
+        childForm.Show();
+
+        pageTitleLabel.Text = pageTitle;
+        statusLabel.Text = $"Đang mở: {pageTitle}";
+        HighlightMenu(menuButton);
     }
 
-    private void OpenAdminDashboardButton_Click(object? sender, EventArgs e) { }
-    private void OpenMovieButton_Click(object? sender, EventArgs e) { }
-    private void OpenRoomButton_Click(object? sender, EventArgs e) { }
-    private void OpenSeatButton_Click(object? sender, EventArgs e) { }
-    private void OpenShowtimeButton_Click(object? sender, EventArgs e) { }
-    private void OpenUserButton_Click(object? sender, EventArgs e) { }
-    private void OpenRevenueButton_Click(object? sender, EventArgs e) { }
-    private void OpenSettingsButton_Click(object? sender, EventArgs e) { }
-    private void OpenStaffDashboardButton_Click(object? sender, EventArgs e) { }
-    private void OpenTicketSaleButton_Click(object? sender, EventArgs e) { }
-    private void OpenTicketCheckButton_Click(object? sender, EventArgs e) { }
-    private void OpenSoldTicketsButton_Click(object? sender, EventArgs e) { }
-    private void OpenTodayShowtimeButton_Click(object? sender, EventArgs e) { }
-    private void LogoutButton_Click(object? sender, EventArgs e) { }
+    private void OpenAdminDashboardButton_Click(object? sender, EventArgs e)
+    {
+        OpenChildForm(new AdminDashboardForm(), "Dashboard quản trị", sender as Button);
+    }
+
+    private void OpenMovieButton_Click(object? sender, EventArgs e)
+    {
+        OpenChildForm(new MovieManagementForm(), "Quản lý phim", sender as Button);
+    }
+
+    private void OpenRoomButton_Click(object? sender, EventArgs e)
+    {
+        OpenChildForm(new RoomManagementForm(), "Quản lý phòng chiếu", sender as Button);
+    }
+
+    private void OpenSeatButton_Click(object? sender, EventArgs e)
+    {
+        OpenChildForm(new SeatManagementForm(), "Quản lý ghế", sender as Button);
+    }
+
+    private void OpenShowtimeButton_Click(object? sender, EventArgs e)
+    {
+        OpenChildForm(new ShowtimeManagementForm(), "Quản lý lịch chiếu", sender as Button);
+    }
+
+    private void OpenUserButton_Click(object? sender, EventArgs e)
+    {
+        OpenChildForm(new UserManagementForm(), "Quản lý nhân viên", sender as Button);
+    }
+
+    private void OpenRevenueButton_Click(object? sender, EventArgs e)
+    {
+        OpenChildForm(new RevenueReportForm(), "Thống kê doanh thu", sender as Button);
+    }
+
+    private void OpenSettingsButton_Click(object? sender, EventArgs e)
+    {
+        OpenChildForm(new SettingsForm(), "Cài đặt hệ thống", sender as Button);
+    }
+
+    private void OpenStaffDashboardButton_Click(object? sender, EventArgs e)
+    {
+        OpenChildForm(new StaffDashboardForm(), "Dashboard nhân viên", sender as Button);
+    }
+
+    private void OpenTicketSaleButton_Click(object? sender, EventArgs e)
+    {
+        OpenChildForm(new TicketSaleForm(), "Bán vé", sender as Button);
+    }
+
+    private void OpenTicketCheckButton_Click(object? sender, EventArgs e)
+    {
+        OpenChildForm(new TicketCheckForm(), "Kiểm tra vé", sender as Button);
+    }
+
+    private void OpenSoldTicketsButton_Click(object? sender, EventArgs e)
+    {
+        OpenChildForm(new SoldTicketsForm(), "Vé đã bán", sender as Button);
+    }
+
+    private void OpenTodayShowtimeButton_Click(object? sender, EventArgs e)
+    {
+        OpenChildForm(new TodayShowtimeForm(), "Lịch chiếu hôm nay", sender as Button);
+    }
+
+    private void LogoutButton_Click(object? sender, EventArgs e)
+    {
+        _clockTimer.Stop();
+        Close();
+    }
+
+    private void ApplyRoleMenu()
+    {
+        SetAdminMenuVisible(UserSession.IsAdmin);
+        SetStaffMenuVisible(UserSession.IsStaff);
+
+        if (UserSession.IsStaff)
+        {
+            staffGroupLabel.Location = adminGroupLabel.Location;
+            staffDashboardButton.Location = adminDashboardButton.Location;
+            ticketSaleButton.Location = movieButton.Location;
+            ticketCheckButton.Location = roomButton.Location;
+            soldTicketsButton.Location = seatButton.Location;
+            todayShowtimeButton.Location = showtimeButton.Location;
+        }
+    }
+
+    private void SetAdminMenuVisible(bool visible)
+    {
+        adminGroupLabel.Visible = visible;
+        adminDashboardButton.Visible = visible;
+        movieButton.Visible = visible;
+        roomButton.Visible = visible;
+        seatButton.Visible = visible;
+        showtimeButton.Visible = visible;
+        userButton.Visible = visible;
+        revenueButton.Visible = visible;
+        settingsButton.Visible = visible;
+    }
+
+    private void SetStaffMenuVisible(bool visible)
+    {
+        staffGroupLabel.Visible = visible;
+        staffDashboardButton.Visible = visible;
+        ticketSaleButton.Visible = visible;
+        ticketCheckButton.Visible = visible;
+        soldTicketsButton.Visible = visible;
+        todayShowtimeButton.Visible = visible;
+    }
+
+    private void HighlightMenu(Button? button)
+    {
+        if (_activeMenuButton is not null)
+        {
+            _activeMenuButton.BackColor = Color.White;
+            _activeMenuButton.ForeColor = Color.FromArgb(45, 55, 72);
+            _activeMenuButton.FlatAppearance.BorderColor = Color.FromArgb(203, 213, 225);
+        }
+
+        _activeMenuButton = button;
+        if (_activeMenuButton is not null)
+        {
+            _activeMenuButton.BackColor = Color.FromArgb(219, 234, 254);
+            _activeMenuButton.ForeColor = Color.FromArgb(37, 99, 235);
+            _activeMenuButton.FlatAppearance.BorderColor = Color.FromArgb(37, 99, 235);
+        }
+    }
+
+    private void StyleSidebarButtons()
+    {
+        var buttons = new[]
+        {
+            adminDashboardButton, movieButton, roomButton, seatButton, showtimeButton,
+            userButton, revenueButton, settingsButton, staffDashboardButton, ticketSaleButton,
+            ticketCheckButton, soldTicketsButton, todayShowtimeButton
+        };
+
+        foreach (var button in buttons)
+        {
+            button.FlatAppearance.BorderColor = Color.FromArgb(203, 213, 225);
+            button.FlatAppearance.MouseOverBackColor = Color.FromArgb(239, 246, 255);
+        }
+
+        logoutButton.FlatAppearance.BorderColor = Color.FromArgb(252, 165, 165);
+        logoutButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(254, 242, 242);
+    }
+
+    private void FixVietnameseText()
+    {
+        Text = "CinemaPro - Core Auth/User/Settings";
+        adminGroupLabel.Text = "QUẢN TRỊ";
+        staffGroupLabel.Text = "NHÂN VIÊN";
+        movieButton.Text = "Quản lý phim";
+        roomButton.Text = "Quản lý phòng chiếu";
+        seatButton.Text = "Quản lý ghế";
+        showtimeButton.Text = "Quản lý lịch chiếu";
+        userButton.Text = "Quản lý nhân viên";
+        revenueButton.Text = "Thống kê doanh thu";
+        settingsButton.Text = "Cài đặt";
+        ticketSaleButton.Text = "Bán vé";
+        ticketCheckButton.Text = "Kiểm tra vé";
+        soldTicketsButton.Text = "Vé đã bán";
+        todayShowtimeButton.Text = "Lịch chiếu hôm nay";
+        logoutButton.Text = "Đăng xuất";
+        contentPlaceholderLabel.Text = "Chọn chức năng từ sidebar để mở màn hình vận hành.";
+        statusLabel.Text = "CinemaPro sẵn sàng";
+    }
 }

@@ -7,16 +7,18 @@ namespace CinemaPro.WinForms.DesignFirst.Forms.Admin;
 public partial class RoomManagementForm : Form
 {
     private readonly RoomService _roomService = new();
+    private string _selectedRoomId = "";
+    private string _selectedRoomStatus = "Active";
     public const string Active = "Active";
     public const string Maintenance = "Maintenance";
 
     public RoomManagementForm()
     {
         InitializeComponent();
-
+        UiStyleHelper.StyleGrid(roomGrid);
         roomGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         roomGrid.MultiSelect = false;
-        roomGrid.SelectionChanged += RoomGrid_SelectionChanged;
+        roomGrid.SelectionChanged += (_, _) => FillDetailFromSelectedRow();
     }
 
     private void RoomManagementForm_Load(object? sender, EventArgs e)
